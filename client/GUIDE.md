@@ -53,6 +53,17 @@ We strongly recommend to use [env.t3.gg](https://env.t3.gg/docs/nextjs) to manag
 import('./src/env.mjs');
 ```
 
+Create a .env.example file with the following content:
+
+```
+NEXT_PUBLIC_ENVIRONMENT=development
+NEXT_PUBLIC_URL=http://localhost:$PORT
+NEXT_PUBLIC_API_URL=http://0.0.0.0:1337/api
+NEXT_PUBLIC_GA_TRACKING_ID=UA-000000-01
+RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false
+```
+
+
 
 ## Eslint
 Remember to restart typescript and eslint servers from your VSCode after adding any plugin
@@ -66,12 +77,12 @@ Remember to restart typescript and eslint servers from your VSCode after adding 
 
 ### Add Typescript plugin recommended [Go to page](https://typescript-eslint.io/getting-started/)
 
-```
+```bash
 pnpm add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
 ```
 
 ### Add Prettier [Go to page](https://www.npmjs.com/package/eslint-plugin-prettier)
-```
+```bash
 pnpm add -D prettier
 pnpm add -D eslint-plugin-prettier
 pnpm add -D eslint-config-prettier
@@ -79,7 +90,7 @@ pnpm add -D eslint-config-prettier
 
 ### Add Prettier Tailwind [Go to page](https://www.npmjs.com/package/eslint-plugin-tailwindcss)
 
-```
+```bash
 pnpm add -D prettier-plugin-tailwindcss
 ```
 
@@ -208,7 +219,14 @@ Custom rules
 
 [ShadcnUI](https://ui.shadcn.com/docs/installation/next)
 
-```
+```bash
 pnpm dlx shadcn-ui@latest init
 pnpm dlx shadcn-ui@latest add button
+```
+
+
+## Next auth [go to page](https://next-auth.js.org/getting-started)
+
+```bash
+pnpm add next-auth
 ```

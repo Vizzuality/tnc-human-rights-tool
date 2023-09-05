@@ -1,6 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+
+import { useSession } from "next-auth/react";
+
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const { data: session } = useSession();
+  console.info(session);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -38,6 +48,10 @@ export default function Home() {
           priority
         />
       </div>
+
+      <Link href="/projects">
+        <Button>Projects</Button>
+      </Link>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <a
