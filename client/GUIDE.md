@@ -13,6 +13,34 @@
 ## .nvmrc
 18.15
 
+## .editorconfig
+```ini
+# editorconfig.org
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+indent_style = tab
+indent_size = 4
+trim_trailing_whitespace = false
+
+[Dockerfile]
+indent_style = tab
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+indent_size = 4
+```
+
 ## Eslint
 Remember to restart typescript and eslint servers from your VSCode after adding any plugin
 
