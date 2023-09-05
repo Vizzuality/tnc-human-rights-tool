@@ -41,6 +41,19 @@ indent_style = tab
 indent_size = 4
 ```
 
+## ENV [Go to page](https://env.t3.gg/docs/nextjs)
+We strongly recommend to use [env.t3.gg](https://env.t3.gg/docs/nextjs) to manage your environment variables.
+
+- Create `src/env.mjs` file with the configuration
+
+- Rename your next.config.js to next.config.mjs and import the env file
+
+```js
+// next.config.mjs
+import('./src/env.mjs');
+```
+
+
 ## Eslint
 Remember to restart typescript and eslint servers from your VSCode after adding any plugin
 
