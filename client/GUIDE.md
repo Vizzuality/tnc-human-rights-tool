@@ -10,6 +10,9 @@
 - Default alias -> YES
 
 
+## .nvmrc
+18.15
+
 ## Eslint
 Remember to restart typescript and eslint servers from your VSCode after adding any plugin
 
@@ -138,6 +141,15 @@ Custom rules
     ]
   }
 }
+```
+
+## UI components
+
+[ShadcnUI](https://ui.shadcn.com/docs/installation/next)
+
+```
+pnpm dlx shadcn-ui@latest init
+pnpm dlx shadcn-ui@latest add button
 ```
 
 
