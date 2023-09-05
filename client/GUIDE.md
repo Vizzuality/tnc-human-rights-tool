@@ -16,25 +16,45 @@
 ## Eslint
 Remember to restart typescript and eslint servers from your VSCode after adding any plugin
 
-Add `.eslintignore`
+### Add `.eslintignore`
 ```
 /.next
 /node_modules
 /public
 ```
 
-Add Typescript plugin recommended [Go to page](https://typescript-eslint.io/getting-started/)
+### Add Typescript plugin recommended [Go to page](https://typescript-eslint.io/getting-started/)
 
 ```
-pnpm add --save-dev @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
+pnpm add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint typescript
 ```
 
-Add Prettier [Go to page](https://www.npmjs.com/package/eslint-plugin-prettier)
+### Add Prettier [Go to page](https://www.npmjs.com/package/eslint-plugin-prettier)
 ```
-pnpm add --save-dev --save-exact prettier
-pnpm add --save-dev eslint-plugin-prettier
-pnpm add --save-dev eslint-config-prettier
+pnpm add -D prettier
+pnpm add -D eslint-plugin-prettier
+pnpm add -D eslint-config-prettier
 ```
+
+### Add Prettier Tailwind [Go to page](https://www.npmjs.com/package/eslint-plugin-tailwindcss)
+
+```
+pnpm add -D prettier-plugin-tailwindcss
+```
+
+```js
+// .pretierrc.js
+const config = {
+  semi: true,
+  tabWidth: 2,
+  printWidth: 100,
+  singleQuote: false,
+  plugins: ['prettier-plugin-tailwindcss'],
+};
+
+module.exports = config;
+```
+
 
 Custom rules
 
@@ -151,5 +171,3 @@ Custom rules
 pnpm dlx shadcn-ui@latest init
 pnpm dlx shadcn-ui@latest add button
 ```
-
-
