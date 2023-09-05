@@ -1,0 +1,38 @@
+{
+  "name": "ncs-human-rights-tool",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vizzuality/tnc-human-rights-tool.git"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "eslint-plugin-vue": "^9.8.0",
+    "nanoid": "^4.0.1",
+    "pinia": "^2.0.21",
+    "pinia-plugin-persistedstate": "^3.1.0",
+    "prettier": "^2.8.2",
+    "primeflex": "^3.2.1",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.16",
+    "save-dev": "^0.0.1-security",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6",
+    "vue3-circle-progress": "^1.0.7"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.2.0",
+    "vite": "^3.2.3"
+  },
+  "engines": {
+    "node": "~20.5"
+  },
+  "packageManager": "yarn@3.6.3"
+}
