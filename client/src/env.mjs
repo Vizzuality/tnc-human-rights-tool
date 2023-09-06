@@ -16,6 +16,14 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
+    NEXTAUTH_URL: z.preprocess(
+      // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
+      // Since NextAuth automatically uses the VERCEL_URL if present.
+      (str) => process.env.VERCEL_URL ?? str,
+      // VERCEL_URL doesnt include `https` so it cant be validated as a URL
+      process.env.VERCEL ? z.string() : z.string().url(),
+    ),
+    NEXTAUTH_SECRET: z.string(),
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: z.preprocess(castToBoolean, z.boolean()),
   },
   /*
@@ -36,6 +44,8 @@ export const env = createEnv({
    * 💡 You'll get typeerrors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
