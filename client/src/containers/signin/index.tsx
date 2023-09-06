@@ -20,10 +20,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
-});
+const formSchema = z
+  .object({
+    email: z
+      .string({
+        required_error: "Please enter your email address",
+      })
+      .min(1, { message: "Please enter your email address" })
+      .email(),
+    password: z
+      .string({
+        required_error: "Please enter your password",
+      })
+      .min(1, { message: "Please enter your password" }),
+  })
+  .required();
 
 export default function Signin() {
   const searchParams = useSearchParams();
