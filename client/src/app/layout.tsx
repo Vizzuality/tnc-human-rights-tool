@@ -8,6 +8,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LayoutProviders from "@/app/layout-poviders";
 
+import Header from "@/containers/header";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,7 +23,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <LayoutProviders session={session}>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <main className="flex min-h-screen flex-col justify-between">
+            <Header />
+            {children}
+          </main>
+        </body>
       </html>
     </LayoutProviders>
   );
