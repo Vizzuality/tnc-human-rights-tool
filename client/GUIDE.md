@@ -230,3 +230,5 @@ pnpm dlx shadcn-ui@latest add button
 ```bash
 pnpm add next-auth
 ```
+
+Create custom pages. Note that I need to disable lastpass on localhost due to an hydration error with next 13
