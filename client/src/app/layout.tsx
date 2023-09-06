@@ -22,7 +22,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <LayoutProviders session={session}>
       <html lang="en" className={`${SpaceGrotesk.variable}`}>
         <body>
-          <main className="flex min-h-screen flex-col justify-between">
+          <main className="flex min-h-screen flex-col">
             <Header />
             {children}
           </main>
