@@ -16,6 +16,14 @@ dist-ssr
 
 
 
+/client/.pnp.*
+/client/.yarn/*
+!/client/.yarn/patches
+!/client/.yarn/plugins
+!/client/.yarn/releases
+!/client/.yarn/sdks
+!/client/.yarn/versions
+
 /client-legacy/.pnp.*
 /client-legacy/.yarn/*
 !/client-legacy/.yarn/patches
