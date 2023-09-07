@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node index.js",
     "lint": "next lint",
     "check-types": "tsc"
   },
@@ -50,5 +50,6 @@
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4"
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
