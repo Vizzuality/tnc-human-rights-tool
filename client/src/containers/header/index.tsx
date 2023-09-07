@@ -30,6 +30,7 @@ export default function Header() {
 
             {!!session && (
               <Button
+                variant="outline"
                 onClick={() => {
                   signOut();
                 }}

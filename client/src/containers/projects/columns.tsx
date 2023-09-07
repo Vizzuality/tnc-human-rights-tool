@@ -32,7 +32,7 @@ export type Project = {
 export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: "name",
-    minSize: 400,
+    minSize: 1000,
     header: ({ column }) => {
       return (
         <Button
@@ -84,7 +84,7 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     accessorKey: "dateUpdated",
-    maxSize: 100,
+    minSize: 250,
     header: ({ column }) => {
       return (
         <Button
@@ -108,15 +108,15 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     id: "actions",
-    maxSize: 100,
+    maxSize: 0,
     cell: ({ row }) => {
       return (
-        <div className="flex space-x-1">
+        <div className="flex space-x-1 px-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href={`/projects/${row.original.id}`}>
                 <Button variant="outline" size="icon" className="items-center">
-                  <Pencil1Icon className="h-5 w-5" />
+                  <Pencil1Icon />
                 </Button>
               </Link>
             </TooltipTrigger>
@@ -131,7 +131,7 @@ export const columns: ColumnDef<Project>[] = [
               <TooltipTrigger asChild>
                 <AlertDialogTrigger asChild>
                   <Button variant="outline" size="icon" className="items-center">
-                    <TrashIcon className="h-5 w-5" />
+                    <TrashIcon />
                   </Button>
                 </AlertDialogTrigger>
               </TooltipTrigger>

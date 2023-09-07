@@ -1,8 +1,14 @@
 "use client";
 
+import Link from "next/link";
+
+import { PlusIcon } from "@radix-ui/react-icons";
+
 import { Project, columns } from "@/containers/projects/columns";
 import { ProjectsTable } from "@/containers/projects/table";
 import Wrapper from "@/containers/wrapper";
+
+import { Button } from "@/components/ui/button";
 
 const data: Project[] = [
   {
@@ -21,13 +27,13 @@ const data: Project[] = [
     id: 3,
     name: "Project 3",
     status: "completed",
-    dateUpdated: "2023-03-03",
+    dateUpdated: "2012-03-03",
   },
   {
     id: 4,
     name: "Project 4",
     status: "completed",
-    dateUpdated: "2023-04-04",
+    dateUpdated: "2021-04-04",
   },
   {
     id: 5,
@@ -65,7 +71,15 @@ const data: Project[] = [
 export default function Projects() {
   return (
     <Wrapper>
-      <section className="flex max-w-6xl grow flex-col py-24">
+      <section className="flex max-w-6xl grow flex-col space-y-5 py-24">
+        <div className="flex items-center justify-end">
+          <Link href="/projects/new">
+            <Button className="items-center space-x-2">
+              <span>New Project</span>
+              <PlusIcon />
+            </Button>
+          </Link>
+        </div>
         <ProjectsTable columns={columns} data={data} />
       </section>
     </Wrapper>
