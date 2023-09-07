@@ -25,6 +25,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip
 export type Project = {
   id: number;
   name: string;
+  description: string;
   status: "pending" | "completed";
   dateUpdated: string;
 };
