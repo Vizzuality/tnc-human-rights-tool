@@ -111,7 +111,7 @@ export const columns: ColumnDef<Project>[] = [
     maxSize: 100,
     cell: ({ row }) => {
       return (
-        <div className="flex space-x-2.5">
+        <div className="flex space-x-1">
           <Tooltip>
             <TooltipTrigger asChild>
               <Link href={`/projects/${row.original.id}`}>
