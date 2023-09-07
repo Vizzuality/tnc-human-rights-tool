@@ -236,3 +236,7 @@ Create custom pages. Note that I need to disable lastpass on localhost due to an
 
 ## Fonts
 next/fonts
+
+## Forms
+zod react-hook-form.
+As we are alredy using zod for validating the .env variables, it's worth it to use them to validate forms too.
