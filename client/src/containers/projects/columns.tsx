@@ -2,11 +2,24 @@
 
 import Link from "next/link";
 
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistance, subDays } from "date-fns";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Project = {
@@ -19,6 +32,7 @@ export type Project = {
 export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: "name",
+    minSize: 400,
     header: ({ column }) => {
       return (
         <Button
@@ -41,6 +55,7 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     accessorKey: "status",
+    maxSize: 100,
     header: ({ column }) => {
       return (
         <Button
@@ -69,6 +84,7 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     accessorKey: "dateUpdated",
+    maxSize: 100,
     header: ({ column }) => {
       return (
         <Button
@@ -88,6 +104,58 @@ export const columns: ColumnDef<Project>[] = [
       });
 
       return <span className="ml-4">{date}</span>;
+    },
+  },
+  {
+    id: "actions",
+    maxSize: 100,
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2.5">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link href={`/projects/${row.original.id}`}>
+                <Button variant="outline" size="icon" className="items-center">
+                  <Pencil1Icon className="h-5 w-5" />
+                </Button>
+              </Link>
+            </TooltipTrigger>
+
+            <TooltipContent sideOffset={4} alignOffset={0}>
+              Edit project
+            </TooltipContent>
+          </Tooltip>
+
+          <Tooltip>
+            <AlertDialog>
+              <TooltipTrigger asChild>
+                <AlertDialogTrigger asChild>
+                  <Button variant="outline" size="icon" className="items-center">
+                    <TrashIcon className="h-5 w-5" />
+                  </Button>
+                </AlertDialogTrigger>
+              </TooltipTrigger>
+
+              <TooltipContent side="top" sideOffset={4} align="center">
+                Delete project
+              </TooltipContent>
+
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your project
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction>Delete</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </Tooltip>
+        </div>
+      );
     },
   },
 ];

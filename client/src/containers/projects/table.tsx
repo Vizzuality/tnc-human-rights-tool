@@ -46,7 +46,13 @@ export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTablePro
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="py-2.5">
+                  <TableHead
+                    key={header.id}
+                    className="py-2.5"
+                    style={{
+                      width: header.getSize(),
+                    }}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
