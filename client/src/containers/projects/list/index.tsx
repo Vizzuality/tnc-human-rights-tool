@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
-import { Project, columns } from "@/containers/projects/columns";
-import { ProjectsTable } from "@/containers/projects/table";
+import { Project, columns } from "@/containers/projects/list/columns";
+import { ProjectsTable } from "@/containers/projects/list/table";
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
@@ -72,7 +72,8 @@ export default function Projects() {
   return (
     <Wrapper>
       <section className="flex max-w-6xl grow flex-col space-y-5 py-24">
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl">Projects</h1>
           <Link href="/projects/new">
             <Button className="items-center space-x-2">
               <span>New Project</span>

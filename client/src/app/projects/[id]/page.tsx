@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+import ProjectsDetail from "@/containers/projects/detail";
+
 type ProjectsDetailPageProps = {
   params: {
     id: string;
@@ -14,5 +16,5 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 }
 
 export default function ProjectsDetailPage() {
-  return "id";
+  return <ProjectsDetail />;
 }

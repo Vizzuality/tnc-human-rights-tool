@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Projects from "@/containers/projects";
+import ProjectsList from "@/containers/projects/list";
 
 export const metadata: Metadata = {
   title: "Projects | Human Rights Tool",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  return <Projects />;
+  return <ProjectsList />;
 }
