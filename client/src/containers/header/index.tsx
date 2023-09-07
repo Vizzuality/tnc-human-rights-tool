@@ -24,12 +24,13 @@ export default function Header() {
           <nav className="flex items-center space-x-5">
             {!!session && (
               <Link href="/projects">
-                <Button variant="secondary">My Projects</Button>
+                <Button variant="link">My Projects</Button>
               </Link>
             )}
 
             {!!session && (
               <Button
+                variant="outline"
                 onClick={() => {
                   signOut();
                 }}

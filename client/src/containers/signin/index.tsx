@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import * as z from "zod";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,17 +22,8 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z
   .object({
-    email: z
-      .string({
-        required_error: "Please enter your email address",
-      })
-      .min(1, { message: "Please enter your email address" })
-      .email(),
-    password: z
-      .string({
-        required_error: "Please enter your password",
-      })
-      .min(1, { message: "Please enter your password" }),
+    email: z.string().min(1, { message: "Please enter your email address" }).email(),
+    password: z.string().min(1, { message: "Please enter your password" }),
   })
   .required();
 
