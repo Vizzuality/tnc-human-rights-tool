@@ -9,9 +9,15 @@ import { cn } from "@/lib/utils";
 
 import { Button, ButtonProps } from "@/components/ui/button";
 
-interface TabsNavigationItemProps extends LinkProps, PropsWithChildren {}
+interface TabsNavigationItemProps extends LinkProps, PropsWithChildren {
+  className?: string;
+}
 
-export default function TabsNavigationItem({ children, ...props }: TabsNavigationItemProps) {
+export default function TabsNavigationItem({
+  children,
+  className,
+  ...props
+}: TabsNavigationItemProps) {
   const pathname = usePathname();
 
   return (
@@ -19,6 +25,7 @@ export default function TabsNavigationItem({ children, ...props }: TabsNavigatio
       {...props}
       className={cn({
         "flex flex-col items-center space-y-1": true,
+        [`${className}`]: !!className,
         // "pointer-events-none": !pathname.includes(`${props.href}`),
       })}
     >

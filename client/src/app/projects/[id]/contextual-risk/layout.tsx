@@ -7,7 +7,7 @@ import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 import NavigationSidebar from "@/containers/navigation/sidebar";
 import Sidebar from "@/containers/sidebar";
 
-import CMS from "@/services/cms";
+import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
 
 interface ProjectsDetailContextualRiskLayoutProps
   extends ProjectsDetailPageProps,
@@ -20,25 +20,13 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
   };
 }
 
-async function getCategories() {
-  return CMS<{
-    data: {
-      id: string;
-      title: string;
-    }[];
-  }>({
-    method: "GET",
-    url: "/items/contextual_risk_categories",
-  });
-}
-
 export default async function ProjectsDetailContextualRiskLayout({
   children,
   params,
 }: ProjectsDetailContextualRiskLayoutProps) {
   const { id } = params;
 
-  const CATEGORIES = await getCategories();
+  const CATEGORIES = await getContextualRiskCategories();
 
   return (
     <section className="flex grow flex-col space-y-5">

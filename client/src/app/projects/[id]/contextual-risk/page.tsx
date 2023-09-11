@@ -1,5 +1,14 @@
-import ProjectsDetailContextualRiskOverview from "@/containers/projects/detail/contextual-risk/overview";
+import { redirect } from "next/navigation";
 
-export default function ProjectsDetailContextualRiskOverviewPage() {
-  return <ProjectsDetailContextualRiskOverview />;
+import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+
+import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
+
+export default async function ProjectsDetailContextualRiskPage({
+  params,
+}: ProjectsDetailPageProps) {
+  const CATEGORIES = await getContextualRiskCategories();
+  const [{ id: categoryId }] = CATEGORIES.data;
+
+  redirect(`/projects/${params.id}/contextual-risk/${categoryId}`);
 }
