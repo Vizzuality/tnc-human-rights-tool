@@ -9,7 +9,7 @@ interface NavigationSidebarProps {
 
 export default function NavigationSidebar({ items }: NavigationSidebarProps) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="sticky top-0 -mt-5 space-y-2.5 py-5">
       {items.map(({ href, label }) => (
         <li key={href}>
           <NavigationSidebarItem href={href}>{label}</NavigationSidebarItem>

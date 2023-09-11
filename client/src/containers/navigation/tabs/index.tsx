@@ -27,7 +27,7 @@ export default function NavigationTabs() {
 
   return (
     <ul className="relative flex justify-between">
-      <div className="absolute left-0 top-1/2 z-0 h-px w-full -translate-y-1/2 bg-slate-200" />
+      <div className="absolute left-0 top-1/2 z-0 h-px w-full -translate-y-1/2 bg-slate-500" />
       {LINKS.map(({ href, label }) => (
         <li className="relative z-10" key={href}>
           <div className="absolute left-0 top-0 z-0 h-full w-full bg-white" />

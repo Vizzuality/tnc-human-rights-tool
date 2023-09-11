@@ -30,6 +30,7 @@ export default function TabsNavigationItem({
       })}
     >
       <Button
+        size="lg"
         variant={
           cn({
             default: pathname.includes(`${props.href}`),
