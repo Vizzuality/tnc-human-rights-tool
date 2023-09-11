@@ -79,7 +79,7 @@ const data: Project[] = [
 export default function Projects() {
   return (
     <Wrapper>
-      <section className="flex max-w-6xl grow flex-col space-y-5 py-24">
+      <div className="space-y-5">
         <div className="flex items-center justify-between">
           <h1 className="text-4xl">Projects</h1>
           <Link href="/projects/new">
@@ -90,7 +90,7 @@ export default function Projects() {
           </Link>
         </div>
         <ProjectsTable columns={columns} data={data} />
-      </section>
+      </div>
     </Wrapper>
   );
 }

@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-import ProjectsDetail from "@/containers/projects/detail";
+import { redirect } from "next/navigation";
 
-type ProjectsDetailPageProps = {
+export type ProjectsDetailPageProps = {
   params: {
     id: string;
   };
@@ -15,6 +15,6 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
   };
 }
 
-export default function ProjectsDetailPage() {
-  return <ProjectsDetail />;
+export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) {
+  redirect(`/projects/${params.id}/research`);
 }

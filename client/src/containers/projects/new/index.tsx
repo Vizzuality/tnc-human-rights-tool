@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,7 +50,7 @@ export default function ProjectsNew() {
 
   return (
     <Wrapper>
-      <section className="flex max-w-6xl grow flex-col space-y-5 py-24">
+      <div className="max-w-6xl space-y-5">
         <h1 className="text-4xl">New Project</h1>
 
         <div className="grid grid-cols-12">
@@ -84,12 +85,20 @@ export default function ProjectsNew() {
                     )}
                   />
                 </fieldset>
-                <Button type="submit">Create</Button>
+
+                <div className="flex space-x-2">
+                  <Link href="/projects">
+                    <Button type="button" variant="secondary">
+                      Cancel
+                    </Button>
+                  </Link>
+                  <Button type="submit">Create</Button>
+                </div>
               </form>
             </Form>
           </div>
         </div>
-      </section>
+      </div>
     </Wrapper>
   );
 }
