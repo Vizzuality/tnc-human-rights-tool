@@ -1,7 +1,11 @@
 import parse from "html-react-parser";
 
+import { cn } from "@/lib/utils";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { getContextualRisks } from "@/data/contextual-risk";
 import { getContextualRiskCategory } from "@/data/contextual-risk/categories";
 
@@ -19,7 +23,13 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
 
   return (
     <div className="-mt-5 space-y-5">
-      <h1 className="sticky left-0 top-0 space-y-5 bg-gradient-to-b from-white to-white/0 py-5 text-4xl font-semibold">
+      <h1
+        className={cn({
+          "sticky left-0 top-0 space-y-5 bg-white py-5 text-3xl": true,
+          "after:absolute after:inset-x-0 after:top-full after:z-10 after:block after:h-2.5 after:bg-gradient-to-b after:from-white after:to-white/0":
+            true,
+        })}
+      >
         {category.data.title}
       </h1>
 
@@ -27,7 +37,7 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
         <div className="prose -mt-5">{parse(category.data.description)}</div>
       </div>
 
-      <ul className="space-y-5">
+      <ul className="space-y-10 border-t border-gray-100 pt-5">
         {items.data
           .sort((a, b) => +a.id - +b.id)
           .map(({ id, title, description, indicator_code }) => (
@@ -36,7 +46,32 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
                 {indicator_code} {title}
               </h3>
 
-              <div className="prose">{parse(description)}</div>
+              <div className="flex items-start justify-between">
+                <div className="prose">{parse(description)}</div>
+
+                <div className="mt-2.5">
+                  <RadioGroup>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="yes" id={`${id}-yes`} />
+                      <Label className="cursor-pointer" htmlFor={`${id}-yes`}>
+                        Yes
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="no" id={`${id}-no`} />
+                      <Label className="cursor-pointer" htmlFor={`${id}-no`}>
+                        No
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="more-research" id={`${id}-more-research`} />
+                      <Label className="cursor-pointer" htmlFor={`${id}-more-research`}>
+                        More research
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+              </div>
             </li>
           ))}
       </ul>
