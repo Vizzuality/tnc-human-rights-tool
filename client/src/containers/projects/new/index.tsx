@@ -86,7 +86,7 @@ export default function ProjectsNew() {
                   />
                 </fieldset>
 
-                <div className="flex justify-end space-x-2">
+                <div className="flex space-x-2">
                   <Link href="/projects">
                     <Button type="button" variant="secondary">
                       Cancel

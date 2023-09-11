@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import Link from "next/link";
+import Sidebar from "@/containers/sidebar";
+import SidebarLink from "@/containers/sidebar/link";
 
 type ProjectsDetailResearchPageProps = {
   params: {
@@ -17,29 +18,49 @@ export async function generateMetadata({
   };
 }
 
+const LINKS = [
+  {
+    href: "/research",
+    label: "Overview",
+  },
+  {
+    href: "/research/iplc",
+    label: "IPLC",
+  },
+  {
+    href: "/research/gender-and-vulnerable-groups",
+    label: "Gender & Vulnerable Groups",
+  },
+  {
+    href: "/research/stakeholders-and-interested-parties",
+    label: "Stakeholders & Interested Parties",
+  },
+  {
+    href: "/research/carbon-offset-project-controversies",
+    label: "Carbon Offset Project Controversies",
+  },
+];
+
 export default async function ProjectsDetailResearchLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
-}) {
+} & ProjectsDetailResearchPageProps) {
+  const { id } = params;
+
   return (
     <section className="flex grow flex-col space-y-5 py-5">
       <div className="grid grid-cols-12">
-        <aside className="col-span-4">
+        <Sidebar>
           <ul>
-            <li>
-              <Link href={`/projects/${1}/research`}>Overview</Link>
-            </li>
-            <li>
-              <Link href={`/projects/${1}/research/iplc`}>IPLC</Link>
-            </li>
-            <li>
-              <Link href={`/projects/${1}/research/gender-and-vulnerable-groups`}>
-                Gender & Vulnerable Groups
-              </Link>
-            </li>
+            {LINKS.map(({ href, label }) => (
+              <li key={href}>
+                <SidebarLink href={`/projects/${id}${href}`}>{label}</SidebarLink>
+              </li>
+            ))}
           </ul>
-        </aside>
+        </Sidebar>
         <div className="col-span-8">{children}</div>
       </div>
     </section>
