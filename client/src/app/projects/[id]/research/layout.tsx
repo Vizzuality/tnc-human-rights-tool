@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import Sidebar from "@/containers/sidebar";
-import SidebarLink from "@/containers/sidebar/link";
+import SidebarNavigation from "@/containers/sidebar/navigation";
 
 type ProjectsDetailResearchPageProps = {
   params: {
@@ -53,13 +53,12 @@ export default async function ProjectsDetailResearchLayout({
     <section className="flex grow flex-col space-y-5 py-5">
       <div className="grid grid-cols-12">
         <Sidebar>
-          <ul>
-            {LINKS.map(({ href, label }) => (
-              <li key={href}>
-                <SidebarLink href={`/projects/${id}${href}`}>{label}</SidebarLink>
-              </li>
-            ))}
-          </ul>
+          <SidebarNavigation
+            items={LINKS.map(({ href, label }) => ({
+              href: `/projects/${id}${href}`,
+              label,
+            }))}
+          />
         </Sidebar>
         <div className="col-span-8">{children}</div>
       </div>

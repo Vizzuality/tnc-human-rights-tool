@@ -1,3 +1,3 @@
-export default function ProjectsDetailResearchStakeholdersAndInterestedParties() {
-  return <div>ProjectsDetailResearchStakeholdersAndInterestedParties</div>;
+export default function ProjectsDetailResearchCarbonOffsetProjectControversies() {
+  return <div>ProjectsDetailResearchCarbonOffsetProjectControversies</div>;
 }
