@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
-interface SidebarNavigationItemProps extends LinkProps, PropsWithChildren {}
+interface NavigationSidebarItemProps extends LinkProps, PropsWithChildren {}
 
-export default function SidebarNavigationItem({ children, ...props }: SidebarNavigationItemProps) {
+export default function NavigationSidebarItem({ children, ...props }: NavigationSidebarItemProps) {
   const pathname = usePathname();
 
   return (

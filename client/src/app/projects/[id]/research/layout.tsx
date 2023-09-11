@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
+import NavigationSidebar from "@/containers/navigation/sidebar";
 import Sidebar from "@/containers/sidebar";
-import SidebarNavigation from "@/containers/sidebar/navigation";
 
 interface ProjectsDetailResearchLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
 
@@ -46,10 +46,10 @@ export default async function ProjectsDetailResearchLayout({
   const { id } = params;
 
   return (
-    <section className="flex grow flex-col space-y-5 py-5">
+    <section className="flex grow flex-col space-y-5">
       <div className="grid grid-cols-12">
         <Sidebar>
-          <SidebarNavigation
+          <NavigationSidebar
             items={LINKS.map(({ href, label }) => ({
               href: `/projects/${id}${href}`,
               label,

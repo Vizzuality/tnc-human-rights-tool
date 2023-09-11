@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main className="flex min-h-screen flex-col">
             <Header />
 
-            <section className="flex grow flex-col space-y-5 py-24">{children}</section>
+            <section className="flex grow flex-col space-y-5 py-16">{children}</section>
           </main>
         </body>
       </html>

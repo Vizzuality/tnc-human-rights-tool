@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
+import NavigationTabs from "@/containers/navigation/tabs";
 import Wrapper from "@/containers/wrapper";
 
 interface ProjectsDetailLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -12,14 +13,20 @@ export default async function ProjectsDetailLayout({
 }: ProjectsDetailLayoutProps) {
   const { id } = params;
   return (
-    <div className="space-y-5">
-      <Wrapper>
-        <header>
-          <h1 className="text-4xl">Project {id}</h1>
+    <Wrapper>
+      <div className="space-y-10">
+        <header className="grid grid-cols-12 items-center space-y-5 border-b border-gray-100 pb-5">
+          <div className="col-span-12">
+            <h1 className="text-4xl">Project with a long name {id}</h1>
+          </div>
+
+          <div className="col-span-6">
+            <NavigationTabs />
+          </div>
         </header>
 
         {children}
-      </Wrapper>
-    </div>
+      </div>
+    </Wrapper>
   );
 }
