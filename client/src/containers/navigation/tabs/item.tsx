@@ -19,7 +19,7 @@ export default function TabsNavigationItem({ children, ...props }: TabsNavigatio
       {...props}
       className={cn({
         "flex flex-col items-center space-y-1": true,
-        "pointer-events-none": !pathname.includes(`${props.href}`),
+        // "pointer-events-none": !pathname.includes(`${props.href}`),
       })}
     >
       <Button
@@ -29,7 +29,7 @@ export default function TabsNavigationItem({ children, ...props }: TabsNavigatio
             secondary: !pathname.includes(`${props.href}`),
           }) as ButtonProps["variant"]
         }
-        disabled={!pathname.includes(`${props.href}`)}
+        // disabled={!pathname.includes(`${props.href}`)}
       >
         {children}
       </Button>

@@ -35,6 +35,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ENVIRONMENT: z.enum(["development", "staging", "production"]),
     NEXT_PUBLIC_URL: z.string().url(),
     NEXT_PUBLIC_API_URL: z.string().url(),
+    NEXT_PUBLIC_CMS_URL: z.string().url(),
     NEXT_PUBLIC_GA_TRACKING_ID: z.string().optional(),
   },
   /*
@@ -49,6 +50,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ENVIRONMENT: process.env.NEXT_PUBLIC_ENVIRONMENT,
     NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_CMS_URL: process.env.NEXT_PUBLIC_CMS_URL,
     NEXT_PUBLIC_GA_TRACKING_ID: process.env.NEXT_PUBLIC_GA_TRACKING_ID,
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED:
       process.env.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED,
