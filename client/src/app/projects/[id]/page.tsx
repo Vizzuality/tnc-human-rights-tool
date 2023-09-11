@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { redirect } from "next/navigation";
 
-type ProjectsDetailPageProps = {
+export type ProjectsDetailPageProps = {
   params: {
     id: string;
   };

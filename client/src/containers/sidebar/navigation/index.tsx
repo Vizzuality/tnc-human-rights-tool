@@ -9,7 +9,7 @@ interface SidebarNavigationProps {
 
 export default function SidebarNavigation({ items }: SidebarNavigationProps) {
   return (
-    <ul>
+    <ul className="space-y-2.5">
       {items.map(({ href, label }) => (
         <li key={href}>
           <SidebarNavigationItem href={href}>{label}</SidebarNavigationItem>
