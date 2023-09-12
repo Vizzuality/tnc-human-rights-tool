@@ -47,15 +47,17 @@ export default async function ProjectsDetailResearchLayout({
 
   return (
     <section className="flex grow flex-col space-y-5">
-      <div className="grid grid-cols-12">
-        <Sidebar>
-          <NavigationSidebar
-            items={LINKS.map(({ href, label }) => ({
-              href: `/projects/${id}${href}`,
-              label,
-            }))}
-          />
-        </Sidebar>
+      <div className="grid grid-cols-12 gap-20">
+        <div className="col-span-4">
+          <Sidebar>
+            <NavigationSidebar
+              items={LINKS.map(({ href, label }) => ({
+                href: `/projects/${id}${href}`,
+                label,
+              }))}
+            />
+          </Sidebar>
+        </div>
         <div className="col-span-8">{children}</div>
       </div>
     </section>

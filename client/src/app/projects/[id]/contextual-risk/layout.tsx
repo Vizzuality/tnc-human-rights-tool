@@ -30,15 +30,17 @@ export default async function ProjectsDetailContextualRiskLayout({
 
   return (
     <section className="flex grow flex-col space-y-5">
-      <div className="grid grid-cols-12">
-        <Sidebar>
-          <NavigationSidebar
-            items={CATEGORIES.data.map(({ id: categoryId, title }) => ({
-              href: `/projects/${id}/contextual-risk/${categoryId}`,
-              label: title,
-            }))}
-          />
-        </Sidebar>
+      <div className="grid grid-cols-12 gap-20">
+        <div className="col-span-4">
+          <Sidebar>
+            <NavigationSidebar
+              items={CATEGORIES.data.map(({ id: categoryId, title }) => ({
+                href: `/projects/${id}/contextual-risk/${categoryId}`,
+                label: title,
+              }))}
+            />
+          </Sidebar>
+        </div>
         <div className="col-span-8">{children}</div>
       </div>
     </section>

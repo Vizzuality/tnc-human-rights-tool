@@ -46,10 +46,10 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
                 {indicator_code} {title}
               </h3>
 
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between divide-x">
                 <div className="prose">{parse(description)}</div>
 
-                <div className="mt-2.5">
+                <div className="mt-5 scale-125 py-2.5 pl-2.5">
                   <RadioGroup>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="yes" id={`${id}-yes`} />

@@ -16,8 +16,9 @@ export default function NavigationSidebarItem({ children, ...props }: Navigation
     <Link
       {...props}
       className={cn({
-        "text-primary": pathname === props.href,
-        "hover:text-gray-500": pathname !== props.href,
+        "block px-4 py-2 text-sm font-medium": true,
+        "bg-gray-100 text-primary": pathname === props.href,
+        "hover:bg-gray-50": pathname !== props.href,
       })}
     >
       {children}
