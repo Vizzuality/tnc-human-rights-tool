@@ -32,6 +32,7 @@ export default async function ProjectsDetailContextualRiskLayout({
     {
       href: `/projects/${id}/contextual-risk`,
       label: "Overview",
+      className: "text-lg",
     },
     ...CATEGORIES.data.map(({ id: categoryId, title }) => ({
       href: `/projects/${id}/contextual-risk/${categoryId}`,

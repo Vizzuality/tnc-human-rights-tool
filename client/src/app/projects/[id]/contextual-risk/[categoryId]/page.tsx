@@ -1,8 +1,9 @@
 import parse from "html-react-parser";
 
-import { cn } from "@/lib/utils";
-
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+
+import ProjectsDetailContent from "@/containers/projects/detail/content";
+import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -22,16 +23,8 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
   const ITEMS = await getContextualRisks(categoryId);
 
   return (
-    <div className="-mt-5 space-y-5">
-      <h1
-        className={cn({
-          "sticky left-0 top-0 space-y-5 bg-white py-5 text-3xl": true,
-          "after:absolute after:inset-x-0 after:top-full after:z-10 after:block after:h-2.5 after:bg-gradient-to-b after:from-white after:to-white/0":
-            true,
-        })}
-      >
-        {CATEGORY.data.title}
-      </h1>
+    <ProjectsDetailContent>
+      <ProjectsDetailTitle>{CATEGORY.data.title}</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">{parse(CATEGORY.data.description)}</div>
@@ -76,6 +69,6 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
             </li>
           ))}
       </ul>
-    </div>
+    </ProjectsDetailContent>
   );
 }

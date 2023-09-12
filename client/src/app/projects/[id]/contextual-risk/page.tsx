@@ -2,9 +2,10 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
-import { cn } from "@/lib/utils";
-
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+
+import ProjectsDetailContent from "@/containers/projects/detail/content";
+import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
 import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
@@ -16,16 +17,8 @@ export default async function ProjectsDetailContextualRiskPage({
   const [{ id: categoryId, title: categoryTitle }] = CATEGORIES.data;
 
   return (
-    <div className="-mt-5 space-y-5">
-      <h1
-        className={cn({
-          "sticky left-0 top-0 space-y-5 bg-white py-5 text-3xl": true,
-          "after:absolute after:inset-x-0 after:top-full after:z-10 after:block after:h-2.5 after:bg-gradient-to-b after:from-white after:to-white/0":
-            true,
-        })}
-      >
-        Contextual Risk Content
-      </h1>
+    <ProjectsDetailContent>
+      <ProjectsDetailTitle>Contextual Risk Content</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">
@@ -72,7 +65,7 @@ export default async function ProjectsDetailContextualRiskPage({
           </Button>
         </Link>
       </div>
-    </div>
+    </ProjectsDetailContent>
 
     // <div>
     //   Contextual Risk Content to be added after it's been edited. The Contextual Risk Screen focuses
