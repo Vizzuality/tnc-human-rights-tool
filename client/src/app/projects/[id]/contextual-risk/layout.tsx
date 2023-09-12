@@ -28,17 +28,23 @@ export default async function ProjectsDetailContextualRiskLayout({
 
   const CATEGORIES = await getContextualRiskCategories();
 
+  const items = [
+    {
+      href: `/projects/${id}/contextual-risk`,
+      label: "Overview",
+    },
+    ...CATEGORIES.data.map(({ id: categoryId, title }) => ({
+      href: `/projects/${id}/contextual-risk/${categoryId}`,
+      label: title,
+    })),
+  ];
+
   return (
     <section className="flex grow flex-col space-y-5">
       <div className="grid grid-cols-12 gap-20">
         <div className="col-span-4">
           <Sidebar>
-            <NavigationSidebar
-              items={CATEGORIES.data.map(({ id: categoryId, title }) => ({
-                href: `/projects/${id}/contextual-risk/${categoryId}`,
-                label: title,
-              }))}
-            />
+            <NavigationSidebar items={items} />
           </Sidebar>
         </div>
         <div className="col-span-8">{children}</div>
