@@ -22,14 +22,14 @@ const LINKS = [
     label: "Overview",
     className: "text-lg",
   },
-  // {
-  //   href: "/research/iplc",
-  //   label: "IPLC",
-  // },
-  // {
-  //   href: "/research/gender-and-vulnerable-groups",
-  //   label: "Gender & Vulnerable Groups",
-  // },
+  {
+    href: "/research/geographic-scope",
+    label: "Geographic scope",
+  },
+  {
+    href: "/research/carbon-offset-project-controversies",
+    label: "Carbon Offset Project Controversies",
+  },
   // {
   //   href: "/research/stakeholders-and-interested-parties",
   //   label: "Stakeholders & Interested Parties",
