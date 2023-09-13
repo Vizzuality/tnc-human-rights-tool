@@ -4,7 +4,7 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 export default function ProjectsDetailResearchOverviewPage() {
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>Research</ProjectsDetailTitle>
+      <ProjectsDetailTitle>Project and Background Community</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">
