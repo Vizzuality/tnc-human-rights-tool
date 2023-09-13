@@ -21,7 +21,7 @@ export default async function ProjectsDetailLayout({
             <h1 className="text-4xl">Project with a long name {id}</h1>
           </div>
 
-          <div className="col-span-8">
+          <div className="col-span-11">
             <NavigationTabs />
           </div>
         </header>
