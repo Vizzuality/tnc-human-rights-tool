@@ -13,7 +13,7 @@ export default function Header() {
   const { data: session } = useSession();
 
   return (
-    <header className="border-b border-gray-200 bg-white px-6 py-4">
+    <header className="border-b border-gray-200 bg-white py-4">
       <Wrapper>
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2.5">

@@ -33,10 +33,10 @@ export default async function ProjectsDetailPCBCategoryPage({
       <ul className="space-y-10 border-t border-gray-100 pt-5">
         {ITEMS.data
           .sort((a, b) => +a.id - +b.id)
-          .map(({ id, title, description, indicator_code }) => (
+          .map(({ id, title, description, display_order, category }) => (
             <li key={id} className="space-y-2">
               <h3 className="text-xl font-semibold">
-                {indicator_code} {title}
+                {`${category.display_order}.${display_order}`} {title}
               </h3>
 
               <div className="prose">{parse(description)}</div>

@@ -5,13 +5,19 @@ export async function getPCBs(categoryId?: string) {
     data: {
       id: string;
       title: string;
-      indicator_code: string;
+      display_order: string;
       description: string;
+      category: {
+        id: string;
+        title: string;
+        display_order: string;
+      };
     }[];
   }>({
     method: "GET",
     url: `/items/pcb`,
     params: {
+      fields: "*.*",
       filter: {
         category: categoryId,
       },

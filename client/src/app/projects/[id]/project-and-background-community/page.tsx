@@ -1,13 +1,34 @@
+import Link from "next/link";
+
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+
+import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
-export default function ProjectsDetailResearchOverviewPage() {
+import { Button } from "@/components/ui/button";
+import { getPCBCategories } from "@/data/pcb/categories";
+
+export default async function ProjectsDetailResearchOverviewPage({
+  params: { id },
+}: ProjectsDetailPageProps) {
+  const CATEGORIES = await getPCBCategories();
+  const [{ id: categoryId, title: categoryTitle }] = CATEGORIES.data;
+
   return (
     <ProjectsDetailContent>
       <ProjectsDetailTitle>Project and Background Community</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">
+          <p>
+            <i>
+              Have you mapped out potentially interested parties? if yes, upload here. If not please
+              use this tool and one of the tools suggested below.
+            </i>
+          </p>
+
           <p>
             The first step before using the Human Rights Screening Tool is for teams to gain a clear
             view of the interested parties to understand which Indigenous Peoples and Local
@@ -54,11 +75,48 @@ export default function ProjectsDetailResearchOverviewPage() {
               </a>
               (18) framework.
             </li>
-            <li>Rightsholder and Stakeholder Mapping Template(19)</li>
-            <li>Community Leaders and Institutions Diagnostic(20)</li>
-            <li>Collective Action and Social Cohesion Diagnostic(21)</li>
-            <li>Module 1 of the Human Rights Guide(11)</li>
+            <li>
+              <a
+                href="https://tnc.app.box.com/s/ekyv0saesnuty5ya3fzteho8njz35w2m"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Rightsholder and Stakeholder Mapping Template
+              </a>
+              (19)
+            </li>
+            <li>
+              <a
+                href="https://tnc.app.box.com/s/cm3ttg63uqvqt1eg59emrp7ssqc389o5/file/939207216958"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Community Leaders and Institutions Diagnostic
+              </a>
+              (20)
+            </li>
+            <li>
+              <a
+                href="https://tnc.app.box.com/s/pczujnzvfzz3anp4ltjg27t0x8cv4xrr/file/939211180924"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Collective Action and Social Cohesion Diagnostic
+              </a>
+              (21)
+            </li>
+            <li>
+              <a
+                href="https://www.tnchumanrightsguide.org/module-1-learning-early-discussions/#step-one"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Module 1 of the Human Rights Guide
+              </a>
+              (11)
+            </li>
           </ul>
+          <p>Teams should consider applying whichever tool best meets their needs.</p>
 
           <h3>Identifying Gender Equity Issues and Vulnerable Groups</h3>
           <p>
@@ -106,6 +164,16 @@ export default function ProjectsDetailResearchOverviewPage() {
             other tools, as it might identify issues that pose risks to these discreet sub-groups.
           </p>
         </div>
+      </div>
+
+      <div className="prose flex justify-end pt-5">
+        <Link href={`/projects/${id}/project-and-background-community/${categoryId}`}>
+          <Button className="items-center">
+            {categoryTitle}
+
+            <ArrowRightIcon className="ml-2" />
+          </Button>
+        </Link>
       </div>
     </ProjectsDetailContent>
   );
