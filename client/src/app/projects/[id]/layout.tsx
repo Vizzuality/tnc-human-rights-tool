@@ -18,10 +18,10 @@ export default async function ProjectsDetailLayout({
       <div className="space-y-8">
         <header className="grid grid-cols-12 items-center space-y-10 border-b border-gray-100 pb-8">
           <div className="col-span-12">
-            <h1 className="text-5xl">Project with a long name {id}</h1>
+            <h1 className="text-4xl">Project with a long name {id}</h1>
           </div>
 
-          <div className="col-span-8">
+          <div className="col-span-10">
             <NavigationTabs />
           </div>
         </header>

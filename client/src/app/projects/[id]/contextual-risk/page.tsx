@@ -18,7 +18,7 @@ export default async function ProjectsDetailContextualRiskPage({
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>Contextual Risk Content</ProjectsDetailTitle>
+      <ProjectsDetailTitle>Contextual Risk</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">

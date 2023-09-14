@@ -5,8 +5,8 @@ import TabsNavigationItem from "@/containers/navigation/tabs/item";
 
 const LINKS = [
   {
-    href: "/research",
-    label: "1. Research",
+    href: "/project-and-background-community",
+    label: "1. Project and Background Community",
   },
   {
     href: "/contextual-risk",
