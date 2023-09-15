@@ -1,8 +1,4 @@
-"use client";
-
 import { PropsWithChildren } from "react";
-
-import { usePathname } from "next/navigation";
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
@@ -12,12 +8,11 @@ import Wrapper from "@/containers/wrapper";
 
 interface ProjectsDetailLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
 
-export default function ProjectsDetailLayout({ children, params }: ProjectsDetailLayoutProps) {
+export default async function ProjectsDetailLayout({
+  children,
+  params,
+}: ProjectsDetailLayoutProps) {
   const { id } = params;
-
-  const pathname = usePathname();
-  // Regex for geting all pathnames that start with /projects/[id] and has other paths after it
-  const pathnameRegex = new RegExp(`/projects/${id}/[a-zA-Z0-9-]+`);
 
   return (
     <Wrapper>
@@ -35,11 +30,11 @@ export default function ProjectsDetailLayout({ children, params }: ProjectsDetai
             </div>
           </div>
 
-          {pathnameRegex.test(pathname) && (
-            <div className="col-span-10">
-              <NavigationTabs />
-            </div>
-          )}
+          {/* {pathnameRegex.test(pathname) && ( */}
+          <div className="col-span-10">
+            <NavigationTabs />
+          </div>
+          {/* )} */}
         </header>
 
         {children}
