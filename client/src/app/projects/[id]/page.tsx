@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+import Link from "next/link";
+
 export type ProjectsDetailPageProps = {
   params: {
     id: string;
@@ -13,6 +15,10 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
   };
 }
 
-export default function ProjectsDetailPage() {
-  return "Hello";
+export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) {
+  return (
+    <div>
+      <Link href={`/projects/${params.id}/project-and-background-community`}>Start</Link>
+    </div>
+  );
 }
