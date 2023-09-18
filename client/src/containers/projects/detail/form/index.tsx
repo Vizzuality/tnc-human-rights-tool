@@ -49,43 +49,54 @@ const useSyncFormValues = (f: UseFormReturn) => {
 };
 
 export default function ProjectsDetailForm({ items }: ProjectsDetailFormProps) {
-  const formSchema = z
-    .object({
-      ...items.data.reduce(
-        (acc, { id, input }) => {
-          switch (input.type) {
-            case "radio":
-              acc[id] = z.enum([
-                ...(input.radio_options.map(({ value }) => value) as [string, ...string[]]),
-              ]);
-
-              acc[`${id}-notes`] = z.string().optional();
-              break;
-            default:
-              acc[id] = z.string();
-              break;
-          }
-
-          return acc;
-        },
-        {} as Record<string, ZodTypeAny>,
-      ),
-    })
-    .superRefine((data, context) => {
-      // if radio is present and is yes then notes is required
-      // if radio is present and is no then notes is not required
-      items.data.forEach(({ id, input }) => {
-        if (input.type === "radio") {
-          if (data[id] === "yes" && !data[`${id}-notes`]) {
-            context.addIssue({
-              code: "custom",
-              message: "Notes are required",
-              path: [`${id}-notes`],
-            });
-          }
+  const formSchema = z.object({
+    ...items.data.reduce(
+      (acc, { id, input }) => {
+        switch (input.type) {
+          case "radio":
+            acc[id] = z
+              .object({
+                answer: z.enum([
+                  ...(input.radio_options.map(({ value }) => value) as [string, ...string[]]),
+                ]),
+                notes: z.string().optional(),
+              })
+              .superRefine((data, context) => {
+                // if radio is present and is yes then notes is required
+                // if radio is present and is no then notes is not required
+                if (data.answer === "yes" && !data.notes) {
+                  context.addIssue({
+                    code: "custom",
+                    message: "Notes/Specific Risk are required",
+                  });
+                }
+              });
+            break;
+          default:
+            acc[id] = z.string();
+            break;
         }
-      });
-    });
+
+        return acc;
+      },
+      {} as Record<string, ZodTypeAny>,
+    ),
+  });
+  // .superRefine((data, context) => {
+  //   // if radio is present and is yes then notes is required
+  //   // if radio is present and is no then notes is not required
+  //   items.data.forEach(({ id, input }) => {
+  //     if (input.type === "radio") {
+  //       if (data[id] === "yes" && !data[`${id}-notes`]) {
+  //         context.addIssue({
+  //           code: "custom",
+  //           message: "Notes/Specific Risk are required",
+  //           path: [`${id}-notes`],
+  //         });
+  //       }
+  //     }
+  //   });
+  // });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -130,7 +141,12 @@ export default function ProjectsDetailForm({ items }: ProjectsDetailFormProps) {
                           <div className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                             <RadioGroup
                               className="flex space-x-2.5"
-                              onValueChange={field.onChange}
+                              onValueChange={(v) =>
+                                field.onChange({
+                                  ...field.value,
+                                  answer: v,
+                                })
+                              }
                               defaultValue={field.value}
                             >
                               {input.radio_options.map(({ value, label }) => (
@@ -149,17 +165,26 @@ export default function ProjectsDetailForm({ items }: ProjectsDetailFormProps) {
                           </div>
                         </FormControl>
 
-                        {field.value === "yes" && (
+                        {field.value?.answer === "yes" && (
                           <FormField
                             control={form.control}
-                            name={`${id}-notes`}
+                            name={`${id}`}
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel>Notes</FormLabel>
+                                <FormLabel>Notes/Specific Risk</FormLabel>
                                 <FormControl>
-                                  <Textarea rows={5} {...field} />
+                                  <Textarea
+                                    rows={5}
+                                    {...field}
+                                    value={field.value?.notes}
+                                    onChange={(e) => {
+                                      field.onChange({
+                                        ...field.value,
+                                        notes: e.target.value,
+                                      });
+                                    }}
+                                  />
                                 </FormControl>
-                                <FormMessage />
                               </FormItem>
                             )}
                           />
