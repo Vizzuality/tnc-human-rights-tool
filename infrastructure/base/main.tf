@@ -62,31 +62,31 @@ module "iam" {
 resource "random_password" "api_token_salt" {
   length           = 32
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
 resource "random_password" "admin_jwt_secret" {
   length           = 32
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
 resource "random_password" "transfer_token_salt" {
   length           = 32
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
 resource "random_password" "jwt_secret" {
   length           = 32
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
 resource "random_password" "nextauth_secret" {
   length           = 32
   special          = true
-  override_special = "!#$%&*()-_=+[]{}<>:?"
+  override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
 locals {
