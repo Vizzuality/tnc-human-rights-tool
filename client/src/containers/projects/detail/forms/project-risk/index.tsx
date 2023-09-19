@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
+import { DETERMINATIONS, PRIORIZATIONS } from "@/constants";
 
 export interface ProjectRiskFormProps extends PropsWithChildren {
   items: {
@@ -44,48 +45,15 @@ export interface ProjectRiskFormProps extends PropsWithChildren {
   };
 }
 
-const DETERMINATIONS = [
-  {
-    value: "probable-high-risk",
-    label: "Probable High Risk",
-  },
-  {
-    value: "not-aplicable",
-    label: "Not Applicable",
-  },
-  {
-    value: "unlikely",
-    label: "Unlikely",
-  },
-  {
-    value: "reliable-mitigation-available-or-already-in-place",
-    label: "Reliable Mitigation Available or Already in Place",
-  },
-  {
-    value: "limited-scope-of-risk",
-    label: "Limited Scope of Risk",
-  },
-];
-
-const PRIORIZATIONS = [
-  {
-    value: "escalate",
-    label: "Escalate",
-  },
-  {
-    value: "prioritize",
-    label: "Prioritize",
-  },
-  {
-    value: "watch",
-    label: "Watch",
-  },
-];
-
 export default function ProjectRiskForm() {
   const formSchema = z.object({
     determination: z.enum(DETERMINATIONS.map(({ value }) => value) as [string, ...string[]]),
-    priorization: z.enum(PRIORIZATIONS.map(({ value }) => value) as [string, ...string[]]),
+    priorization: z.enum(
+      PRIORIZATIONS.filter(({ value }) => value !== "more-research").map(({ value }) => value) as [
+        string,
+        ...string[],
+      ],
+    ),
     screening_notes: z.string(),
     specific_risk_notes: z.string(),
     research_notes: z.string(),
@@ -150,16 +118,18 @@ export default function ProjectRiskForm() {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  {PRIORIZATIONS.map(({ value, label }) => (
-                    <FormItem key={value}>
-                      <div className="flex items-center">
-                        <FormControl>
-                          <RadioGroupItem {...field} value={value} />
-                        </FormControl>
-                        <FormLabel className="cursor-pointer pl-2 font-normal">{label}</FormLabel>
-                      </div>
-                    </FormItem>
-                  ))}
+                  {PRIORIZATIONS.filter(({ value }) => value !== "more-research").map(
+                    ({ value, label }) => (
+                      <FormItem key={value}>
+                        <div className="flex items-center">
+                          <FormControl>
+                            <RadioGroupItem {...field} value={value} />
+                          </FormControl>
+                          <FormLabel className="cursor-pointer pl-2 font-normal">{label}</FormLabel>
+                        </div>
+                      </FormItem>
+                    ),
+                  )}
                 </RadioGroup>
               </FormControl>
 
