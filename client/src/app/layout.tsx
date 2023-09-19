@@ -7,6 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LayoutProviders from "@/app/layout-poviders";
 
 import Header from "@/containers/header";
+import ScrollUp from "@/containers/scroll-up";
 
 import { SpaceGrotesk } from "@/styles/fonts";
 
@@ -24,6 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body>
           <main className="flex min-h-screen flex-col">
             <Header />
+            <ScrollUp />
 
             <section className="flex grow flex-col space-y-5 py-16">{children}</section>
           </main>

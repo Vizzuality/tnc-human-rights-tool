@@ -12,6 +12,13 @@ export async function getPCBs(categoryId?: string) {
         title: string;
         display_order: string;
       };
+      input: {
+        type: string;
+        radio_options: {
+          value: string;
+          label: string;
+        }[];
+      };
     }[];
   }>({
     method: "GET",

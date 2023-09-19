@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar from "@/containers/navigation/sidebar";
+import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
 
 import { getPCBCategories } from "@/data/pcb/categories";
@@ -31,11 +32,23 @@ export default async function ProjectsDetailPCBLayout({
       href: `/projects/${id}/project-and-background-community`,
       label: "Overview",
       className: "text-lg",
+      children: <span className="text-lg">Overview</span>,
     },
-    ...CATEGORIES.data.map(({ id: categoryId, title }) => ({
-      href: `/projects/${id}/project-and-background-community/${categoryId}`,
-      label: title,
-    })),
+    ...CATEGORIES.data.map(({ id: categoryId, title }) => {
+      const percentage = Math.random();
+
+      return {
+        href: `/projects/${id}/project-and-background-community/${categoryId}`,
+        label: title,
+        children: (
+          <>
+            <span>{title}</span>
+            {/* Draw a svg circle that I can control how much of the path is filled */}
+            <NavigationCircle percentage={percentage} />
+          </>
+        ),
+      };
+    }),
   ];
 
   return (
