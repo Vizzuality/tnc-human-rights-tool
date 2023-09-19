@@ -1,7 +1,7 @@
 "use client";
 import { PropsWithChildren } from "react";
 
-import { useForm } from "react-hook-form";
+import { UseFormReturn, useForm, useWatch } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import parse from "html-react-parser";
@@ -45,13 +45,13 @@ export interface ProjectsDetailFormProps extends PropsWithChildren {
   };
 }
 
-// const useSyncFormValues = (f: UseFormReturn) => {
-//   const values = useWatch({
-//     control: f.control,
-//   });
+const useSyncFormValues = (f: UseFormReturn) => {
+  const values = useWatch({
+    control: f.control,
+  });
 
-//   console.info("watch values", values);
-// };
+  console.info("watch values", values);
+};
 
 export default function ProjectsDetailForm({ items }: ProjectsDetailFormProps) {
   const formSchema = z.object({
@@ -96,7 +96,7 @@ export default function ProjectsDetailForm({ items }: ProjectsDetailFormProps) {
     console.info(values);
   };
 
-  // useSyncFormValues(form);
+  useSyncFormValues(form);
 
   return (
     <Form {...form}>

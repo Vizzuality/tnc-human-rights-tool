@@ -5,19 +5,22 @@ interface NavigationSidebarProps {
     href: string;
     label: string;
     className?: string;
+    children?: React.ReactNode;
   }[];
 }
 
 export default function NavigationSidebar({ items }: NavigationSidebarProps) {
   return (
     <ul className="-mt-5 py-5">
-      {items.map(({ href, label, className }) => (
-        <li key={href}>
-          <NavigationSidebarItem className={className} href={href}>
-            {label}
-          </NavigationSidebarItem>
-        </li>
-      ))}
+      {items.map(({ href, className, children }) => {
+        return (
+          <li key={href}>
+            <NavigationSidebarItem className={className} href={href}>
+              {children}
+            </NavigationSidebarItem>
+          </li>
+        );
+      })}
     </ul>
   );
 }

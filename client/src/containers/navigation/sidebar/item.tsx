@@ -22,7 +22,7 @@ export default function NavigationSidebarItem({
     <Link
       {...props}
       className={cn({
-        "block px-4 py-2 text-sm font-medium": true,
+        "relative flex items-center space-x-2 px-4 py-2 text-sm font-medium": true,
         "bg-gray-100 text-primary": pathname === props.href,
         "hover:bg-gray-50": pathname !== props.href,
         [`${className}`]: !!className,
