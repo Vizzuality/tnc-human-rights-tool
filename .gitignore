@@ -14,7 +14,7 @@ dist
 dist-ssr
 *.local
 
-
+/node_modules
 
 /client/.pnp.*
 /client/.yarn/*
@@ -24,14 +24,6 @@ dist-ssr
 !/client/.yarn/sdks
 !/client/.yarn/versions
 
-/client-legacy/.pnp.*
-/client-legacy/.yarn/*
-!/client-legacy/.yarn/patches
-!/client-legacy/.yarn/plugins
-!/client-legacy/.yarn/releases
-!/client-legacy/.yarn/sdks
-!/client-legacy/.yarn/versions
-
 /api/.pnp.*
 /api/.yarn/*
 !/api/.yarn/patches
@@ -39,3 +31,11 @@ dist-ssr
 !/api/.yarn/releases
 !/api/.yarn/sdks
 !/api/.yarn/versions
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
