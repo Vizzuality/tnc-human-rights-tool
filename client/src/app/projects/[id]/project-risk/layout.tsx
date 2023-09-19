@@ -6,6 +6,7 @@ import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar from "@/containers/navigation/sidebar";
 // import NavigationCircle from "@/containers/navigation/sidebar/circle";
+import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailProjectRiskLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -29,6 +30,18 @@ export default async function ProjectsDetailProjectRiskLayout({
       label: "Overview",
       className: "text-lg",
       children: <span className="text-lg">Overview</span>,
+    },
+    // Just testing
+    {
+      href: `/projects/${id}/project-risk/1`,
+      label: "Contextual Risk Name",
+      children: (
+        <>
+          <span>Contextual Risk Name</span>
+          {/* Draw a svg circle that I can control how much of the path is filled */}
+          <NavigationCircle percentage={0.35} />
+        </>
+      ),
     },
   ];
 
