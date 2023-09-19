@@ -1,6 +1,7 @@
 // import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
+import ProjectRiskForm from "@/containers/projects/detail/forms/project-risk";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 // interface ProjectsDetailProjectRiskIdProps {
@@ -22,7 +23,7 @@ export default async function ProjectsDetailProjectRiskIdPage() {
         </div>
       </div>
 
-      {/* <ProjectsDetailForm items={ITEMS} /> */}
+      <ProjectRiskForm />
     </ProjectsDetailContent>
   );
 }

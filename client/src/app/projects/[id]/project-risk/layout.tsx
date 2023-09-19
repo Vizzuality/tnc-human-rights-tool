@@ -34,12 +34,23 @@ export default async function ProjectsDetailProjectRiskLayout({
     // Just testing
     {
       href: `/projects/${id}/project-risk/1`,
-      label: "Contextual Risk Name",
+      label: "1.1 Killings",
       children: (
         <>
-          <span>Contextual Risk Name</span>
+          <span>1.1 Killings</span>
           {/* Draw a svg circle that I can control how much of the path is filled */}
           <NavigationCircle percentage={0.35} />
+        </>
+      ),
+    },
+    {
+      href: `/projects/${id}/project-risk/2`,
+      label: "5.2 Lack of Community capacity",
+      children: (
+        <>
+          <span>5.2 Lack of Community capacity</span>
+          {/* Draw a svg circle that I can control how much of the path is filled */}
+          <NavigationCircle percentage={0.75} />
         </>
       ),
     },
