@@ -24,7 +24,7 @@
     "name": "Vizzuality"
   },
   "strapi": {
-    "uuid": "4a4dadd6-df30-41a8-bc20-7d43d59c6201"
+    "uuid": "cea9068c-7d0a-49b2-86f8-f6c809faa374"
   },
   "engines": {
     "node": ">=16.0.0 <=18.x.x",
