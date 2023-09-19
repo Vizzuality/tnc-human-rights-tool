@@ -83,3 +83,9 @@ variable "ga_tracking_id" {
   default     = ""
   description = "Google Analytics tracking id"
 }
+
+variable "cms_url" {
+  type        = string
+  default     = ""
+  description = "URL for the HRT CMS application"
+}

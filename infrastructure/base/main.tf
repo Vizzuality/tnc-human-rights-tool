@@ -119,6 +119,7 @@ locals {
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
     NEXTAUTH_URL                               = "https://${var.staging_domain}"
     NEXTAUTH_SECRET                            = random_password.nextauth_secret.result
+    NEXT_PUBLIC_CMS_URL                        = var.cms_url
   }
 }
 

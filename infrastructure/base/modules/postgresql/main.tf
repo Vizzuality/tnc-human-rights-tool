@@ -27,7 +27,6 @@ resource "aws_db_instance" "postgresql" {
 resource "random_password" "postgresql_superuser" {
   length           = 16
   special          = false
-  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 
