@@ -37,12 +37,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Env variables
 
 
-| Variable name           | Description                                                             |  Default value                      |
-|-------------------------|-------------------------------------------------------------------------|------------------------------------:|
-| NEXT_PUBLIC_ENVIRONMENT  | `'develop', 'staging', 'production'`. There are many times where you want to do things on specific environments. Load a third party library only in production, enable search engines only in production... | develop   |
-| NEXT_PUBLIC_URL  | canonical URL | http://localhost:$PORT   |
-| NEXT_PUBLIC_API_URL  | URL of the API. | http://0.0.0.0:1337/api   |
-| NEXT_PUBLIC_GA_TRACKING_ID  | Google Analytics tracking ID. If you're working with an Google Analytics 4 property, you have a Measurement ID instead of a Tracking ID. |    |
-| RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED  | If you use recoil and you want to avoid weird errors due to hotreload |  false  |
-| NEXTAUTH_URL  | Canonical URL. You don't need to define it if you deploy it to Vercel [Check out the docs](https://next-auth.js.org/configuration/options#nextauth_url)  |  http://localhost:$PORT  |
-| NEXTAUTH_SECRET  | Used to encrypt the NextAuth.js JWT and to hash email verification tokens [Check out the docs](https://next-auth.js.org/configuration/options#nextauth_secret) |  cat  |
+| Variable name                              | Description                                                                                                                                                                                                 |           Default value |
+|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------:|
+| NEXT_PUBLIC_ENVIRONMENT                    | `'develop', 'staging', 'production'`. There are many times where you want to do things on specific environments. Load a third party library only in production, enable search engines only in production... |                 develop |
+| NEXT_PUBLIC_URL                            | canonical URL                                                                                                                                                                                               |  http://localhost:$PORT |
+| NEXT_PUBLIC_API_URL                        | URL of the API.                                                                                                                                                                                             | http://0.0.0.0:1337/api |
+| NEXT_PUBLIC_GA_TRACKING_ID                 | Google Analytics tracking ID. If you're working with an Google Analytics 4 property, you have a Measurement ID instead of a Tracking ID.                                                                    |                         |
+| RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED | If you use recoil and you want to avoid weird errors due to hotreload                                                                                                                                       |                   false |
+| NEXTAUTH_URL                               | Canonical URL. You don't need to define it if you deploy it to Vercel [Check out the docs](https://next-auth.js.org/configuration/options#nextauth_url)                                                     |  http://localhost:$PORT |
+| NEXTAUTH_SECRET                            | Used to encrypt the NextAuth.js JWT and to hash email verification tokens [Check out the docs](https://next-auth.js.org/configuration/options#nextauth_secret)                                              |                     cat |

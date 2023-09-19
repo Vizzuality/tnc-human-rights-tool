@@ -83,6 +83,12 @@ resource "random_password" "jwt_secret" {
   override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
+resource "random_password" "nextauth_secret" {
+  length           = 32
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
 locals {
   staging_api_env = {
     HOST                = "0.0.0.0"
@@ -103,14 +109,16 @@ locals {
     DATABASE_PASSWORD                = module.staging.postgresql_password
     DATABASE_SSL                     = true
     DATABASE_SSL_REJECT_UNAUTHORIZED = false
-
   }
   staging_client_env = {
-    NEXT_PUBLIC_URL            = "https://${var.staging_domain}"
-    NEXT_PUBLIC_ENVIRONMENT    = "production"
-    NEXT_PUBLIC_API_URL        = "https://${var.staging_domain}/cms/api"
-    NEXT_PUBLIC_GA_TRACKING_ID = var.ga_tracking_id
-    LOG_LEVEL                  = "info"
+    NEXT_PUBLIC_URL                            = "https://${var.staging_domain}"
+    NEXT_PUBLIC_ENVIRONMENT                    = "production"
+    NEXT_PUBLIC_API_URL                        = "https://${var.staging_domain}/cms/api"
+    NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
+    LOG_LEVEL                                  = "info"
+    RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
+    NEXTAUTH_URL                               = "https://${var.staging_domain}"
+    NEXTAUTH_SECRET                            = random_password.nextauth_secret.result
   }
 }
 
