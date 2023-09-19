@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
-import ProjectsDetailForm from "@/containers/projects/detail/form";
+import ProjectsDetailForm from "@/containers/projects/detail/forms";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { getContextualRisks } from "@/data/contextual-risk";
