@@ -98,7 +98,7 @@ locals {
     ADMIN_JWT_SECRET    = random_password.admin_jwt_secret.result
     TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
     JWT_SECRET          = random_password.jwt_secret.result
-    API_URL             = "https://${var.staging_domain}/cms/"
+    API_BASE_URL        = "https://${var.staging_domain}/cms/"
 
     # Database
     DATABASE_CLIENT                  = "postgres"
