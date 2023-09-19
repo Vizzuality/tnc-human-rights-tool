@@ -5,66 +5,60 @@
  * OpenAPI spec version: 1.0.0
  */
 export type GetProjectsParams = {
-  /**
-   * Sort by attributes ascending (asc) or descending (desc)
-   */
-  sort?: string;
-  /**
-   * Return page/pageSize (default: true)
-   */
-  "pagination[withCount]"?: boolean;
-  /**
-   * Page number (default: 0)
-   */
-  "pagination[page]"?: number;
-  /**
-   * Page size (default: 25)
-   */
-  "pagination[pageSize]"?: number;
-  /**
-   * Offset value (default: 0)
-   */
-  "pagination[start]"?: number;
-  /**
-   * Number of entities to return (default: 25)
-   */
-  "pagination[limit]"?: number;
-  /**
-   * Fields to return (ex: title,author)
-   */
-  fields?: string;
-  /**
-   * Relations to return
-   */
-  populate?: string;
-  /**
-   * Filters to apply
-   */
-  filters?: { [key: string]: any };
-  /**
-   * Locale to apply
-   */
-  locale?: string;
+/**
+ * Sort by attributes ascending (asc) or descending (desc)
+ */
+sort?: string;
+/**
+ * Return page/pageSize (default: true)
+ */
+'pagination[withCount]'?: boolean;
+/**
+ * Page number (default: 0)
+ */
+'pagination[page]'?: number;
+/**
+ * Page size (default: 25)
+ */
+'pagination[pageSize]'?: number;
+/**
+ * Offset value (default: 0)
+ */
+'pagination[start]'?: number;
+/**
+ * Number of entities to return (default: 25)
+ */
+'pagination[limit]'?: number;
+/**
+ * Fields to return (ex: title,author)
+ */
+fields?: string;
+/**
+ * Relations to return
+ */
+populate?: string;
+/**
+ * Filters to apply
+ */
+filters?: { [key: string]: any };
+/**
+ * Locale to apply
+ */
+locale?: string;
 };
 
 /**
  * every controller of the api
  */
-export type UsersPermissionsPermissionsTreeControllers = {
-  [key: string]: {
-    [key: string]: {
-      enabled?: boolean;
-      policy?: string;
-    };
-  };
-};
+export type UsersPermissionsPermissionsTreeControllers = {[key: string]: {[key: string]: {
+  enabled?: boolean;
+  policy?: string;
+}}};
 
-export interface UsersPermissionsPermissionsTree {
-  [key: string]: {
-    /** every controller of the api */
-    controllers?: UsersPermissionsPermissionsTreeControllers;
-  };
-}
+export interface UsersPermissionsPermissionsTree {[key: string]: {
+  /** every controller of the api */
+  controllers?: UsersPermissionsPermissionsTreeControllers;
+}}
 
 export type UsersPermissionsRoleRequestBody = {
   name?: string;
@@ -214,9 +208,7 @@ export type ProjectCreatedByDataAttributes = {
   updatedBy?: ProjectCreatedByDataAttributesUpdatedBy;
 };
 
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = {
-  [key: string]: any;
-};
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: any };
 
 export type ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedByData = {
   id?: number;
@@ -227,9 +219,7 @@ export type ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedBy = {
   data?: ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedByData;
 };
 
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = {
-  [key: string]: any;
-};
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesCreatedByDataAttributes = { [key: string]: any };
 
 export type ProjectCreatedByDataAttributesRolesDataItemAttributesCreatedByData = {
   id?: number;
@@ -273,51 +263,40 @@ export type ProjectCreatedByDataAttributesRolesDataItemAttributes = {
   updatedBy?: ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedBy;
 };
 
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes =
-  { [key: string]: any };
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes = { [key: string]: any };
 
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData =
-  {
-    id?: number;
-    attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy =
-  {
-    data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes =
-  { [key: string]: any };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData =
-  {
-    id?: number;
-    attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy =
-  {
-    data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes =
-  { [key: string]: any };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData =
-  {
-    id?: number;
-    attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole =
-  {
-    data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
-  };
-
-export type ProjectCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = {
-  [key: string]: any;
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData = {
+  id?: number;
+  attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByDataAttributes;
 };
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedBy = {
+  data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesUpdatedByData;
+};
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes = { [key: string]: any };
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData = {
+  id?: number;
+  attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByDataAttributes;
+};
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedBy = {
+  data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesCreatedByData;
+};
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes = { [key: string]: any };
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData = {
+  id?: number;
+  attributes?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleDataAttributes;
+};
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRole = {
+  data?: ProjectCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributesRoleData;
+};
+
+export type ProjectCreatedByDataAttributesRolesDataItemAttributesUsersDataItemAttributes = { [key: string]: any };
 
 export type ProjectCreatedByDataAttributesRolesDataItemAttributesUsersDataItem = {
   id?: number;
@@ -381,3 +360,4 @@ export type ErrorDataOneOfTwoItem = { [key: string]: any };
 export type ErrorDataOneOf = { [key: string]: any };
 
 export type ErrorData = ErrorDataOneOf | ErrorDataOneOfTwoItem[] | null;
+

@@ -5,8 +5,26 @@ RUN apt-get update -y && \
     apt-get clean
 
 WORKDIR /app
+
 COPY .yarn ./.yarn
-COPY package.json .yarnrc.yml yarn.lock ./
+COPY public ./public
+COPY src ./src
+
+COPY .browserlistrc \
+     .yarnrc.yml \
+     components.json \
+     entrypoint.sh \
+     index.js \
+     logger.js \
+     next.config.mjs \
+     package.json \
+     postcss.config.js \
+     README.md \
+     tailwind.config.ts \
+     tsconfig.json \
+     yarn.lock \
+     .env.local \
+     ./
 
 WORKDIR /app/client
 COPY ./package.json ./
