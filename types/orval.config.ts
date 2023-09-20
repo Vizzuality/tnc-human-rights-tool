@@ -12,10 +12,8 @@ module.exports = {
           path: '../client/src/services/api/index.ts',
           name: 'API',
         },
-        query: {
+        queryOptions: {
           useQuery: true,
-          useInfinite: true,
-          useInfiniteQueryParam: "'pagination[page]'",
           useMutation: true,
           options: {
             staleTime: 10000,
@@ -23,50 +21,10 @@ module.exports = {
           signal: true,
         },
         operations: {
-          'get/pages/{id}': {
-            query: {
+          'get/projects': {
+            queryOptions: {
               useQuery: true,
-              useInfinite: false,
-              signal: true,
-              options: {
-                staleTime: 10000,
-              },
-            },
-          },
-          'get/layer-groups/{id}': {
-            query: {
-              useQuery: true,
-              useInfinite: false,
-              signal: true,
-              options: {
-                staleTime: 10000,
-              },
-            },
-          },
-          'get/layers/{id}': {
-            query: {
-              useQuery: true,
-              useInfinite: false,
-              signal: true,
-              options: {
-                staleTime: 10000,
-              },
-            },
-          },
-          'get/organizations/{id}': {
-            query: {
-              useQuery: true,
-              useInfinite: false,
-              signal: true,
-              options: {
-                staleTime: 10000,
-              },
-            },
-          },
-          'get/projects/{id}': {
-            query: {
-              useQuery: true,
-              useInfinite: false,
+              useInfinite: true,
               signal: true,
               options: {
                 staleTime: 10000,
@@ -80,7 +38,7 @@ module.exports = {
       target:
         '../api/src/extensions/documentation/documentation/1.0.0/full_documentation.json',
       filters: {
-        tags: ['Page', 'Layer-group', 'Layer', 'Organization', 'Project'],
+        tags: ['Project', 'Users-Permissions - Auth'],
       },
     },
   },

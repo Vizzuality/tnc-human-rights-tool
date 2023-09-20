@@ -1,7 +1,9 @@
 import NextAuth from "next-auth";
-import type { AuthOptions } from "next-auth";
+import type { AuthOptions, Awaitable, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+import { postAuthLocal } from "@/types/generated/users-permissions-auth";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -11,18 +13,18 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize() {
-        const user = {
-          id: "1",
-          name: "J Smith",
-          email: "jsmith@example.com",
-          apiToken:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-        };
+      async authorize(credentials) {
+        const u = await postAuthLocal({
+          identifier: credentials?.email,
+          password: credentials?.password,
+        });
+
+        const { jwt: apiToken, user } = u;
 
         if (user) {
-          return user;
+          return { ...user, apiToken } as unknown as Awaitable<User>;
         }
+
         return null;
       },
     }),
@@ -50,6 +52,7 @@ export const authOptions: AuthOptions = {
   },
   pages: {
     signIn: "/auth/signin",
+    error: "/auth/signin",
   },
 };
 
