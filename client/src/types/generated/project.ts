@@ -4,273 +4,258 @@
  * DOCUMENTATION
  * OpenAPI spec version: 1.0.0
  */
-import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation
+} from '@tanstack/react-query'
 import type {
   UseQueryOptions,
   UseMutationOptions,
   QueryFunction,
   MutationFunction,
   UseQueryResult,
-  QueryKey,
-} from "@tanstack/react-query";
+  QueryKey
+} from '@tanstack/react-query'
 import type {
   ProjectListResponse,
   Error,
   GetProjectsParams,
   ProjectResponse,
-  ProjectRequest,
-} from "./strapi.schemas";
-import { API } from "../../services/api/index";
-import type { ErrorType } from "../../services/api/index";
+  ProjectRequest
+} from './strapi.schemas'
+import { API } from '../../services/api/index';
+import type { ErrorType } from '../../services/api/index';
 
-export const getProjects = (params?: GetProjectsParams, signal?: AbortSignal) => {
-  return API<ProjectListResponse>({ url: `/projects`, method: "get", params, signal });
-};
 
-export const getGetProjectsQueryKey = (params?: GetProjectsParams) =>
-  [`/projects`, ...(params ? [params] : [])] as const;
 
-export const getGetProjectsQueryOptions = <
-  TData = Awaited<ReturnType<typeof getProjects>>,
-  TError = ErrorType<Error>,
->(
-  params?: GetProjectsParams,
-  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> },
-): UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & {
-  queryKey: QueryKey;
-} => {
-  const { query: queryOptions } = options ?? {};
+export const getProjects = (
+    params?: GetProjectsParams,
+ signal?: AbortSignal
+) => {
+      return API<ProjectListResponse>(
+      {url: `/projects`, method: 'get',
+        params, signal
+    },
+      );
+    }
+  
 
-  const queryKey = queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
+export const getGetProjectsQueryKey = (params?: GetProjectsParams,) => [`/projects`, ...(params ? [params]: [])] as const;
+  
 
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) =>
-    getProjects(params, signal);
+    
+export const getGetProjectsQueryOptions = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<Error>>(params?: GetProjectsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>, }
+): UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions} = options ?? {};
 
-  return { queryKey, queryFn, ...queryOptions };
-};
+  const queryKey =  queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
 
-export type GetProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>;
-export type GetProjectsQueryError = ErrorType<Error>;
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) => getProjects(params, signal);
+    
+      
+      
+   return  { queryKey, queryFn, ...queryOptions}}
 
-export const useGetProjects = <
-  TData = Awaited<ReturnType<typeof getProjects>>,
-  TError = ErrorType<Error>,
->(
-  params?: GetProjectsParams,
-  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetProjectsQueryOptions(params, options);
+export type GetProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>
+export type GetProjectsQueryError = ErrorType<Error>
 
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+export const useGetProjects = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<Error>>(
+ params?: GetProjectsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>, }
 
-  query.queryKey = queryOptions.queryKey;
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
-  return query;
-};
+  const queryOptions = getGetProjectsQueryOptions(params,options)
 
-export const postProjects = (projectRequest: ProjectRequest) => {
-  return API<ProjectResponse>({
-    url: `/projects`,
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    data: projectRequest,
-  });
-};
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
-export const getPostProjectsMutationOptions = <
-  TError = ErrorType<Error>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postProjects>>,
-    TError,
-    { data: ProjectRequest },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof postProjects>>,
-  TError,
-  { data: ProjectRequest },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {};
-
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof postProjects>>,
-    { data: ProjectRequest }
-  > = (props) => {
-    const { data } = props ?? {};
-
-    return postProjects(data);
-  };
-
-  return { mutationFn, ...mutationOptions };
-};
-
-export type PostProjectsMutationResult = NonNullable<Awaited<ReturnType<typeof postProjects>>>;
-export type PostProjectsMutationBody = ProjectRequest;
-export type PostProjectsMutationError = ErrorType<Error>;
-
-export const usePostProjects = <TError = ErrorType<Error>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postProjects>>,
-    TError,
-    { data: ProjectRequest },
-    TContext
-  >;
-}) => {
-  const mutationOptions = getPostProjectsMutationOptions(options);
-
-  return useMutation(mutationOptions);
-};
-export const getProjectsId = (id: number, signal?: AbortSignal) => {
-  return API<ProjectResponse>({ url: `/projects/${id}`, method: "get", signal });
-};
-
-export const getGetProjectsIdQueryKey = (id: number) => [`/projects/${id}`] as const;
-
-export const getGetProjectsIdQueryOptions = <
-  TData = Awaited<ReturnType<typeof getProjectsId>>,
-  TError = ErrorType<Error>,
->(
-  id: number,
-  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> },
-): UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> & {
-  queryKey: QueryKey;
-} => {
-  const { query: queryOptions } = options ?? {};
-
-  const queryKey = queryOptions?.queryKey ?? getGetProjectsIdQueryKey(id);
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjectsId>>> = ({ signal }) =>
-    getProjectsId(id, signal);
-
-  return { queryKey, queryFn, enabled: !!id, ...queryOptions };
-};
-
-export type GetProjectsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getProjectsId>>>;
-export type GetProjectsIdQueryError = ErrorType<Error>;
-
-export const useGetProjectsId = <
-  TData = Awaited<ReturnType<typeof getProjectsId>>,
-  TError = ErrorType<Error>,
->(
-  id: number,
-  options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> },
-): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetProjectsIdQueryOptions(id, options);
-
-  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey;
+  query.queryKey = queryOptions.queryKey ;
 
   return query;
-};
+}
 
-export const putProjectsId = (id: number, projectRequest: ProjectRequest) => {
-  return API<ProjectResponse>({
-    url: `/projects/${id}`,
-    method: "put",
-    headers: { "Content-Type": "application/json" },
-    data: projectRequest,
-  });
-};
+export const postProjects = (
+    projectRequest: ProjectRequest,
+ ) => {
+      return API<ProjectResponse>(
+      {url: `/projects`, method: 'post',
+      headers: {'Content-Type': 'application/json', },
+      data: projectRequest
+    },
+      );
+    }
+  
 
-export const getPutProjectsIdMutationOptions = <
-  TError = ErrorType<Error>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof putProjectsId>>,
-    TError,
-    { id: number; data: ProjectRequest },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof putProjectsId>>,
-  TError,
-  { id: number; data: ProjectRequest },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {};
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof putProjectsId>>,
-    { id: number; data: ProjectRequest }
-  > = (props) => {
-    const { id, data } = props ?? {};
+export const getPostProjectsMutationOptions = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: ProjectRequest}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: ProjectRequest}, TContext> => {
+ const {mutation: mutationOptions} = options ?? {};
 
-    return putProjectsId(id, data);
-  };
+      
 
-  return { mutationFn, ...mutationOptions };
-};
 
-export type PutProjectsIdMutationResult = NonNullable<Awaited<ReturnType<typeof putProjectsId>>>;
-export type PutProjectsIdMutationBody = ProjectRequest;
-export type PutProjectsIdMutationError = ErrorType<Error>;
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postProjects>>, {data: ProjectRequest}> = (props) => {
+          const {data} = props ?? {};
 
-export const usePutProjectsId = <TError = ErrorType<Error>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof putProjectsId>>,
-    TError,
-    { id: number; data: ProjectRequest },
-    TContext
-  >;
-}) => {
-  const mutationOptions = getPutProjectsIdMutationOptions(options);
+          return  postProjects(data,)
+        }
 
-  return useMutation(mutationOptions);
-};
-export const deleteProjectsId = (id: number) => {
-  return API<number>({ url: `/projects/${id}`, method: "delete" });
-};
+        
 
-export const getDeleteProjectsIdMutationOptions = <
-  TError = ErrorType<Error>,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteProjectsId>>,
-    TError,
-    { id: number },
-    TContext
-  >;
-}): UseMutationOptions<
-  Awaited<ReturnType<typeof deleteProjectsId>>,
-  TError,
-  { id: number },
-  TContext
-> => {
-  const { mutation: mutationOptions } = options ?? {};
+ 
+   return  { mutationFn, ...mutationOptions }}
 
-  const mutationFn: MutationFunction<
-    Awaited<ReturnType<typeof deleteProjectsId>>,
-    { id: number }
-  > = (props) => {
-    const { id } = props ?? {};
+    export type PostProjectsMutationResult = NonNullable<Awaited<ReturnType<typeof postProjects>>>
+    export type PostProjectsMutationBody = ProjectRequest
+    export type PostProjectsMutationError = ErrorType<Error>
 
-    return deleteProjectsId(id);
-  };
+    export const usePostProjects = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postProjects>>, TError,{data: ProjectRequest}, TContext>, }
+) => {
+    
+      const mutationOptions = getPostProjectsMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const getProjectsId = (
+    id: number,
+ signal?: AbortSignal
+) => {
+      return API<ProjectResponse>(
+      {url: `/projects/${id}`, method: 'get', signal
+    },
+      );
+    }
+  
 
-  return { mutationFn, ...mutationOptions };
-};
+export const getGetProjectsIdQueryKey = (id: number,) => [`/projects/${id}`] as const;
+  
 
-export type DeleteProjectsIdMutationResult = NonNullable<
-  Awaited<ReturnType<typeof deleteProjectsId>>
->;
+    
+export const getGetProjectsIdQueryOptions = <TData = Awaited<ReturnType<typeof getProjectsId>>, TError = ErrorType<Error>>(id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData>, }
+): UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions} = options ?? {};
 
-export type DeleteProjectsIdMutationError = ErrorType<Error>;
+  const queryKey =  queryOptions?.queryKey ?? getGetProjectsIdQueryKey(id);
 
-export const useDeleteProjectsId = <TError = ErrorType<Error>, TContext = unknown>(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof deleteProjectsId>>,
-    TError,
-    { id: number },
-    TContext
-  >;
-}) => {
-  const mutationOptions = getDeleteProjectsIdMutationOptions(options);
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjectsId>>> = ({ signal }) => getProjectsId(id, signal);
+    
+      
+      
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions}}
 
-  return useMutation(mutationOptions);
-};
+export type GetProjectsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getProjectsId>>>
+export type GetProjectsIdQueryError = ErrorType<Error>
+
+export const useGetProjectsId = <TData = Awaited<ReturnType<typeof getProjectsId>>, TError = ErrorType<Error>>(
+ id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData>, }
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getGetProjectsIdQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const putProjectsId = (
+    id: number,
+    projectRequest: ProjectRequest,
+ ) => {
+      return API<ProjectResponse>(
+      {url: `/projects/${id}`, method: 'put',
+      headers: {'Content-Type': 'application/json', },
+      data: projectRequest
+    },
+      );
+    }
+  
+
+
+export const getPutProjectsIdMutationOptions = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsId>>, TError,{id: number;data: ProjectRequest}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof putProjectsId>>, TError,{id: number;data: ProjectRequest}, TContext> => {
+ const {mutation: mutationOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof putProjectsId>>, {id: number;data: ProjectRequest}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  putProjectsId(id,data,)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type PutProjectsIdMutationResult = NonNullable<Awaited<ReturnType<typeof putProjectsId>>>
+    export type PutProjectsIdMutationBody = ProjectRequest
+    export type PutProjectsIdMutationError = ErrorType<Error>
+
+    export const usePutProjectsId = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof putProjectsId>>, TError,{id: number;data: ProjectRequest}, TContext>, }
+) => {
+    
+      const mutationOptions = getPutProjectsIdMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const deleteProjectsId = (
+    id: number,
+ ) => {
+      return API<number>(
+      {url: `/projects/${id}`, method: 'delete'
+    },
+      );
+    }
+  
+
+
+export const getDeleteProjectsIdMutationOptions = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProjectsId>>, TError,{id: number}, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof deleteProjectsId>>, TError,{id: number}, TContext> => {
+ const {mutation: mutationOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteProjectsId>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  deleteProjectsId(id,)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteProjectsIdMutationResult = NonNullable<Awaited<ReturnType<typeof deleteProjectsId>>>
+    
+    export type DeleteProjectsIdMutationError = ErrorType<Error>
+
+    export const useDeleteProjectsId = <TError = ErrorType<Error>,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteProjectsId>>, TError,{id: number}, TContext>, }
+) => {
+    
+      const mutationOptions = getDeleteProjectsIdMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    
