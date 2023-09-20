@@ -31,7 +31,7 @@ export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTablePro
     initialState: {
       sorting: [
         {
-          id: "dateUpdated",
+          id: "updatedAt",
           desc: true,
         },
       ],

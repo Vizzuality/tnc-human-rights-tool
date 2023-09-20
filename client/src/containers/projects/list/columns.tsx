@@ -2,37 +2,20 @@
 
 import Link from "next/link";
 
-import { CaretSortIcon, Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon } from "@radix-ui/react-icons";
 import { ColumnDef } from "@tanstack/react-table";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance } from "date-fns";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+import { ProjectListResponseDataItem } from "@/types/generated/strapi.schemas";
+
+import ProjectsActions from "@/containers/projects/list/actions";
+
 import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Project = {
-  id: number;
-  name: string;
-  description: string;
-  status: "pending" | "completed";
-  dateUpdated: string;
-};
-
-export const columns: ColumnDef<Project>[] = [
+export const columns: ColumnDef<ProjectListResponseDataItem>[] = [
   {
-    accessorKey: "name",
+    id: "name",
+    accessorFn: (row) => row?.attributes?.name,
     minSize: 1000,
     header: ({ column }) => {
       return (
@@ -48,14 +31,14 @@ export const columns: ColumnDef<Project>[] = [
     },
     cell: ({ row }) => {
       return (
-        <Link href={`/projects/${row.original.id}`}>
-          <Button variant="link">{row.getValue("name")}</Button>
+        <Link href={`/projects/${row?.original?.id}`}>
+          <Button variant="link">{row?.original?.attributes?.name}</Button>
         </Link>
       );
     },
   },
   {
-    accessorKey: "status",
+    id: "status",
     maxSize: 100,
     header: ({ column }) => {
       return (
@@ -78,13 +61,15 @@ export const columns: ColumnDef<Project>[] = [
               : "bg-yellow-100 text-yellow-800"
           }`}
         >
-          {row.getValue("status")}
+          {/* {row.getValue("status")} */}
+          Pending
         </span>
       );
     },
   },
   {
-    accessorKey: "dateUpdated",
+    id: "updatedAt",
+    accessorFn: (row) => row?.attributes?.updatedAt,
     minSize: 250,
     header: ({ column }) => {
       return (
@@ -100,7 +85,9 @@ export const columns: ColumnDef<Project>[] = [
     },
 
     cell: ({ row }) => {
-      const date = formatDistance(subDays(new Date(row.getValue("dateUpdated")), 3), new Date(), {
+      if (!row?.original?.attributes?.updatedAt) return "-";
+
+      const date = formatDistance(new Date(row?.original?.attributes?.updatedAt), new Date(), {
         addSuffix: true,
       });
 
@@ -110,53 +97,8 @@ export const columns: ColumnDef<Project>[] = [
   {
     id: "actions",
     maxSize: 0,
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-1 px-4">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link href={`/projects/${row.original.id}`}>
-                <Button variant="outline" size="icon" className="items-center">
-                  <Pencil1Icon />
-                </Button>
-              </Link>
-            </TooltipTrigger>
-
-            <TooltipContent sideOffset={4} alignOffset={0}>
-              Edit project
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <AlertDialog>
-              <TooltipTrigger asChild>
-                <AlertDialogTrigger asChild>
-                  <Button variant="outline" size="icon" className="items-center">
-                    <TrashIcon />
-                  </Button>
-                </AlertDialogTrigger>
-              </TooltipTrigger>
-
-              <TooltipContent side="top" sideOffset={4} align="center">
-                Delete project
-              </TooltipContent>
-
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your project
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Delete</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </Tooltip>
-        </div>
-      );
+    cell: (props) => {
+      return <ProjectsActions {...props} />;
     },
   },
 ];
