@@ -10,7 +10,6 @@ import Header from "@/containers/header";
 import ScrollUp from "@/containers/scroll-up";
 
 import { Toaster } from "@/components/ui/toaster";
-
 import { SpaceGrotesk } from "@/styles/fonts";
 
 export const metadata: Metadata = {
