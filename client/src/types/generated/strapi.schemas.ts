@@ -4,6 +4,69 @@
  * DOCUMENTATION
  * OpenAPI spec version: 1.0.0
  */
+export type PostAuthSendEmailConfirmation200Sent = typeof PostAuthSendEmailConfirmation200Sent[keyof typeof PostAuthSendEmailConfirmation200Sent];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PostAuthSendEmailConfirmation200Sent = {
+  true: 'true',
+} as const;
+
+export type PostAuthSendEmailConfirmation200 = {
+  email?: string;
+  sent?: PostAuthSendEmailConfirmation200Sent;
+};
+
+export type PostAuthSendEmailConfirmationBody = {
+  email?: string;
+};
+
+export type GetAuthEmailConfirmationParams = {
+/**
+ * confirmation token received by email
+ */
+confirmation?: string;
+};
+
+export type PostAuthChangePasswordBody = {
+  password: string;
+  currentPassword: string;
+  passwordConfirmation: string;
+};
+
+export type PostAuthResetPasswordBody = {
+  password?: string;
+  passwordConfirmation?: string;
+  code?: string;
+};
+
+export type PostAuthForgotPassword200Ok = typeof PostAuthForgotPassword200Ok[keyof typeof PostAuthForgotPassword200Ok];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const PostAuthForgotPassword200Ok = {
+  true: 'true',
+} as const;
+
+export type PostAuthForgotPassword200 = {
+  ok?: PostAuthForgotPassword200Ok;
+};
+
+export type PostAuthForgotPasswordBody = {
+  email?: string;
+};
+
+export type PostAuthLocalRegisterBody = {
+  username?: string;
+  email?: string;
+  password?: string;
+};
+
+export type PostAuthLocalBody = {
+  identifier?: string;
+  password?: string;
+};
+
 export type GetProjectsParams = {
 /**
  * Sort by attributes ascending (asc) or descending (desc)
@@ -122,7 +185,8 @@ export interface ProjectResponse {
 }
 
 export interface Project {
-  name?: string;
+  name: string;
+  description: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -144,6 +208,23 @@ export type ProjectUpdatedByData = {
 
 export type ProjectUpdatedBy = {
   data?: ProjectUpdatedByData;
+};
+
+export type ProjectCreatedByDataAttributes = {
+  firstname?: string;
+  lastname?: string;
+  username?: string;
+  email?: string;
+  resetPasswordToken?: string;
+  registrationToken?: string;
+  isActive?: boolean;
+  roles?: ProjectCreatedByDataAttributesRoles;
+  blocked?: boolean;
+  preferedLanguage?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createdBy?: ProjectCreatedByDataAttributesCreatedBy;
+  updatedBy?: ProjectCreatedByDataAttributesUpdatedBy;
 };
 
 export type ProjectCreatedByData = {
@@ -184,23 +265,6 @@ export type ProjectCreatedByDataAttributesRolesDataItem = {
 
 export type ProjectCreatedByDataAttributesRoles = {
   data?: ProjectCreatedByDataAttributesRolesDataItem[];
-};
-
-export type ProjectCreatedByDataAttributes = {
-  firstname?: string;
-  lastname?: string;
-  username?: string;
-  email?: string;
-  resetPasswordToken?: string;
-  registrationToken?: string;
-  isActive?: boolean;
-  roles?: ProjectCreatedByDataAttributesRoles;
-  blocked?: boolean;
-  preferedLanguage?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  createdBy?: ProjectCreatedByDataAttributesCreatedBy;
-  updatedBy?: ProjectCreatedByDataAttributesUpdatedBy;
 };
 
 export type ProjectCreatedByDataAttributesRolesDataItemAttributesUpdatedByDataAttributes = { [key: string]: any };
@@ -324,7 +388,8 @@ export interface ProjectListResponse {
 }
 
 export type ProjectRequestData = {
-  name?: string;
+  name: string;
+  description: string;
 };
 
 export interface ProjectRequest {

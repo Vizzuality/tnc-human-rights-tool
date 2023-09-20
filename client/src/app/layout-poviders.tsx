@@ -1,7 +1,8 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
@@ -11,9 +12,13 @@ export default function LayoutProviders({
   children,
   session,
 }: PropsWithChildren<{ session: Session | null }>) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <SessionProvider session={session}>
-      <TooltipProvider>{children}</TooltipProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>{children}</TooltipProvider>
+      </QueryClientProvider>
     </SessionProvider>
   );
 }

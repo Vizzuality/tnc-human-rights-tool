@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,12 +21,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z
-  .object({
-    email: z.string().min(1, { message: "Please enter your email address" }).email(),
-    password: z.string().min(1, { message: "Please enter your password" }),
-  })
-  .required();
+const formSchema = z.object({
+  email: z.string().email({ message: "Please enter your email address" }),
+  password: z.string().nonempty({ message: "Please enter your password" }),
+});
 
 export default function Signin() {
   const searchParams = useSearchParams();
@@ -54,11 +53,15 @@ export default function Signin() {
     <Card className="min-w-[380px]">
       <CardHeader>
         <CardTitle>Sign in</CardTitle>
-        {/* <CardDescription>Card Description</CardDescription> */}
+        {!!searchParams.get("error") && (
+          <div className="rounded-md bg-destructive p-3 text-sm text-background">
+            Invalid username or password. Please try again.
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
             <fieldset className="space-y-2">
               <FormField
                 control={form.control}
@@ -87,9 +90,19 @@ export default function Signin() {
                 )}
               />
             </fieldset>
-            <Button className="w-full" type="submit">
-              Sign
-            </Button>
+
+            <div className="space-y-3">
+              <Button className="w-full" type="submit">
+                Sign in
+              </Button>
+              <p className="text-center text-sm">
+                {"Don't"} have an account?{" "}
+                <Link className="text-primary hover:underline" href="/auth/signup">
+                  Sign up
+                </Link>{" "}
+                instead.
+              </p>
+            </div>
           </form>
         </Form>
       </CardContent>

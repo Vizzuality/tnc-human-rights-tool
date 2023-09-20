@@ -8,8 +8,8 @@
     "types"
   ],
   "scripts": {
-    "client": "yarn workspace tnc-human-rights-tool-client",
-    "cms": "yarn workspace tnc-human-rights-tool-api",
+    "client": "yarn workspace @tnc-human-rights-tool/client",
+    "cms": "yarn workspace @tnc-human-rights-tool/api",
     "types": "yarn workspace @tnc-human-rights-tool/types",
     "postinstall": "husky install"
   },

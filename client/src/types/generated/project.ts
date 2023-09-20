@@ -6,17 +6,14 @@
  */
 import {
   useQuery,
-  useInfiniteQuery,
   useMutation
 } from '@tanstack/react-query'
 import type {
   UseQueryOptions,
-  UseInfiniteQueryOptions,
   UseMutationOptions,
   QueryFunction,
   MutationFunction,
   UseQueryResult,
-  UseInfiniteQueryResult,
   QueryKey
 } from '@tanstack/react-query'
 import type {
@@ -47,37 +44,6 @@ export const getGetProjectsQueryKey = (params?: GetProjectsParams,) => [`/projec
   
 
     
-export const getGetProjectsInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<Error>>(params?: GetProjectsParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>, }
-): UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & { queryKey: QueryKey } => {
-const {query: queryOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
-
-  
-  
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal, pageParam }) => getProjects({ 'pagination[page]': pageParam, ...params }, signal);
-    
-      
-      
-   return  { queryKey, queryFn,   staleTime: 10000,  ...queryOptions}}
-
-export type GetProjectsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>
-export type GetProjectsInfiniteQueryError = ErrorType<Error>
-
-export const useGetProjectsInfinite = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<Error>>(
- params?: GetProjectsParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>, }
-
-  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
-
-  const queryOptions = getGetProjectsInfiniteQueryOptions(params,options)
-
-  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
-
 export const getGetProjectsQueryOptions = <TData = Awaited<ReturnType<typeof getProjects>>, TError = ErrorType<Error>>(params?: GetProjectsParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>, }
 ): UseQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & { queryKey: QueryKey } => {
 const {query: queryOptions} = options ?? {};
@@ -90,7 +56,7 @@ const {query: queryOptions} = options ?? {};
     
       
       
-   return  { queryKey, queryFn,   staleTime: 10000,  ...queryOptions}}
+   return  { queryKey, queryFn, ...queryOptions}}
 
 export type GetProjectsQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>
 export type GetProjectsQueryError = ErrorType<Error>
@@ -182,7 +148,7 @@ const {query: queryOptions} = options ?? {};
     
       
       
-   return  { queryKey, queryFn, enabled: !!(id),  staleTime: 10000,  ...queryOptions}}
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions}}
 
 export type GetProjectsIdQueryResult = NonNullable<Awaited<ReturnType<typeof getProjectsId>>>
 export type GetProjectsIdQueryError = ErrorType<Error>
