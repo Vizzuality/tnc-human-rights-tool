@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+import { usePostProjects } from "@/types/generated/project";
+
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
@@ -21,6 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Please enter your project name" }),
@@ -29,6 +32,10 @@ const formSchema = z.object({
 
 export default function ProjectsNew() {
   const { push } = useRouter();
+
+  const postProjectMutation = usePostProjects();
+
+  const { toast } = useToast();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,11 +48,30 @@ export default function ProjectsNew() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.info(values);
-    // we should push to the new project page
-    push("/projects/1");
+    postProjectMutation.mutate(
+      {
+        data: {
+          data: values,
+        },
+      },
+      {
+        onSuccess: (data) => {
+          toast({
+            variant: "default",
+            title: "Great!",
+            description: `Your project "${data?.data?.attributes?.name}" has been created successfully.`,
+          });
+          push(`/projects/${data?.data?.id}`);
+        },
+        onError: () => {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "We couldn't create your project. Please try again.",
+          });
+        },
+      },
+    );
   }
 
   return (
