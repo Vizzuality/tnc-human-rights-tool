@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
+import { usePostProjects } from "@/types/generated/project";
+
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
@@ -30,6 +32,8 @@ const formSchema = z.object({
 export default function ProjectsNew() {
   const { push } = useRouter();
 
+  const postProjectMutation = usePostProjects();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,11 +45,21 @@ export default function ProjectsNew() {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.info(values);
-    // we should push to the new project page
-    push("/projects/1");
+    postProjectMutation.mutate(
+      {
+        data: {
+          data: values,
+        },
+      },
+      {
+        onSuccess: (data) => {
+          push(`/projects/${data?.data?.id}`);
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      },
+    );
   }
 
   return (
