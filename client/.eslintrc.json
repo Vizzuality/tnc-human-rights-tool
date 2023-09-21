@@ -96,6 +96,11 @@
           },
           {
             "pattern": "@/components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "@/styles/**",
             "group": "internal"
           }
         ],
