@@ -8,6 +8,7 @@ import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
+
 import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
 
 export default async function ProjectsDetailContextualRiskPage({
