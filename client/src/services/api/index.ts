@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 
 import env from "@/env.mjs";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const AXIOS_INSTANCE = Axios.create({ baseURL: env.NEXT_PUBLIC_API_URL });
 

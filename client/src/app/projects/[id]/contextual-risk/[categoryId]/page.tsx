@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
-import ProjectsDetailForm from "@/containers/projects/detail/forms";
+import ContextualRiskForm from "@/containers/projects/detail/forms/contextual-risk";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { getContextualRisks } from "@/data/contextual-risk";
@@ -29,7 +29,7 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
         <div className="prose -mt-5">{parse(CATEGORY.data.description)}</div>
       </div>
 
-      <ProjectsDetailForm items={ITEMS} />
+      <ContextualRiskForm items={ITEMS} />
     </ProjectsDetailContent>
   );
 }
