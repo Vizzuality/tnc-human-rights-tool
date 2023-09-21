@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pcbs",
+  "info": {
+    "singularName": "pcb",
+    "pluralName": "pcbs",
+    "displayName": "PCB",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "display_order": {
+      "type": "integer"
+    },
+    "pcb_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::pcb-category.pcb-category",
+      "inversedBy": "pcbs"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
