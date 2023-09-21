@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "react";
 
+import { getProjectsId } from "@/types/generated/project";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationBreadcrumbs from "@/containers/navigation/breadcrumbs";
@@ -14,6 +16,8 @@ export default async function ProjectsDetailLayout({
 }: ProjectsDetailLayoutProps) {
   const { id } = params;
 
+  const PROJECT = await getProjectsId(+id);
+
   return (
     <Wrapper>
       <div className="space-y-8">
@@ -21,12 +25,8 @@ export default async function ProjectsDetailLayout({
           <div className="col-span-12 space-y-2.5">
             <NavigationBreadcrumbs />
             <div className="prose">
-              <h1>Project with a long name {id}</h1>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex nisi omnis dignissimos
-                at expedita repudiandae non voluptates inventore, commodi magni iure dolorum.
-                Soluta, eum fuga. Expedita nam eos explicabo sit!
-              </p>
+              <h1>{PROJECT?.data?.attributes?.name}</h1>
+              <p>{PROJECT?.data?.attributes?.description}</p>
             </div>
           </div>
 

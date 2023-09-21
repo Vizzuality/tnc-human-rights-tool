@@ -1,7 +1,10 @@
 import Axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import { getServerSession } from "next-auth/next";
 import { getSession } from "next-auth/react";
 
 import env from "@/env.mjs";
+
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const AXIOS_INSTANCE = Axios.create({ baseURL: env.NEXT_PUBLIC_API_URL });
 
@@ -25,7 +28,8 @@ AXIOS_INSTANCE.interceptors.request.use(async (request) => {
 
 export async function setAxiosAuth(request: InternalAxiosRequestConfig) {
   if (!AXIOS_INSTANCE.defaults.headers.common.Authorization) {
-    const session = await getSession();
+    const session =
+      typeof window === "undefined" ? await getServerSession(authOptions) : await getSession();
 
     if (session) {
       const Authorization = `Bearer ${session.apiToken}`;
