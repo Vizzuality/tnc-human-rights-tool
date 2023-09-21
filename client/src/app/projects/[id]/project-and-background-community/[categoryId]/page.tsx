@@ -3,7 +3,8 @@ import parse from "html-react-parser";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
-import ProjectsDetailForm from "@/containers/projects/detail/forms";
+import CarbonOffsetProjectControversiesForm from "@/containers/projects/detail/forms/pcb/carbon-offset-offset-controversies";
+import GeographicScopeForm from "@/containers/projects/detail/forms/pcb/geographic-scope";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { getPCBs } from "@/data/pcb";
@@ -29,7 +30,9 @@ export default async function ProjectsDetailPCBCategoryPage({
         <div className="prose -mt-5">{parse(CATEGORY.data.description)}</div>
       </div>
 
-      <ProjectsDetailForm items={ITEMS} />
+      {categoryId === "1" && <GeographicScopeForm items={ITEMS} />}
+
+      {categoryId === "3" && <CarbonOffsetProjectControversiesForm items={ITEMS} />}
     </ProjectsDetailContent>
   );
 }
