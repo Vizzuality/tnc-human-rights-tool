@@ -2618,20 +2618,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tnc-human-rights-tool/api@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@tnc-human-rights-tool/api@workspace:."
-  dependencies:
-    "@strapi/plugin-documentation": 4.13.6
-    "@strapi/plugin-i18n": 4.13.6
-    "@strapi/plugin-users-permissions": 4.13.6
-    "@strapi/strapi": 4.13.6
-    pg: ^8.11.3
-    strapi-plugin-config-sync: 1.1.3
-    strapi-plugin-import-export-entries: 1.21.1
-  languageName: unknown
-  linkType: soft
-
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -12450,6 +12436,20 @@ __metadata:
   checksum: 902d7aceb74453ea02abbf58c203f4a8fc1cead89b60b31e354f74ed5b3fb09ea817f94fb310f884a5d16987dd9fa5a735412a7c2dd088dd3d415aa819ae3a28
   languageName: node
   linkType: hard
+
+"tnc-human-rights-tool-api@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "tnc-human-rights-tool-api@workspace:."
+  dependencies:
+    "@strapi/plugin-documentation": 4.13.6
+    "@strapi/plugin-i18n": 4.13.6
+    "@strapi/plugin-users-permissions": 4.13.6
+    "@strapi/strapi": 4.13.6
+    pg: ^8.11.3
+    strapi-plugin-config-sync: 1.1.3
+    strapi-plugin-import-export-entries: 1.21.1
+  languageName: unknown
+  linkType: soft
 
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
