@@ -22,6 +22,12 @@
     },
     "display_order": {
       "type": "integer"
+    },
+    "contextual_risks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contextual-risk.contextual-risk",
+      "mappedBy": "contextual_risk_category"
     }
   }
 }
