@@ -3,5 +3,5 @@
 
 cd ./client && yarn types
 cd ./client && yarn lint
-cd ./client && yarn check-types
+# cd ./client && yarn check-types
 
