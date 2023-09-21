@@ -57,7 +57,7 @@ export default function ProjectsNew() {
       {
         onSuccess: (data) => {
           toast({
-            variant: "default",
+            variant: "success",
             title: "Great!",
             description: `Your project "${data?.data?.attributes?.name}" has been created successfully.`,
           });

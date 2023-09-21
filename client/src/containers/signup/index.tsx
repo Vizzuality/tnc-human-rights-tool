@@ -88,7 +88,7 @@ export default function Signup() {
       <CardHeader>
         <CardTitle>Sign up</CardTitle>
         {!!searchParams.get("error") && (
-          <div className="rounded-md bg-destructive/90 p-3 text-sm text-background">
+          <div className="rounded-md bg-destructive/90 p-3 text-sm text-destructive-foreground">
             {searchParams.get("error")}
           </div>
         )}

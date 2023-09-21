@@ -4,79 +4,18 @@ import Link from "next/link";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 
-import { Project, columns } from "@/containers/projects/list/columns";
+import { useGetProjects } from "@/types/generated/project";
+
+import { columns } from "@/containers/projects/list/columns";
 import { ProjectsTable } from "@/containers/projects/list/table";
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
-
-const data: Project[] = [
-  {
-    id: 1,
-    name: "Project 1",
-    description: "This is a description",
-    status: "completed",
-    dateUpdated: "2023-01-01",
-  },
-  {
-    id: 2,
-    name: "Project 2",
-    description: "This is a description",
-    status: "completed",
-    dateUpdated: "2023-02-02",
-  },
-  {
-    id: 3,
-    name: "Project 3",
-    description: "This is a description",
-    status: "completed",
-    dateUpdated: "2012-03-03",
-  },
-  {
-    id: 4,
-    name: "Project 4",
-    description: "This is a description",
-    status: "completed",
-    dateUpdated: "2021-04-04",
-  },
-  {
-    id: 5,
-    name: "Project 5",
-    description: "This is a description",
-    status: "pending",
-    dateUpdated: "2023-05-05",
-  },
-  {
-    id: 6,
-    name: "Project 6",
-    description: "This is a description",
-    status: "completed",
-    dateUpdated: "2023-06-06",
-  },
-  {
-    id: 7,
-    name: "Project 7",
-    description: "This is a description",
-    status: "pending",
-    dateUpdated: "2023-07-07",
-  },
-  {
-    id: 8,
-    name: "Project 8",
-    description: "This is a description",
-    status: "pending",
-    dateUpdated: "2023-08-08",
-  },
-  {
-    id: 9,
-    name: "Project 9",
-    description: "This is a description",
-    status: "pending",
-    dateUpdated: "2023-09-09",
-  },
-];
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Projects() {
+  const { data, isFetching, isFetched } = useGetProjects();
+
   return (
     <Wrapper>
       <div className="space-y-5">
@@ -89,7 +28,15 @@ export default function Projects() {
             </Button>
           </Link>
         </div>
-        <ProjectsTable columns={columns} data={data} />
+
+        {!isFetched && isFetching && <Skeleton className="h-96" />}
+
+        {isFetched && (
+          <div className="space-y-5">
+            <ProjectsTable columns={columns} data={data?.data ?? []} />
+            {isFetching && <div className="px-5 text-xs">Loading...</div>}
+          </div>
+        )}
       </div>
     </Wrapper>
   );
