@@ -8,6 +8,7 @@ import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
+
 import { getPCBCategories } from "@/data/pcb/categories";
 
 export default async function ProjectsDetailResearchOverviewPage({
