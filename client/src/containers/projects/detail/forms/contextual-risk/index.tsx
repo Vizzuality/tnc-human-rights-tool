@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,17 +22,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 
 export interface ContextualRiskFormProps extends PropsWithChildren {
-  items: {
-    data: {
-      id: string;
-      title: string;
-      description: string;
-      display_order: string;
-      category: {
-        display_order: string;
-      };
-    }[];
-  };
+  items: ContextualRiskListResponse;
 }
 
 const useSyncFormValues = (f: UseFormReturn) => {
@@ -58,8 +50,12 @@ const RADIO_OPTIONS = [
 
 export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
   const formSchema = z.object({
-    ...items.data.reduce(
+    ...items?.data?.reduce(
       (acc, { id }) => {
+        if (!id) {
+          return acc;
+        }
+
         acc[id] = z.record(z.string(), z.string()).superRefine((data, context) => {
           // if radio is present and is yes then notes is required
           // if radio is present and is no then notes is not required
@@ -93,9 +89,21 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-10 border-t border-gray-100 pt-5"
       >
-        {items.data
-          .sort((a, b) => +a.display_order - +b.display_order)
-          .map(({ id, title, description, display_order, category }) => {
+        {items?.data
+          ?.sort((a, b) => {
+            if (a?.attributes?.display_order && b?.attributes?.display_order) {
+              return +a.attributes.display_order - +b.attributes.display_order;
+            }
+
+            return 0;
+          })
+          ?.map(({ id, attributes }) => {
+            if (!id || !attributes) {
+              return null;
+            }
+
+            const { title, description, display_order, contextual_risk_category } = attributes;
+
             return (
               <FormField
                 key={id}
@@ -104,7 +112,8 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 render={({ field }) => (
                   <FormItem className="space-y-2">
                     <FormLabel>
-                      {`${category.display_order}.${display_order}`} {title}
+                      {`${contextual_risk_category?.data?.attributes?.display_order}.${display_order}`}{" "}
+                      {title}
                     </FormLabel>
                     <div className="prose">{parse(description)}</div>
 

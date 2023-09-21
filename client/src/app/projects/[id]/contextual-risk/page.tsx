@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
+import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
@@ -9,13 +11,14 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
 
-import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
-
 export default async function ProjectsDetailContextualRiskPage({
   params: { id },
 }: ProjectsDetailPageProps) {
   const CATEGORIES = await getContextualRiskCategories();
-  const [{ id: categoryId, title: categoryTitle }] = CATEGORIES.data;
+
+  if (!CATEGORIES?.data) return null;
+
+  const [{ id: categoryId, attributes }] = CATEGORIES?.data;
 
   return (
     <ProjectsDetailContent>
@@ -60,7 +63,7 @@ export default async function ProjectsDetailContextualRiskPage({
       <div className="prose flex justify-end pt-5">
         <Link href={`/projects/${id}/contextual-risk/${categoryId}`}>
           <Button className="items-center">
-            {categoryTitle}
+            {attributes?.title}
 
             <ArrowRightIcon className="ml-2" />
           </Button>
