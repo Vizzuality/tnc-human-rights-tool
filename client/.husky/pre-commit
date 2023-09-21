@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn types
+cd ./client && yarn types
+cd ./client && yarn lint
+cd ./client && yarn check-types
+
