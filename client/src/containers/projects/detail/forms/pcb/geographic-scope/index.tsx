@@ -83,8 +83,8 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
                     </FormLabel>
                     <div className="prose">{parse(description)}</div>
 
-                    <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
-                      <Textarea {...field} rows={4} />
+                    <FormControl className="flex py-2.5">
+                      <Textarea {...field} rows={4} className="w-full" />
                     </FormControl>
 
                     <FormMessage />
