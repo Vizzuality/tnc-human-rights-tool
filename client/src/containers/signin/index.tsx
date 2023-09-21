@@ -54,7 +54,7 @@ export default function Signin() {
       <CardHeader>
         <CardTitle>Sign in</CardTitle>
         {!!searchParams.get("error") && (
-          <div className="rounded-md bg-destructive p-3 text-sm text-background">
+          <div className="rounded-md bg-destructive p-3 text-sm text-destructive-foreground">
             Invalid username or password. Please try again.
           </div>
         )}

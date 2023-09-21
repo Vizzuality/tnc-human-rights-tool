@@ -20,6 +20,7 @@ import {
 interface ProjectsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  isFetching?: boolean;
 }
 
 export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTableProps<TData, TValue>) {

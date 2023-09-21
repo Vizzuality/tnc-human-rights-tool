@@ -31,7 +31,12 @@ export default function Projects() {
 
         {!isFetched && isFetching && <Skeleton className="h-96" />}
 
-        {isFetched && <ProjectsTable columns={columns} data={data?.data ?? []} />}
+        {isFetched && (
+          <div className="space-y-5">
+            <ProjectsTable columns={columns} data={data?.data ?? []} />
+            {isFetching && <div className="px-5 text-xs">Loading...</div>}
+          </div>
+        )}
       </div>
     </Wrapper>
   );
