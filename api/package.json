@@ -1,6 +1,5 @@
 {
-  "name": "@tnc-human-rights-tool/api",
-  "private": true,
+  "name": "tnc-human-rights-tool-api",
   "version": "0.1.0",
   "description": "TNC Human Rights Tool API",
   "packageManager": "yarn@3.6.3",
