@@ -381,10 +381,9 @@ export type ProjectUpdatedBy = {
 export interface Project {
   name: string;
   description: string;
-  geographic_scope?: unknown;
-  carbon_offset_project_controversies?: unknown;
   risks?: unknown;
   author?: ProjectAuthor;
+  pcbs?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -766,10 +765,9 @@ export type ProjectRequestDataAuthor = number | string;
 export type ProjectRequestData = {
   name: string;
   description: string;
-  geographic_scope?: unknown;
-  carbon_offset_project_controversies?: unknown;
   risks?: unknown;
   author?: ProjectRequestDataAuthor;
+  pcbs?: unknown;
 };
 
 export interface ProjectRequest {
@@ -836,6 +834,7 @@ export interface PcbCategory {
   display_order?: number;
   pcbs?: PcbCategoryPcbs;
   description: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -901,6 +900,7 @@ export type PcbCategoryPcbsDataItemAttributesPcbCategoryDataAttributes = {
   display_order?: number;
   pcbs?: PcbCategoryPcbsDataItemAttributesPcbCategoryDataAttributesPcbs;
   description?: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1126,6 +1126,7 @@ export type PcbCategoryRequestData = {
   display_order?: number;
   pcbs?: PcbCategoryRequestDataPcbsItem[];
   description: string;
+  slug?: string;
 };
 
 export interface PcbCategoryRequest {
@@ -1218,6 +1219,7 @@ export type PcbPcbCategoryDataAttributes = {
   display_order?: number;
   pcbs?: PcbPcbCategoryDataAttributesPcbs;
   description?: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1533,6 +1535,7 @@ export interface ContextualRiskCategory {
   description: string;
   display_order?: number;
   contextual_risks?: ContextualRiskCategoryContextualRisks;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1572,6 +1575,7 @@ export type ContextualRiskCategoryContextualRisksDataItemAttributesContextualRis
     description?: string;
     display_order?: number;
     contextual_risks?: ContextualRiskCategoryContextualRisksDataItemAttributesContextualRiskCategoryDataAttributesContextualRisks;
+    slug?: string;
     createdAt?: string;
     updatedAt?: string;
     publishedAt?: string;
@@ -1845,6 +1849,7 @@ export type ContextualRiskCategoryRequestData = {
   description: string;
   display_order?: number;
   contextual_risks?: ContextualRiskCategoryRequestDataContextualRisksItem[];
+  slug?: string;
 };
 
 export interface ContextualRiskCategoryRequest {
@@ -1890,6 +1895,7 @@ export type ContextualRiskContextualRiskCategoryDataAttributes = {
   description?: string;
   display_order?: number;
   contextual_risks?: ContextualRiskContextualRiskCategoryDataAttributesContextualRisks;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;

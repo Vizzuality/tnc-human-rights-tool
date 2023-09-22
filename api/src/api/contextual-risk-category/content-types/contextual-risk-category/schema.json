@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contextual-risk-category",
     "pluralName": "contextual-risk-categories",
-    "displayName": "Contextual Risk Category"
+    "displayName": "Contextual Risk Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -28,6 +29,10 @@
       "relation": "oneToMany",
       "target": "api::contextual-risk.contextual-risk",
       "mappedBy": "contextual_risk_category"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

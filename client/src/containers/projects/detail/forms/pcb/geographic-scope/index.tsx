@@ -50,9 +50,15 @@ export default function GeographicScopeForm({ projectId, items }: GeographicScop
     ),
   });
 
+  const defaultValuesCategory = (projectIdData?.data?.attributes?.pcbs || {}) as Record<
+    'carbon-offset-project-controversies' | 'geographic-scope',
+    Record<string, string>
+    >;
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: projectIdData?.data?.attributes?.geographic_scope as Record<string, string>,
+    defaultValues: defaultValuesCategory['geographic-scope'],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -65,7 +71,10 @@ export default function GeographicScopeForm({ projectId, items }: GeographicScop
               data: {
                 name: projectIdData.data.attributes.name,
                 description: projectIdData.data.attributes.description,
-                geographic_scope: values,
+                pcbs: {
+                  ...defaultValuesCategory,
+                  'geographic-scope': values,
+                },
               },
             },
           },

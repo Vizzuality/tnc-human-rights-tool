@@ -65,14 +65,14 @@ export default function CarbonOffsetProjectControversiesForm({
     ),
   });
 
+  const defaultValuesCategory = (projectIdData?.data?.attributes?.pcbs || {}) as Record<
+    'carbon-offset-project-controversies' | 'geographic-scope',
+    Record<string, { answer: string }>
+    >;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: projectIdData?.data?.attributes?.carbon_offset_project_controversies as Record<
-      string,
-      {
-        answer: string;
-      }
-    >,
+    defaultValues: defaultValuesCategory['carbon-offset-project-controversies'],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -85,7 +85,10 @@ export default function CarbonOffsetProjectControversiesForm({
               data: {
                 name: projectIdData.data.attributes.name,
                 description: projectIdData.data.attributes.description,
-                carbon_offset_project_controversies: values,
+                pcbs: {
+                  ...defaultValuesCategory,
+                  'carbon-offset-project-controversies': values,
+                },
               },
             },
           },

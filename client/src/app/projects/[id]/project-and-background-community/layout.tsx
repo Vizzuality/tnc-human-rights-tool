@@ -9,6 +9,7 @@ import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
+import { getProjectsId } from "@/types/generated/project";
 
 interface ProjectsDetailPCBLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
 
@@ -25,6 +26,7 @@ export default async function ProjectsDetailPCBLayout({
 }: ProjectsDetailPCBLayoutProps) {
   const { id } = params;
 
+  const PROJECT = await getProjectsId(+id);
   const CATEGORIES = await getPcbCategories();
 
   const items = [
@@ -34,6 +36,12 @@ export default async function ProjectsDetailPCBLayout({
       children: <span className="text-lg">Overview</span>,
     },
     ...(CATEGORIES?.data || [])?.map(({ id: categoryId, attributes }) => {
+      const slug = attributes?.slug ?? "";
+      const PCBS_DATA = (PROJECT?.data?.attributes?.pcbs ?? {}) as Record<
+        string,
+        unknown
+      >;
+      console.log({PCBS_DATA, slug}, PCBS_DATA[slug]);
       const percentage = Math.random();
 
       return {
