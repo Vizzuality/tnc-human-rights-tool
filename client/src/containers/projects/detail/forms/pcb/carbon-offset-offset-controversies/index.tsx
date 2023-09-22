@@ -142,7 +142,7 @@ export default function CarbonOffsetProjectControversiesForm({
                               answer: v,
                             })
                           }
-                          defaultValue={field.value.answer}
+                          defaultValue={field.value?.answer}
                         >
                           {RADIO_OPTIONS.map(({ value, label }) => (
                             <FormItem key={value}>

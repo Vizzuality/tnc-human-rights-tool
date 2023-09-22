@@ -20,6 +20,8 @@ export default async function ProjectsDetailLayout({
   const { id } = params;
 
   const PROJECT = await getProjectsId(+id);
+
+  // Prefetch useGetProjectsId
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     ...getGetProjectsIdQueryOptions(+id),
