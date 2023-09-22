@@ -10,7 +10,8 @@ import { ZodTypeAny, z } from "zod";
 import { useGetProjectsId, usePutProjectsId } from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
-import { Button } from "@/components/ui/button";
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -75,17 +76,26 @@ export default function CarbonOffsetProjectControversiesForm({
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    if (projectIdData?.data?.attributes) {
-      putProjectMutation.mutate({
-        id: +projectId,
-        data: {
-          data: {
-            ...projectIdData?.data?.attributes,
-            carbon_offset_project_controversies: values,
+    return new Promise((resolve) => {
+      if (projectIdData?.data?.attributes) {
+        return putProjectMutation.mutate(
+          {
+            id: +projectId,
+            data: {
+              data: {
+                ...projectIdData.data.attributes,
+                carbon_offset_project_controversies: values,
+              },
+            },
           },
-        },
-      });
-    }
+          {
+            onSettled: () => {
+              resolve(true);
+            },
+          },
+        );
+      }
+    });
   };
 
   return (
@@ -156,7 +166,7 @@ export default function CarbonOffsetProjectControversiesForm({
             );
           })}
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );

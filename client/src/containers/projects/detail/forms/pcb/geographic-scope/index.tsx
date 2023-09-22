@@ -10,7 +10,8 @@ import { ZodTypeAny, z } from "zod";
 import { useGetProjectsId, usePutProjectsId } from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
-import { Button } from "@/components/ui/button";
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -55,17 +56,26 @@ export default function GeographicScopeForm({ projectId, items }: GeographicScop
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    if (projectIdData?.data?.attributes) {
-      putProjectMutation.mutate({
-        id: +projectId,
-        data: {
-          data: {
-            ...projectIdData?.data?.attributes,
-            geographic_scope: values,
+    return new Promise((resolve) => {
+      if (projectIdData?.data?.attributes) {
+        return putProjectMutation.mutate(
+          {
+            id: +projectId,
+            data: {
+              data: {
+                ...projectIdData.data.attributes,
+                geographic_scope: values,
+              },
+            },
           },
-        },
-      });
-    }
+          {
+            onSettled: () => {
+              resolve(true);
+            },
+          },
+        );
+      }
+    });
   };
 
   return (
@@ -115,7 +125,7 @@ export default function GeographicScopeForm({ projectId, items }: GeographicScop
             );
           })}
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );
