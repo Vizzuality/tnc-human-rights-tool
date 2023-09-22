@@ -2,13 +2,13 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
+import { getPcbCategories } from "@/types/generated/pcb-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
+import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
-
-import { getPCBCategories } from "@/data/pcb/categories";
 
 interface ProjectsDetailPCBLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
 
@@ -25,31 +25,30 @@ export default async function ProjectsDetailPCBLayout({
 }: ProjectsDetailPCBLayoutProps) {
   const { id } = params;
 
-  const CATEGORIES = await getPCBCategories();
+  const CATEGORIES = await getPcbCategories();
 
   const items = [
     {
       href: `/projects/${id}/project-and-background-community`,
       label: "Overview",
-      className: "text-lg",
       children: <span className="text-lg">Overview</span>,
     },
-    ...CATEGORIES.data.map(({ id: categoryId, title }) => {
+    ...(CATEGORIES?.data || [])?.map(({ id: categoryId, attributes }) => {
       const percentage = Math.random();
 
       return {
         href: `/projects/${id}/project-and-background-community/${categoryId}`,
-        label: title,
+        label: attributes?.title ?? "",
         children: (
           <>
-            <span>{title}</span>
+            <span>{attributes?.title}</span>
             {/* Draw a svg circle that I can control how much of the path is filled */}
             <NavigationCircle percentage={percentage} />
           </>
         ),
       };
     }),
-  ];
+  ] satisfies NavigationSidebarProps["items"];
 
   return (
     <section className="flex grow flex-col space-y-5">

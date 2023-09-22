@@ -6,7 +6,7 @@ import { getContextualRiskCategories } from "@/types/generated/contextual-risk-c
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
+import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
 
@@ -50,7 +50,7 @@ export default async function ProjectsDetailContextualRiskLayout({
         ),
       };
     }),
-  ];
+  ] satisfies NavigationSidebarProps["items"];
 
   return (
     <section className="flex grow flex-col space-y-5">

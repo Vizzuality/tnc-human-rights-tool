@@ -1,6 +1,6 @@
 import NavigationSidebarItem from "@/containers/navigation/sidebar/item";
 
-interface NavigationSidebarProps {
+export interface NavigationSidebarProps {
   items: {
     href: string;
     label: string;
