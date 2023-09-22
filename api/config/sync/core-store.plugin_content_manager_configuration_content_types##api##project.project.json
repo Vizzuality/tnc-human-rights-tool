@@ -48,34 +48,6 @@
           "sortable": false
         }
       },
-      "geographic_scope": {
-        "edit": {
-          "label": "geographic_scope",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "geographic_scope",
-          "searchable": false,
-          "sortable": false
-        }
-      },
-      "carbon_offset_project_controversies": {
-        "edit": {
-          "label": "carbon_offset_project_controversies",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "carbon_offset_project_controversies",
-          "searchable": false,
-          "sortable": false
-        }
-      },
       "risks": {
         "edit": {
           "label": "risks",
@@ -103,6 +75,20 @@
           "label": "author",
           "searchable": true,
           "sortable": true
+        }
+      },
+      "pcbs": {
+        "edit": {
+          "label": "pcbs",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "pcbs",
+          "searchable": false,
+          "sortable": false
         }
       },
       "createdAt": {
@@ -180,13 +166,7 @@
         ],
         [
           {
-            "name": "geographic_scope",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "carbon_offset_project_controversies",
+            "name": "pcbs",
             "size": 12
           }
         ],

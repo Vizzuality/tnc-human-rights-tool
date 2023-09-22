@@ -11,7 +11,8 @@
           "title",
           "description",
           "display_order",
-          "contextual_risks"
+          "contextual_risks",
+          "slug"
         ]
       },
       "conditions": []
@@ -36,7 +37,8 @@
           "title",
           "description",
           "display_order",
-          "contextual_risks"
+          "contextual_risks",
+          "slug"
         ]
       },
       "conditions": []
@@ -49,7 +51,8 @@
           "title",
           "description",
           "display_order",
-          "contextual_risks"
+          "contextual_risks",
+          "slug"
         ]
       },
       "conditions": []
@@ -113,7 +116,8 @@
           "title",
           "display_order",
           "pcbs",
-          "description"
+          "description",
+          "slug"
         ]
       },
       "conditions": []
@@ -138,7 +142,8 @@
           "title",
           "display_order",
           "pcbs",
-          "description"
+          "description",
+          "slug"
         ]
       },
       "conditions": []
@@ -151,7 +156,8 @@
           "title",
           "display_order",
           "pcbs",
-          "description"
+          "description",
+          "slug"
         ]
       },
       "conditions": []
@@ -214,10 +220,9 @@
         "fields": [
           "name",
           "description",
-          "geographic_scope",
-          "carbon_offset_project_controversies",
           "risks",
-          "author"
+          "author",
+          "pcbs"
         ]
       },
       "conditions": []
@@ -241,10 +246,9 @@
         "fields": [
           "name",
           "description",
-          "geographic_scope",
-          "carbon_offset_project_controversies",
           "risks",
-          "author"
+          "author",
+          "pcbs"
         ]
       },
       "conditions": []
@@ -256,10 +260,9 @@
         "fields": [
           "name",
           "description",
-          "geographic_scope",
-          "carbon_offset_project_controversies",
           "risks",
-          "author"
+          "author",
+          "pcbs"
         ]
       },
       "conditions": []

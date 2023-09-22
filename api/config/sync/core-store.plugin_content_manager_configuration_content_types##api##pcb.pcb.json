@@ -8,7 +8,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "title",
-      "defaultSortBy": "title",
+      "defaultSortBy": "id",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -137,18 +137,14 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "title",
-        "display_order",
-        "pcb_category"
-      ],
       "edit": [
         [
           {
             "name": "title",
             "size": 6
-          },
+          }
+        ],
+        [
           {
             "name": "display_order",
             "size": 4
@@ -166,6 +162,12 @@
             "size": 12
           }
         ]
+      ],
+      "list": [
+        "id",
+        "title",
+        "display_order",
+        "pcb_category"
       ]
     }
   },
