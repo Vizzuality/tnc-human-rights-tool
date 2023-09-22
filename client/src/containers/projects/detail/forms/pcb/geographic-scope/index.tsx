@@ -1,12 +1,13 @@
 "use client";
 import { PropsWithChildren } from "react";
 
-import { UseFormReturn, useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import { useGetProjectsId, usePutProjectsId } from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
 import { Button } from "@/components/ui/button";
@@ -21,26 +22,26 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 export interface GeographicScopeFormProps extends PropsWithChildren {
+  projectId: string;
   items: PcbListResponse;
 }
 
-const useSyncFormValues = (f: UseFormReturn) => {
-  const values = useWatch({
-    control: f.control,
-  });
+export default function GeographicScopeForm({ projectId, items }: GeographicScopeFormProps) {
+  const { data: projectIdData } = useGetProjectsId(+projectId);
+  const putProjectMutation = usePutProjectsId();
 
-  console.info("watch values", values);
-};
-
-export default function GeographicScopeForm({ items }: GeographicScopeFormProps) {
   const formSchema = z.object({
     ...items?.data?.reduce(
-      (acc, { id }) => {
-        if (!id) {
+      (acc, { id, attributes }) => {
+        if (!id || !attributes) {
           return acc;
         }
 
-        acc[id] = z.string().min(10);
+        const { display_order, pcb_category } = attributes;
+
+        acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
+          .string()
+          .min(10);
 
         return acc;
       },
@@ -50,13 +51,22 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: projectIdData?.data?.attributes?.geographic_scope as Record<string, string>,
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.info(values);
+    if (projectIdData?.data?.attributes) {
+      putProjectMutation.mutate({
+        id: +projectId,
+        data: {
+          data: {
+            ...projectIdData?.data?.attributes,
+            geographic_scope: values,
+          },
+        },
+      });
+    }
   };
-
-  useSyncFormValues(form);
 
   return (
     <Form {...form}>
@@ -83,21 +93,24 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
               <FormField
                 key={id}
                 control={form.control}
-                name={`${id}`}
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel>
-                      {`${pcb_category?.data?.attributes?.display_order}.${display_order}`} {title}
-                    </FormLabel>
-                    <div className="prose">{parse(description)}</div>
+                name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
+                render={({ field }) => {
+                  return (
+                    <FormItem className="space-y-2">
+                      <FormLabel>
+                        {`${pcb_category?.data?.attributes?.display_order}.${display_order}`}{" "}
+                        {title}
+                      </FormLabel>
+                      <div className="prose">{parse(description)}</div>
 
-                    <FormControl className="flex py-2.5">
-                      <Textarea {...field} rows={4} className="w-full" />
-                    </FormControl>
+                      <FormControl className="flex py-2.5">
+                        <Textarea {...field} rows={4} className="w-full" />
+                      </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
             );
           })}

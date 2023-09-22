@@ -24,8 +24,7 @@
       "type": "json"
     },
     "carbon_offset_project_controversies": {
-      "type": "json",
-      "required": false
+      "type": "json"
     },
     "risks": {
       "type": "json"

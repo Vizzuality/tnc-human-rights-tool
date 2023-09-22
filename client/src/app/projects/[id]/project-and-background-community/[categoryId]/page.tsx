@@ -17,7 +17,7 @@ interface ProjectsDetailPCBCategoryProps {
 }
 
 export default async function ProjectsDetailPCBCategoryPage({
-  params: { categoryId },
+  params: { id, categoryId },
 }: ProjectsDetailPCBCategoryProps) {
   const CATEGORY = await getPcbCategoriesId(+categoryId);
   const ITEMS = await getPcbs({
@@ -37,9 +37,9 @@ export default async function ProjectsDetailPCBCategoryPage({
         </div>
       )}
 
-      {categoryId === "1" && <GeographicScopeForm items={ITEMS} />}
+      {categoryId === "1" && <GeographicScopeForm projectId={id} items={ITEMS} />}
 
-      {categoryId === "3" && <CarbonOffsetProjectControversiesForm items={ITEMS} />}
+      {categoryId === "3" && <CarbonOffsetProjectControversiesForm projectId={id} items={ITEMS} />}
     </ProjectsDetailContent>
   );
 }
