@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd ./client && yarn types && yarn lint --fix && yarn check-types
-
+cd ./api && yarn config-sync export -y

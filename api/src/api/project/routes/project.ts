@@ -2,6 +2,29 @@
  * project router
  */
 
-import { factories } from '@strapi/strapi';
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-export default factories.createCoreRouter('api::project.project');
+const isOwner = {
+  name: "global::isOwner",
+  config: { contentType: "project" },
+};
+
+module.exports = createCoreRouter("api::project.project", {
+  config: {
+    create: {
+      policies: [isOwner],
+    },
+    update: {
+      policies: [isOwner],
+    },
+    delete: {
+      policies: [isOwner],
+    },
+    find: {
+      policies: [isOwner],
+    },
+    findOne: {
+      policies: [isOwner],
+    },
+  },
+});
