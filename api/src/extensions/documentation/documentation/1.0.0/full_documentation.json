@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-21T14:29:38.193Z"
+    "x-generation-date": "2023-09-22T08:33:00.488Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -2462,7 +2462,10 @@
               },
               "description": {
                 "type": "string"
-              }
+              },
+              "geographic_scope": {},
+              "carbon_offset_project_controversies": {},
+              "risks": {}
             }
           }
         }
@@ -2526,6 +2529,9 @@
           "description": {
             "type": "string"
           },
+          "geographic_scope": {},
+          "carbon_offset_project_controversies": {},
+          "risks": {},
           "createdAt": {
             "type": "string",
             "format": "date-time"

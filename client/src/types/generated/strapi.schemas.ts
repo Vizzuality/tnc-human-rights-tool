@@ -365,6 +365,9 @@ export interface ProjectResponse {
 export interface Project {
   name: string;
   description: string;
+  geographic_scope?: unknown;
+  carbon_offset_project_controversies?: unknown;
+  risks?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -583,6 +586,9 @@ export interface ProjectListResponse {
 export type ProjectRequestData = {
   name: string;
   description: string;
+  geographic_scope?: unknown;
+  carbon_offset_project_controversies?: unknown;
+  risks?: unknown;
 };
 
 export interface ProjectRequest {
