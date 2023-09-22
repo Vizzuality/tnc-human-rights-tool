@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 
+import { getPcbCategories } from "@/types/generated/pcb-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
@@ -9,13 +11,14 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
 
-import { getPCBCategories } from "@/data/pcb/categories";
-
 export default async function ProjectsDetailResearchOverviewPage({
   params: { id },
 }: ProjectsDetailPageProps) {
-  const CATEGORIES = await getPCBCategories();
-  const [{ id: categoryId, title: categoryTitle }] = CATEGORIES.data;
+  const CATEGORIES = await getPcbCategories();
+
+  if (!CATEGORIES?.data) return null;
+
+  const [{ id: categoryId, attributes }] = CATEGORIES.data;
 
   return (
     <ProjectsDetailContent>
@@ -170,7 +173,7 @@ export default async function ProjectsDetailResearchOverviewPage({
       <div className="prose flex justify-end pt-5">
         <Link href={`/projects/${id}/project-and-background-community/${categoryId}`}>
           <Button className="items-center">
-            {categoryTitle}
+            {attributes?.title}
 
             <ArrowRightIcon className="ml-2" />
           </Button>

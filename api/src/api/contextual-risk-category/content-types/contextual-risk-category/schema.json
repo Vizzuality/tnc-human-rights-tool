@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contextual_risk_categories",
+  "info": {
+    "singularName": "contextual-risk-category",
+    "pluralName": "contextual-risk-categories",
+    "displayName": "Contextual Risk Category"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "display_order": {
+      "type": "integer"
+    },
+    "contextual_risks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::contextual-risk.contextual-risk",
+      "mappedBy": "contextual_risk_category"
+    }
+  }
+}

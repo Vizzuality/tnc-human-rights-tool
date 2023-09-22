@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import LayoutProviders from "@/app/layout-poviders";
 
 import Header from "@/containers/header";

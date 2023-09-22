@@ -1,13 +1,13 @@
 import parse from "html-react-parser";
 
+import { getContextualRisks } from "@/types/generated/contextual-risk";
+import { getContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
-import ProjectsDetailForm from "@/containers/projects/detail/forms";
+import ContextualRiskForm from "@/containers/projects/detail/forms/contextual-risk";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
-
-import { getContextualRisks } from "@/data/contextual-risk";
-import { getContextualRiskCategory } from "@/data/contextual-risk/categories";
 
 interface ProjectsDetailContextualRiskCategoryProps {
   params: {
@@ -18,18 +18,25 @@ interface ProjectsDetailContextualRiskCategoryProps {
 export default async function ProjectsDetailContextualRiskCategoryPage({
   params: { categoryId },
 }: ProjectsDetailContextualRiskCategoryProps) {
-  const CATEGORY = await getContextualRiskCategory(categoryId);
-  const ITEMS = await getContextualRisks(categoryId);
+  const CATEGORY = await getContextualRiskCategoriesId(+categoryId);
+  const ITEMS = await getContextualRisks({
+    filters: {
+      contextual_risk_category: +categoryId,
+    },
+    populate: "*",
+  });
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>{CATEGORY.data.title}</ProjectsDetailTitle>
+      <ProjectsDetailTitle>{CATEGORY?.data?.attributes?.title}</ProjectsDetailTitle>
 
-      <div>
-        <div className="prose -mt-5">{parse(CATEGORY.data.description)}</div>
-      </div>
+      {!!CATEGORY?.data?.attributes?.description && (
+        <div>
+          <div className="prose -mt-5">{parse(CATEGORY.data.attributes.description)}</div>
+        </div>
+      )}
 
-      <ProjectsDetailForm items={ITEMS} />
+      <ContextualRiskForm items={ITEMS} />
     </ProjectsDetailContent>
   );
 }

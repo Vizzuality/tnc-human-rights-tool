@@ -19,6 +19,16 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "geographic_scope": {
+      "type": "json"
+    },
+    "carbon_offset_project_controversies": {
+      "type": "json",
+      "required": false
+    },
+    "risks": {
+      "type": "json"
     }
   }
 }

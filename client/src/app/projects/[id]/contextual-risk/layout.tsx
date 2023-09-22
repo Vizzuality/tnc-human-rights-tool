@@ -2,13 +2,13 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
+import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
+import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 import Sidebar from "@/containers/sidebar";
-
-import { getContextualRiskCategories } from "@/data/contextual-risk/categories";
 
 interface ProjectsDetailContextualRiskLayoutProps
   extends ProjectsDetailPageProps,
@@ -33,25 +33,24 @@ export default async function ProjectsDetailContextualRiskLayout({
     {
       href: `/projects/${id}/contextual-risk`,
       label: "Overview",
-      className: "text-lg",
       children: <span className="text-lg">Overview</span>,
     },
-    ...CATEGORIES.data.map(({ id: categoryId, title }) => {
+    ...(CATEGORIES?.data || [])?.map(({ id: categoryId, attributes }) => {
       const percentage = Math.random();
 
       return {
         href: `/projects/${id}/contextual-risk/${categoryId}`,
-        label: title,
+        label: attributes?.title ?? "",
         children: (
           <>
-            <span>{title}</span>
+            <span>{attributes?.title}</span>
             {/* Draw a svg circle that I can control how much of the path is filled */}
             <NavigationCircle percentage={percentage} />
           </>
         ),
       };
     }),
-  ];
+  ] satisfies NavigationSidebarProps["items"];
 
   return (
     <section className="flex grow flex-col space-y-5">

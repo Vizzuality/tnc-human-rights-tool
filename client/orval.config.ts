@@ -37,7 +37,14 @@ module.exports = {
     input: {
       target: "../api/src/extensions/documentation/documentation/1.0.0/full_documentation.json",
       filters: {
-        tags: ["Project", "Users-Permissions - Auth"],
+        tags: [
+          "Project",
+          "Users-Permissions - Auth",
+          "Contextual-risk",
+          "Contextual-risk-category",
+          "Pcb",
+          "Pcb-category",
+        ],
       },
     },
   },

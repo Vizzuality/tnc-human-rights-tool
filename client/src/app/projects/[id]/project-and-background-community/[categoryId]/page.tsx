@@ -1,13 +1,14 @@
 import parse from "html-react-parser";
 
+import { getPcbs } from "@/types/generated/pcb";
+import { getPcbCategoriesId } from "@/types/generated/pcb-category";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
-import ProjectsDetailForm from "@/containers/projects/detail/forms";
+import CarbonOffsetProjectControversiesForm from "@/containers/projects/detail/forms/pcb/carbon-offset-offset-controversies";
+import GeographicScopeForm from "@/containers/projects/detail/forms/pcb/geographic-scope";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
-
-import { getPCBs } from "@/data/pcb";
-import { getPCBCategory } from "@/data/pcb/categories";
 
 interface ProjectsDetailPCBCategoryProps {
   params: {
@@ -18,18 +19,27 @@ interface ProjectsDetailPCBCategoryProps {
 export default async function ProjectsDetailPCBCategoryPage({
   params: { categoryId },
 }: ProjectsDetailPCBCategoryProps) {
-  const CATEGORY = await getPCBCategory(categoryId);
-  const ITEMS = await getPCBs(categoryId);
+  const CATEGORY = await getPcbCategoriesId(+categoryId);
+  const ITEMS = await getPcbs({
+    filters: {
+      pcb_category: categoryId,
+    },
+    populate: "*",
+  });
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>{CATEGORY.data.title}</ProjectsDetailTitle>
+      <ProjectsDetailTitle>{CATEGORY?.data?.attributes?.title}</ProjectsDetailTitle>
 
-      <div>
-        <div className="prose -mt-5">{parse(CATEGORY.data.description)}</div>
-      </div>
+      {!!CATEGORY?.data?.attributes?.description && (
+        <div>
+          <div className="prose -mt-5">{parse(CATEGORY?.data?.attributes?.description)}</div>
+        </div>
+      )}
 
-      <ProjectsDetailForm items={ITEMS} />
+      {categoryId === "1" && <GeographicScopeForm items={ITEMS} />}
+
+      {categoryId === "3" && <CarbonOffsetProjectControversiesForm items={ITEMS} />}
     </ProjectsDetailContent>
   );
 }
