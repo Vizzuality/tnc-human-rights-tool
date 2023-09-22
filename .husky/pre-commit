@@ -3,3 +3,4 @@
 
 cd ./client && yarn types && yarn lint --fix && yarn check-types
 
+cd .. && cd ./api && yarn config-sync export -y

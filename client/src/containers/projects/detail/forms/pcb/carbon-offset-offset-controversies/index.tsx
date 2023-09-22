@@ -83,7 +83,8 @@ export default function CarbonOffsetProjectControversiesForm({
             id: +projectId,
             data: {
               data: {
-                ...projectIdData.data.attributes,
+                name: projectIdData.data.attributes.name,
+                description: projectIdData.data.attributes.description,
                 carbon_offset_project_controversies: values,
               },
             },

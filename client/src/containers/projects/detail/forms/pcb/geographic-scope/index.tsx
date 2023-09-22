@@ -63,7 +63,8 @@ export default function GeographicScopeForm({ projectId, items }: GeographicScop
             id: +projectId,
             data: {
               data: {
-                ...projectIdData.data.attributes,
+                name: projectIdData.data.attributes.name,
+                description: projectIdData.data.attributes.description,
                 geographic_scope: values,
               },
             },
