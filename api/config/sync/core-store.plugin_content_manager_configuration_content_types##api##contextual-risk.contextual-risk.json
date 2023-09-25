@@ -8,7 +8,7 @@
       "searchable": true,
       "pageSize": 10,
       "mainField": "title",
-      "defaultSortBy": "title",
+      "defaultSortBy": "id",
       "defaultSortOrder": "ASC"
     },
     "metadatas": {
@@ -137,12 +137,6 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "title",
-        "display_order",
-        "contextual_risk_category"
-      ],
       "edit": [
         [
           {
@@ -152,20 +146,28 @@
         ],
         [
           {
-            "name": "description",
-            "size": 12
+            "name": "display_order",
+            "size": 4
           }
         ],
         [
           {
-            "name": "display_order",
-            "size": 4
-          },
-          {
             "name": "contextual_risk_category",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "description",
+            "size": 12
+          }
         ]
+      ],
+      "list": [
+        "id",
+        "title",
+        "display_order",
+        "contextual_risk_category"
       ]
     }
   },

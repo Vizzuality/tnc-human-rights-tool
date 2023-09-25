@@ -123,3 +123,8 @@ build
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+############################
+# Plugins
+############################
+src/extensions/documentation/documentation/**/*.json

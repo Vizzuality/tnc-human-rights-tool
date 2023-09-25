@@ -43,9 +43,10 @@ export default async function ProjectsDetailContextualRiskLayout({
         label: attributes?.title ?? "",
         children: (
           <>
-            <span>{attributes?.title}</span>
             {/* Draw a svg circle that I can control how much of the path is filled */}
             <NavigationCircle percentage={percentage} />
+
+            <span>{attributes?.title}</span>
           </>
         ),
       };

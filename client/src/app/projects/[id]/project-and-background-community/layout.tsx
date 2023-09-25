@@ -2,12 +2,18 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
-import { getPcbCategories } from "@/types/generated/pcb-category";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import {
+  getGetPcbCategoriesIdQueryOptions,
+  getPcbCategories,
+} from "@/types/generated/pcb-category";
+
+import getQueryClient from "@/app/getQueryClient";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
-import NavigationCircle from "@/containers/navigation/sidebar/circle";
+import PBCSidebarItem from "@/containers/projects/detail/sidebar/item";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailPCBLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -27,39 +33,58 @@ export default async function ProjectsDetailPCBLayout({
 
   const CATEGORIES = await getPcbCategories();
 
+  // prefetch category id data
+  const queryClient = getQueryClient();
+
+  for (const c of CATEGORIES?.data ?? []) {
+    if (!c.id) return;
+    await queryClient.prefetchQuery(getGetPcbCategoriesIdQueryOptions(c.id));
+  }
+
+  const dehydratedState = dehydrate(queryClient);
+
   const items = [
     {
       href: `/projects/${id}/project-and-background-community`,
       label: "Overview",
       children: <span className="text-lg">Overview</span>,
     },
-    ...(CATEGORIES?.data || [])?.map(({ id: categoryId, attributes }) => {
-      const percentage = Math.random();
+    ...(CATEGORIES?.data || [])
+      ?.sort((a, b) => {
+        if (a?.attributes?.display_order && b?.attributes?.display_order) {
+          return +a.attributes.display_order - +b.attributes.display_order;
+        }
 
-      return {
-        href: `/projects/${id}/project-and-background-community/${categoryId}`,
-        label: attributes?.title ?? "",
-        children: (
-          <>
-            <span>{attributes?.title}</span>
-            {/* Draw a svg circle that I can control how much of the path is filled */}
-            <NavigationCircle percentage={percentage} />
-          </>
-        ),
-      };
-    }),
+        return 0;
+      })
+      ?.map(({ id: categoryId, attributes }) => {
+        return {
+          href: `/projects/${id}/project-and-background-community/${categoryId}`,
+          label: attributes?.title ?? "",
+          children: (
+            <>
+              {/* Draw a svg circle that I can control how much of the path is filled */}
+              {typeof categoryId !== "undefined" && <PBCSidebarItem categoryId={categoryId} />}
+
+              <span>{attributes?.title}</span>
+            </>
+          ),
+        };
+      }),
   ] satisfies NavigationSidebarProps["items"];
 
   return (
-    <section className="flex grow flex-col space-y-5">
-      <div className="grid grid-cols-12 gap-20">
-        <div className="col-span-4">
-          <Sidebar>
-            <NavigationSidebar items={items} />
-          </Sidebar>
+    <Hydrate state={dehydratedState}>
+      <section className="flex grow flex-col space-y-5">
+        <div className="grid grid-cols-12 gap-20">
+          <div className="col-span-4">
+            <Sidebar>
+              <NavigationSidebar items={items} />
+            </Sidebar>
+          </div>
+          <div className="col-span-8">{children}</div>
         </div>
-        <div className="col-span-8">{children}</div>
-      </div>
-    </section>
+      </section>
+    </Hydrate>
   );
 }

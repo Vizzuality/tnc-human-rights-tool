@@ -1,15 +1,22 @@
 "use client";
 import { PropsWithChildren } from "react";
 
-import { UseFormReturn, useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import {
+  getGetProjectsIdQueryKey,
+  useGetProjectsId,
+  usePutProjectsId,
+} from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
-import { Button } from "@/components/ui/button";
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -21,16 +28,9 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export interface CarbonOffsetProjectControversiesFormProps extends PropsWithChildren {
+  projectId: string;
   items: PcbListResponse;
 }
-
-const useSyncFormValues = (f: UseFormReturn) => {
-  const values = useWatch({
-    control: f.control,
-  });
-
-  console.info("watch values", values);
-};
 
 const RADIO_OPTIONS = [
   {
@@ -44,16 +44,33 @@ const RADIO_OPTIONS = [
 ];
 
 export default function CarbonOffsetProjectControversiesForm({
+  projectId,
   items,
 }: CarbonOffsetProjectControversiesFormProps) {
+  const queryClient = useQueryClient();
+
+  const { data: projectIdData } = useGetProjectsId(+projectId);
+  const putProjectMutation = usePutProjectsId({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries(getGetProjectsIdQueryKey(+projectId));
+      },
+    },
+  });
+
   const formSchema = z.object({
     ...items?.data?.reduce(
-      (acc, { id }) => {
-        if (!id) {
+      (acc, { id, attributes }) => {
+        if (!id || !attributes) {
           return acc;
         }
 
-        acc[id] = z.record(z.string(), z.string());
+        const { display_order, pcb_category } = attributes;
+
+        acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z.record(
+          z.string(),
+          z.string(),
+        );
 
         return acc;
       },
@@ -61,15 +78,42 @@ export default function CarbonOffsetProjectControversiesForm({
     ),
   });
 
+  const defaultValuesCategory = (projectIdData?.data?.attributes?.pcbs || {}) as Record<
+    "carbon-offset-project-controversies" | "geographic-scope",
+    Record<string, { answer: string }>
+  >;
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: defaultValuesCategory["carbon-offset-project-controversies"],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.info(values);
+    return new Promise((resolve) => {
+      if (projectIdData?.data?.attributes) {
+        return putProjectMutation.mutate(
+          {
+            id: +projectId,
+            data: {
+              data: {
+                name: projectIdData.data.attributes.name,
+                description: projectIdData.data.attributes.description,
+                pcbs: {
+                  ...defaultValuesCategory,
+                  "carbon-offset-project-controversies": values,
+                },
+              },
+            },
+          },
+          {
+            onSettled: () => {
+              resolve(true);
+            },
+          },
+        );
+      }
+    });
   };
-
-  useSyncFormValues(form);
 
   return (
     <Form {...form}>
@@ -95,48 +139,51 @@ export default function CarbonOffsetProjectControversiesForm({
               <FormField
                 key={id}
                 control={form.control}
-                name={`${id}`}
-                render={({ field }) => (
-                  <FormItem className="space-y-2">
-                    <FormLabel>
-                      {`${pcb_category?.data?.attributes?.display_order}.${display_order}`} {title}
-                    </FormLabel>
-                    <div className="prose">{parse(description)}</div>
+                name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
+                render={({ field }) => {
+                  return (
+                    <FormItem className="space-y-2">
+                      <FormLabel>
+                        {`${pcb_category?.data?.attributes?.display_order}.${display_order}`}{" "}
+                        {title}
+                      </FormLabel>
+                      <div className="prose">{parse(description)}</div>
 
-                    <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
-                      <RadioGroup
-                        className="flex space-x-2.5"
-                        onValueChange={(v) =>
-                          field.onChange({
-                            ...field.value,
-                            answer: v,
-                          })
-                        }
-                        defaultValue={field.value}
-                      >
-                        {RADIO_OPTIONS.map(({ value, label }) => (
-                          <FormItem key={value}>
-                            <div className="flex items-center">
-                              <FormControl>
-                                <RadioGroupItem {...field} value={value} />
-                              </FormControl>
-                              <FormLabel className="cursor-pointer pl-2 font-normal">
-                                {label}
-                              </FormLabel>
-                            </div>
-                          </FormItem>
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
+                      <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
+                        <RadioGroup
+                          className="flex space-x-2.5"
+                          onValueChange={(v) =>
+                            field.onChange({
+                              ...field.value,
+                              answer: v,
+                            })
+                          }
+                          defaultValue={field.value?.answer}
+                        >
+                          {RADIO_OPTIONS.map(({ value, label }) => (
+                            <FormItem key={value}>
+                              <div className="flex items-center">
+                                <FormControl>
+                                  <RadioGroupItem {...field} value={value} />
+                                </FormControl>
+                                <FormLabel className="cursor-pointer pl-2 font-normal">
+                                  {label}
+                                </FormLabel>
+                              </div>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
+                      <FormMessage />
+                    </FormItem>
+                  );
+                }}
               />
             );
           })}
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );

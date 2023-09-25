@@ -14,7 +14,9 @@ import { Button } from "@/components/ui/button";
 export default async function ProjectsDetailResearchOverviewPage({
   params: { id },
 }: ProjectsDetailPageProps) {
-  const CATEGORIES = await getPcbCategories();
+  const CATEGORIES = await getPcbCategories({
+    sort: "display_order:asc",
+  });
 
   if (!CATEGORIES?.data) return null;
 
