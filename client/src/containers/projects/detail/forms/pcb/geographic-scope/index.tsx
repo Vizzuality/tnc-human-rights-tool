@@ -4,10 +4,15 @@ import { PropsWithChildren } from "react";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
-import { useGetProjectsId, usePutProjectsId } from "@/types/generated/project";
+import {
+  getGetProjectsIdQueryKey,
+  useGetProjectsId,
+  usePutProjectsId,
+} from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
@@ -28,8 +33,16 @@ export interface GeographicScopeFormProps extends PropsWithChildren {
 }
 
 export default function GeographicScopeForm({ projectId, items }: GeographicScopeFormProps) {
+  const queryClient = useQueryClient();
+
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const putProjectMutation = usePutProjectsId();
+  const putProjectMutation = usePutProjectsId({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries(getGetProjectsIdQueryKey(+projectId));
+      },
+    },
+  });
 
   const formSchema = z.object({
     ...items?.data?.reduce(
