@@ -63,9 +63,10 @@ export default async function ProjectsDetailPCBLayout({
           label: attributes?.title ?? "",
           children: (
             <>
-              <span>{attributes?.title}</span>
               {/* Draw a svg circle that I can control how much of the path is filled */}
               {typeof categoryId !== "undefined" && <PBCSidebarItem categoryId={categoryId} />}
+
+              <span>{attributes?.title}</span>
             </>
           ),
         };
