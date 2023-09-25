@@ -3,6 +3,8 @@ import { PropsWithChildren } from "react";
 
 import { useForm } from "react-hook-form";
 
+import { useParams } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
@@ -28,7 +30,6 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export interface CarbonOffsetProjectControversiesFormProps extends PropsWithChildren {
-  projectId: string;
   items: PcbListResponse;
 }
 
@@ -44,9 +45,9 @@ const RADIO_OPTIONS = [
 ];
 
 export default function CarbonOffsetProjectControversiesForm({
-  projectId,
   items,
 }: CarbonOffsetProjectControversiesFormProps) {
+  const { id: projectId } = useParams();
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);

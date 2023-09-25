@@ -2,12 +2,18 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
-import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import {
+  getContextualRiskCategories,
+  getGetContextualRiskCategoriesIdQueryOptions,
+} from "@/types/generated/contextual-risk-category";
+
+import getQueryClient from "@/app/getQueryClient";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
-import NavigationCircle from "@/containers/navigation/sidebar/circle";
+import ContextualRiskSidebarItem from "@/containers/projects/detail/sidebar/contextual-risk-item";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailContextualRiskLayoutProps
@@ -29,40 +35,59 @@ export default async function ProjectsDetailContextualRiskLayout({
 
   const CATEGORIES = await getContextualRiskCategories();
 
+  // prefetch category id data
+  const queryClient = getQueryClient();
+
+  for (const c of CATEGORIES?.data ?? []) {
+    if (!c.id) return;
+    await queryClient.prefetchQuery(getGetContextualRiskCategoriesIdQueryOptions(c.id));
+  }
+
+  const dehydratedState = dehydrate(queryClient);
+
   const items = [
     {
       href: `/projects/${id}/contextual-risk`,
       label: "Overview",
       children: <span className="text-lg">Overview</span>,
     },
-    ...(CATEGORIES?.data || [])?.map(({ id: categoryId, attributes }) => {
-      const percentage = Math.random();
+    ...(CATEGORIES?.data || [])
+      ?.sort((a, b) => {
+        if (a?.attributes?.display_order && b?.attributes?.display_order) {
+          return +a.attributes.display_order - +b.attributes.display_order;
+        }
 
-      return {
-        href: `/projects/${id}/contextual-risk/${categoryId}`,
-        label: attributes?.title ?? "",
-        children: (
-          <>
-            {/* Draw a svg circle that I can control how much of the path is filled */}
-            <NavigationCircle percentage={percentage} />
+        return 0;
+      })
+      ?.map(({ id: categoryId, attributes }) => {
+        return {
+          href: `/projects/${id}/contextual-risk/${categoryId}`,
+          label: attributes?.title ?? "",
+          children: (
+            <>
+              {typeof categoryId !== "undefined" && (
+                <ContextualRiskSidebarItem categoryId={categoryId} />
+              )}
 
-            <span>{attributes?.title}</span>
-          </>
-        ),
-      };
-    }),
+              <span>{attributes?.title}</span>
+            </>
+          ),
+        };
+      }),
   ] satisfies NavigationSidebarProps["items"];
 
   return (
-    <section className="flex grow flex-col space-y-5">
-      <div className="grid grid-cols-12 gap-20">
-        <div className="col-span-4">
-          <Sidebar>
-            <NavigationSidebar items={items} />
-          </Sidebar>
+    <Hydrate state={dehydratedState}>
+      <section className="flex grow flex-col space-y-5">
+        <div className="grid grid-cols-12 gap-20">
+          <div className="col-span-4">
+            <Sidebar>
+              <NavigationSidebar items={items} />
+            </Sidebar>
+          </div>
+          <div className="col-span-8">{children}</div>
         </div>
-        <div className="col-span-8">{children}</div>
-      </div>
-    </section>
+      </section>
+    </Hydrate>
   );
 }

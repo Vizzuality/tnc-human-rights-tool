@@ -3,6 +3,8 @@ import { PropsWithChildren } from "react";
 
 import { useForm } from "react-hook-form";
 
+import { useParams } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
@@ -28,11 +30,12 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 export interface GeographicScopeFormProps extends PropsWithChildren {
-  projectId: string;
   items: PcbListResponse;
 }
 
-export default function GeographicScopeForm({ projectId, items }: GeographicScopeFormProps) {
+export default function GeographicScopeForm({ items }: GeographicScopeFormProps) {
+  const { id: projectId } = useParams();
+
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);

@@ -6,11 +6,11 @@ import { useGetProjectsId } from "@/types/generated/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
-interface PBCSidebarItemProps {
+interface PCBSidebarItemProps {
   categoryId: number;
 }
 
-export default function PBCSidebarItem({ categoryId }: PBCSidebarItemProps) {
+export default function PCBSidebarItem({ categoryId }: PCBSidebarItemProps) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
   const { data: categoriesIdData } = useGetPcbCategoriesId(categoryId);

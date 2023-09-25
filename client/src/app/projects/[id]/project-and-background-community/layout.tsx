@@ -13,7 +13,7 @@ import getQueryClient from "@/app/getQueryClient";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
-import PBCSidebarItem from "@/containers/projects/detail/sidebar/item";
+import PCBSidebarItem from "@/containers/projects/detail/sidebar/pcb-item";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailPCBLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -63,8 +63,7 @@ export default async function ProjectsDetailPCBLayout({
           label: attributes?.title ?? "",
           children: (
             <>
-              {/* Draw a svg circle that I can control how much of the path is filled */}
-              {typeof categoryId !== "undefined" && <PBCSidebarItem categoryId={categoryId} />}
+              {typeof categoryId !== "undefined" && <PCBSidebarItem categoryId={categoryId} />}
 
               <span>{attributes?.title}</span>
             </>
