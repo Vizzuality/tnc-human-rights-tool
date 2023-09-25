@@ -2,14 +2,9 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
-import { getContextualRisks } from "@/types/generated/contextual-risk";
-import { getProjectsId } from "@/types/generated/project";
-import { Risks } from "@/types/project";
-
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
-import ProjectRiskSidebarItem from "@/containers/projects/detail/sidebar/project-risk-item";
+import ProjectRiskSidebar from "@/containers/projects/detail/sidebar/project-risk";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailProjectRiskLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -23,62 +18,13 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default async function ProjectsDetailProjectRiskLayout({
   children,
-  params,
 }: ProjectsDetailProjectRiskLayoutProps) {
-  const { id } = params;
-
-  const PROJECT = await getProjectsId(+id);
-
-  const risks = (PROJECT?.data?.attributes?.risks ?? {}) as Risks;
-  const projectRisks = Object.keys(risks)
-    .map((key) => {
-      return Object.keys(risks[key])
-        .filter((r) => risks[key][r].contextual_risk === "yes")
-        .map((r) => r);
-    })
-    .flat();
-
-  const ITEMS = await getContextualRisks({
-    populate: "*",
-    filters: {
-      id: projectRisks,
-    },
-    "pagination[limit]": 100,
-    sort: "contextual_risk_category.display_order:asc,display_order:asc",
-  });
-
-  const items = [
-    {
-      href: `/projects/${id}/project-risk`,
-      label: "Overview",
-      className: "text-lg",
-      children: <span className="text-lg">Overview</span>,
-    },
-    // Just testing
-    ...(ITEMS?.data || [])?.map((item) => {
-      return {
-        href: `/projects/${id}/project-risk/${item.id}`,
-        label: "1.1 Killings",
-        children: (
-          <>
-            {typeof item.id !== "undefined" && <ProjectRiskSidebarItem ctxId={item.id} />}
-
-            <span>
-              {item.attributes?.contextual_risk_category?.data?.attributes?.display_order}.
-              {item.attributes?.display_order} {item.attributes?.title}
-            </span>
-          </>
-        ),
-      };
-    }),
-  ];
-
   return (
     <section className="flex grow flex-col space-y-5">
       <div className="grid grid-cols-12 gap-20">
         <div className="col-span-4">
           <Sidebar>
-            <NavigationSidebar items={items} />
+            <ProjectRiskSidebar />
           </Sidebar>
         </div>
         <div className="col-span-8">{children}</div>
