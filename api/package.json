@@ -4,7 +4,7 @@
   "description": "TNC Human Rights Tool API",
   "packageManager": "yarn@3.6.3",
   "scripts": {
-    "develop": "strapi develop",
+    "develop": "config-sync import -y && strapi develop",
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
