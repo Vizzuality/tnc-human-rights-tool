@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 
 import { useGetPcbCategoriesId } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
+import { PCBs } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
@@ -17,8 +18,8 @@ export default function PCBSidebarItem({ categoryId }: PCBSidebarItemProps) {
   const { attributes } = categoriesIdData?.data ?? {};
 
   const slug = attributes?.slug ?? "";
-  const PCBS_DATA = (projectIdData?.data?.attributes?.pcbs ?? {}) as Record<string, unknown>;
-  const PCB_DATA = (PCBS_DATA[slug] ?? {}) as Record<string, unknown> | string;
+  const PCBS_DATA = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
+  const PCB_DATA = PCBS_DATA[slug] ?? {};
   const PCBS_VALUES = Object.values(PCB_DATA);
 
   const total = PCBS_VALUES.length;

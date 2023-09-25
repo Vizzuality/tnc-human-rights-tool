@@ -151,6 +151,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "name",
+        "createdAt",
+        "updatedAt"
+      ],
       "edit": [
         [
           {
@@ -166,12 +172,6 @@
         ],
         [
           {
-            "name": "pcbs",
-            "size": 12
-          }
-        ],
-        [
-          {
             "name": "risks",
             "size": 12
           }
@@ -181,14 +181,13 @@
             "name": "author",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "pcbs",
+            "size": 12
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "name",
-        "createdAt",
-        "updatedAt",
-        "author"
       ]
     }
   },

@@ -151,16 +151,16 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "title",
+        "display_order",
+        "pcbs"
+      ],
       "edit": [
         [
           {
             "name": "title",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "slug",
             "size": 6
           }
         ],
@@ -175,13 +175,13 @@
             "name": "description",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "slug",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "title",
-        "display_order",
-        "pcbs"
       ]
     }
   },
