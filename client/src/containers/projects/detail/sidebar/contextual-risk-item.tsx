@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 
 import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
 import { useGetProjectsId } from "@/types/generated/project";
+import { Risks } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
@@ -17,8 +18,8 @@ export default function ContextualRiskSidebarItem({ categoryId }: ContextualRisk
   const { attributes } = categoriesIdData?.data ?? {};
 
   const slug = attributes?.slug ?? "";
-  const CRS_DATA = (projectIdData?.data?.attributes?.risks ?? {}) as Record<string, unknown>;
-  const CR_DATA = (CRS_DATA[slug] ?? {}) as Record<string, unknown> | string;
+  const CRS_DATA = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
+  const CR_DATA = CRS_DATA[slug] ?? {};
   const CRS_VALUES = Object.values(CR_DATA);
 
   const total = CRS_VALUES.length;

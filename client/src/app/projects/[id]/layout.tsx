@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import { getGetContextualRiskCategoriesQueryOptions } from "@/types/generated/contextual-risk-category";
 import { getGetProjectsIdQueryOptions, getProjectsId } from "@/types/generated/project";
 
 import getQueryClient from "@/app/getQueryClient";
@@ -25,6 +26,13 @@ export default async function ProjectsDetailLayout({
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     ...getGetProjectsIdQueryOptions(+id),
+  });
+
+  // Prefetch useGetContextualRisks
+  await queryClient.prefetchQuery({
+    ...getGetContextualRiskCategoriesQueryOptions({
+      sort: "display_order:asc",
+    }),
   });
 
   const dehydratedState = dehydrate(queryClient);

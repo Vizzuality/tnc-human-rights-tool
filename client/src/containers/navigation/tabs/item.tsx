@@ -11,11 +11,13 @@ import { Button, ButtonProps } from "@/components/ui/button";
 
 interface TabsNavigationItemProps extends LinkProps, PropsWithChildren {
   className?: string;
+  disabled?: boolean;
 }
 
 export default function TabsNavigationItem({
   children,
   className,
+  disabled,
   ...props
 }: TabsNavigationItemProps) {
   const pathname = usePathname();
@@ -26,7 +28,7 @@ export default function TabsNavigationItem({
       className={cn({
         "flex flex-col items-center space-y-1": true,
         [`${className}`]: !!className,
-        // "pointer-events-none": !pathname.includes(`${props.href}`),
+        "pointer-events-none": disabled,
       })}
     >
       <Button
@@ -37,7 +39,7 @@ export default function TabsNavigationItem({
             secondary: !pathname.includes(`${props.href}`),
           }) as ButtonProps["variant"]
         }
-        // disabled={!pathname.includes(`${props.href}`)}
+        disabled={disabled}
       >
         {children}
       </Button>
