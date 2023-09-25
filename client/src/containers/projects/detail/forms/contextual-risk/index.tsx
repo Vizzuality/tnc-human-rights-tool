@@ -1,15 +1,25 @@
 "use client";
 import { PropsWithChildren } from "react";
 
-import { UseFormReturn, useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
+import {
+  getGetProjectsIdQueryKey,
+  useGetProjectsId,
+  usePutProjectsId,
+} from "@/types/generated/project";
 import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
 
-import { Button } from "@/components/ui/button";
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -24,14 +34,6 @@ import { Textarea } from "@/components/ui/textarea";
 export interface ContextualRiskFormProps extends PropsWithChildren {
   items: ContextualRiskListResponse;
 }
-
-const useSyncFormValues = (f: UseFormReturn) => {
-  const values = useWatch({
-    control: f.control,
-  });
-
-  console.info("watch values", values);
-};
 
 const RADIO_OPTIONS = [
   {
@@ -49,6 +51,26 @@ const RADIO_OPTIONS = [
 ];
 
 export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
+  const { id: projectId, categoryId } = useParams();
+
+  const queryClient = useQueryClient();
+
+  const { data: projectIdData } = useGetProjectsId(+projectId);
+  const { data: categoryIdData } = useGetContextualRiskCategoriesId(+categoryId);
+  const putProjectMutation = usePutProjectsId({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries(getGetProjectsIdQueryKey(+projectId));
+      },
+    },
+  });
+
+  const categorySlug = categoryIdData?.data?.attributes?.slug ?? "";
+  const defaultValuesCategory = (projectIdData?.data?.attributes?.risks || {}) as Record<
+    string,
+    Record<string, { contextual_risk: string }>
+  >;
+
   const formSchema = z.object({
     ...items?.data?.reduce(
       (acc, { id }) => {
@@ -59,7 +81,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
         acc[id] = z.record(z.string(), z.string()).superRefine((data, context) => {
           // if radio is present and is yes then notes is required
           // if radio is present and is no then notes is not required
-          if (data.answer === "yes" && !data.contextual_notes) {
+          if (data.contextual_risk === "yes" && !data.contextual_notes) {
             context.addIssue({
               code: "custom",
               message: "Notes/Specific Risk are required",
@@ -75,13 +97,35 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: defaultValuesCategory[categorySlug],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.info(values);
+    return new Promise((resolve) => {
+      if (projectIdData?.data?.attributes) {
+        return putProjectMutation.mutate(
+          {
+            id: +projectId,
+            data: {
+              data: {
+                name: projectIdData.data.attributes.name,
+                description: projectIdData.data.attributes.description,
+                risks: {
+                  ...defaultValuesCategory,
+                  [categorySlug]: values,
+                },
+              },
+            },
+          },
+          {
+            onSettled: () => {
+              resolve(true);
+            },
+          },
+        );
+      }
+    });
   };
-
-  useSyncFormValues(form);
 
   return (
     <Form {...form}>
@@ -123,10 +167,10 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                         onValueChange={(v) =>
                           field.onChange({
                             ...field.value,
-                            answer: v,
+                            contextual_risk: v,
                           })
                         }
-                        defaultValue={field.value}
+                        defaultValue={field.value?.contextual_risk}
                       >
                         {RADIO_OPTIONS.map(({ value, label }) => (
                           <FormItem key={value}>
@@ -143,7 +187,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                       </RadioGroup>
                     </FormControl>
 
-                    {field.value?.answer === "yes" && (
+                    {field.value?.contextual_risk === "yes" && (
                       <FormField
                         control={form.control}
                         name={`${id}`}
@@ -175,7 +219,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
             );
           })}
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );

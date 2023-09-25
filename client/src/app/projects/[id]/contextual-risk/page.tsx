@@ -14,7 +14,9 @@ import { Button } from "@/components/ui/button";
 export default async function ProjectsDetailContextualRiskPage({
   params: { id },
 }: ProjectsDetailPageProps) {
-  const CATEGORIES = await getContextualRiskCategories();
+  const CATEGORIES = await getContextualRiskCategories({
+    sort: "display_order:asc",
+  });
 
   if (!CATEGORIES?.data) return null;
 
