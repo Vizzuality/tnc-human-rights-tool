@@ -2,6 +2,10 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
+import { getContextualRisks } from "@/types/generated/contextual-risk";
+import { getProjectsId } from "@/types/generated/project";
+import { Risks } from "@/types/project";
+
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar from "@/containers/navigation/sidebar";
@@ -24,6 +28,26 @@ export default async function ProjectsDetailProjectRiskLayout({
 }: ProjectsDetailProjectRiskLayoutProps) {
   const { id } = params;
 
+  const PROJECT = await getProjectsId(+id);
+
+  const risks = (PROJECT?.data?.attributes?.risks ?? {}) as Risks;
+  const projectRisks = Object.keys(risks)
+    .map((key) => {
+      return Object.keys(risks[key])
+        .filter((r) => risks[key][r].contextual_risk === "yes")
+        .map((r) => r);
+    })
+    .flat();
+
+  const ITEMS = await getContextualRisks({
+    populate: "*",
+    filters: {
+      id: projectRisks,
+    },
+    "pagination[limit]": 100,
+    sort: "contextual_risk_category.display_order:asc,display_order:asc",
+  });
+
   const items = [
     {
       href: `/projects/${id}/project-risk`,
@@ -32,28 +56,22 @@ export default async function ProjectsDetailProjectRiskLayout({
       children: <span className="text-lg">Overview</span>,
     },
     // Just testing
-    {
-      href: `/projects/${id}/project-risk/1`,
-      label: "1.1 Killings",
-      children: (
-        <>
-          <span>1.1 Killings</span>
-          {/* Draw a svg circle that I can control how much of the path is filled */}
-          <NavigationCircle percentage={0.35} />
-        </>
-      ),
-    },
-    {
-      href: `/projects/${id}/project-risk/2`,
-      label: "5.2 Lack of Community capacity",
-      children: (
-        <>
-          <span>5.2 Lack of Community capacity</span>
-          {/* Draw a svg circle that I can control how much of the path is filled */}
-          <NavigationCircle percentage={0.75} />
-        </>
-      ),
-    },
+    ...(ITEMS?.data || [])?.map((item) => {
+      return {
+        href: `/projects/${id}/project-risk/${item.id}`,
+        label: "1.1 Killings",
+        children: (
+          <>
+            <NavigationCircle percentage={0.35} />
+
+            <span>
+              {item.attributes?.contextual_risk_category?.data?.attributes?.display_order}.
+              {item.attributes?.display_order} {item.attributes?.title}
+            </span>
+          </>
+        ),
+      };
+    }),
   ];
 
   return (

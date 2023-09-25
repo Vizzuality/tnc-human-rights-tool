@@ -12,23 +12,17 @@ module.exports = {
           path: "./src/services/api/index.ts",
           name: "API",
         },
-        queryOptions: {
+        query: {
           useQuery: true,
           useMutation: true,
-          options: {
-            staleTime: 10000,
-          },
           signal: true,
         },
         operations: {
           "get/projects": {
-            queryOptions: {
+            query: {
               useQuery: true,
               useInfinite: true,
               signal: true,
-              options: {
-                staleTime: 10000,
-              },
             },
           },
         },

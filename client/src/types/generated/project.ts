@@ -4,13 +4,15 @@
  * DOCUMENTATION
  * OpenAPI spec version: 1.0.0
  */
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import type {
   UseQueryOptions,
+  UseInfiniteQueryOptions,
   UseMutationOptions,
   QueryFunction,
   MutationFunction,
   UseQueryResult,
+  UseInfiniteQueryResult,
   QueryKey,
 } from "@tanstack/react-query";
 import type {
@@ -29,6 +31,50 @@ export const getProjects = (params?: GetProjectsParams, signal?: AbortSignal) =>
 
 export const getGetProjectsQueryKey = (params?: GetProjectsParams) =>
   [`/projects`, ...(params ? [params] : [])] as const;
+
+export const getGetProjectsInfiniteQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<Error>,
+>(
+  params?: GetProjectsParams,
+  options?: {
+    query?: UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>;
+  },
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & {
+  queryKey: QueryKey;
+} => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) =>
+    getProjects(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions };
+};
+
+export type GetProjectsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>;
+export type GetProjectsInfiniteQueryError = ErrorType<Error>;
+
+export const useGetProjectsInfinite = <
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<Error>,
+>(
+  params?: GetProjectsParams,
+  options?: {
+    query?: UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>;
+  },
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = getGetProjectsInfiniteQueryOptions(params, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
 
 export const getGetProjectsQueryOptions = <
   TData = Awaited<ReturnType<typeof getProjects>>,

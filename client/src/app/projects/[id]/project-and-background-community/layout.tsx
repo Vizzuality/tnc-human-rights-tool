@@ -31,7 +31,9 @@ export default async function ProjectsDetailPCBLayout({
 }: ProjectsDetailPCBLayoutProps) {
   const { id } = params;
 
-  const CATEGORIES = await getPcbCategories();
+  const CATEGORIES = await getPcbCategories({
+    sort: "display_order:asc",
+  });
 
   // prefetch category id data
   const queryClient = getQueryClient();
