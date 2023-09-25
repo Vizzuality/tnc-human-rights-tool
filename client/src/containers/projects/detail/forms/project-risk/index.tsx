@@ -16,7 +16,8 @@ import {
 } from "@/types/generated/project";
 import { Risks } from "@/types/project";
 
-import { Button } from "@/components/ui/button";
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -253,7 +254,7 @@ export default function ProjectRiskForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );

@@ -9,8 +9,7 @@ import { Risks } from "@/types/project";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import NavigationSidebar from "@/containers/navigation/sidebar";
-// import NavigationCircle from "@/containers/navigation/sidebar/circle";
-import NavigationCircle from "@/containers/navigation/sidebar/circle";
+import ProjectRiskSidebarItem from "@/containers/projects/detail/sidebar/project-risk-item";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailProjectRiskLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -62,7 +61,7 @@ export default async function ProjectsDetailProjectRiskLayout({
         label: "1.1 Killings",
         children: (
           <>
-            <NavigationCircle percentage={0.35} />
+            {typeof item.id !== "undefined" && <ProjectRiskSidebarItem ctxId={item.id} />}
 
             <span>
               {item.attributes?.contextual_risk_category?.data?.attributes?.display_order}.
