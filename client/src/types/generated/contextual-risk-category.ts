@@ -19,6 +19,7 @@ import type {
   GetContextualRiskCategoriesParams,
   ContextualRiskCategoryResponse,
   ContextualRiskCategoryRequest,
+  GetContextualRiskCategoriesIdParams,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -146,22 +147,30 @@ export const usePostContextualRiskCategories = <
 
   return useMutation(mutationOptions);
 };
-export const getContextualRiskCategoriesId = (id: number, signal?: AbortSignal) => {
+export const getContextualRiskCategoriesId = (
+  id: number,
+  params?: GetContextualRiskCategoriesIdParams,
+  signal?: AbortSignal,
+) => {
   return API<ContextualRiskCategoryResponse>({
     url: `/contextual-risk-categories/${id}`,
     method: "get",
+    params,
     signal,
   });
 };
 
-export const getGetContextualRiskCategoriesIdQueryKey = (id: number) =>
-  [`/contextual-risk-categories/${id}`] as const;
+export const getGetContextualRiskCategoriesIdQueryKey = (
+  id: number,
+  params?: GetContextualRiskCategoriesIdParams,
+) => [`/contextual-risk-categories/${id}`, ...(params ? [params] : [])] as const;
 
 export const getGetContextualRiskCategoriesIdQueryOptions = <
   TData = Awaited<ReturnType<typeof getContextualRiskCategoriesId>>,
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetContextualRiskCategoriesIdParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getContextualRiskCategoriesId>>,
@@ -174,11 +183,11 @@ export const getGetContextualRiskCategoriesIdQueryOptions = <
 } => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetContextualRiskCategoriesIdQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetContextualRiskCategoriesIdQueryKey(id, params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getContextualRiskCategoriesId>>> = ({
     signal,
-  }) => getContextualRiskCategoriesId(id, signal);
+  }) => getContextualRiskCategoriesId(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions };
 };
@@ -193,6 +202,7 @@ export const useGetContextualRiskCategoriesId = <
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetContextualRiskCategoriesIdParams,
   options?: {
     query?: UseQueryOptions<
       Awaited<ReturnType<typeof getContextualRiskCategoriesId>>,
@@ -201,7 +211,7 @@ export const useGetContextualRiskCategoriesId = <
     >;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetContextualRiskCategoriesIdQueryOptions(id, options);
+  const queryOptions = getGetContextualRiskCategoriesIdQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
