@@ -40,7 +40,7 @@ export default function NavigationCircle({ percentage }: NavigationCircleProps) 
         </svg>
       )}
 
-      {percentage === 1 && <CheckIcon className="h-4 w-4 stroke-primary" />}
+      {percentage === 1 && <CheckIcon className="h-4 w-4 shrink-0 stroke-primary" />}
     </>
   );
 }

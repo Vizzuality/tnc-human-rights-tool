@@ -1,12 +1,23 @@
 "use client";
-import { PropsWithChildren } from "react";
 
 import { useForm } from "react-hook-form";
 
+import { useParams } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
+import { useGetContextualRisksId } from "@/types/generated/contextual-risk";
+import {
+  getGetProjectsIdQueryKey,
+  useGetProjectsId,
+  usePutProjectsId,
+} from "@/types/generated/project";
+import { Risks } from "@/types/project";
+
+import FooterForm from "@/containers/projects/detail/forms/common/footer";
+
 import {
   Form,
   FormControl,
@@ -20,53 +31,78 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { DETERMINATIONS, PRIORIZATIONS } from "@/constants";
 
-export interface ProjectRiskFormProps extends PropsWithChildren {
-  items: {
-    data: {
-      id: string;
-      title: string;
-      description: string;
-      display_order: string;
-      category: {
-        display_order: string;
-      };
-      input: {
-        type: string;
-        radio_options: {
-          value: string;
-          label: string;
-          additional_input?: {
-            id: string;
-            label: string;
-            error: string;
-          };
-        }[];
-      };
-    }[];
-  };
-}
-
 export default function ProjectRiskForm() {
+  const { id: projectId, ctxId } = useParams();
+
+  const queryClient = useQueryClient();
+
+  const { data: projectIdData } = useGetProjectsId(+projectId);
+  const { data: ctxIdData } = useGetContextualRisksId(+ctxId, {
+    populate: "*",
+  });
+  const putProjectMutation = usePutProjectsId({
+    mutation: {
+      onSuccess: () => {
+        queryClient.invalidateQueries(getGetProjectsIdQueryKey(+projectId));
+      },
+    },
+  });
+
+  const slug = ctxIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
+  const risks = projectIdData?.data?.attributes?.risks as Risks;
+
   const formSchema = z.object({
-    determination: z.enum(DETERMINATIONS.map(({ value }) => value) as [string, ...string[]]),
-    priorization: z.enum(
+    proyect_risk_determination: z.enum(
+      DETERMINATIONS.map(({ value }) => value) as [string, ...string[]],
+    ),
+    proyect_risk_priorization: z.enum(
       PRIORIZATIONS.filter(({ value }) => value !== "more-research").map(({ value }) => value) as [
         string,
         ...string[],
       ],
     ),
-    screening_notes: z.string(),
-    specific_risk_notes: z.string(),
-    research_notes: z.string(),
-    key_determination_factors: z.string(),
+    contextual_notes: z.string(),
+    proyect_risk_notes: z.string(),
+    proyect_risk_research_notes: z.string(),
+    proyect_risk_key_determination_factors: z.string(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: risks[slug]?.[`${ctxId}`],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.info(values);
+    return new Promise((resolve) => {
+      if (projectIdData?.data?.attributes) {
+        return putProjectMutation.mutate(
+          {
+            id: +projectId,
+            data: {
+              data: {
+                name: projectIdData.data.attributes.name,
+                description: projectIdData.data.attributes.description,
+                risks: {
+                  ...risks,
+                  [slug]: {
+                    ...risks[slug],
+                    [`${ctxId}`]: {
+                      ...risks[slug]?.[`${ctxId}`],
+                      ...values,
+                    },
+                  },
+                },
+              },
+            },
+          },
+          {
+            onSettled: () => {
+              resolve(true);
+            },
+          },
+        );
+      }
+    });
   };
 
   return (
@@ -77,7 +113,7 @@ export default function ProjectRiskForm() {
       >
         <FormField
           control={form.control}
-          name="determination"
+          name="proyect_risk_determination"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel>Project Risk Determination</FormLabel>
@@ -108,7 +144,7 @@ export default function ProjectRiskForm() {
 
         <FormField
           control={form.control}
-          name="priorization"
+          name="proyect_risk_priorization"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel>Project Risk Prioritization</FormLabel>
@@ -141,7 +177,7 @@ export default function ProjectRiskForm() {
 
         <FormField
           control={form.control}
-          name="screening_notes"
+          name="contextual_notes"
           defaultValue="lorem ipsum"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
@@ -160,7 +196,7 @@ export default function ProjectRiskForm() {
 
         <FormField
           control={form.control}
-          name="specific_risk_notes"
+          name="proyect_risk_notes"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel>Specific Risk Notes</FormLabel>
@@ -180,7 +216,7 @@ export default function ProjectRiskForm() {
 
         <FormField
           control={form.control}
-          name="research_notes"
+          name="proyect_risk_research_notes"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel>Research Notes</FormLabel>
@@ -200,7 +236,7 @@ export default function ProjectRiskForm() {
 
         <FormField
           control={form.control}
-          name="key_determination_factors"
+          name="proyect_risk_key_determination_factors"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel>Key Determination Factors</FormLabel>
@@ -218,7 +254,7 @@ export default function ProjectRiskForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <FooterForm />
       </form>
     </Form>
   );

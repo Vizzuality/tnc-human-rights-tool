@@ -12,8 +12,7 @@ import {
 import getQueryClient from "@/app/getQueryClient";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
-import ContextualRiskSidebarItem from "@/containers/projects/detail/sidebar/contextual-risk-item";
+import ContextualRiskSidebar from "@/containers/projects/detail/sidebar/contextual-risk";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailContextualRiskLayoutProps
@@ -29,11 +28,10 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default async function ProjectsDetailContextualRiskLayout({
   children,
-  params,
 }: ProjectsDetailContextualRiskLayoutProps) {
-  const { id } = params;
-
-  const CATEGORIES = await getContextualRiskCategories();
+  const CATEGORIES = await getContextualRiskCategories({
+    sort: "display_order:asc",
+  });
 
   // prefetch category id data
   const queryClient = getQueryClient();
@@ -45,44 +43,13 @@ export default async function ProjectsDetailContextualRiskLayout({
 
   const dehydratedState = dehydrate(queryClient);
 
-  const items = [
-    {
-      href: `/projects/${id}/contextual-risk`,
-      label: "Overview",
-      children: <span className="text-lg">Overview</span>,
-    },
-    ...(CATEGORIES?.data || [])
-      ?.sort((a, b) => {
-        if (a?.attributes?.display_order && b?.attributes?.display_order) {
-          return +a.attributes.display_order - +b.attributes.display_order;
-        }
-
-        return 0;
-      })
-      ?.map(({ id: categoryId, attributes }) => {
-        return {
-          href: `/projects/${id}/contextual-risk/${categoryId}`,
-          label: attributes?.title ?? "",
-          children: (
-            <>
-              {typeof categoryId !== "undefined" && (
-                <ContextualRiskSidebarItem categoryId={categoryId} />
-              )}
-
-              <span>{attributes?.title}</span>
-            </>
-          ),
-        };
-      }),
-  ] satisfies NavigationSidebarProps["items"];
-
   return (
     <Hydrate state={dehydratedState}>
       <section className="flex grow flex-col space-y-5">
         <div className="grid grid-cols-12 gap-20">
           <div className="col-span-4">
             <Sidebar>
-              <NavigationSidebar items={items} />
+              <ContextualRiskSidebar />
             </Sidebar>
           </div>
           <div className="col-span-8">{children}</div>

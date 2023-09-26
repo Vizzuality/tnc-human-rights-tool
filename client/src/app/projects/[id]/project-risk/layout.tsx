@@ -4,9 +4,7 @@ import type { Metadata } from "next";
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
-// import NavigationCircle from "@/containers/navigation/sidebar/circle";
-import NavigationCircle from "@/containers/navigation/sidebar/circle";
+import ProjectRiskSidebar from "@/containers/projects/detail/sidebar/project-risk";
 import Sidebar from "@/containers/sidebar";
 
 interface ProjectsDetailProjectRiskLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -20,48 +18,13 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default async function ProjectsDetailProjectRiskLayout({
   children,
-  params,
 }: ProjectsDetailProjectRiskLayoutProps) {
-  const { id } = params;
-
-  const items = [
-    {
-      href: `/projects/${id}/project-risk`,
-      label: "Overview",
-      className: "text-lg",
-      children: <span className="text-lg">Overview</span>,
-    },
-    // Just testing
-    {
-      href: `/projects/${id}/project-risk/1`,
-      label: "1.1 Killings",
-      children: (
-        <>
-          <span>1.1 Killings</span>
-          {/* Draw a svg circle that I can control how much of the path is filled */}
-          <NavigationCircle percentage={0.35} />
-        </>
-      ),
-    },
-    {
-      href: `/projects/${id}/project-risk/2`,
-      label: "5.2 Lack of Community capacity",
-      children: (
-        <>
-          <span>5.2 Lack of Community capacity</span>
-          {/* Draw a svg circle that I can control how much of the path is filled */}
-          <NavigationCircle percentage={0.75} />
-        </>
-      ),
-    },
-  ];
-
   return (
     <section className="flex grow flex-col space-y-5">
       <div className="grid grid-cols-12 gap-20">
         <div className="col-span-4">
           <Sidebar>
-            <NavigationSidebar items={items} />
+            <ProjectRiskSidebar />
           </Sidebar>
         </div>
         <div className="col-span-8">{children}</div>

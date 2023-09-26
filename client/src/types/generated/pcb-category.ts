@@ -19,6 +19,7 @@ import type {
   GetPcbCategoriesParams,
   PcbCategoryResponse,
   PcbCategoryRequest,
+  GetPcbCategoriesIdParams,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -129,17 +130,23 @@ export const usePostPcbCategories = <TError = ErrorType<Error>, TContext = unkno
 
   return useMutation(mutationOptions);
 };
-export const getPcbCategoriesId = (id: number, signal?: AbortSignal) => {
-  return API<PcbCategoryResponse>({ url: `/pcb-categories/${id}`, method: "get", signal });
+export const getPcbCategoriesId = (
+  id: number,
+  params?: GetPcbCategoriesIdParams,
+  signal?: AbortSignal,
+) => {
+  return API<PcbCategoryResponse>({ url: `/pcb-categories/${id}`, method: "get", params, signal });
 };
 
-export const getGetPcbCategoriesIdQueryKey = (id: number) => [`/pcb-categories/${id}`] as const;
+export const getGetPcbCategoriesIdQueryKey = (id: number, params?: GetPcbCategoriesIdParams) =>
+  [`/pcb-categories/${id}`, ...(params ? [params] : [])] as const;
 
 export const getGetPcbCategoriesIdQueryOptions = <
   TData = Awaited<ReturnType<typeof getPcbCategoriesId>>,
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetPcbCategoriesIdParams,
   options?: {
     query?: UseQueryOptions<Awaited<ReturnType<typeof getPcbCategoriesId>>, TError, TData>;
   },
@@ -148,10 +155,10 @@ export const getGetPcbCategoriesIdQueryOptions = <
 } => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetPcbCategoriesIdQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetPcbCategoriesIdQueryKey(id, params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getPcbCategoriesId>>> = ({ signal }) =>
-    getPcbCategoriesId(id, signal);
+    getPcbCategoriesId(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions };
 };
@@ -166,11 +173,12 @@ export const useGetPcbCategoriesId = <
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetPcbCategoriesIdParams,
   options?: {
     query?: UseQueryOptions<Awaited<ReturnType<typeof getPcbCategoriesId>>, TError, TData>;
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetPcbCategoriesIdQueryOptions(id, options);
+  const queryOptions = getGetPcbCategoriesIdQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

@@ -19,6 +19,7 @@ import type {
   GetPcbsParams,
   PcbResponse,
   PcbRequest,
+  GetPcbsIdParams,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -117,27 +118,29 @@ export const usePostPcbs = <TError = ErrorType<Error>, TContext = unknown>(optio
 
   return useMutation(mutationOptions);
 };
-export const getPcbsId = (id: number, signal?: AbortSignal) => {
-  return API<PcbResponse>({ url: `/pcbs/${id}`, method: "get", signal });
+export const getPcbsId = (id: number, params?: GetPcbsIdParams, signal?: AbortSignal) => {
+  return API<PcbResponse>({ url: `/pcbs/${id}`, method: "get", params, signal });
 };
 
-export const getGetPcbsIdQueryKey = (id: number) => [`/pcbs/${id}`] as const;
+export const getGetPcbsIdQueryKey = (id: number, params?: GetPcbsIdParams) =>
+  [`/pcbs/${id}`, ...(params ? [params] : [])] as const;
 
 export const getGetPcbsIdQueryOptions = <
   TData = Awaited<ReturnType<typeof getPcbsId>>,
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetPcbsIdParams,
   options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getPcbsId>>, TError, TData> },
 ): UseQueryOptions<Awaited<ReturnType<typeof getPcbsId>>, TError, TData> & {
   queryKey: QueryKey;
 } => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetPcbsIdQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetPcbsIdQueryKey(id, params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getPcbsId>>> = ({ signal }) =>
-    getPcbsId(id, signal);
+    getPcbsId(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions };
 };
@@ -150,9 +153,10 @@ export const useGetPcbsId = <
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetPcbsIdParams,
   options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getPcbsId>>, TError, TData> },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetPcbsIdQueryOptions(id, options);
+  const queryOptions = getGetPcbsIdQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

@@ -4,13 +4,15 @@
  * DOCUMENTATION
  * OpenAPI spec version: 1.0.0
  */
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import type {
   UseQueryOptions,
+  UseInfiniteQueryOptions,
   UseMutationOptions,
   QueryFunction,
   MutationFunction,
   UseQueryResult,
+  UseInfiniteQueryResult,
   QueryKey,
 } from "@tanstack/react-query";
 import type {
@@ -19,6 +21,7 @@ import type {
   GetProjectsParams,
   ProjectResponse,
   ProjectRequest,
+  GetProjectsIdParams,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -29,6 +32,50 @@ export const getProjects = (params?: GetProjectsParams, signal?: AbortSignal) =>
 
 export const getGetProjectsQueryKey = (params?: GetProjectsParams) =>
   [`/projects`, ...(params ? [params] : [])] as const;
+
+export const getGetProjectsInfiniteQueryOptions = <
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<Error>,
+>(
+  params?: GetProjectsParams,
+  options?: {
+    query?: UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>;
+  },
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData> & {
+  queryKey: QueryKey;
+} => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetProjectsQueryKey(params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjects>>> = ({ signal }) =>
+    getProjects(params, signal);
+
+  return { queryKey, queryFn, ...queryOptions };
+};
+
+export type GetProjectsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof getProjects>>>;
+export type GetProjectsInfiniteQueryError = ErrorType<Error>;
+
+export const useGetProjectsInfinite = <
+  TData = Awaited<ReturnType<typeof getProjects>>,
+  TError = ErrorType<Error>,
+>(
+  params?: GetProjectsParams,
+  options?: {
+    query?: UseInfiniteQueryOptions<Awaited<ReturnType<typeof getProjects>>, TError, TData>;
+  },
+): UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = getGetProjectsInfiniteQueryOptions(params, options);
+
+  const query = useInfiniteQuery(queryOptions) as UseInfiniteQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
 
 export const getGetProjectsQueryOptions = <
   TData = Awaited<ReturnType<typeof getProjects>>,
@@ -123,27 +170,29 @@ export const usePostProjects = <TError = ErrorType<Error>, TContext = unknown>(o
 
   return useMutation(mutationOptions);
 };
-export const getProjectsId = (id: number, signal?: AbortSignal) => {
-  return API<ProjectResponse>({ url: `/projects/${id}`, method: "get", signal });
+export const getProjectsId = (id: number, params?: GetProjectsIdParams, signal?: AbortSignal) => {
+  return API<ProjectResponse>({ url: `/projects/${id}`, method: "get", params, signal });
 };
 
-export const getGetProjectsIdQueryKey = (id: number) => [`/projects/${id}`] as const;
+export const getGetProjectsIdQueryKey = (id: number, params?: GetProjectsIdParams) =>
+  [`/projects/${id}`, ...(params ? [params] : [])] as const;
 
 export const getGetProjectsIdQueryOptions = <
   TData = Awaited<ReturnType<typeof getProjectsId>>,
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetProjectsIdParams,
   options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> },
 ): UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> & {
   queryKey: QueryKey;
 } => {
   const { query: queryOptions } = options ?? {};
 
-  const queryKey = queryOptions?.queryKey ?? getGetProjectsIdQueryKey(id);
+  const queryKey = queryOptions?.queryKey ?? getGetProjectsIdQueryKey(id, params);
 
   const queryFn: QueryFunction<Awaited<ReturnType<typeof getProjectsId>>> = ({ signal }) =>
-    getProjectsId(id, signal);
+    getProjectsId(id, params, signal);
 
   return { queryKey, queryFn, enabled: !!id, ...queryOptions };
 };
@@ -156,9 +205,10 @@ export const useGetProjectsId = <
   TError = ErrorType<Error>,
 >(
   id: number,
+  params?: GetProjectsIdParams,
   options?: { query?: UseQueryOptions<Awaited<ReturnType<typeof getProjectsId>>, TError, TData> },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
-  const queryOptions = getGetProjectsIdQueryOptions(id, options);
+  const queryOptions = getGetProjectsIdQueryOptions(id, params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

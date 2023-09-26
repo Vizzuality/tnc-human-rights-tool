@@ -13,8 +13,8 @@ export default function FooterForm() {
   const { isSubmitting } = formState;
 
   return (
-    <div className="flex justify-end">
-      <Button className="relative" type="submit">
+    <div className="sticky bottom-0 flex justify-end py-4">
+      <Button className="relative" type="submit" size="lg">
         {isSubmitting ? (
           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <ShadowIcon className="h-4 w-4 animate-spin" />
