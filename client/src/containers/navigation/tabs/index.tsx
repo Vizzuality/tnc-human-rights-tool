@@ -59,7 +59,7 @@ export default function NavigationTabs() {
         if (!slug) return false;
 
         const contextualRisks = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
-        return !!contextualRisks[slug];
+        return !!contextualRisks[slug] && Object.values(contextualRisks[slug]).every((v) => !!v);
       },
     );
 

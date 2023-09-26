@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
 import {
   getContextualRiskCategories,
   getGetContextualRiskCategoriesIdQueryOptions,
@@ -39,6 +40,14 @@ export default async function ProjectsDetailContextualRiskLayout({
   for (const c of CATEGORIES?.data ?? []) {
     if (!c.id) return;
     await queryClient.prefetchQuery(getGetContextualRiskCategoriesIdQueryOptions(c.id));
+    await queryClient.prefetchQuery(
+      getGetContextualRisksQueryOptions({
+        filters: {
+          contextual_risk_category: c.id,
+        },
+        populate: "*",
+      }),
+    );
   }
 
   const dehydratedState = dehydrate(queryClient);

@@ -57,6 +57,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
   const { data: categoryIdData } = useGetContextualRiskCategoriesId(+categoryId);
+
   const putProjectMutation = usePutProjectsId({
     mutation: {
       onSuccess: () => {
@@ -78,16 +79,19 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
           return acc;
         }
 
-        acc[id] = z.record(z.string(), z.string()).superRefine((data, context) => {
-          // if radio is present and is yes then notes is required
-          // if radio is present and is no then notes is not required
-          if (data.contextual_risk === "yes" && !data.contextual_notes) {
-            context.addIssue({
-              code: "custom",
-              message: "Notes/Specific Risk are required",
-            });
-          }
-        });
+        acc[id] = z
+          .record(z.string(), z.string())
+          .optional()
+          .superRefine((data, context) => {
+            // if radio is present and is yes then notes is required
+            // if radio is present and is no then notes is not required
+            if (data?.contextual_risk === "yes" && !data?.contextual_notes) {
+              context.addIssue({
+                code: "custom",
+                message: "Notes/Specific Risk are required",
+              });
+            }
+          });
 
         return acc;
       },
@@ -103,6 +107,15 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     return new Promise((resolve) => {
       if (projectIdData?.data?.attributes) {
+        const parsedValues = Object.entries(values).reduce(
+          (acc, [key, value]) => {
+            acc[key] = value || null;
+
+            return acc;
+          },
+          {} as Record<string, Record<string, string>>,
+        );
+
         return putProjectMutation.mutate(
           {
             id: +projectId,
@@ -112,7 +125,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 description: projectIdData.data.attributes.description,
                 risks: {
                   ...defaultValuesCategory,
-                  [categorySlug]: values,
+                  [categorySlug]: parsedValues,
                 },
               },
             },
