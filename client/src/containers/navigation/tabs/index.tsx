@@ -49,7 +49,7 @@ export default function NavigationTabs() {
       if (!slug) return false;
 
       const PCBS = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
-      return !!PCBS[slug];
+      return !!PCBS[slug] && Object.values(PCBS[slug]).every((v) => !!v);
     });
 
     const contextualRiskCompleted = contextualRiskCategoriesData.data?.every(

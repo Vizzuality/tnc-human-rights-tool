@@ -30,7 +30,6 @@ export default function NavigationCircle({ percentage }: NavigationCircleProps) 
             r="12"
             strokeWidth={4}
             strokeDasharray={`${length} ${circumference}`}
-            strokeLinecap="round"
             strokeOpacity={percentage === 0 ? 0 : 1}
             transform="rotate(-90 15 15)"
             className={cn({

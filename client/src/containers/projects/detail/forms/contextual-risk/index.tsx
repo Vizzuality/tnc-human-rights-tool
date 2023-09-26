@@ -82,6 +82,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
         acc[id] = z
           .record(z.string(), z.string())
           .optional()
+          .nullable()
           .superRefine((data, context) => {
             // if radio is present and is yes then notes is required
             // if radio is present and is no then notes is not required

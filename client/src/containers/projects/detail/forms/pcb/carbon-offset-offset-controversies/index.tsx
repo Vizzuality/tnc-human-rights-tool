@@ -68,10 +68,10 @@ export default function CarbonOffsetProjectControversiesForm({
 
         const { display_order, pcb_category } = attributes;
 
-        acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z.record(
-          z.string(),
-          z.string(),
-        );
+        acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
+          .record(z.string(), z.string())
+          .nullable()
+          .optional();
 
         return acc;
       },
@@ -92,6 +92,15 @@ export default function CarbonOffsetProjectControversiesForm({
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     return new Promise((resolve) => {
       if (projectIdData?.data?.attributes) {
+        const parsedValues = Object.entries(values).reduce(
+          (acc, [key, value]) => {
+            acc[key] = value || null;
+
+            return acc;
+          },
+          {} as Record<string, Record<string, string>>,
+        );
+
         return putProjectMutation.mutate(
           {
             id: +projectId,
@@ -101,7 +110,7 @@ export default function CarbonOffsetProjectControversiesForm({
                 description: projectIdData.data.attributes.description,
                 pcbs: {
                   ...defaultValuesCategory,
-                  "carbon-offset-project-controversies": values,
+                  "carbon-offset-project-controversies": parsedValues,
                 },
               },
             },

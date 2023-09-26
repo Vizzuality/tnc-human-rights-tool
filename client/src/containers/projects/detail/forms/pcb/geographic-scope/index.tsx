@@ -58,7 +58,8 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
 
         acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
           .string()
-          .min(10);
+          .min(10)
+          .optional();
 
         return acc;
       },
@@ -79,6 +80,15 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     return new Promise((resolve) => {
       if (projectIdData?.data?.attributes) {
+        const parsedValues = Object.entries(values).reduce(
+          (acc, [key, value]) => {
+            acc[key] = value || "";
+
+            return acc;
+          },
+          {} as Record<string, Record<string, string>>,
+        );
+
         return putProjectMutation.mutate(
           {
             id: +projectId,
@@ -88,7 +98,7 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
                 description: projectIdData.data.attributes.description,
                 pcbs: {
                   ...defaultValuesCategory,
-                  "geographic-scope": values,
+                  "geographic-scope": parsedValues,
                 },
               },
             },
