@@ -4,8 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 import { postAuthLocal } from "@/types/generated/users-permissions-auth";
 
-import { deleteAxiosAuth } from "@/services/api";
-
 export const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
@@ -49,11 +47,6 @@ export const authOptions: AuthOptions = {
         return user as unknown as JWT;
       }
       return token;
-    },
-  },
-  events: {
-    signOut: async () => {
-      deleteAxiosAuth();
     },
   },
   pages: {
