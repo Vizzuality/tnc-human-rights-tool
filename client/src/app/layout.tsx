@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import LayoutProviders from "@/app/layout-poviders";
+import LayoutProviders from "@/app/layout-providers";
 
 import Header from "@/containers/header";
 import ScrollUp from "@/containers/scroll-up";

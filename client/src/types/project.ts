@@ -10,6 +10,7 @@ export type Risks = Record<
       proyect_risk_notes: string;
       proyect_risk_research_notes: string;
       proyect_risk_key_determination_factors: string;
+      follow_up_notes: string;
     }
   >
 >;

@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
 import { getGetContextualRiskCategoriesQueryOptions } from "@/types/generated/contextual-risk-category";
 import { getGetPcbCategoriesQueryOptions } from "@/types/generated/pcb-category";
 import { getGetProjectsIdQueryOptions, getProjectsId } from "@/types/generated/project";
@@ -40,6 +41,14 @@ export default async function ProjectsDetailLayout({
   await queryClient.prefetchQuery({
     ...getGetPcbCategoriesQueryOptions({
       sort: "display_order:asc",
+    }),
+  });
+
+  await queryClient.prefetchQuery({
+    ...getGetContextualRisksQueryOptions({
+      populate: "*",
+      "pagination[limit]": 100,
+      sort: "contextual_risk_category.display_order:asc,display_order:asc",
     }),
   });
 
