@@ -1,4 +1,5 @@
-import Axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import Axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { Session } from "next-auth";
 import { getServerSession } from "next-auth/next";
 import { getSession } from "next-auth/react";
 
@@ -7,6 +8,8 @@ import env from "@/env.mjs";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const AXIOS_INSTANCE = Axios.create({ baseURL: env.NEXT_PUBLIC_API_URL });
+
+let lastSession: Session | null = null;
 
 export const API = <T>(config: AxiosRequestConfig): Promise<T> => {
   const source = Axios.CancelToken.source();
@@ -22,27 +25,22 @@ export const API = <T>(config: AxiosRequestConfig): Promise<T> => {
 };
 
 AXIOS_INSTANCE.interceptors.request.use(async (request) => {
-  await setAxiosAuth(request);
-  return request;
-});
-
-export async function setAxiosAuth(request: InternalAxiosRequestConfig) {
-  if (!AXIOS_INSTANCE.defaults.headers.common.Authorization) {
+  if (lastSession === null || Date.now() > Date.parse(lastSession.expires)) {
     const session =
       typeof window === "undefined" ? await getServerSession(authOptions) : await getSession();
-
-    if (session) {
-      const Authorization = `Bearer ${session.apiToken}`;
-
-      request.headers.Authorization = Authorization;
-      AXIOS_INSTANCE.defaults.headers.common.Authorization = Authorization;
-    }
+    lastSession = session;
   }
-}
 
-export async function deleteAxiosAuth() {
-  delete AXIOS_INSTANCE.defaults.headers.common.Authorization;
-}
+  if (lastSession) {
+    const Authorization = `Bearer ${lastSession.apiToken}`;
+
+    request.headers.Authorization = Authorization;
+  } else {
+    delete request.headers.Authorization;
+  }
+
+  return request;
+});
 
 // In some case with react-query and swr you want to be able to override the return error type so you can also do it here like this
 export type ErrorType<Error> = AxiosError<Error>;

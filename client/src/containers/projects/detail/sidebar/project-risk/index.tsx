@@ -14,20 +14,10 @@ export default function ProjectRiskSidebar() {
 
   const { data: projectIdData } = useGetProjectsId(+id);
 
-  const risks = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
-  const projectRisks = Object.keys(risks)
-    .map((key) => {
-      return Object.keys(risks[key])
-        .filter((r) => risks[key][r].contextual_risk === "yes")
-        .map((r) => r);
-    })
-    .flat();
+  const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
 
   const { data: contextualRisksData } = useGetContextualRisks({
     populate: "*",
-    filters: {
-      id: projectRisks,
-    },
     "pagination[limit]": 100,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
   });
@@ -40,22 +30,30 @@ export default function ProjectRiskSidebar() {
       children: <span className="text-lg">Overview</span>,
     },
     // Just testing
-    ...(contextualRisksData?.data || [])?.map((item) => {
-      return {
-        href: `/projects/${id}/project-risk/${item.id}`,
-        label: item.attributes?.title ?? "",
-        children: (
-          <>
-            {typeof item.id !== "undefined" && <ProjectRiskSidebarItem ctxId={item.id} />}
+    ...(contextualRisksData?.data || [])
+      ?.filter((item) => {
+        const RISKS_VALUES = Object.values(RISKS).reduce((acc, item) => {
+          return { ...acc, ...item };
+        }, {});
 
-            <span>
-              {item.attributes?.contextual_risk_category?.data?.attributes?.display_order}.
-              {item.attributes?.display_order} {item.attributes?.title}
-            </span>
-          </>
-        ),
-      };
-    }),
+        return RISKS_VALUES[`${item?.id}`]?.contextual_risk === "yes";
+      })
+      ?.map((item) => {
+        return {
+          href: `/projects/${id}/project-risk/${item.id}`,
+          label: item.attributes?.title ?? "",
+          children: (
+            <>
+              {typeof item.id !== "undefined" && <ProjectRiskSidebarItem {...item} />}
+
+              <span>
+                {item.attributes?.contextual_risk_category?.data?.attributes?.display_order}.
+                {item.attributes?.display_order} {item.attributes?.title}
+              </span>
+            </>
+          ),
+        };
+      }),
   ];
 
   return <NavigationSidebar items={items} />;

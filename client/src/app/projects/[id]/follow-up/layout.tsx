@@ -4,10 +4,8 @@ import type { Metadata } from "next";
 
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
-import NavigationSidebar from "@/containers/navigation/sidebar";
+import FollowUpSidebar from "@/containers/projects/detail/sidebar/follow-up";
 import Sidebar from "@/containers/sidebar";
-
-import { PRIORIZATIONS } from "@/constants";
 
 interface ProjectsDetailFollowUpLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
 
@@ -20,36 +18,13 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default async function ProjectsDetailFollowUpLayout({
   children,
-  params,
 }: ProjectsDetailFollowUpLayoutProps) {
-  const { id } = params;
-
-  const items = [
-    {
-      href: `/projects/${id}/follow-up`,
-      label: "Overview",
-      className: "text-lg",
-      children: <span className="text-lg">Overview</span>,
-    },
-    ...PRIORIZATIONS.map((priority) => ({
-      href: `/projects/${id}/follow-up/${priority.value}`,
-      label: priority.label,
-      children: (
-        <>
-          <span>{priority.label}</span>
-          {/* Draw a svg circle that I can control how much of the path is filled */}
-          {/* <NavigationCircle percentage={0.35} /> */}
-        </>
-      ),
-    })),
-  ];
-
   return (
     <section className="flex grow flex-col space-y-5">
       <div className="grid grid-cols-12 gap-20">
         <div className="col-span-4">
           <Sidebar>
-            <NavigationSidebar items={items} />
+            <FollowUpSidebar />
           </Sidebar>
         </div>
         <div className="col-span-8">{children}</div>
