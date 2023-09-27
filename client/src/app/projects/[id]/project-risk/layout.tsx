@@ -2,6 +2,13 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
+import { Hydrate, dehydrate } from "@tanstack/react-query";
+
+import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
+import { getProjectsId } from "@/types/generated/project";
+import { Risks } from "@/types/project";
+
+import getQueryClient from "@/app/getQueryClient";
 import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
 import ProjectRiskSidebar from "@/containers/projects/detail/sidebar/project-risk";
@@ -18,17 +25,48 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default async function ProjectsDetailProjectRiskLayout({
   children,
+  params,
 }: ProjectsDetailProjectRiskLayoutProps) {
+  const { id } = params;
+
+  const PROJECT = await getProjectsId(+id);
+
+  const queryClient = getQueryClient();
+
+  const RISKS = (PROJECT?.data?.attributes?.risks ?? {}) as Risks;
+  const projectRisks = Object.keys(RISKS)
+    .map((key) => {
+      return Object.keys(RISKS[key])
+        .filter((r) => RISKS[key][r].contextual_risk === "yes")
+        .map((r) => r);
+    })
+    .flat();
+
+  await queryClient.prefetchQuery({
+    ...getGetContextualRisksQueryOptions({
+      populate: "*",
+      filters: {
+        id: projectRisks,
+      },
+      "pagination[limit]": 100,
+      sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    }),
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+
   return (
-    <section className="flex grow flex-col space-y-5">
-      <div className="grid grid-cols-12 gap-20">
-        <div className="col-span-4">
-          <Sidebar>
-            <ProjectRiskSidebar />
-          </Sidebar>
+    <Hydrate state={dehydratedState}>
+      <section className="flex grow flex-col space-y-5">
+        <div className="grid grid-cols-12 gap-20">
+          <div className="col-span-4">
+            <Sidebar>
+              <ProjectRiskSidebar />
+            </Sidebar>
+          </div>
+          <div className="col-span-8">{children}</div>
         </div>
-        <div className="col-span-8">{children}</div>
-      </div>
-    </section>
+      </section>
+    </Hydrate>
   );
 }
