@@ -4,7 +4,7 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 export default async function ProjectsDetailFollowUpPage() {
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>Results Tables</ProjectsDetailTitle>
+      <ProjectsDetailTitle>Follow up</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">
