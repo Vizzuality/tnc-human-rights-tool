@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import { getGetPcbsQueryOptions } from "@/types/generated/pcb";
 import {
   getGetPcbCategoriesIdQueryOptions,
   getPcbCategories,
@@ -35,6 +36,14 @@ export default async function ProjectsDetailPCBLayout({ children }: ProjectsDeta
   for (const c of CATEGORIES?.data ?? []) {
     if (!c.id) return;
     await queryClient.prefetchQuery(getGetPcbCategoriesIdQueryOptions(c.id));
+    await queryClient.prefetchQuery(
+      getGetPcbsQueryOptions({
+        filters: {
+          pcb_category: c.id,
+        },
+        populate: "*",
+      }),
+    );
   }
 
   const dehydratedState = dehydrate(queryClient);

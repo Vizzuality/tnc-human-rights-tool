@@ -1,6 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 
+import { useGetPcbs } from "@/types/generated/pcb";
 import { useGetPcbCategoriesId } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
 import { PCBs } from "@/types/project";
@@ -14,18 +15,27 @@ interface PCBSidebarItemProps {
 export default function PCBSidebarItem({ categoryId }: PCBSidebarItemProps) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
+  const { data: pcbData } = useGetPcbs({
+    filters: {
+      pcb_category: categoryId,
+    },
+    populate: "*",
+  });
   const { data: categoriesIdData } = useGetPcbCategoriesId(categoryId);
   const { attributes } = categoriesIdData?.data ?? {};
 
+  const c_display_order = attributes?.display_order ?? "";
   const slug = attributes?.slug ?? "";
   const PCBS_DATA = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
   const PCB_DATA = PCBS_DATA[slug] ?? {};
-  const PCBS_VALUES = Object.values(PCB_DATA);
 
-  const total = PCBS_VALUES.length;
-  const completed = PCBS_VALUES.filter((value) => !!value).length;
+  const pcbIds =
+    pcbData?.data?.map((item) => `${c_display_order}-${item?.attributes?.display_order}`) ?? [];
 
-  const percentage = !PCBS_VALUES.length ? 0 : total / completed;
+  const total = pcbIds.length;
+  const completed = pcbIds.filter((i) => !!PCB_DATA[`${i}`]).length;
+
+  const percentage = completed / total;
 
   return <NavigationCircle percentage={percentage} />;
 }

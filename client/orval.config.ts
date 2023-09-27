@@ -17,15 +17,6 @@ module.exports = {
           useMutation: true,
           signal: true,
         },
-        operations: {
-          "get/projects": {
-            query: {
-              useQuery: true,
-              useInfinite: true,
-              signal: true,
-            },
-          },
-        },
       },
     },
     input: {

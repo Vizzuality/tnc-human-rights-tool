@@ -20,7 +20,7 @@ export default function FooterForm() {
             <ShadowIcon className="h-4 w-4 animate-spin" />
           </span>
         ) : null}
-        <span className={cn(isSubmitting ? "opacity-20" : "opacity-100")}>Save and continue</span>
+        <span className={cn(isSubmitting ? "opacity-20" : "opacity-100")}>Save</span>
       </Button>
     </div>
   );
