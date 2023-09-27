@@ -43,12 +43,14 @@ export default function NavigationTabs() {
   const state = useMemo(() => {
     if (!projectIdData || !pcbCategoriesData || !contextualRiskCategoriesData) return 1;
 
+    const PCBS = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
+    const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
+
     const PCBcompleted = pcbCategoriesData.data?.every((pcbCategory) => {
       const slug = pcbCategory.attributes?.slug;
 
       if (!slug) return false;
 
-      const PCBS = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
       return !!PCBS[slug] && Object.values(PCBS[slug]).every((v) => !!v);
     });
 
@@ -58,16 +60,24 @@ export default function NavigationTabs() {
 
         if (!slug) return false;
 
-        const contextualRisks = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
-        return !!contextualRisks[slug] && Object.values(contextualRisks[slug]).every((v) => !!v);
+        return !!RISKS[slug] && Object.values(RISKS[slug]).every((v) => !!v);
       },
     );
+
+    const projectRiskCompleted = Object.values(RISKS).every((v) => {
+      if (!v) return false;
+      return Object.values(v)
+        .filter((v) => !!v && v.contextual_risk === "yes")
+        .every((v) => !!v.proyect_risk_priorization);
+    });
 
     if (!PCBcompleted) return 1;
 
     if (PCBcompleted && !contextualRiskCompleted) return 2;
 
-    if (PCBcompleted && contextualRiskCompleted) return 3;
+    if (PCBcompleted && contextualRiskCompleted && !projectRiskCompleted) return 3;
+
+    if (PCBcompleted && contextualRiskCompleted && projectRiskCompleted) return 4;
 
     return 1;
   }, [projectIdData, pcbCategoriesData, contextualRiskCategoriesData]);
