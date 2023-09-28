@@ -1,29 +1,31 @@
 "use client";
 import { useParams } from "next/navigation";
 
-import { useGetContextualRisksId } from "@/types/generated/contextual-risk";
 import { useGetProjectsId } from "@/types/generated/project";
+import { ContextualRiskListResponseDataItem } from "@/types/generated/strapi.schemas";
 import { Risks } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
-interface ProjectRiskSidebarItemProps {
-  ctxId: number;
+interface FollowUpSidebarItemProps {
+  items?: ContextualRiskListResponseDataItem[];
 }
 
-export default function ProjectRiskSidebarItem({ ctxId }: ProjectRiskSidebarItemProps) {
+export default function FollowUpSidebarItem({ items }: FollowUpSidebarItemProps) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
-  const { data: ctxIdData } = useGetContextualRisksId(ctxId, {
-    populate: "*",
-  });
+  const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
+  const RISKS_VALUES = Object.values(RISKS).reduce((acc, item) => {
+    return { ...acc, ...item };
+  }, {});
 
-  const slug = ctxIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
-  const CRS_DATA = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
-  const CR_DATA = CRS_DATA[slug] ?? {};
-  const PR_DATA = CR_DATA[ctxId] ?? {};
+  const completed =
+    items?.filter((item) => {
+      return !!RISKS_VALUES[`${item?.id}`]?.follow_up_notes;
+    }).length ?? 0;
+  const total = items?.length ?? 0;
 
-  const percentage = !PR_DATA.proyect_risk_priorization ? 0 : 1;
+  const percentage = completed / total;
 
   return <NavigationCircle percentage={percentage} />;
 }
