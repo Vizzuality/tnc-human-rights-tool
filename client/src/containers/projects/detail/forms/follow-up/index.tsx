@@ -30,7 +30,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function FollowUpForm(props: ContextualRiskListResponseDataItem) {
-  const { id: projectId } = useParams();
+  const { id: projectId, priorizationId } = useParams();
 
   const queryClient = useQueryClient();
 
@@ -99,14 +99,34 @@ export default function FollowUpForm(props: ContextualRiskListResponseDataItem) 
           {props?.attributes?.title}
         </h2>
 
-        <Label>Contextual Risk</Label>
-        <p>{RISK.contextual_notes}</p>
+        {priorizationId !== "more-research" && (
+          <>
+            <Label>Contextual Risk</Label>
+            <p>{RISK.contextual_notes}</p>
+          </>
+        )}
 
-        <Label>Project Risk</Label>
-        <p>{RISK.proyect_risk_notes}</p>
+        {priorizationId !== "more-research" && (
+          <>
+            <Label>Project Risk</Label>
+            <p>{RISK.proyect_risk_notes}</p>
+          </>
+        )}
 
-        <Label>Research</Label>
-        <p>{RISK.proyect_risk_research_notes}</p>
+        {priorizationId !== "more-research" && (
+          <>
+            <Label>Research</Label>
+            <p>{RISK.proyect_risk_research_notes}</p>
+          </>
+        )}
+
+        {priorizationId !== "more-research" && (
+          <>
+            <Label>Project Risk Determination factors</Label>
+            <p>{RISK.proyect_risk_key_determination_factors}</p>
+          </>
+        )}
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -128,7 +148,7 @@ export default function FollowUpForm(props: ContextualRiskListResponseDataItem) 
               )}
             />
 
-            <FooterForm />
+            <FooterForm className="relative" />
           </form>
         </Form>
       </div>

@@ -37,16 +37,16 @@ export default function ProjectsDetailFollowUpIdPriorization() {
   }, [contextualRisksData, priorizationId, projectIdData]);
 
   return (
-    <>
+    <div className="divide-y">
       {ITEMS.map((item) => {
         if (!item?.id) return null;
 
         return (
-          <div key={item.id}>
+          <div key={item.id} className="pb-8 pt-10 first-of-type:pt-0">
             <FollowUpForm {...item} />
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
