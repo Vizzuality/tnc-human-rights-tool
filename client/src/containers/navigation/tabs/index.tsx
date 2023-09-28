@@ -71,13 +71,24 @@ export default function NavigationTabs() {
         .every((v) => !!v.proyect_risk_priorization);
     });
 
+    const followUpCompleted = Object.values(RISKS).every((v) => {
+      if (!v) return false;
+      return Object.values(v)
+        .filter((v) => !!v && v.contextual_risk === "yes")
+        .every((v) => !!v.follow_up_notes);
+    });
+
     if (!PCBcompleted) return 1;
 
     if (PCBcompleted && !contextualRiskCompleted) return 2;
 
     if (PCBcompleted && contextualRiskCompleted && !projectRiskCompleted) return 3;
 
-    if (PCBcompleted && contextualRiskCompleted && projectRiskCompleted) return 4;
+    if (PCBcompleted && contextualRiskCompleted && projectRiskCompleted && !followUpCompleted)
+      return 4;
+
+    if (PCBcompleted && contextualRiskCompleted && projectRiskCompleted && followUpCompleted)
+      return 5;
 
     return 1;
   }, [projectIdData, pcbCategoriesData, contextualRiskCategoriesData]);
