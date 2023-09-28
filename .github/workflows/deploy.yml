@@ -142,7 +142,7 @@ jobs:
           ECR_REPOSITORY_API: tnc-hrt-staging-api
           IMAGE_TAG_API: api-${{ github.sha }}
           ECR_REPOSITORY_WEBSHOT: tnc-hrt-staging-webshot
-          IMAGE_TAG_WEBSHOT: webshot${{ github.sha }}
+          IMAGE_TAG_WEBSHOT: webshot-${{ github.sha }}
         run: |
           echo "version: '3.3'" > docker-compose.yml
           echo "services:" >> docker-compose.yml
