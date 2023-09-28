@@ -32,6 +32,14 @@ dist-ssr
 !/api/.yarn/sdks
 !/api/.yarn/versions
 
+/webshot/.pnp.*
+/webshot/.yarn/*
+!/webshot/.yarn/patches
+!/webshot/.yarn/plugins
+!/webshot/.yarn/releases
+!/webshot/.yarn/sdks
+!/webshot/.yarn/versions
+
 .pnp.*
 .yarn/*
 !.yarn/patches
