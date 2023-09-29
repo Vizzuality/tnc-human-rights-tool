@@ -4,14 +4,15 @@ import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import getQueryClient from "@/lib/getQueryClient";
+
 import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
 import {
   getContextualRiskCategories,
   getGetContextualRiskCategoriesIdQueryOptions,
 } from "@/types/generated/contextual-risk-category";
 
-import getQueryClient from "@/app/getQueryClient";
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import ContextualRiskSidebar from "@/containers/projects/detail/sidebar/contextual-risk";
 import Sidebar from "@/containers/sidebar";

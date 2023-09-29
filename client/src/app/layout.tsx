@@ -6,11 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import LayoutProviders from "@/app/layout-providers";
 
-import Header from "@/containers/header";
-import ScrollUp from "@/containers/scroll-up";
-
-import { Toaster } from "@/components/ui/toaster";
-
 import { SpaceGrotesk } from "@/styles/fonts";
 
 export const metadata: Metadata = {
@@ -24,15 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <LayoutProviders session={session}>
       <html lang="en" className={`${SpaceGrotesk.variable}`}>
-        <body>
-          <main className="flex min-h-screen flex-col">
-            <Header />
-            <ScrollUp />
-            <Toaster />
-
-            <section className="flex grow flex-col space-y-5 py-16">{children}</section>
-          </main>
-        </body>
+        <body>{children}</body>
       </html>
     </LayoutProviders>
   );

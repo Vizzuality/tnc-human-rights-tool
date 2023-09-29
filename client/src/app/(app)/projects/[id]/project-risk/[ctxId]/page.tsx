@@ -3,13 +3,14 @@
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 import parse from "html-react-parser";
 
+import getQueryClient from "@/lib/getQueryClient";
+
 import {
   getContextualRisksId,
   getGetContextualRisksIdQueryOptions,
 } from "@/types/generated/contextual-risk";
 
-import getQueryClient from "@/app/getQueryClient";
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectRiskForm from "@/containers/projects/detail/forms/project-risk";

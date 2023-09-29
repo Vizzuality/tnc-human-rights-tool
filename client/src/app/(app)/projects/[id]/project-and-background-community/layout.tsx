@@ -4,14 +4,15 @@ import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
 
+import getQueryClient from "@/lib/getQueryClient";
+
 import { getGetPcbsQueryOptions } from "@/types/generated/pcb";
 import {
   getGetPcbCategoriesIdQueryOptions,
   getPcbCategories,
 } from "@/types/generated/pcb-category";
 
-import getQueryClient from "@/app/getQueryClient";
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import PcbSidebar from "@/containers/projects/detail/sidebar/pcb";
 import Sidebar from "@/containers/sidebar";
