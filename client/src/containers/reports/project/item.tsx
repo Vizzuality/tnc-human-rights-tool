@@ -9,7 +9,7 @@ import { Risks } from "@/types/project";
 import { Label } from "@/components/ui/label";
 
 export default function ReportsProjectIdItem(props: ContextualRiskListResponseDataItem) {
-  const { id: projectId, priorizationId } = useParams();
+  const { id: projectId } = useParams();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
   const slug = props?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
@@ -26,28 +26,28 @@ export default function ReportsProjectIdItem(props: ContextualRiskListResponseDa
           {props?.attributes?.title}
         </h3>
 
-        {priorizationId !== "more-research" && (
+        {RISK.contextual_risk !== "more-research" && (
           <>
             <Label>Contextual Risk</Label>
             <p>{RISK.contextual_notes}</p>
           </>
         )}
 
-        {priorizationId !== "more-research" && (
+        {RISK.contextual_risk !== "more-research" && (
           <>
             <Label>Project Risk</Label>
             <p>{RISK.proyect_risk_notes}</p>
           </>
         )}
 
-        {priorizationId !== "more-research" && (
+        {RISK.contextual_risk !== "more-research" && (
           <>
             <Label>Research</Label>
             <p>{RISK.proyect_risk_research_notes}</p>
           </>
         )}
 
-        {priorizationId !== "more-research" && (
+        {RISK.contextual_risk !== "more-research" && (
           <>
             <Label>Project Risk Determination factors</Label>
             <p>{RISK.proyect_risk_key_determination_factors}</p>
