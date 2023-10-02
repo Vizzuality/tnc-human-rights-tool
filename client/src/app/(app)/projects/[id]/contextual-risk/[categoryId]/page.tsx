@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 import { getContextualRisks } from "@/types/generated/contextual-risk";
 import { getContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
 
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ContextualRiskForm from "@/containers/projects/detail/forms/contextual-risk";

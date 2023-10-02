@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";

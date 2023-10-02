@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { signOut, useSession } from "next-auth/react";
+
+import { cn } from "@/lib/utils";
 
 import Wrapper from "@/containers/wrapper";
 
@@ -11,9 +14,15 @@ import { Button } from "@/components/ui/button";
 
 export default function Header() {
   const { data: session } = useSession();
+  const searchParams = useSearchParams();
 
   return (
-    <header className="border-b border-gray-200 bg-white py-4">
+    <header
+      className={cn({
+        "border-b border-gray-200 bg-white py-4": true,
+        hidden: searchParams.get("format") === "pdf",
+      })}
+    >
       <Wrapper>
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2.5">

@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 import { getPcbCategories } from "@/types/generated/pcb-category";
 
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";

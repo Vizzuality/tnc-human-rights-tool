@@ -2,10 +2,9 @@
   "name": "webshot",
   "version": "1.0.0",
   "scripts": {
-    "test": "NODE_ENV=test NODE_PATH=app/src node ./node_modules/.bin/grunt --gruntfile app/Gruntfile.js e2eTest",
     "start": "NODE_PATH=app/src node app/index.js",
-    "coverage": "NODE_ENV=test NODE_PATH=app/src node ./node_modules/.bin/grunt --gruntfile app/Gruntfile.js nyc",
-    "prepare": "husky install"
+    "test": "NODE_ENV=test NODE_PATH=app/src node ./node_modules/.bin/grunt --gruntfile app/Gruntfile.js e2eTest",
+    "coverage": "NODE_ENV=test NODE_PATH=app/src node ./node_modules/.bin/grunt --gruntfile app/Gruntfile.js nyc"
   },
   "engines": {
     "node": "~20.4"
@@ -47,7 +46,7 @@
     "koa-mount": "2.0.0",
     "koa-router": "^7.0.1",
     "koa-send": "^4.1.0",
-    "puppeteer": "^2.1.1",
+    "puppeteer": "^21.3.6",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "rimraf": "^2.6.1",

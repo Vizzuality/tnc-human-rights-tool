@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 
 import type { Metadata } from "next";
 
-import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import FollowUpSidebar from "@/containers/projects/detail/sidebar/follow-up";
 import Sidebar from "@/containers/sidebar";
