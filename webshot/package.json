@@ -46,7 +46,7 @@
     "koa-mount": "2.0.0",
     "koa-router": "^7.0.1",
     "koa-send": "^4.1.0",
-    "puppeteer": "^2.1.1",
+    "puppeteer": "^21.3.6",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "rimraf": "^2.6.1",

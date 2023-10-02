@@ -18,13 +18,6 @@ const viewportDefaultOptions = { width: 1024, height: 768, isMobile: true };
 const gotoOptions = { waitUntil: ['networkidle2', 'domcontentloaded'] };
 const browserArgs = ['--no-sandbox', '--single-process', '--no-first-run'];
 
-const getDelayParam = (param) => {
-    const n = parseInt(param, 10);
-    // eslint-disable-next-line no-restricted-globals
-    if (typeof n === 'number' && !isNaN(n)) return n;
-    return param;
-};
-
 const VALID_FORMATS = ['pdf', 'png'];
 
 class WebshotRouter {
@@ -58,7 +51,6 @@ class WebshotRouter {
         const saveAs = ctx.query.format || 'pdf';
         const filename = `${ctx.query.filename}-${Date.now()}.${saveAs}`;
         const filePath = `${tmpDir.name}/${filename}`;
-        const delay = getDelayParam(ctx.query.waitFor);
 
         if (ctx.query.landscape && ctx.query.landscape === 'true') viewportOptions.isLandscape = true;
         if (ctx.query.width) viewportOptions.width = parseInt(ctx.query.width, 10);
@@ -69,14 +61,16 @@ class WebshotRouter {
             logger.debug(`Saving in: ${filePath}`);
 
             // Using Puppeteer
-            browser = await puppeteer.launch({ args: browserArgs });
+            browser = await puppeteer.launch({
+                args: browserArgs,
+                headless: 'new'
+            });
             const page = await browser.newPage();
             await page.setExtraHTTPHeaders({
                 'Cookie': ctx.request.headers['cookie']
             });
             await page.setViewport(viewportOptions);
             await page.goto(ctx.query.url, gotoOptions);
-            if (delay) await page.waitFor(delay);
             if (ctx.query.mediatype) await page.emulateMedia(ctx.query.mediatype);
 
             // Whether to include the background

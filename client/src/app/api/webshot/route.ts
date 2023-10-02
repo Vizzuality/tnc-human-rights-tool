@@ -14,6 +14,7 @@ const handler = async (req: Request) => {
     params: {
       url: u.searchParams.get("url"),
       filename: u.searchParams.get("filename"),
+      waitFor: 500,
     },
   });
 

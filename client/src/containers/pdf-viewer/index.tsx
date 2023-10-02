@@ -114,8 +114,8 @@ export default function PDFViewer({ children, url, filename }: PDFViewerProps) {
       <div
         className={cn({
           "w-[210mm] overflow-hidden rounded-md bg-white": true,
-          "p-8": format === "pdf",
-          "m-4 p-8 shadow-lg": format !== "pdf",
+          // "px-[1cm]": format === "pdf",
+          "p-[1.9cm] shadow-lg": format !== "pdf",
         })}
       >
         {children}

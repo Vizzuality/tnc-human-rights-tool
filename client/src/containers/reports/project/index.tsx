@@ -84,7 +84,7 @@ export default function ReportsProjectId() {
                 key={priorization.value}
                 className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
               >
-                <h2 className="text-2xl">{priorization.label}</h2>
+                <h2>{priorization.label}</h2>
                 <div className="mt-8 divide-y">
                   {GROUPS[priorization.value]?.map((item) => {
                     if (!item?.id) return null;
