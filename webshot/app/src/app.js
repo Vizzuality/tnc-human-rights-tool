@@ -1,10 +1,10 @@
 const Koa = require('koa');
 const logger = require('logger');
 const koaLogger = require('koa-logger');
-const cors = require('@koa/cors');
 const config = require('config');
 const loader = require('loader');
 const { koaBody } = require('koa-body');
+const cors = require('@koa/cors');
 const ErrorSerializer = require('serializers/error.serializer');
 require('dotenv').config();
 
