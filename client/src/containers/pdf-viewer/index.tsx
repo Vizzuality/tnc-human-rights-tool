@@ -5,6 +5,7 @@ import { PropsWithChildren } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { useMutation } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,8 @@ interface PDFViewerProps extends PropsWithChildren {
 type WebshotMutationProps = { url: string; filename: string };
 
 const useWebshotMutation = () => {
+  const { data: session } = useSession();
+
   return useMutation(
     async ({ url, filename }: WebshotMutationProps) => {
       const response = await fetch(
@@ -26,6 +29,7 @@ const useWebshotMutation = () => {
         {
           method: "GET",
           headers: {
+            Authorization: `Bearer ${session?.apiToken}`,
             "Content-Type": "application/pdf",
           },
         },
