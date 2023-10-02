@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const logger = require('logger');
 const koaLogger = require('koa-logger');
+const cors = require('@koa/cors');
 const config = require('config');
 const loader = require('loader');
 const { koaBody } = require('koa-body');
@@ -10,6 +11,8 @@ require('dotenv').config();
 async function init() {
   return new Promise((resolve) => {
     const app = new Koa();
+
+    app.use(cors());
 
     app.use(koaBody({
       multipart: true,

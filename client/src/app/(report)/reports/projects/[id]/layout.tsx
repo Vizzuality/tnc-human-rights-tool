@@ -9,9 +9,11 @@ import { getGetContextualRiskCategoriesQueryOptions } from "@/types/generated/co
 import { getGetPcbCategoriesQueryOptions } from "@/types/generated/pcb-category";
 import { getGetProjectsIdQueryOptions } from "@/types/generated/project";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
-
-interface ReportsProjectsIdLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
+interface ReportsProjectsIdLayoutProps extends PropsWithChildren {
+  params: {
+    id: string;
+  };
+}
 
 export default async function ReportsProjectsIdLayout({
   children,

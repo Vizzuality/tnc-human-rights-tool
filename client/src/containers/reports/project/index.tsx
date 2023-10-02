@@ -8,6 +8,7 @@ import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetProjectsId } from "@/types/generated/project";
 import { Risks } from "@/types/project";
 
+import PDFViewer from "@/containers/pdf-viewer";
 import ReportsProjectIdItem from "@/containers/reports/project/item";
 
 import { PRIORIZATIONS } from "@/constants";
@@ -63,34 +64,46 @@ export default function ReportsProjectId() {
   }, [ITEMS, projectIdData]);
 
   return (
-    <div className="prose">
-      <header>
-        <h1>{projectIdData?.data?.attributes?.name}</h1>
-        <p>{projectIdData?.data?.attributes?.description}</p>
-      </header>
-      <div className="mt-10">
-        {PRIORIZATIONS.map((priorization) => {
-          return (
-            <div
-              key={priorization.value}
-              className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
-            >
-              <h2 className="text-2xl">{priorization.label}</h2>
-              <div className="mt-8 divide-y">
-                {GROUPS[priorization.value]?.map((item) => {
-                  if (!item?.id) return null;
+    <PDFViewer
+      filename={`${projectIdData?.data?.attributes?.name ?? "project"}-report.pdf`}
+      url={
+        typeof window !== "undefined"
+          ? `${window?.location.origin}${window?.location.pathname}?format=pdf`
+          : ""
+      }
+    >
+      <div className="prose">
+        <header>
+          <h1>{projectIdData?.data?.attributes?.name}</h1>
+          <p>{projectIdData?.data?.attributes?.description}</p>
+        </header>
+        <div className="mt-10">
+          {PRIORIZATIONS.map((priorization) => {
+            return (
+              <div
+                key={priorization.value}
+                className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
+              >
+                <h2 className="text-2xl">{priorization.label}</h2>
+                <div className="mt-8 divide-y">
+                  {GROUPS[priorization.value]?.map((item) => {
+                    if (!item?.id) return null;
 
-                  return (
-                    <div key={item.id} className="pb-10 pt-10 first-of-type:pt-0 last-of-type:pb-0">
-                      <ReportsProjectIdItem {...item} />
-                    </div>
-                  );
-                })}
+                    return (
+                      <div
+                        key={item.id}
+                        className="pb-10 pt-10 first-of-type:pt-0 last-of-type:pb-0"
+                      >
+                        <ReportsProjectIdItem {...item} />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </PDFViewer>
   );
 }
