@@ -236,6 +236,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@koa/cors@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@koa/cors@npm:4.0.0"
+  dependencies:
+    vary: ^1.1.2
+  checksum: e0760544823532f2d71d792e3076858e38bab9b1c090abea175f1319fd91ea58a1da384a2fe7f5108f1c681e3830b01f62a1cafe271d6406751976af443187aa
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -7695,6 +7704,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "webshot@workspace:."
   dependencies:
+    "@koa/cors": ^4.0.0
     bunyan: ^1.8.5
     chai: ^4.3.7
     chai-http: ^4.4.0

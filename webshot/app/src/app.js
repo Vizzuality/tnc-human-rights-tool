@@ -4,12 +4,15 @@ const koaLogger = require('koa-logger');
 const config = require('config');
 const loader = require('loader');
 const { koaBody } = require('koa-body');
+const cors = require('@koa/cors');
 const ErrorSerializer = require('serializers/error.serializer');
 require('dotenv').config();
 
 async function init() {
   return new Promise((resolve) => {
     const app = new Koa();
+
+    app.use(cors());
 
     app.use(koaBody({
       multipart: true,
