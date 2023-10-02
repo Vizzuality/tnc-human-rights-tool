@@ -13,6 +13,7 @@ import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 
 import NavigationBreadcrumbs from "@/containers/navigation/breadcrumbs";
 import NavigationTabs from "@/containers/navigation/tabs";
+import ProjectsDetailReport from "@/containers/projects/detail/report";
 import Wrapper from "@/containers/wrapper";
 
 interface ProjectsDetailLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -64,15 +65,16 @@ export default async function ProjectsDetailLayout({
               <NavigationBreadcrumbs />
               <div className="prose">
                 <h1>{PROJECT?.data?.attributes?.name}</h1>
+              </div>
+              <div className="prose">
                 <p>{PROJECT?.data?.attributes?.description}</p>
+                <ProjectsDetailReport />
               </div>
             </div>
 
-            {/* {pathnameRegex.test(pathname) && ( */}
             <div className="col-span-10">
               <NavigationTabs />
             </div>
-            {/* )} */}
           </header>
 
           {children}

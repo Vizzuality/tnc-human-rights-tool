@@ -64,14 +64,7 @@ export default function ReportsProjectId() {
   }, [ITEMS, projectIdData]);
 
   return (
-    <PDFViewer
-      filename={`${projectIdData?.data?.attributes?.name ?? "project"}-report.pdf`}
-      url={
-        typeof window !== "undefined"
-          ? `${window?.location.origin}${window?.location.pathname}?format=pdf`
-          : ""
-      }
-    >
+    <PDFViewer filename={`${projectIdData?.data?.attributes?.name ?? "project"}-report.pdf`}>
       <div className="prose">
         <header>
           <h1>{projectIdData?.data?.attributes?.name}</h1>

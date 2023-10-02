@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 
 interface PDFViewerProps extends PropsWithChildren {
-  url: string;
   filename: string;
 }
 
@@ -69,7 +68,7 @@ const useWebshotMutation = () => {
   );
 };
 
-export default function PDFViewer({ children, url, filename }: PDFViewerProps) {
+export default function PDFViewer({ children, filename }: PDFViewerProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const format = searchParams.get("format");
@@ -77,6 +76,11 @@ export default function PDFViewer({ children, url, filename }: PDFViewerProps) {
   const webshotMutation = useWebshotMutation();
 
   const handleExportAsPdf = () => {
+    const url =
+      typeof window !== "undefined"
+        ? `${window?.location.origin}${window?.location.pathname}?format=pdf`
+        : "";
+
     if (isSubmitting) return;
 
     setIsSubmitting(true);
