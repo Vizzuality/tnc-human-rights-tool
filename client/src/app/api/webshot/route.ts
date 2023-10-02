@@ -7,9 +7,6 @@ const handler = async (req: Request) => {
     method: "get",
     url: `/webshot`,
     headers: {
-      ...(req?.headers?.get("Authorization") && {
-        Authorization: req?.headers?.get("Authorization"),
-      }),
       "Content-Type": "application/json",
       Cookie: req?.headers?.get("Cookie"),
     },

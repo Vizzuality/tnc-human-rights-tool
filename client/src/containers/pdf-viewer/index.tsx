@@ -1,15 +1,17 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 
 import { useSearchParams } from "next/navigation";
 
+import { ShadowIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 interface PDFViewerProps extends PropsWithChildren {
   url: string;
@@ -20,6 +22,7 @@ type WebshotMutationProps = { url: string; filename: string };
 
 const useWebshotMutation = () => {
   const { data: session } = useSession();
+  const { toast } = useToast();
 
   return useMutation(
     async ({ url, filename }: WebshotMutationProps) => {
@@ -34,6 +37,16 @@ const useWebshotMutation = () => {
           },
         },
       );
+
+      if (!response.ok) {
+        toast({
+          title: "PDF Not Generated",
+          description: "The pdf could not be generated. Please try again.",
+          variant: "destructive",
+        });
+
+        throw new Error("The pdf could not be generated. Please try again.");
+      }
 
       return response.blob();
     },
@@ -57,10 +70,25 @@ const useWebshotMutation = () => {
 };
 
 export default function PDFViewer({ children, url, filename }: PDFViewerProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const format = searchParams.get("format");
 
   const webshotMutation = useWebshotMutation();
+
+  const handleExportAsPdf = () => {
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    webshotMutation.mutate(
+      { url, filename },
+      {
+        onSettled: () => {
+          setIsSubmitting(false);
+        },
+      },
+    );
+  };
 
   return (
     <div
@@ -71,15 +99,14 @@ export default function PDFViewer({ children, url, filename }: PDFViewerProps) {
     >
       {format !== "pdf" && (
         <header className="mb-10 flex w-[210mm] justify-end">
-          <Button
-            onClick={() => {
-              webshotMutation.mutate({
-                url,
-                filename,
-              });
-            }}
-          >
-            Export as pdf
+          <Button className="relative" size="lg" onClick={handleExportAsPdf}>
+            {isSubmitting ? (
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <ShadowIcon className="h-4 w-4 animate-spin" />
+              </span>
+            ) : null}
+
+            <span className={cn(isSubmitting ? "opacity-20" : "opacity-100")}>Export as pdf</span>
           </Button>
         </header>
       )}

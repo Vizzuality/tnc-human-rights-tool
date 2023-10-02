@@ -1,7 +1,14 @@
 import { PropsWithChildren } from "react";
 
+import Header from "@/containers/header";
+
 interface ReportsLayoutProps extends PropsWithChildren {}
 
 export default async function ReportsLayout({ children }: ReportsLayoutProps) {
-  return <>{children}</>;
+  return (
+    <main>
+      <Header />
+      {children}
+    </main>
+  );
 }

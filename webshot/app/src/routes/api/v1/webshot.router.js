@@ -8,6 +8,7 @@ const rimraf = require('rimraf');
 const WebshotURLError = require('errors/webshotURL.error');
 const WebshotNotFoundError = require('errors/webshotNotFound.error');
 const KoaSendError = require('errors/koaSend.error');
+const { log } = require('console');
 
 const router = new Router({
     prefix: '/webshot',
@@ -70,6 +71,9 @@ class WebshotRouter {
             // Using Puppeteer
             browser = await puppeteer.launch({ args: browserArgs });
             const page = await browser.newPage();
+            await page.setExtraHTTPHeaders({
+                'Cookie': ctx.request.headers['cookie']
+            });
             await page.setViewport(viewportOptions);
             await page.goto(ctx.query.url, gotoOptions);
             if (delay) await page.waitFor(delay);

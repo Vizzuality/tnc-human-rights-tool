@@ -6,6 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import LayoutProviders from "@/app/layout-providers";
 
+import { Toaster } from "@/components/ui/toaster";
+
 import { SpaceGrotesk } from "@/styles/fonts";
 
 export const metadata: Metadata = {
@@ -19,7 +21,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <LayoutProviders session={session}>
       <html lang="en" className={`${SpaceGrotesk.variable}`}>
-        <body>{children}</body>
+        <body>
+          <Toaster />
+          {children}
+        </body>
       </html>
     </LayoutProviders>
   );
