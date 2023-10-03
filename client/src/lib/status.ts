@@ -1,22 +1,47 @@
+import {
+  ContextualRiskCategoryListResponseDataItem,
+  PcbCategoryListResponseDataItem,
+} from "@/types/generated/strapi.schemas";
 import { PCBs, Risks } from "@/types/project";
 
-export const getStatus = ({ risks, pcbs }: { risks?: Risks; pcbs?: PCBs }) => {
-  const PCBS_VALUES =
-    pcbs &&
-    Object.values(pcbs).reduce((acc, item) => {
-      return { ...acc, ...item };
-    }, {});
+export interface GetStatusProps {
+  risks?: Risks;
+  pcbs?: PCBs;
+  pcbCategories?: PcbCategoryListResponseDataItem[];
+  contextualRiskCategories?: ContextualRiskCategoryListResponseDataItem[];
+}
 
+export const getStatus = ({
+  risks,
+  pcbs,
+  pcbCategories,
+  contextualRiskCategories,
+}: GetStatusProps) => {
   const RISKS_VALUES =
     risks &&
     Object.values(risks).reduce((acc, item) => {
       return { ...acc, ...item };
     }, {});
 
-  const PCBcompleted = !!PCBS_VALUES && Object.values(PCBS_VALUES).every((v) => !!v);
+  const PCBcompleted =
+    pcbs &&
+    pcbCategories?.every((pcbCategory) => {
+      const slug = pcbCategory.attributes?.slug;
+
+      if (!slug) return false;
+
+      return !!pcbs[slug] && Object.values(pcbs[slug]).every((v) => !!v);
+    });
 
   const contextualRiskCompleted =
-    !!RISKS_VALUES && Object.values(RISKS_VALUES).every((v) => !!v && !!v.contextual_risk);
+    risks &&
+    contextualRiskCategories?.every((contextualRiskCategory) => {
+      const slug = contextualRiskCategory.attributes?.slug;
+
+      if (!slug) return false;
+
+      return !!risks[slug] && Object.values(risks[slug]).every((v) => !!v);
+    });
 
   const projectRiskCompleted =
     !!RISKS_VALUES &&

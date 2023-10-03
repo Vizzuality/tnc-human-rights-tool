@@ -6,7 +6,7 @@ import { PlusIcon } from "@radix-ui/react-icons";
 
 import { useGetProjects } from "@/types/generated/project";
 
-import { columns } from "@/containers/projects/list/columns";
+import { useColumns } from "@/containers/projects/list/columns";
 import { ProjectsTable } from "@/containers/projects/list/table";
 import Wrapper from "@/containers/wrapper";
 
@@ -15,6 +15,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Projects() {
   const { data, isFetching, isFetched } = useGetProjects();
+  const columns = useColumns();
 
   return (
     <Wrapper>

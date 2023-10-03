@@ -2,11 +2,19 @@
 
 import {
   ColumnDef,
+  RowData,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+
+import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+import { useGetPcbCategories } from "@/types/generated/pcb-category";
+import {
+  ContextualRiskCategoryListResponseDataItem,
+  PcbCategoryListResponseDataItem,
+} from "@/types/generated/strapi.schemas";
 
 import {
   Table,
@@ -17,6 +25,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+declare module "@tanstack/table-core" {
+  interface TableMeta<TData extends RowData> {
+    row?: TData;
+    pcbCategories?: PcbCategoryListResponseDataItem[];
+    contextualRiskCategories?: ContextualRiskCategoryListResponseDataItem[];
+  }
+}
 interface ProjectsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -24,8 +39,19 @@ interface ProjectsTableProps<TData, TValue> {
 }
 
 export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTableProps<TData, TValue>) {
+  const { data: pcbCategoriesData } = useGetPcbCategories({
+    sort: "display_order:asc",
+  });
+  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+    sort: "display_order:asc",
+  });
+
   const table = useReactTable({
     data,
+    meta: {
+      pcbCategories: pcbCategoriesData?.data,
+      contextualRiskCategories: contextualRiskCategoriesData?.data,
+    },
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),

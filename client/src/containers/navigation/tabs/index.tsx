@@ -4,6 +4,8 @@ import { useParams } from "next/navigation";
 
 import { getStatus } from "@/lib/status";
 
+import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
 import { PCBs, Risks } from "@/types/project";
 
@@ -32,11 +34,20 @@ export default function NavigationTabs() {
   const { id } = useParams();
 
   const { data: projectIdData } = useGetProjectsId(+id);
+  const { data: pcbCategoriesData } = useGetPcbCategories({
+    sort: "display_order:asc",
+  });
+  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+    sort: "display_order:asc",
+  });
 
   const status = getStatus({
     pcbs: projectIdData?.data?.attributes?.pcbs as PCBs,
     risks: projectIdData?.data?.attributes?.risks as Risks,
+    pcbCategories: pcbCategoriesData?.data,
+    contextualRiskCategories: contextualRiskCategoriesData?.data,
   });
+
   return (
     <ul className="relative flex justify-between">
       <div className="absolute left-0 top-1/2 z-0 h-px w-full -translate-y-1/2 bg-slate-500" />
