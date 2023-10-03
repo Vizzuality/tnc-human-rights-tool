@@ -5,7 +5,7 @@ const handler = async (req: Request) => {
 
   const r = await WEBSHOT<ArrayBuffer>({
     method: "get",
-    url: `/webshot`,
+    url: `/api/v1/webshot`,
     headers: {
       "Content-Type": "application/json",
       Cookie: req?.headers?.get("Cookie"),
