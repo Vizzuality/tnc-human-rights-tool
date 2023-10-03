@@ -110,7 +110,14 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
       if (projectIdData?.data?.attributes) {
         const parsedValues = Object.entries(values).reduce(
           (acc, [key, value]) => {
-            acc[key] = value || null;
+            if (value?.contextual_risk === "yes") {
+              acc[key] = value || null;
+              return acc;
+            }
+
+            acc[key] = {
+              contextual_risk: value?.contextual_risk,
+            };
 
             return acc;
           },
