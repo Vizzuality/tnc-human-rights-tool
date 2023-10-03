@@ -4,9 +4,6 @@ import { Hydrate, dehydrate } from "@tanstack/react-query";
 
 import getQueryClient from "@/lib/getQueryClient";
 
-import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
-import { getGetContextualRiskCategoriesQueryOptions } from "@/types/generated/contextual-risk-category";
-import { getGetPcbCategoriesQueryOptions } from "@/types/generated/pcb-category";
 import { getGetProjectsIdQueryOptions, getProjectsId } from "@/types/generated/project";
 
 import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
@@ -30,28 +27,6 @@ export default async function ProjectsDetailLayout({
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     ...getGetProjectsIdQueryOptions(+id),
-  });
-
-  // Prefetch useGetContextualRisksCategories
-  await queryClient.prefetchQuery({
-    ...getGetContextualRiskCategoriesQueryOptions({
-      sort: "display_order:asc",
-    }),
-  });
-
-  // Prefetch useGetPCBsCategories
-  await queryClient.prefetchQuery({
-    ...getGetPcbCategoriesQueryOptions({
-      sort: "display_order:asc",
-    }),
-  });
-
-  await queryClient.prefetchQuery({
-    ...getGetContextualRisksQueryOptions({
-      populate: "*",
-      "pagination[limit]": 100,
-      sort: "contextual_risk_category.display_order:asc,display_order:asc",
-    }),
   });
 
   const dehydratedState = dehydrate(queryClient);
