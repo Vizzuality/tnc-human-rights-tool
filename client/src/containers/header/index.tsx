@@ -4,13 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
+
+import { AXIOS_SIGNOUT } from "@/services/api";
 
 export default function Header() {
   const { data: session } = useSession();
@@ -41,7 +43,7 @@ export default function Header() {
               <Button
                 variant="outline"
                 onClick={() => {
-                  signOut();
+                  AXIOS_SIGNOUT();
                 }}
               >
                 Logout

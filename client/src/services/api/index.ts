@@ -1,7 +1,7 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { Session } from "next-auth";
 import { getServerSession } from "next-auth/next";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 
 import env from "@/env.mjs";
 
@@ -25,6 +25,10 @@ export const API = <T>(config: AxiosRequestConfig): Promise<T> => {
 };
 
 AXIOS_INSTANCE.interceptors.request.use(async (request) => {
+  if (request.url?.includes("/auth/")) {
+    return request;
+  }
+
   if (lastSession === null || Date.now() > Date.parse(lastSession.expires)) {
     const session =
       typeof window === "undefined" ? await getServerSession(authOptions) : await getSession();
@@ -41,6 +45,11 @@ AXIOS_INSTANCE.interceptors.request.use(async (request) => {
 
   return request;
 });
+
+export const AXIOS_SIGNOUT = async () => {
+  lastSession = null;
+  await signOut();
+};
 
 // In some case with react-query and swr you want to be able to override the return error type so you can also do it here like this
 export type ErrorType<Error> = AxiosError<Error>;
