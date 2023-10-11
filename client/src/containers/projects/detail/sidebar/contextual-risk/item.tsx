@@ -31,7 +31,7 @@ export default function ContextualRiskSidebarItem({ categoryId }: ContextualRisk
   const ctxIds = ctxData?.data?.map((item) => item?.id) ?? [];
 
   const total = ctxIds.length;
-  const completed = ctxIds.filter((i) => !!CR_DATA[`${i}`]).length;
+  const completed = ctxIds.filter((i) => !!CR_DATA[`${i}`]?.contextual_risk).length;
 
   const percentage = completed / total;
 
