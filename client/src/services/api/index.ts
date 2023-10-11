@@ -1,5 +1,4 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { Session } from "next-auth";
 import { getServerSession } from "next-auth/next";
 import { getSession, signOut } from "next-auth/react";
 
@@ -8,8 +7,6 @@ import env from "@/env.mjs";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const AXIOS_INSTANCE = Axios.create({ baseURL: env.NEXT_PUBLIC_API_URL });
-
-let lastSession: Session | null = null;
 
 export const API = <T>(config: AxiosRequestConfig): Promise<T> => {
   const source = Axios.CancelToken.source();
@@ -29,14 +26,11 @@ AXIOS_INSTANCE.interceptors.request.use(async (request) => {
     return request;
   }
 
-  if (lastSession === null || Date.now() > Date.parse(lastSession.expires)) {
-    const session =
-      typeof window === "undefined" ? await getServerSession(authOptions) : await getSession();
-    lastSession = session;
-  }
+  const session =
+    typeof window === "undefined" ? await getServerSession(authOptions) : await getSession();
 
-  if (lastSession) {
-    const Authorization = `Bearer ${lastSession.apiToken}`;
+  if (session) {
+    const Authorization = `Bearer ${session.apiToken}`;
 
     request.headers.Authorization = Authorization;
   } else {
@@ -47,7 +41,6 @@ AXIOS_INSTANCE.interceptors.request.use(async (request) => {
 });
 
 export const AXIOS_SIGNOUT = async () => {
-  lastSession = null;
   await signOut();
 };
 
