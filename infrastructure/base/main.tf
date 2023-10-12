@@ -110,10 +110,10 @@ locals {
     DATABASE_SSL                     = true
     DATABASE_SSL_REJECT_UNAUTHORIZED = false
 
-    AWS_REGION            = var.aws_region
-    AWS_SES_DOMAIN        = var.staging_domain
-    AWS_SES_ACCESS_KEY_ID = module.staging.email_iam_user_access_key_id
-    AWS_SES_ACCESS_SECRET = module.staging.email_iam_user_access_key_secret
+    AWS_REGION                = var.aws_region
+    AWS_SES_DOMAIN            = var.staging_domain
+    AWS_SES_ACCESS_KEY_ID     = module.staging.email_iam_user_access_key_id
+    AWS_SES_ACCESS_KEY_SECRET = module.staging.email_iam_user_access_key_secret
   }
   staging_client_env = {
     LOG_LEVEL                                  = "info"
