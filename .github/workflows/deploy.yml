@@ -123,8 +123,8 @@ jobs:
       - name: Build, tag, and push Webshot image to Amazon ECR
         uses: docker/build-push-action@v2
         with:
-          context: ./api
-          file: ./api/Dockerfile.prod
+          context: ./webshot
+          file: ./webshot/Dockerfile.prod
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ secrets.WEBSHOT_REPOSITORY_NAME }}:${{ github.sha }}
