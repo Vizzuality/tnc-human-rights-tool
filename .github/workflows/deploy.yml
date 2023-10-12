@@ -124,7 +124,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./webshot
-          file: ./webshot/Dockerfile.prod
+          file: ./webshot/Dockerfile
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ secrets.WEBSHOT_REPOSITORY_NAME }}:${{ github.sha }}
