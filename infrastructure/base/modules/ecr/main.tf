@@ -21,7 +21,33 @@ resource "aws_ecr_lifecycle_policy" "ecr_lifecycle_policy" {
     "rules": [
         {
             "rulePriority": 1,
-            "description": "Keep last n api images",
+            "description": "Keep production image",
+            "selection": {
+                "tagStatus": "tagged",
+                "tagPrefixList": ["production"],
+                "countType": "imageCountMoreThan",
+                "countNumber": 1
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 2,
+            "description": "Keep staging image",
+            "selection": {
+                "tagStatus": "tagged",
+                "tagPrefixList": ["staging"],
+                "countType": "imageCountMoreThan",
+                "countNumber": 1
+            },
+            "action": {
+                "type": "expire"
+            }
+        },
+        {
+            "rulePriority": 100,
+            "description": "Delete older than n latest images",
             "selection": {
                 "tagStatus": "any",
                 "countType": "imageCountMoreThan",
