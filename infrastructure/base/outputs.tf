@@ -14,10 +14,6 @@ output "staging_postgresql_port" {
   value = module.staging.postgresql_port
 }
 
-output "staging_beanstalk_environment_settings" {
-  value = module.staging.beanstalk_environment_settings
-}
-
 output "staging_beanstalk_environment_cname" {
   value = module.staging.beanstalk_environment_cname
 }
