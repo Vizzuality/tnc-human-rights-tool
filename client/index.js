@@ -1,7 +1,3 @@
-if (typeof(PhusionPassenger) != 'undefined') {
-    PhusionPassenger.configure({ autoInstall: false });
-}
-
 const express = require('express');
 const next = require('next');
 const logger = require('pino-http')()
@@ -19,11 +15,6 @@ app.prepare().then(() => {
   server.use(logger);
 
   server.all('*', (req, res) => handle(req, res));
-  if (typeof (PhusionPassenger) != 'undefined') {
-    server.listen('passenger');
-    console.log(`> Ready on passenger`);
-  } else {
-    server.listen(3000);
-    console.log(`> Ready on http://localhost:${port}`);
-  }
+  server.listen(3000);
+  console.log(`> Ready on http://localhost:${port}`);
 });
