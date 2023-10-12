@@ -24,7 +24,7 @@ jobs:
 
       - name: Copy env variables to docker
         run: |
-          echo "${{ secrets.STAGING_CLIENT_ENV_FILE }}" > client/.env.local
+          echo "${{ steps.extract_branch.outputs.branch == 'main' && secrets.PRODUCTION_CLIENT_ENV_FILE || secrets.STAGING_CLIENT_ENV_FILE }}" > client/.env.local
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -64,7 +64,7 @@ jobs:
 
       - name: Copy env variables to docker
         run: |
-          echo "${{ secrets.STAGING_API_ENV_FILE }}" > api/.env
+          echo "${{ steps.extract_branch.outputs.branch == 'main' && secrets.PRODUCTION_API_ENV_FILE || secrets.STAGING_API_ENV_FILE }}" > api/.env.local
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -206,8 +206,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.PIPELINE_USER_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.PIPELINE_USER_SECRET_ACCESS_KEY }}
-          application_name: tnc-hrt-staging
-          environment_name: tnc-hrt-staging-environment
+          application_name: tnc-hrt-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
+          environment_name: tnc-hrt-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
           region: ${{ vars.AWS_REGION }}
           version_label: ${{ github.sha }}
           deployment_package: infrastructure/source_bundle/deploy.zip
