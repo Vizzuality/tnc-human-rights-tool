@@ -111,16 +111,16 @@ locals {
     DATABASE_SSL_REJECT_UNAUTHORIZED = false
   }
   staging_client_env = {
-    NEXT_PUBLIC_URL                            = "https://${var.staging_domain}"
-    NEXT_PUBLIC_ENVIRONMENT                    = "production"
-    NEXT_PUBLIC_API_URL                        = "https://${var.staging_domain}/cms/api"
-    NEXT_PUBLIC_WEBSHOT_URL                    = "https://${var.staging_domain}/webshot"
-    NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
     LOG_LEVEL                                  = "info"
-    RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
+    NEXT_PUBLIC_API_URL                        = "https://${var.staging_domain}/cms/api"
+    NEXT_PUBLIC_ENVIRONMENT                    = "production"
+    NEXT_PUBLIC_CMS_URL                        = var.cms_url
+    NEXT_PUBLIC_GA_TRACKING_ID                 = var.ga_tracking_id
+    NEXT_PUBLIC_URL                            = "https://${var.staging_domain}"
+    NEXT_PUBLIC_WEBSHOT_URL                    = "https://${var.staging_domain}/webshot/"
     NEXTAUTH_URL                               = "https://${var.staging_domain}"
     NEXTAUTH_SECRET                            = random_password.nextauth_secret.result
-    NEXT_PUBLIC_CMS_URL                        = var.cms_url
+    RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
   }
 }
 
@@ -130,6 +130,9 @@ module "github_values" {
   secret_map = {
     PIPELINE_USER_ACCESS_KEY_ID     = module.iam.pipeline_user_access_key_id
     PIPELINE_USER_SECRET_ACCESS_KEY = module.iam.pipeline_user_access_key_secret
+    API_REPOSITORY_NAME             = module.api_ecr.repository_name
+    CLIENT_REPOSITORY_NAME          = module.client_ecr.repository_name
+    WEBSHOT_REPOSITORY_NAME         = module.webshot_ecr.repository_name
     STAGING_API_ENV_FILE            = join("\n", [for key, value in local.staging_api_env : "${key}=${value}"])
     STAGING_CLIENT_ENV_FILE         = join("\n", [for key, value in local.staging_client_env : "${key}=${value}"])
     STAGING_DOMAIN                  = var.staging_domain
@@ -139,6 +142,26 @@ module "github_values" {
   }
 }
 
+module "api_ecr" {
+  source = "./modules/ecr"
+
+  project_name = var.project_name
+  repo_name    = "api"
+}
+
+module "client_ecr" {
+  source = "./modules/ecr"
+
+  project_name = var.project_name
+  repo_name    = "client"
+}
+
+module "webshot_ecr" {
+  source = "./modules/ecr"
+
+  project_name = var.project_name
+  repo_name    = "webshot"
+}
 
 module "staging" {
   source             = "./modules/env"
