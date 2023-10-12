@@ -11,11 +11,11 @@
     "config-sync": "config-sync"
   },
   "dependencies": {
-    "@strapi/plugin-documentation": "4.13.6",
-    "@strapi/plugin-i18n": "4.13.6",
-    "@strapi/plugin-users-permissions": "4.13.6",
-    "@strapi/strapi": "4.13.6",
-    "pg": "^8.11.3",
+    "@strapi/plugin-documentation": "4.14.4",
+    "@strapi/plugin-i18n": "4.14.4",
+    "@strapi/plugin-users-permissions": "4.14.4",
+    "@strapi/strapi": "4.14.4",
+    "pg": "8.11.3",
     "strapi-plugin-config-sync": "1.1.3",
     "strapi-plugin-import-export-entries": "1.21.1"
   },
