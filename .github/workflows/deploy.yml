@@ -45,7 +45,7 @@ jobs:
         id: extract_branch
 
       - name: Build, tag, and push Client image to Amazon ECR
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: ./client
           file: ./client/Dockerfile.prod
@@ -85,7 +85,7 @@ jobs:
         id: extract_branch
 
       - name: Build, tag, and push API image to Amazon ECR
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: ./api
           file: ./api/Dockerfile.prod
@@ -121,7 +121,7 @@ jobs:
         id: extract_branch
 
       - name: Build, tag, and push Webshot image to Amazon ECR
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: ./webshot
           file: ./webshot/Dockerfile
