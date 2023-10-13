@@ -32,7 +32,3 @@ resource "aws_iam_user_policy" "get_ecr_token_policy" {
     ]
   })
 }
-
-resource "aws_ses_domain_identity_verification" "example_verification" {
-  domain = aws_ses_domain_identity.domain_identity.id
-}
