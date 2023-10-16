@@ -5,16 +5,250 @@
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
+      "subject": "api::contextual-risk-category.contextual-risk-category",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risks",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::contextual-risk-category.contextual-risk-category",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::contextual-risk-category.contextual-risk-category",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::contextual-risk-category.contextual-risk-category",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risks",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::contextual-risk-category.contextual-risk-category",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risks",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::contextual-risk.contextual-risk",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risk_category"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::contextual-risk.contextual-risk",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::contextual-risk.contextual-risk",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::contextual-risk.contextual-risk",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risk_category"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::contextual-risk.contextual-risk",
+      "properties": {
+        "fields": [
+          "title",
+          "description",
+          "display_order",
+          "contextual_risk_category"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::pcb-category.pcb-category",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcbs",
+          "description",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::pcb-category.pcb-category",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::pcb-category.pcb-category",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::pcb-category.pcb-category",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcbs",
+          "description",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::pcb-category.pcb-category",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcbs",
+          "description",
+          "slug"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "api::pcb.pcb",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcb_category",
+          "description"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "api::pcb.pcb",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::pcb.pcb",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "api::pcb.pcb",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcb_category",
+          "description"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::pcb.pcb",
+      "properties": {
+        "fields": [
+          "title",
+          "display_order",
+          "pcb_category",
+          "description"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.create",
       "subject": "api::project.project",
       "properties": {
         "fields": [
           "name",
-          "description"
+          "description",
+          "risks",
+          "author",
+          "pcbs"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
@@ -22,7 +256,15 @@
       "properties": {},
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.publish",
+      "subject": "api::project.project",
+      "properties": {},
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
@@ -30,12 +272,16 @@
       "properties": {
         "fields": [
           "name",
-          "description"
+          "description",
+          "risks",
+          "author",
+          "pcbs"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
@@ -43,52 +289,80 @@
       "properties": {
         "fields": [
           "name",
-          "description"
+          "description",
+          "risks",
+          "author",
+          "pcbs"
         ]
       },
       "conditions": [
         "admin::is-creator"
-      ]
+      ],
+      "actionParameters": {}
     },
     {
-      "action": "plugin::upload.assets.copy-link",
-      "subject": null,
-      "properties": {},
-      "conditions": []
+      "action": "plugin::content-manager.explorer.create",
+      "subject": "plugin::users-permissions.user",
+      "properties": {
+        "fields": [
+          "username",
+          "email",
+          "provider",
+          "password",
+          "resetPasswordToken",
+          "confirmationToken",
+          "confirmed",
+          "blocked",
+          "role"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
     },
     {
-      "action": "plugin::upload.assets.create",
-      "subject": null,
+      "action": "plugin::content-manager.explorer.delete",
+      "subject": "plugin::users-permissions.user",
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
-      "action": "plugin::upload.assets.download",
-      "subject": null,
-      "properties": {},
-      "conditions": []
+      "action": "plugin::content-manager.explorer.read",
+      "subject": "plugin::users-permissions.user",
+      "properties": {
+        "fields": [
+          "username",
+          "email",
+          "provider",
+          "password",
+          "resetPasswordToken",
+          "confirmationToken",
+          "confirmed",
+          "blocked",
+          "role"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
     },
     {
-      "action": "plugin::upload.assets.update",
-      "subject": null,
-      "properties": {},
-      "conditions": [
-        "admin::is-creator"
-      ]
-    },
-    {
-      "action": "plugin::upload.configure-view",
-      "subject": null,
-      "properties": {},
-      "conditions": []
-    },
-    {
-      "action": "plugin::upload.read",
-      "subject": null,
-      "properties": {},
-      "conditions": [
-        "admin::is-creator"
-      ]
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "plugin::users-permissions.user",
+      "properties": {
+        "fields": [
+          "username",
+          "email",
+          "provider",
+          "password",
+          "resetPasswordToken",
+          "confirmationToken",
+          "confirmed",
+          "blocked",
+          "role"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
     }
   ]
 }
