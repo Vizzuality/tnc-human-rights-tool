@@ -13,15 +13,21 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const u = await postAuthLocal({
-          identifier: credentials?.email,
-          password: credentials?.password,
-        });
+        try {
+          const u = await postAuthLocal({
+            identifier: credentials?.email,
+            password: credentials?.password,
+          });
 
-        const { jwt: apiToken, user } = u;
+          const { jwt: apiToken, user } = u;
 
-        if (user) {
-          return { ...user, apiToken } as unknown as Awaitable<User>;
+          if (user) {
+            return { ...user, apiToken } as unknown as Awaitable<User>;
+          }
+
+          return null;
+        } catch (error) {
+          console.error(error);
         }
 
         return null;

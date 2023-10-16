@@ -40,7 +40,7 @@ export const getStatus = ({
 
       if (!slug) return false;
 
-      return !!risks[slug] && Object.values(risks[slug]).every((v) => !!v);
+      return !!risks[slug] && Object.values(risks[slug]).every((v) => !!v && !!v?.contextual_risk);
     });
 
   const projectRiskCompleted =
