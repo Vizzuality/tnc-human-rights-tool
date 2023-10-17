@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { z } from "zod";
+
+import { usePostAuthForgotPassword } from "@/types/generated/users-permissions-auth";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,18 +24,17 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter your email address" }),
-  password: z.string().nonempty({ message: "Please enter your password" }),
 });
 
-export default function Signin() {
+export default function ForgotPassword() {
   const searchParams = useSearchParams();
+  const forgotPasswordMutation = usePostAuthForgotPassword();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
@@ -42,33 +42,46 @@ export default function Signin() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      callbackUrl: searchParams.get("callbackUrl") ?? "/projects",
-    });
+
+    // 3. Submit the form.
+    forgotPasswordMutation.mutate(
+      {
+        data: values,
+      },
+      {
+        onSuccess: () => {
+          console.info("success");
+        },
+        onError: (error) => {
+          console.error(error);
+          // const searchParams = new URLSearchParams();
+          // searchParams.set("error", error?.response?.data?.error?.message ?? "Unknown error");
+          // replace(`/auth/signup?${searchParams.toString()}`);
+        },
+      },
+    );
   }
 
   return (
     <Card className="min-w-[380px]">
       <CardHeader>
-        <CardTitle>Sign in</CardTitle>
+        <CardTitle>Forgot password</CardTitle>
         {!!searchParams.get("error") && (
-          <div className="rounded-md bg-destructive p-3 text-sm text-destructive-foreground">
-            Invalid username or password. Please try again.
+          <div className="rounded-md bg-destructive/90 p-3 text-sm text-destructive-foreground">
+            {searchParams.get("error")}
           </div>
         )}
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <fieldset className="space-y-2">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -76,37 +89,18 @@ export default function Signin() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </fieldset>
-
             <div className="space-y-3">
               <Button className="w-full" type="submit">
-                Sign in
+                Send
               </Button>
+
               <p className="text-center text-sm">
-                {"Don't"} have an account?{" "}
-                <Link className="text-primary hover:underline" href="/auth/signup">
-                  Sign up
+                Already have an account?{" "}
+                <Link className="text-primary hover:underline" href="/auth/signin">
+                  Sign in
                 </Link>{" "}
                 instead.
-              </p>
-              <p className="text-center text-sm">
-                Forgot you password?{" "}
-                <Link className="text-primary hover:underline" href="/auth/forgot-password">
-                  Reset password
-                </Link>
               </p>
             </div>
           </form>
