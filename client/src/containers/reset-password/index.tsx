@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -37,6 +37,7 @@ const formSchema = z
   });
 
 export default function ResetPassword() {
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
   const signupMutation = usePostAuthResetPassword();
 
@@ -68,6 +69,9 @@ export default function ResetPassword() {
         },
         onError: (error) => {
           console.error(error);
+          const sp = new URLSearchParams(searchParams);
+          sp.set("error", error?.response?.data?.error?.message ?? "Unknown error");
+          replace(`/auth/reset-password?${sp.toString()}`);
         },
       },
     );

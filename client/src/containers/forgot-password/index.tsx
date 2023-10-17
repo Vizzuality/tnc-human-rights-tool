@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -28,6 +28,7 @@ const formSchema = z.object({
 
 export default function ForgotPassword() {
   const searchParams = useSearchParams();
+  const { replace } = useRouter();
   const forgotPasswordMutation = usePostAuthForgotPassword();
 
   // 1. Define your form.
@@ -54,9 +55,9 @@ export default function ForgotPassword() {
         },
         onError: (error) => {
           console.error(error);
-          // const searchParams = new URLSearchParams();
-          // searchParams.set("error", error?.response?.data?.error?.message ?? "Unknown error");
-          // replace(`/auth/signup?${searchParams.toString()}`);
+          const searchParams = new URLSearchParams();
+          searchParams.set("error", error?.response?.data?.error?.message ?? "Unknown error");
+          replace(`/auth/forgot-password?${searchParams.toString()}`);
         },
       },
     );
