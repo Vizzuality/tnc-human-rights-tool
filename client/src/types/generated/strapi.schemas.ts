@@ -685,6 +685,7 @@ export type ProjectAuthorDataAttributesRoleDataAttributesPermissionsDataItemAttr
 export type ProjectAuthorDataAttributesRoleDataAttributesPermissionsDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
+    actionParameters?: unknown;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
@@ -1068,6 +1069,7 @@ export type PcbCategoryPcbsDataItemAttributesPcbCategoryDataAttributesCreatedByD
 export type PcbCategoryPcbsDataItemAttributesPcbCategoryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
+    actionParameters?: unknown;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
@@ -1445,6 +1447,7 @@ export type PcbPcbCategoryDataAttributesPcbsDataItemAttributesCreatedByDataAttri
 export type PcbPcbCategoryDataAttributesPcbsDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
+    actionParameters?: unknown;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
@@ -1818,6 +1821,7 @@ export type ContextualRiskCategoryContextualRisksDataItemAttributesContextualRis
 export type ContextualRiskCategoryContextualRisksDataItemAttributesContextualRiskCategoryDataAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
+    actionParameters?: unknown;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
@@ -2132,6 +2136,7 @@ export type ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDat
 export type ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDataItemAttributesCreatedByDataAttributesRolesDataItemAttributesPermissionsDataItemAttributes =
   {
     action?: string;
+    actionParameters?: unknown;
     subject?: string;
     properties?: unknown;
     conditions?: unknown;
