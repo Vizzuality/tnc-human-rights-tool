@@ -185,7 +185,8 @@
           "title",
           "display_order",
           "pcb_category",
-          "description"
+          "description",
+          "input"
         ]
       },
       "conditions": [],
@@ -213,7 +214,8 @@
           "title",
           "display_order",
           "pcb_category",
-          "description"
+          "description",
+          "input"
         ]
       },
       "conditions": [],
@@ -227,7 +229,8 @@
           "title",
           "display_order",
           "pcb_category",
-          "description"
+          "description",
+          "input"
         ]
       },
       "conditions": [],

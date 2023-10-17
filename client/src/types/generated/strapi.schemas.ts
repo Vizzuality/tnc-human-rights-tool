@@ -902,6 +902,7 @@ export type PcbCategoryPcbsDataItemAttributes = {
   display_order?: number;
   pcb_category?: PcbCategoryPcbsDataItemAttributesPcbCategory;
   description?: string;
+  input?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1209,6 +1210,7 @@ export interface Pcb {
   display_order?: number;
   pcb_category?: PcbPcbCategory;
   description: string;
+  input: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1291,6 +1293,7 @@ export type PcbPcbCategoryDataAttributesPcbsDataItemAttributes = {
   display_order?: number;
   pcb_category?: PcbPcbCategoryDataAttributesPcbsDataItemAttributesPcbCategory;
   description?: string;
+  input?: unknown;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1519,6 +1522,7 @@ export type PcbRequestData = {
   display_order?: number;
   pcb_category?: PcbRequestDataPcbCategory;
   description: string;
+  input: unknown;
 };
 
 export interface PcbRequest {

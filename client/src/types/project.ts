@@ -1,3 +1,11 @@
+export type Input = {
+  type: "textarea" | "checkbox" | "radio";
+  options?: {
+    label: string;
+    value: string;
+  }[];
+};
+
 export type Risks = Record<
   string,
   Record<

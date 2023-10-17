@@ -77,6 +77,20 @@
           "sortable": false
         }
       },
+      "input": {
+        "edit": {
+          "label": "input",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "input",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -137,6 +151,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "title",
+        "display_order",
+        "pcb_category"
+      ],
       "edit": [
         [
           {
@@ -161,13 +181,13 @@
             "name": "description",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "input",
+            "size": 12
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "title",
-        "display_order",
-        "pcb_category"
       ]
     }
   },

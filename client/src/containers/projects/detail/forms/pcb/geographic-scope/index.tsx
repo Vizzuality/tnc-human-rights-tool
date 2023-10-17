@@ -16,9 +16,11 @@ import {
   usePutProjectsId,
 } from "@/types/generated/project";
 import { PcbListResponse } from "@/types/generated/strapi.schemas";
+import { Input } from "@/types/project";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -54,12 +56,20 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
           return acc;
         }
 
-        const { display_order, pcb_category } = attributes;
+        const { display_order, pcb_category, input } = attributes;
+        const ip = input as Input;
 
-        acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
-          .string()
-          .min(10)
-          .optional();
+        if (ip.type === "checkbox") {
+          acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
+            .array(z.string())
+            .optional();
+        }
+
+        if (ip.type === "textarea") {
+          acc[`${pcb_category?.data?.attributes?.display_order}-${display_order}`] = z
+            .string()
+            .optional();
+        }
 
         return acc;
       },
@@ -132,7 +142,8 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
               return null;
             }
 
-            const { title, description, display_order, pcb_category } = attributes;
+            const { title, description, display_order, pcb_category, input } = attributes;
+            const ip = input as Input;
 
             return (
               <FormField
@@ -148,9 +159,52 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
                       </FormLabel>
                       <div className="prose">{parse(description)}</div>
 
-                      <FormControl className="flex py-2.5">
-                        <Textarea {...field} rows={4} className="w-full" />
-                      </FormControl>
+                      {ip.type === "textarea" && (
+                        <FormControl className="flex py-2.5">
+                          <Textarea {...field} rows={4} className="w-full" />
+                        </FormControl>
+                      )}
+
+                      {ip.type === "checkbox" && !!ip.options && (
+                        <>
+                          {ip.options.map((o) => (
+                            <FormField
+                              key={o.value}
+                              control={form.control}
+                              name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
+                              render={({ field }) => {
+                                return (
+                                  <FormItem
+                                    key={o.value}
+                                    className="flex flex-row items-start space-y-0"
+                                  >
+                                    <FormControl>
+                                      <Checkbox
+                                        className="mt-0.5 cursor-pointer"
+                                        checked={field.value?.includes(o.value)}
+                                        onCheckedChange={(checked) => {
+                                          const prevValue = field.value || [];
+
+                                          return checked
+                                            ? field.onChange([...prevValue, o.value])
+                                            : field.onChange(
+                                                prevValue?.filter(
+                                                  (value: string) => value !== o.value,
+                                                ),
+                                              );
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="cursor-pointer pl-2 text-sm font-normal">
+                                      {o.label}
+                                    </FormLabel>
+                                  </FormItem>
+                                );
+                              }}
+                            />
+                          ))}
+                        </>
+                      )}
 
                       <FormMessage />
                     </FormItem>

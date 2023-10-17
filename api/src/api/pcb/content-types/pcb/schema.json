@@ -28,6 +28,10 @@
     "description": {
       "type": "richtext",
       "required": true
+    },
+    "input": {
+      "type": "json",
+      "required": true
     }
   }
 }

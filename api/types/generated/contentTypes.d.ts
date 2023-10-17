@@ -778,6 +778,7 @@ export interface ApiPcbPcb extends Schema.CollectionType {
       'api::pcb-category.pcb-category'
     >;
     description: Attribute.RichText & Attribute.Required;
+    input: Attribute.JSON & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
