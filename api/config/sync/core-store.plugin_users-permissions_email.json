@@ -6,8 +6,8 @@
       "icon": "sync",
       "options": {
         "from": {
-          "name": "TNC Human Rights Tool",
-          "email": "no-reply@no-reply.staging.tnc-hrt.dev-vizzuality.com"
+          "name": "Administration Panel",
+          "email": "no-reply@strapi.io"
         },
         "response_email": "",
         "object": "Reset password",
@@ -19,8 +19,8 @@
       "icon": "check-square",
       "options": {
         "from": {
-          "name": "TNC Human Rights Tool",
-          "email": "no-reply@no-reply.staging.tnc-hrt.dev-vizzuality.com"
+          "name": "Administration Panel",
+          "email": "no-reply@strapi.io"
         },
         "response_email": "",
         "object": "Account confirmation",
