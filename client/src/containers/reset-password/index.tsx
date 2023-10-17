@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,6 +40,8 @@ const formSchema = z
   });
 
 export default function ResetPassword() {
+  const [success, setSuccess] = useState(false);
+
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const signupMutation = usePostAuthResetPassword();
@@ -65,7 +70,8 @@ export default function ResetPassword() {
       },
       {
         onSuccess: () => {
-          console.info("success");
+          setSuccess(true);
+          replace(`/auth/reset-password`);
         },
         onError: (error) => {
           console.error(error);
@@ -88,43 +94,55 @@ export default function ResetPassword() {
         )}
       </CardHeader>
       <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-            <fieldset className="space-y-2">
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="passwordConfirmation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input type="password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </fieldset>
-            <div className="space-y-3">
-              <Button className="w-full" type="submit">
-                Reset password
-              </Button>
-            </div>
-          </form>
-        </Form>
+        {!!success && (
+          <div className="prose max-w-xs">
+            <h3>Success!</h3>
+            <p>You have changed your password successfully.</p>
+            <Link href="/auth/signin">
+              <Button>Sign in</Button>
+            </Link>
+          </div>
+        )}
+
+        {!success && (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <fieldset className="space-y-2">
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input type="password" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="passwordConfirmation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input type="password" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </fieldset>
+              <div className="space-y-3">
+                <Button className="w-full" type="submit">
+                  Reset password
+                </Button>
+              </div>
+            </form>
+          </Form>
+        )}
       </CardContent>
     </Card>
   );
