@@ -24,7 +24,7 @@ export default async function ProjectsDetailResearchOverviewPage({
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>Project and Background Community</ProjectsDetailTitle>
+      <ProjectsDetailTitle>Project and Community Background</ProjectsDetailTitle>
 
       <div>
         <div className="prose -mt-5">

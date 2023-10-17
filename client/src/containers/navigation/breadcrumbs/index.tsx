@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 
 export const BREADCRUMBS_DICTIONARY = {
   projects: "Projects",
-  "project-and-background-community": "Project and Background Community",
+  "project-and-background-community": "Project and Community Background",
   "contextual-risk": "Contextual Risk",
   "project-risk": "Project Risk",
   "follow-up": "Follow Up",
