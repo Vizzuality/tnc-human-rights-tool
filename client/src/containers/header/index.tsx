@@ -39,6 +39,14 @@ export default function Header() {
               </Link>
             )}
 
+            <Link href="/glossary">
+              <Button variant="link">Glossary</Button>
+            </Link>
+
+            <Link href="/faqs">
+              <Button variant="link">FAQs</Button>
+            </Link>
+
             {!!session && (
               <Button
                 variant="outline"
