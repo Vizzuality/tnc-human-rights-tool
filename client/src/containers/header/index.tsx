@@ -47,6 +47,10 @@ export default function Header() {
               <Button variant="link">FAQs</Button>
             </Link>
 
+            <Link href="/other-tools">
+              <Button variant="link">Other tools</Button>
+            </Link>
+
             {!!session && (
               <Button
                 variant="outline"
