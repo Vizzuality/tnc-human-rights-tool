@@ -56,11 +56,17 @@ jobs:
         with:
           mask-password: 'true'
 
+      - name: Set up Docker Buildx
+        if: steps.client-changes.outputs.client == 'true'
+        uses: docker/setup-buildx-action@v3
+
       - name: Build, tag, and push Client image to Amazon ECR
         if: steps.client-changes.outputs.client == 'true'
         uses: docker/build-push-action@v5
         with:
           context: ./client
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           file: ./client/Dockerfile.prod
           push: true
           tags: |
@@ -109,11 +115,17 @@ jobs:
         with:
           mask-password: 'true'
 
+      - name: Set up Docker Buildx
+        if: steps.cms-changes.outputs.cms == 'true'
+        uses: docker/setup-buildx-action@v3
+
       - name: Build, tag, and push API image to Amazon ECR
         if: steps.api-changes.outputs.api == 'true'
         uses: docker/build-push-action@v5
         with:
           context: ./api
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           file: ./api/Dockerfile.prod
           push: true
           tags: |
@@ -157,11 +169,17 @@ jobs:
         with:
           mask-password: 'true'
 
+      - name: Set up Docker Buildx
+        if: steps.cms-changes.outputs.cms == 'true'
+        uses: docker/setup-buildx-action@v3
+
       - name: Build, tag, and push Webshot image to Amazon ECR
         if: steps.webshot-changes.outputs.webshot == 'true'
         uses: docker/build-push-action@v5
         with:
           context: ./webshot
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           file: ./webshot/Dockerfile
           push: true
           tags: |
