@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
@@ -16,8 +17,10 @@ import {
 } from "@/types/generated/project";
 import { Risks } from "@/types/project";
 
+import ProjectRiskDetermination from "@/containers/project-risk-determination";
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -116,7 +119,18 @@ export default function ProjectRiskForm() {
           name="proyect_risk_determination"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Project Risk Determination</FormLabel>
+              <FormLabel className="flex items-center">
+                <span>Project Risk Determination</span>
+                <Dialog>
+                  <DialogTrigger className="ml-2">
+                    <InfoCircledIcon className="inline-block h-4 w-4 text-primary hover:text-primary/50" />
+                  </DialogTrigger>
+
+                  <DialogContent className="max-h-[90svh] overflow-auto">
+                    <ProjectRiskDetermination />
+                  </DialogContent>
+                </Dialog>
+              </FormLabel>
 
               <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                 <RadioGroup
