@@ -11,7 +11,7 @@ data "aws_availability_zones" "all_available_azs" {
 data "aws_ec2_instance_type_offerings" "azs_with_ec2_instance_type_offering" {
   filter {
     name   = "instance-type"
-    values = [var.ec2_instance_type]
+    values = [var.staging_ec2_instance_type, var.production_ec2_instance_type]
   }
 
   filter {
@@ -59,33 +59,85 @@ module "iam" {
   source = "./modules/iam"
 }
 
-resource "random_password" "api_token_salt" {
+#
+# Staging secrets
+#
+
+resource "random_password" "staging_api_token_salt" {
   length           = 32
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
-resource "random_password" "admin_jwt_secret" {
+resource "random_password" "staging_admin_jwt_secret" {
   length           = 32
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
-resource "random_password" "transfer_token_salt" {
+resource "random_password" "staging_transfer_token_salt" {
   length           = 32
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
-resource "random_password" "jwt_secret" {
+resource "random_password" "staging_jwt_secret" {
   length           = 32
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
-resource "random_password" "nextauth_secret" {
+resource "random_password" "staging_nextauth_secret" {
   length           = 32
   special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "staging_app_key" {
+  length           = 32
+  special          = false
+  numeric          = false
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+#
+# Production secrets
+#
+
+resource "random_password" "production_api_token_salt" {
+  length           = 32
+  special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "production_admin_jwt_secret" {
+  length           = 32
+  special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "production_transfer_token_salt" {
+  length           = 32
+  special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "production_jwt_secret" {
+  length           = 32
+  special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "production_nextauth_secret" {
+  length           = 32
+  special          = true
+  override_special = "!#%&*()-_=+[]{}<>:?"
+}
+
+resource "random_password" "production_app_key" {
+  length           = 32
+  special          = false
+  numeric          = false
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
 
@@ -93,11 +145,11 @@ locals {
   staging_api_env = {
     HOST                = "0.0.0.0"
     PORT                = 1337
-    APP_KEYS            = "toBeModified1,toBeModified2"
-    API_TOKEN_SALT      = random_password.api_token_salt.result
-    ADMIN_JWT_SECRET    = random_password.admin_jwt_secret.result
-    TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
-    JWT_SECRET          = random_password.jwt_secret.result
+    APP_KEYS            = random_password.staging_app_key.result
+    API_TOKEN_SALT      = random_password.staging_api_token_salt.result
+    ADMIN_JWT_SECRET    = random_password.staging_admin_jwt_secret.result
+    TRANSFER_TOKEN_SALT = random_password.staging_transfer_token_salt.result
+    JWT_SECRET          = random_password.staging_jwt_secret.result
     API_BASE_URL        = "https://${var.staging_domain}/cms/"
 
     # Database
@@ -124,17 +176,17 @@ locals {
     NEXT_PUBLIC_URL                            = "https://${var.staging_domain}"
     NEXT_PUBLIC_WEBSHOT_URL                    = "https://${var.staging_domain}/webshot/"
     NEXTAUTH_URL                               = "https://${var.staging_domain}"
-    NEXTAUTH_SECRET                            = random_password.nextauth_secret.result
+    NEXTAUTH_SECRET                            = random_password.staging_nextauth_secret.result
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
   }
   production_api_env = {
     HOST                = "0.0.0.0"
     PORT                = 1337
-    APP_KEYS            = "toBeModified1,toBeModified2"
-    API_TOKEN_SALT      = random_password.api_token_salt.result
-    ADMIN_JWT_SECRET    = random_password.admin_jwt_secret.result
-    TRANSFER_TOKEN_SALT = random_password.transfer_token_salt.result
-    JWT_SECRET          = random_password.jwt_secret.result
+    APP_KEYS            = random_password.production_app_key.result
+    API_TOKEN_SALT      = random_password.production_api_token_salt.result
+    ADMIN_JWT_SECRET    = random_password.production_admin_jwt_secret.result
+    TRANSFER_TOKEN_SALT = random_password.production_transfer_token_salt.result
+    JWT_SECRET          = random_password.production_jwt_secret.result
     API_BASE_URL        = "https://${var.production_domain}/cms/"
 
     # Database
@@ -161,7 +213,7 @@ locals {
     NEXT_PUBLIC_URL                            = "https://${var.production_domain}"
     NEXT_PUBLIC_WEBSHOT_URL                    = "https://${var.production_domain}/webshot/"
     NEXTAUTH_URL                               = "https://${var.production_domain}"
-    NEXTAUTH_SECRET                            = random_password.nextauth_secret.result
+    NEXTAUTH_SECRET                            = random_password.production_nextauth_secret.result
     RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = "false"
   }
 }
@@ -223,9 +275,10 @@ module "staging" {
   availability_zones                            = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
   beanstalk_platform                            = var.beanstalk_platform
   beanstalk_tier                                = var.beanstalk_tier
-  ec2_instance_type                             = var.ec2_instance_type
+  ec2_instance_type                             = var.staging_ec2_instance_type
   rds_engine_version                            = var.rds_engine_version
   rds_instance_class                            = var.rds_instance_class
+  rds_backup_retention_period                   = var.staging_rds_backup_retention_period
   elasticbeanstalk_iam_service_linked_role_name = aws_iam_service_linked_role.elasticbeanstalk.name
 }
 
@@ -240,8 +293,10 @@ module "production" {
   availability_zones                            = data.aws_availability_zones.azs_with_ec2_instance_type_offering.names
   beanstalk_platform                            = var.beanstalk_platform
   beanstalk_tier                                = var.beanstalk_tier
-  ec2_instance_type                             = var.ec2_instance_type
+  ec2_instance_type                             = var.production_ec2_instance_type
   rds_engine_version                            = var.rds_engine_version
   rds_instance_class                            = var.rds_instance_class
+  rds_backup_retention_period                   = var.production_rds_backup_retention_period
   elasticbeanstalk_iam_service_linked_role_name = aws_iam_service_linked_role.elasticbeanstalk.name
+
 }

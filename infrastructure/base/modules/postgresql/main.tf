@@ -11,7 +11,7 @@ resource "aws_db_instance" "postgresql" {
   db_name                 = replace(var.database_name, "-", "")
   username                = var.rds_user_name
   password                = random_password.postgresql_superuser.result
-  backup_retention_period = 5
+  backup_retention_period = var.rds_backup_retention_period
   allocated_storage       = 5
 
   maintenance_window = "Mon:00:00-Mon:03:00"
