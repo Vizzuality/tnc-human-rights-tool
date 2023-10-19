@@ -265,5 +265,5 @@ jobs:
           application_name: tnc-hrt-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}
           environment_name: tnc-hrt-${{ steps.extract_branch.outputs.branch == 'main' && 'production' || 'staging' }}-environment
           region: ${{ vars.AWS_REGION }}
-          version_label: ${{ github.sha }}
+          version_label: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           deployment_package: infrastructure/source_bundle/deploy.zip

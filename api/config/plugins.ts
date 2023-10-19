@@ -7,8 +7,8 @@ module.exports = ({ env }) => ({
         "core-store.plugin_upload_metrics",
         "core-store.strapi_content_types_schema",
         "core-store.ee_information",
-        "core-store.ee_information",
         "core-store.plugin_users-permissions_email",
+        "core-store.plugin_users-permissions_advanced"
       ],
     },
   },
