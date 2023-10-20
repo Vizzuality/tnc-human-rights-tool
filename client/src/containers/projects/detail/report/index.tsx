@@ -3,33 +3,21 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { getStatus } from "@/lib/status";
+import { FileIcon } from "@radix-ui/react-icons";
 
-import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
-import { useGetPcbCategories } from "@/types/generated/pcb-category";
-import { useGetProjectsId } from "@/types/generated/project";
-import { PCBs, Risks } from "@/types/project";
+import { Button } from "@/components/ui/button";
 
 export default function ProjectsDetailReport() {
   const { id } = useParams();
-  const { data: projectsIdData } = useGetProjectsId(+id);
-  const { data: pcbCategoriesData } = useGetPcbCategories({
-    sort: "display_order:asc",
-  });
-  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
-    sort: "display_order:asc",
-  });
 
-  const status = getStatus({
-    pcbs: projectsIdData?.data?.attributes?.pcbs as PCBs,
-    risks: projectsIdData?.data?.attributes?.risks as Risks,
-    pcbCategories: pcbCategoriesData?.data,
-    contextualRiskCategories: contextualRiskCategoriesData?.data,
-  });
-
-  if (status < 5) {
-    return null;
-  }
-
-  return <Link href={`/reports/projects/${id}`}>Report</Link>;
+  return (
+    <div>
+      <Link href={`/reports/projects/${id}`}>
+        <Button variant="outline" size="lg" className="items-center">
+          <FileIcon className="mr-2 h-4 w-4" />
+          <span>Report</span>
+        </Button>
+      </Link>
+    </div>
+  );
 }

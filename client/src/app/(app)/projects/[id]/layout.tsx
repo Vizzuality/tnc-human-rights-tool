@@ -38,16 +38,21 @@ export default async function ProjectsDetailLayout({
           <header className="grid grid-cols-12 items-center space-y-10 border-b border-gray-100 pb-8">
             <div className="col-span-12 space-y-2.5">
               <NavigationBreadcrumbs />
-              <div className="prose">
-                <h1>{PROJECT?.data?.attributes?.name}</h1>
-              </div>
-              <div className="prose">
-                <p>{PROJECT?.data?.attributes?.description}</p>
+
+              <div className="flex justify-between">
+                <div>
+                  <div className="prose">
+                    <h1>{PROJECT?.data?.attributes?.name}</h1>
+                  </div>
+                  <div className="prose">
+                    <p>{PROJECT?.data?.attributes?.description}</p>
+                  </div>
+                </div>
                 <ProjectsDetailReport />
               </div>
             </div>
 
-            <div className="col-span-10">
+            <div className="col-span-12">
               <NavigationTabs />
             </div>
           </header>
