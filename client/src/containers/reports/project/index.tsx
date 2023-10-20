@@ -63,6 +63,12 @@ export default function ReportsProjectId() {
     );
   }, [ITEMS, projectIdData]);
 
+  const NO_DATA = useMemo(() => {
+    return PRIORIZATIONS.every((priorization) => {
+      return !GROUPS[priorization.value]?.length;
+    });
+  }, [GROUPS]);
+
   return (
     <PDFViewer filename={`${projectIdData?.data?.attributes?.name ?? "project"}-report.pdf`}>
       <div className="prose">
@@ -71,30 +77,44 @@ export default function ReportsProjectId() {
           <p>{projectIdData?.data?.attributes?.description}</p>
         </header>
         <div className="mt-10">
-          {PRIORIZATIONS.map((priorization) => {
-            return (
-              <div
-                key={priorization.value}
-                className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
-              >
-                <h2>{priorization.label}</h2>
-                <div className="mt-8 divide-y">
-                  {GROUPS[priorization.value]?.map((item) => {
-                    if (!item?.id) return null;
+          {!!NO_DATA && (
+            <div className="prose">
+              <h2>No data</h2>
+              <p>
+                Only contextual risks with a prioritization are shown. Please, go to the project
+                detail page and add a prioritization to the contextual risks in the project risk
+                section.
+              </p>
+            </div>
+          )}
 
-                    return (
-                      <div
-                        key={item.id}
-                        className="pb-10 pt-10 first-of-type:pt-0 last-of-type:pb-0"
-                      >
-                        <ReportsProjectIdItem {...item} />
-                      </div>
-                    );
-                  })}
+          {!NO_DATA &&
+            PRIORIZATIONS.map((priorization) => {
+              if (!GROUPS[priorization.value]?.length) return null;
+
+              return (
+                <div
+                  key={priorization.value}
+                  className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
+                >
+                  <h2>{priorization.label}</h2>
+                  <div className="mt-8 divide-y">
+                    {GROUPS[priorization.value]?.map((item) => {
+                      if (!item?.id) return null;
+
+                      return (
+                        <div
+                          key={item.id}
+                          className="pb-10 pt-10 first-of-type:pt-0 last-of-type:pb-0"
+                        >
+                          <ReportsProjectIdItem {...item} />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </PDFViewer>

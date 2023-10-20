@@ -2,7 +2,8 @@
 
 import { PropsWithChildren, useState } from "react";
 
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { useParams, useSearchParams } from "next/navigation";
 
 import { ShadowIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
@@ -70,6 +71,7 @@ const useWebshotMutation = () => {
 
 export default function PDFViewer({ children, filename }: PDFViewerProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { id } = useParams();
   const searchParams = useSearchParams();
   const format = searchParams.get("format");
 
@@ -102,7 +104,11 @@ export default function PDFViewer({ children, filename }: PDFViewerProps) {
       })}
     >
       {format !== "pdf" && (
-        <header className="mb-10 flex w-[210mm] justify-end">
+        <header className="mb-10 flex w-[210mm] items-center justify-between">
+          <Link className="hover:text-primary hover:underline" href={`/projects/${id}`}>
+            {"<"} Back to project
+          </Link>
+
           <Button className="relative" size="lg" onClick={handleExportAsPdf}>
             {isSubmitting ? (
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
