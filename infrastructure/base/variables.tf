@@ -19,14 +19,6 @@ variable "repo_name" {
   description = "Name of the Github repository where the code is hosted"
 }
 
-variable "staging_domain" {
-  type = string
-}
-
-variable "production_domain" {
-  type = string
-}
-
 #
 # Elastic Beanstalk configuration
 # concepts: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.html
@@ -44,14 +36,6 @@ variable "beanstalk_tier" {
 }
 
 #
-# EC2 configuration
-#
-variable "ec2_instance_type" {
-  type        = string
-  description = "The type of EC2 instance to launch"
-}
-
-#
 # RDS configuration
 #
 variable "rds_instance_class" {
@@ -64,24 +48,6 @@ variable "rds_engine_version" {
   description = "RDS Database engine version"
 }
 
-variable "rds_instance_count" {
-  type        = number
-  default     = 1
-  description = "Number of Aurora PostgreSQL instances before autoscaling"
-}
-
-variable "rds_log_retention_period" {
-  type        = number
-  default     = 1
-  description = "Time in days to keep log files in cloud watch"
-}
-
-variable "rds_backup_retention_period" {
-  type        = number
-  default     = 7
-  description = "Time in days to keep db backups"
-}
-
 variable "ga_tracking_id" {
   type        = string
   default     = ""
@@ -92,4 +58,34 @@ variable "cms_url" {
   type        = string
   default     = ""
   description = "URL for the HRT CMS application"
+}
+
+# Staging configuration
+variable "staging_domain" {
+  type = string
+}
+
+variable "staging_ec2_instance_type" {
+  type        = string
+  description = "The type of EC2 instance to launch on the staging environment"
+}
+
+variable "staging_rds_backup_retention_period" {
+  type        = number
+  description = "Time in days to keep staging db backups"
+}
+
+# Production configuration
+variable "production_domain" {
+  type = string
+}
+
+variable "production_ec2_instance_type" {
+  type        = string
+  description = "The type of EC2 instance to launch on the production environment"
+}
+
+variable "production_rds_backup_retention_period" {
+  type        = number
+  description = "Time in days to keep production db backups"
 }
