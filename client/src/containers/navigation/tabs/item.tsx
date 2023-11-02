@@ -36,6 +36,7 @@ export default function TabsNavigationItem({
             secondary: !pathname.includes(`${props.href}`),
           }) as ButtonProps["variant"]
         }
+        className="h-20 w-full items-center justify-center py-0"
       >
         {children}
       </Button>
