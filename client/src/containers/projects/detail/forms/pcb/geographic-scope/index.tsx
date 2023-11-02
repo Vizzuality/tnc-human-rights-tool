@@ -167,42 +167,44 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
 
                       {ip.type === "checkbox" && !!ip.options && (
                         <>
-                          {ip.options.map((o) => (
-                            <FormField
-                              key={o.value}
-                              control={form.control}
-                              name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
-                              render={({ field }) => {
-                                return (
-                                  <FormItem
-                                    key={o.value}
-                                    className="flex flex-row items-start space-y-0"
-                                  >
-                                    <FormControl>
-                                      <Checkbox
-                                        className="mt-0.5 cursor-pointer"
-                                        checked={field.value?.includes(o.value)}
-                                        onCheckedChange={(checked) => {
-                                          const prevValue = field.value || [];
+                          {ip.options
+                            .sort((a, b) => a.label.localeCompare(b.label))
+                            .map((o) => (
+                              <FormField
+                                key={o.value}
+                                control={form.control}
+                                name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
+                                render={({ field }) => {
+                                  return (
+                                    <FormItem
+                                      key={o.value}
+                                      className="flex flex-row items-start space-y-0"
+                                    >
+                                      <FormControl>
+                                        <Checkbox
+                                          className="mt-0.5 cursor-pointer"
+                                          checked={field.value?.includes(o.value)}
+                                          onCheckedChange={(checked) => {
+                                            const prevValue = field.value || [];
 
-                                          return checked
-                                            ? field.onChange([...prevValue, o.value])
-                                            : field.onChange(
-                                                prevValue?.filter(
-                                                  (value: string) => value !== o.value,
-                                                ),
-                                              );
-                                        }}
-                                      />
-                                    </FormControl>
-                                    <FormLabel className="cursor-pointer pl-2 text-sm font-normal">
-                                      {o.label}
-                                    </FormLabel>
-                                  </FormItem>
-                                );
-                              }}
-                            />
-                          ))}
+                                            return checked
+                                              ? field.onChange([...prevValue, o.value])
+                                              : field.onChange(
+                                                  prevValue?.filter(
+                                                    (value: string) => value !== o.value,
+                                                  ),
+                                                );
+                                          }}
+                                        />
+                                      </FormControl>
+                                      <FormLabel className="cursor-pointer pl-2 text-sm font-normal">
+                                        {o.label}
+                                      </FormLabel>
+                                    </FormItem>
+                                  );
+                                }}
+                              />
+                            ))}
                         </>
                       )}
 
