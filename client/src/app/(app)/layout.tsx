@@ -6,7 +6,7 @@ import Header from "@/containers/header";
 import ScrollUp from "@/containers/scroll-up";
 
 export const metadata: Metadata = {
-  title: "Human Rights Tool",
+  title: "Human Rights Screening Tool",
   description: "",
 };
 
