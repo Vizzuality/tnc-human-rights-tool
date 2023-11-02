@@ -9,7 +9,7 @@ export default function OtherTools() {
         <div className="col-span-12 lg:col-span-8">
           <div className="space-y-10">
             <div className="prose w-full">
-              <h1>Other tools</h1>
+              <h1>Other Tools</h1>
 
               <p>
                 This Toolset is not meant to be a single solution to address human rights and

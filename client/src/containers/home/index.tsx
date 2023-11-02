@@ -124,10 +124,7 @@ export default function Home() {
                 guidance to help make Project Risk Determinations, prioritize, and decide next
                 steps.
               </p>
-            </div>
 
-            <div className="prose w-full">
-              <h2>Screening phase</h2>
               <p>
                 Screening for project risk occurs in two steps, ensuring a comprehensive analysis.
               </p>
@@ -191,8 +188,9 @@ export default function Home() {
             </CardHeader>
             <CardContent className="prose w-full">
               <p>
-                The Human Rights Screening Toolset is designed to be used by TNC field teams to
-                identify potential human rights risks and prioritize them for action.
+                The Human Rights Screening Tool is designed to identify potential human rights
+                risks, prioritize them for further action, and fulfill the larger responsibility of
+                human rights due diligence
               </p>
               <Link href="/projects" className="block">
                 <Button size="lg" className="w-full">
