@@ -37,7 +37,7 @@ export default function FooterForm({ className = "" }: FooterFormProps) {
     <div
       className={cn({
         "pointer-events-none flex justify-end py-4": true,
-        "sticky bottom-0": !className,
+        "sticky bottom-0 z-10": !className,
         [className]: !!className,
       })}
     >
