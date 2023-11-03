@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
@@ -23,6 +24,7 @@ import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -208,9 +210,45 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 name={`${id}`}
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel>
+                    <FormLabel className="flex items-center">
                       {`${contextual_risk_category?.data?.attributes?.display_order}.${display_order}`}{" "}
                       {title}
+                      <Dialog>
+                        <DialogTrigger className="ml-2">
+                          <InfoCircledIcon className="inline-block h-4 w-4 text-primary hover:text-primary/50" />
+                        </DialogTrigger>
+
+                        <DialogContent className="max-h-[90svh] overflow-auto">
+                          <div className="prose">
+                            <h2>Any, Multiple, Frequent, and Pervasive</h2>
+                            <p>
+                              These terms are used, not interchangeably, to calibrate frequency or
+                              persistence of incidents. They each have a slightly different meaning:
+                            </p>
+                            <ul>
+                              <li>
+                                <strong>any:</strong> at least one incident
+                              </li>
+                              <li>
+                                <strong>multiple:</strong> two or more incidents
+                              </li>
+                              <li>
+                                <strong>frequent:</strong> more than two incidents, and somewhat
+                                geographically dependent — three incidents in a small community
+                                might be deemed “frequent” rather than merely “multiple”
+                              </li>
+                              <li>
+                                <strong>pervasive:</strong> high frequency over both time and
+                                geographic scope
+                              </li>
+                            </ul>
+                            <blockquote>
+                              NOTE: Using “frequent” and “pervasive” with strictest rigor will help
+                              teams prioritize.
+                            </blockquote>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </FormLabel>
                     <div className="prose">{parse(description)}</div>
 
