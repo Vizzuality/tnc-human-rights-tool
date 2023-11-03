@@ -114,7 +114,12 @@ export default function NavigationTabs() {
         {LINKS.map(({ href, label, slug }) => (
           <li className="relative z-10 col-span-3" key={href}>
             <div className="absolute left-0 top-0 z-0 h-full w-full bg-white" />
-            <TabsNavigationItem href={`/projects/${id}${href}`} className="relative z-10">
+            <TabsNavigationItem
+              href={`/projects/${id}${href}`}
+              className="relative z-10"
+              slug={slug}
+              progress={progress}
+            >
               <span className="flex space-x-1">
                 <span>{label}</span>{" "}
                 <span className="absolute bottom-1.5 right-1.5 text-[10px] leading-none opacity-75">
