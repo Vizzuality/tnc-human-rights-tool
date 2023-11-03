@@ -140,8 +140,8 @@ export const getFollowUpProgress = ({ risks }: Partial<GetStatusProps>) => {
   const values = Object.values(RISKS_VALUES).filter(
     (v) =>
       !!v &&
-      !!v.proyect_risk_priorization &&
-      (v.contextual_risk === "yes" || v.contextual_risk === "more-research"),
+      ((v.contextual_risk === "yes" && !!v.proyect_risk_priorization) ||
+        v.contextual_risk === "more-research"),
   );
 
   const progress = values.reduce((acc, v) => {

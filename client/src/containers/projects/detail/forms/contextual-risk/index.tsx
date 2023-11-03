@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -10,7 +10,10 @@ import { useQueryClient } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
-import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
+import {
+  useGetContextualRiskCategories,
+  useGetContextualRiskCategoriesId,
+} from "@/types/generated/contextual-risk-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
@@ -53,6 +56,10 @@ const RADIO_OPTIONS = [
 export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
   const { id: projectId, categoryId } = useParams();
 
+  const { data: categoriesData } = useGetContextualRiskCategories({
+    sort: "display_order:asc",
+  });
+
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
@@ -71,6 +78,31 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
     string,
     Record<string, { contextual_risk: string }>
   >;
+
+  const nextCategory = useMemo(() => {
+    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+
+    if (!categoryId || i === undefined) {
+      return {
+        href: `/projects/${projectId}/contextual-risk`,
+        label: "Contextual Risk",
+      };
+    }
+
+    const n = categoriesData?.data?.[i + 1];
+
+    if (!n) {
+      return {
+        href: `/projects/${projectId}/project-risk`,
+        label: "Proyect Risk",
+      };
+    }
+
+    return {
+      href: `/projects/${projectId}/contextual-risk/${n.id}`,
+      label: n.attributes?.title ?? "",
+    };
+  }, [categoriesData, categoryId, projectId]);
 
   const formSchema = z.object({
     ...items?.data?.reduce(
@@ -240,7 +272,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
             );
           })}
 
-        <FooterForm />
+        <FooterForm next={nextCategory} />
       </form>
     </Form>
   );

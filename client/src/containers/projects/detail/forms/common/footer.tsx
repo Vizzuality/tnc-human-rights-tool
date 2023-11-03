@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 import { useFormContext } from "react-hook-form";
 
+import Link from "next/link";
+
 import { CheckIcon, ShadowIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
@@ -12,9 +14,13 @@ import { Button } from "@/components/ui/button";
 
 type FooterFormProps = {
   className?: string;
+  next?: {
+    href: string;
+    label: string;
+  };
 };
 
-export default function FooterForm({ className = "" }: FooterFormProps) {
+export default function FooterForm({ className = "", next }: FooterFormProps) {
   const { formState } = useFormContext();
   const { isSubmitting, isSubmitSuccessful } = formState;
 
@@ -36,7 +42,7 @@ export default function FooterForm({ className = "" }: FooterFormProps) {
   return (
     <div
       className={cn({
-        "pointer-events-none flex justify-end py-4": true,
+        "pointer-events-none flex items-end justify-end space-x-5 py-4": true,
         "sticky bottom-0 z-10": !className,
         [className]: !!className,
       })}
@@ -55,6 +61,17 @@ export default function FooterForm({ className = "" }: FooterFormProps) {
         ) : null}
         <span className={cn(isSubmitting || success ? "opacity-20" : "opacity-100")}>Save</span>
       </Button>
+
+      {!!next && (
+        <Link href={next.href}>
+          <Button className="pointer-events-auto relative" variant="secondary" type="submit">
+            <span>
+              {/* Go to {next.label} */}
+              Continue
+            </span>
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
