@@ -1,5 +1,10 @@
 import { Metadata } from "next";
 
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 export type ProjectsDetailPageProps = {
   params: {
     id: string;
@@ -13,505 +18,548 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
   };
 }
 
-export default function ProjectsDetailPage() {
+export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) {
   return (
-    <div className="prose">
-      <h2>Learning & Early Discussions</h2>
-      <p>
-        In preparing to use this Toolset, teams should feel empowered to conduct research and engage
-        with key Communities. Module 1 of the Human Rights Guide (11) might help guide you to
-        identify Communities, assess your capacity for engaging, and focus on how to engage
-        respectfully. Human rights often are and should be adapted to local understandings and
-        values. Outsiders must bring humility and deference to the process of applying their
-        understanding of “international human rights” to other peoples’ circumstances.
-      </p>
-      <h2>Project and Community Background</h2>
-      <p>
-        Teams should complete a stakeholder mapping or interested parties assessment to identify
-        rightsholders and uncover all the potential impacts that affect them. They should also
-        identify subgroups within Communities who might need special human rights considerations.
-        Addtionally in this phase, the tool generates the following project-specific terms:
-      </p>
-      <ul>
-        <li>Project Site</li>
-        <li>Project Area</li>
-        <li>Project Region</li>
-      </ul>
-      <p>
-        The real utility of the research phase is to help teams familiarize themselves with the
-        geographies, Communities, and other contexts present in a project. There are many other
-        context-setting tools available for this work, so teams should decide for themselves which
-        one suits best.
-      </p>
-      <h2>Screening Phase</h2>
-      <h3>Human Rights Risk</h3>
-      <p>
-        Conservation work creates impacts. These impacts can be good or controversial, or indeed
-        hard to characterize. Running a livelihoods program carries the risk of unfavorable results,
-        impacting gender equity, or impacting a Community’s right to self-determination.
-      </p>
-      <p>
-        It’s important to be aware of this possibility in order to avoid unfavorable outcomes.
-        Human-rights based conservation seeks to respect and advance human rights, and as such, we
-        see risks as inevitable and embrace the process of identifying risk and responding well to
-        it. This Toolset helps identify and prioritize those risks.
-      </p>
-      <p>
-        The scope of human rights and our responsibility to respect and caretake them is vast, so
-        understanding how actions and impacts are linked well help teams understand TNC’s
-        obligations. This Toolset was designed to identify and prioritize human rights risks — it
-        answers to broad ranges of impacts, including not only severe human rights abuses but also
-        socioeconomic rights, labor rights, and complex collective rights like the right to
-        self-determination.
-      </p>
-      <p>
-        Following a comprehensive human rights due diligence process (HRDD) is essential. The
-        responsibility of HRDD is to first identify and assess risk, and secondly to co-create,
-        implement, and review mitigation strategies. This Toolset applies these concepts by way of
-        the Project Risk Determination Framework.
-      </p>
-      <h3>Contextual Risk and Project Risk</h3>
-      <p>The screening phase comprises two distinct parts:</p>
-      <ol>
-        <li>Contextual Risk Screen: Assessment of the overall environment</li>
-        <li>Project Risk Screen: Focusing on the specific project and its likely impacts</li>
-      </ol>
-      <p>
-        The overall environmental assessment is performed with the framework of the Contextual Risk
-        Screen. It can be easy to overlook human rights risks, especially when supporters are
-        optimistically focused on benefits and upsides as opposed to unexpected turns of events.
-      </p>
-      <p>
-        Importantly, because the Contextual Risk Screen casts such a broad lens, it presumes that
-        any risks that are uncovered will be linked to the project in question, unless the team
-        specifically determines that a risk is not applicable, unlikely, or already has a mitigation
-        strategy in place.
-      </p>
-      <p>
-        This first phase of the screening process moves quickly, as its indicators identify rights
-        issues broadly and asks whether Communities working in the area are aware of
-        them.&nbsp;Teams can answer &ldquo;yes,&rdquo; &ldquo;no,&rdquo; or &ldquo;need for more
-        research,&rdquo; the latter of which puts the indicator on a Research List for teams to
-        document and organize issues for investigation.
-      </p>
-      <p>
-        A more in-depth analysis is performed with the Project Risk Screen, which zooms in on
-        indicators identified in the Contextual screening process. At this level, teams will be
-        given indicator-specific guidance and cross-references to other indicators and tools, moving
-        on to a more structured assessment in the Project Risk Determination, where each indicator
-        will be placed into one of three categories:
-      </p>
-      <ul>
-        <li>Escalate List</li>
-        <li>Prioritize List</li>
-        <li>Watch List</li>
-      </ul>
-      <h3>Judgment and Prioritization</h3>
-      <p>
-        Human rights screening is a complex process, requiring existing knowledge, experience, and
-        keen attunement. It can be difficult to make judgment calls or know how to prioritize, but
-        it&rsquo;s a necessary part of the process, because after all, if everything is a priority,
-        nothing is a priority.
-      </p>
-      <p>
-        This Toolset, with its planned and prescriptive structure, aims to cut down on the cognitive
-        load required to do this prioritization effectively. It will organize teams&rsquo; thinking
-        so they can usefully engage with Communities, but it is not a one-stop shop. Rather, the
-        Toolset itself expressly guides teams to revisit and validate determinations with the
-        Communities.
-      </p>
-      <p>
-        During some of our early workshopping of this Toolset, teams felt uncomfortable making risk
-        determinations, particularly if they felt they would be on the hook for missing something.
-      </p>
-      <p>This is understandable.</p>
-      <p>
-        It&rsquo;s important to remember that, if no due diligence process like this is followed,
-        the team is essentially making a &ldquo;no risk&rdquo; determination about everything.
-        Therefore it&rsquo;s better to follow a process, however imperfect or incomplete it might
-        feel.
-      </p>
-      <p>
-        With that in mind, team members should be made to feel comfortable engaging with the Toolset
-        and properly incentivized to identify risks, even if their identification might delay
-        project deadlines.
-      </p>
-      <p>
-        In our workshopping sessions, team members became more comfortable with making these
-        judgments as they familiarized themselves with the Toolset. And the discussions that ensued
-        from engaging with the Toolset were found to be educational and clarifying.
-      </p>
-      <h3>Key Tool: The Project Risk Determination</h3>
-      <p>
-        This risk analysis framework, then, is meant to help teams determine whether an identified
-        risk can be considered limited or manageable to the point that it is a normal part of work
-        in the environment.
-      </p>
-      <p>
-        That’s not to say these risks are ignored, but they are placed on the Watch List, where they
-        receive a different level of attention.
-      </p>
-      <p>A useful acronym to remember the elements of a so-called “normal” risk is NAURMAL:</p>
-      <ul>
-        <li>
-          <b>NA</b> —{" "}
-          <b>
-            <u>N</u>
-          </b>
-          ot{" "}
-          <b>
-            <u>A</u>
-          </b>
-          pplicable to the project
-        </li>
-        <li>
-          <b>U</b> —{" "}
-          <b>
-            <u>U</u>
-          </b>
-          nlikely to occur
-        </li>
-        <li>
-          <b>RM</b> —{" "}
-          <b>
-            <u>R</u>
-          </b>
-          eliable{" "}
-          <b>
-            <u>M</u>
-          </b>
-          itigation strategies exist and are
-        </li>
-        <li>
-          <b>A</b> —{" "}
-          <b>
-            <u>A</u>
-          </b>
-          vailable
-        </li>
-        <li>
-          <b>L</b> —{" "}
-          <b>
-            <u>L</u>
-          </b>
-          imited scope of risk
-        </li>
-      </ul>
-      <p>
-        Having learned from our past workshopping process, we hope this tool will help teams to feel
-        more comfortable making the complex risk analysis decisions required at this phase of
-        engagement.
-      </p>
-      <p>
-        The Project Risk Determination is meant to give teams a high-level impression of where a
-        given risk falls on the continuum of project risk. Teams then use that, along with
-        indicator-specific guidance, to place risks on the Escalate, Priority, or Watch Lists.
-      </p>
-      <h3>Key Tool: Minimum Core Risk Determination(13)</h3>
-      <p>
-        Minimum Core Risk Determinations apply most often to socioeconomic rights: food, water,
-        housing, education, medical care, and so on, as delineated further in this helpful fact
-        sheet (13). These rights are understood somewhat differently than civil and political
-        rights. Rather than setting concrete standards, these rights are seen as imposing
-        obligations on states to “progressively realize” the right over time. That said,
-        socioeconomic rights have a “minimum core,” the violation of which is a violation of human
-        rights law like any other. The factors that indicate a minimum core violation include
-      </p>
-      <ol>
-        <li>Unlawful discrimination in respecting, protecting, or fulfilling the right</li>
-        <li>Retrogressive action measures that worsen baseline conditions</li>
-        <li>Failing to pursue available mitigation strategies that would alleviate insecurity</li>
-        <li>
-          The existence of persistent severe inadequacies, particularly those that affect children.
-        </li>
-      </ol>
-      <p>
-        These factors are described in more detail in the Minimum Core Risk Determination Framework.
-        When directed in the Project Risk Screen,, teams should apply factors (A)-(D) above and
-        determine if a project risks violating Communities’ minimum core enjoyment of a right.
-      </p>
-      <h3>The Research List</h3>
-      <p>
-        While performing the Contextual Risk Screen, teams may find some indicators that require
-        more information to mark as a contextual risk. These are to be pursued with desk research in
-        tandem with preliminary Community engagement as outlined in Module 1 of the Human Rights
-        Guide(11).
-      </p>
-      <h3>The Escalate List</h3>
-      <p>
-        In cases where risks are considered severe, “grave,” or “gross” [1] violations in
-        international human rights law, and irrespective of whether they are more or less likely to
-        occur, organizations like TNC have a stronger obligation to avoid these risks. Mitigation
-        strategies might be deemed unreliable in the face of these risks, as they might be
-        accompanied by a breakdown in governance or other types of protections. Such risks are
-        placed on the Escalate List.
-      </p>
-      <p>
-        Risks marked on the Escalate List should receive follow up via the process described below.
-        A risk on the Escalate List might still be a viable project, but it should be put on hold
-        and vetted by reviewers outside the project team who might have specialized expertise in
-        human rights and risk analysis.
-      </p>
-      <p>
-        If a project is already in motion, the action of putting it on hold might itself trigger
-        adverse human rights impacts. In those circumstances, do suspend significant changes or
-        expansions until the risk is reviewed.
-      </p>
-      <p>
-        The additional layer of review is still being piloted, and is described below. If an
-        Escalate List risk has already been examined by regional, national, or global leadership
-        outside the project team, the Toolset recommends a refresh.
-      </p>
-      <p>
-        <i>
-          Note: This Toolset aligns with TNC’s heightened risk definition, as it identifies
-          conflicts with TNC’s core values and general adverse impacts. That will necessitate
-          performing a heightened risk analysis(16) as described by TNC. The Toolset also serves to
-          identify heightened people risk assessment factors, and it helps create social safeguards
-          and recommendations.
-        </i>
-      </p>
+    <div className="grid grid-cols-12 gap-y-10 lg:gap-20">
+      <div className="col-span-12 lg:col-span-8">
+        <div className="prose">
+          <h2>Learning & Early Discussions</h2>
+          <p>
+            In preparing to use this Toolset, teams should feel empowered to conduct research and
+            engage with key Communities. Module 1 of the Human Rights Guide (11) might help guide
+            you to identify Communities, assess your capacity for engaging, and focus on how to
+            engage respectfully. Human rights often are and should be adapted to local
+            understandings and values. Outsiders must bring humility and deference to the process of
+            applying their understanding of “international human rights” to other peoples’
+            circumstances.
+          </p>
+          <h2>Project and Community Background</h2>
+          <p>
+            Teams should complete a stakeholder mapping or interested parties assessment to identify
+            rightsholders and uncover all the potential impacts that affect them. They should also
+            identify subgroups within Communities who might need special human rights
+            considerations. Addtionally in this phase, the tool generates the following
+            project-specific terms:
+          </p>
+          <ul>
+            <li>Project Site</li>
+            <li>Project Area</li>
+            <li>Project Region</li>
+          </ul>
+          <p>
+            The real utility of the research phase is to help teams familiarize themselves with the
+            geographies, Communities, and other contexts present in a project. There are many other
+            context-setting tools available for this work, so teams should decide for themselves
+            which one suits best.
+          </p>
+          <h2>Screening Phase</h2>
+          <h3>Human Rights Risk</h3>
+          <p>
+            Conservation work creates impacts. These impacts can be good or controversial, or indeed
+            hard to characterize. Running a livelihoods program carries the risk of unfavorable
+            results, impacting gender equity, or impacting a Community’s right to
+            self-determination.
+          </p>
+          <p>
+            It’s important to be aware of this possibility in order to avoid unfavorable outcomes.
+            Human-rights based conservation seeks to respect and advance human rights, and as such,
+            we see risks as inevitable and embrace the process of identifying risk and responding
+            well to it. This Toolset helps identify and prioritize those risks.
+          </p>
+          <p>
+            The scope of human rights and our responsibility to respect and caretake them is vast,
+            so understanding how actions and impacts are linked well help teams understand TNC’s
+            obligations. This Toolset was designed to identify and prioritize human rights risks —
+            it answers to broad ranges of impacts, including not only severe human rights abuses but
+            also socioeconomic rights, labor rights, and complex collective rights like the right to
+            self-determination.
+          </p>
+          <p>
+            Following a comprehensive human rights due diligence process (HRDD) is essential. The
+            responsibility of HRDD is to first identify and assess risk, and secondly to co-create,
+            implement, and review mitigation strategies. This Toolset applies these concepts by way
+            of the Project Risk Determination Framework.
+          </p>
+          <h3>Contextual Risk and Project Risk</h3>
+          <p>The screening phase comprises two distinct parts:</p>
+          <ol>
+            <li>Contextual Risk Screen: Assessment of the overall environment</li>
+            <li>Project Risk Screen: Focusing on the specific project and its likely impacts</li>
+          </ol>
+          <p>
+            The overall environmental assessment is performed with the framework of the Contextual
+            Risk Screen. It can be easy to overlook human rights risks, especially when supporters
+            are optimistically focused on benefits and upsides as opposed to unexpected turns of
+            events.
+          </p>
+          <p>
+            Importantly, because the Contextual Risk Screen casts such a broad lens, it presumes
+            that any risks that are uncovered will be linked to the project in question, unless the
+            team specifically determines that a risk is not applicable, unlikely, or already has a
+            mitigation strategy in place.
+          </p>
+          <p>
+            This first phase of the screening process moves quickly, as its indicators identify
+            rights issues broadly and asks whether Communities working in the area are aware of
+            them.&nbsp;Teams can answer &ldquo;yes,&rdquo; &ldquo;no,&rdquo; or &ldquo;need for more
+            research,&rdquo; the latter of which puts the indicator on a Research List for teams to
+            document and organize issues for investigation.
+          </p>
+          <p>
+            A more in-depth analysis is performed with the Project Risk Screen, which zooms in on
+            indicators identified in the Contextual screening process. At this level, teams will be
+            given indicator-specific guidance and cross-references to other indicators and tools,
+            moving on to a more structured assessment in the Project Risk Determination, where each
+            indicator will be placed into one of three categories:
+          </p>
+          <ul>
+            <li>Escalate List</li>
+            <li>Prioritize List</li>
+            <li>Watch List</li>
+          </ul>
+          <h3>Judgment and Prioritization</h3>
+          <p>
+            Human rights screening is a complex process, requiring existing knowledge, experience,
+            and keen attunement. It can be difficult to make judgment calls or know how to
+            prioritize, but it&rsquo;s a necessary part of the process, because after all, if
+            everything is a priority, nothing is a priority.
+          </p>
+          <p>
+            This Toolset, with its planned and prescriptive structure, aims to cut down on the
+            cognitive load required to do this prioritization effectively. It will organize
+            teams&rsquo; thinking so they can usefully engage with Communities, but it is not a
+            one-stop shop. Rather, the Toolset itself expressly guides teams to revisit and validate
+            determinations with the Communities.
+          </p>
+          <p>
+            During some of our early workshopping of this Toolset, teams felt uncomfortable making
+            risk determinations, particularly if they felt they would be on the hook for missing
+            something.
+          </p>
+          <p>This is understandable.</p>
+          <p>
+            It&rsquo;s important to remember that, if no due diligence process like this is
+            followed, the team is essentially making a &ldquo;no risk&rdquo; determination about
+            everything. Therefore it&rsquo;s better to follow a process, however imperfect or
+            incomplete it might feel.
+          </p>
+          <p>
+            With that in mind, team members should be made to feel comfortable engaging with the
+            Toolset and properly incentivized to identify risks, even if their identification might
+            delay project deadlines.
+          </p>
+          <p>
+            In our workshopping sessions, team members became more comfortable with making these
+            judgments as they familiarized themselves with the Toolset. And the discussions that
+            ensued from engaging with the Toolset were found to be educational and clarifying.
+          </p>
+          <h3>Key Tool: The Project Risk Determination</h3>
+          <p>
+            This risk analysis framework, then, is meant to help teams determine whether an
+            identified risk can be considered limited or manageable to the point that it is a normal
+            part of work in the environment.
+          </p>
+          <p>
+            That’s not to say these risks are ignored, but they are placed on the Watch List, where
+            they receive a different level of attention.
+          </p>
+          <p>A useful acronym to remember the elements of a so-called “normal” risk is NAURMAL:</p>
+          <ul>
+            <li>
+              <b>NA</b> —{" "}
+              <b>
+                <u>N</u>
+              </b>
+              ot{" "}
+              <b>
+                <u>A</u>
+              </b>
+              pplicable to the project
+            </li>
+            <li>
+              <b>U</b> —{" "}
+              <b>
+                <u>U</u>
+              </b>
+              nlikely to occur
+            </li>
+            <li>
+              <b>RM</b> —{" "}
+              <b>
+                <u>R</u>
+              </b>
+              eliable{" "}
+              <b>
+                <u>M</u>
+              </b>
+              itigation strategies exist and are
+            </li>
+            <li>
+              <b>A</b> —{" "}
+              <b>
+                <u>A</u>
+              </b>
+              vailable
+            </li>
+            <li>
+              <b>L</b> —{" "}
+              <b>
+                <u>L</u>
+              </b>
+              imited scope of risk
+            </li>
+          </ul>
+          <p>
+            Having learned from our past workshopping process, we hope this tool will help teams to
+            feel more comfortable making the complex risk analysis decisions required at this phase
+            of engagement.
+          </p>
+          <p>
+            The Project Risk Determination is meant to give teams a high-level impression of where a
+            given risk falls on the continuum of project risk. Teams then use that, along with
+            indicator-specific guidance, to place risks on the Escalate, Priority, or Watch Lists.
+          </p>
+          <h3>Key Tool: Minimum Core Risk Determination(13)</h3>
+          <p>
+            Minimum Core Risk Determinations apply most often to socioeconomic rights: food, water,
+            housing, education, medical care, and so on, as delineated further in this helpful fact
+            sheet (13). These rights are understood somewhat differently than civil and political
+            rights. Rather than setting concrete standards, these rights are seen as imposing
+            obligations on states to “progressively realize” the right over time. That said,
+            socioeconomic rights have a “minimum core,” the violation of which is a violation of
+            human rights law like any other. The factors that indicate a minimum core violation
+            include
+          </p>
+          <ol>
+            <li>Unlawful discrimination in respecting, protecting, or fulfilling the right</li>
+            <li>Retrogressive action measures that worsen baseline conditions</li>
+            <li>
+              Failing to pursue available mitigation strategies that would alleviate insecurity
+            </li>
+            <li>
+              The existence of persistent severe inadequacies, particularly those that affect
+              children.
+            </li>
+          </ol>
+          <p>
+            These factors are described in more detail in the Minimum Core Risk Determination
+            Framework. When directed in the Project Risk Screen,, teams should apply factors (A)-(D)
+            above and determine if a project risks violating Communities’ minimum core enjoyment of
+            a right.
+          </p>
+          <h3>The Research List</h3>
+          <p>
+            While performing the Contextual Risk Screen, teams may find some indicators that require
+            more information to mark as a contextual risk. These are to be pursued with desk
+            research in tandem with preliminary Community engagement as outlined in Module 1 of the
+            Human Rights Guide(11).
+          </p>
+          <h3>The Escalate List</h3>
+          <p>
+            In cases where risks are considered severe, “grave,” or “gross” [1] violations in
+            international human rights law, and irrespective of whether they are more or less likely
+            to occur, organizations like TNC have a stronger obligation to avoid these risks.
+            Mitigation strategies might be deemed unreliable in the face of these risks, as they
+            might be accompanied by a breakdown in governance or other types of protections. Such
+            risks are placed on the Escalate List.
+          </p>
+          <p>
+            Risks marked on the Escalate List should receive follow up via the process described
+            below. A risk on the Escalate List might still be a viable project, but it should be put
+            on hold and vetted by reviewers outside the project team who might have specialized
+            expertise in human rights and risk analysis.
+          </p>
+          <p>
+            If a project is already in motion, the action of putting it on hold might itself trigger
+            adverse human rights impacts. In those circumstances, do suspend significant changes or
+            expansions until the risk is reviewed.
+          </p>
+          <p>
+            The additional layer of review is still being piloted, and is described below. If an
+            Escalate List risk has already been examined by regional, national, or global leadership
+            outside the project team, the Toolset recommends a refresh.
+          </p>
+          <p>
+            <i>
+              Note: This Toolset aligns with TNC’s heightened risk definition, as it identifies
+              conflicts with TNC’s core values and general adverse impacts. That will necessitate
+              performing a heightened risk analysis(16) as described by TNC. The Toolset also serves
+              to identify heightened people risk assessment factors, and it helps create social
+              safeguards and recommendations.
+            </i>
+          </p>
 
-      <h3>The Prioritize List</h3>
-      <p>
-        Some risks, on the other hand, need to be prioritized for prompt attention by project teams
-        and incorporated into the project design and implementation processes.
-      </p>
-      <p>
-        There is a natural tendency to over-include priorities to avoid making a mistake, but as
-        stated above, if everything is a priority, nothing is a priority. This Toolset will help
-        with these priority decisions with specific guidance and key risk analysis frameworks.
-      </p>
-      <p>
-        When a risk carries a high level of project risk that does not fall under the Escalate
-        category, it will be placed on the Prioritize List for prompt attention by the project team.
-        All other risks, assessed by the Project Risk Determination template, will be placed on the
-        Watch List. Leaving these off the Prioritize List frees up time and resources to address the
-        most urgent issues.
-      </p>
-      <p>
-        The recommended follow up for issues on the prioritize list is described below, and includes
-        engagement and collaboration with Communities and rightsholders and potentially a human
-        rights expert.
-      </p>
+          <h3>The Prioritize List</h3>
+          <p>
+            Some risks, on the other hand, need to be prioritized for prompt attention by project
+            teams and incorporated into the project design and implementation processes.
+          </p>
+          <p>
+            There is a natural tendency to over-include priorities to avoid making a mistake, but as
+            stated above, if everything is a priority, nothing is a priority. This Toolset will help
+            with these priority decisions with specific guidance and key risk analysis frameworks.
+          </p>
+          <p>
+            When a risk carries a high level of project risk that does not fall under the Escalate
+            category, it will be placed on the Prioritize List for prompt attention by the project
+            team. All other risks, assessed by the Project Risk Determination template, will be
+            placed on the Watch List. Leaving these off the Prioritize List frees up time and
+            resources to address the most urgent issues.
+          </p>
+          <p>
+            The recommended follow up for issues on the prioritize list is described below, and
+            includes engagement and collaboration with Communities and rightsholders and potentially
+            a human rights expert.
+          </p>
 
-      <h3>The Watch List</h3>
+          <h3>The Watch List</h3>
 
-      <p>
-        The Watch List is a holding space for contextual risks that aren’t top priorities, whether
-        because of timing, because of situations that are uncertain and evolving. Remember that not
-        everything can be a top priority. These risks should be revisited and reassessed regularly —
-        no less than once a year.
-      </p>
+          <p>
+            The Watch List is a holding space for contextual risks that aren’t top priorities,
+            whether because of timing, because of situations that are uncertain and evolving.
+            Remember that not everything can be a top priority. These risks should be revisited and
+            reassessed regularly — no less than once a year.
+          </p>
 
-      <p>
-        The Watch List is also helpful to revisit at the implementation phase, or when designing
-        Community engagement processes.
-      </p>
+          <p>
+            The Watch List is also helpful to revisit at the implementation phase, or when designing
+            Community engagement processes.
+          </p>
 
-      <p>
-        Some items on the Watch List might be better addressed with alternative tools. The range of
-        human rights considered by this Toolset is broad — food, water, housing, medical care,
-        education, standards of living, collective rights, inter-generational rights. The correct
-        approach to the social challenges underlying each of these rights is still under debate, and
-        approaches that are comprehensive and correct in one context might not work in other
-        contexts. A global toolkit is useful, but it is not a global substitute purporting to work
-        in every situation. Other approaches that are more flexible or locally adapted should be
-        considered and assessed.
-      </p>
+          <p>
+            Some items on the Watch List might be better addressed with alternative tools. The range
+            of human rights considered by this Toolset is broad — food, water, housing, medical
+            care, education, standards of living, collective rights, inter-generational rights. The
+            correct approach to the social challenges underlying each of these rights is still under
+            debate, and approaches that are comprehensive and correct in one context might not work
+            in other contexts. A global toolkit is useful, but it is not a global substitute
+            purporting to work in every situation. Other approaches that are more flexible or
+            locally adapted should be considered and assessed.
+          </p>
 
-      <p>
-        Cross referencing to Other Tools enables teams to off-ramp some risks into different
-        solution frameworks. These risks are still included on the Watch List so that teams can
-        easily review progress and maintain a single point of reference for risks. Risks on the
-        Watch List can occasionally be reviewed using the Minimum Core Risk Determination Framework
-        to ensure that no unlawful discrimination occurs that would violate the minimum core of the
-        right in question.
-      </p>
+          <p>
+            Cross referencing to Other Tools enables teams to off-ramp some risks into different
+            solution frameworks. These risks are still included on the Watch List so that teams can
+            easily review progress and maintain a single point of reference for risks. Risks on the
+            Watch List can occasionally be reviewed using the Minimum Core Risk Determination
+            Framework to ensure that no unlawful discrimination occurs that would violate the
+            minimum core of the right in question.
+          </p>
 
-      <h3>Results Tables</h3>
+          <h3>Results Tables</h3>
 
-      <p>
-        Summary information is pulled from the screening process and codified into the Escalate,
-        Prioritize, and Watch Lists. These results tables are designed to help organize action and
-        recommendations for teams to pursue.
-      </p>
+          <p>
+            Summary information is pulled from the screening process and codified into the Escalate,
+            Prioritize, and Watch Lists. These results tables are designed to help organize action
+            and recommendations for teams to pursue.
+          </p>
 
-      <p>
-        There is potential for items on these lists to overlap. Project teams are expected to use
-        their discretion to set priorities and schedule analyses and check-ins at various stages of
-        project design and implementation. This should ensure transparency and accountability, while
-        also prioritizing the expertise of local management from Communities.
-      </p>
+          <p>
+            There is potential for items on these lists to overlap. Project teams are expected to
+            use their discretion to set priorities and schedule analyses and check-ins at various
+            stages of project design and implementation. This should ensure transparency and
+            accountability, while also prioritizing the expertise of local management from
+            Communities.
+          </p>
 
-      <h2>Follow-up Phase</h2>
-      <h3>Escalate List Follow-up: Seek Additional Review</h3>
-      <p>
-        Because issues on the Escalate List often reflect governance or social breakdown, they are
-        unpredictable, difficult to mitigate, and carry a high degree of human rights and
-        organizational risk. Therefore, decisions cannot be made with the project team alone; TNC
-        leadership and outside experts should be consulted.
-      </p>
-      <p>
-        There is, as yet, no specific review process to follow for Escalate List risks. Future
-        options could include use of existing review committees, a new specialized review committee,
-        or selected staff who have knowledge of the risks in question. Higher-level reviewers should
-        be able to:
-      </p>
-      <ul>
-        <li>Exercise independent judgment</li>
-        <li>
-          Offer expertise in human rights and/or the challenges of the particular project
-          environment
-        </li>
-        <li>
-          Oversee discretionary budget with authority to direct additional research or engage
-          outside experts
-        </li>
-        <li>
-          Assess organizational risk to TNC, TNC’s partners, and the NCS community of practice
-          globally
-        </li>
-      </ul>
-      <p>
-        For beta users of the Toolset, the interim process is to send their Escalate List results to
-        their Business Unit or Regional Leadership for review. Reviewers will have support from a
-        specialized TNC legal advisor who will assist reviewers in determining next steps and
-        escalating the issue to existing review mechanisms if there is an urgent need to do so.
-      </p>
-      <p>
-        If Escalate List risks have previously been examined by higher-level leadership, as in the
-        case of ongoing projects, the review need not start over from scratch. A general guideline
-        is for leadership to refresh its formal review of these risks every two years by way of a
-        written analysis that reconsiders mitigation strategies in light of new developments.
-      </p>
-      <p>
-        Additionally, teams can use the summary information on key risk assessment criteria to
-        conduct less formal reviews on a more regular basis, sharing it with colleagues on other
-        teams and units.
-      </p>
+          <h2>Follow-up Phase</h2>
+          <h3>Escalate List Follow-up: Seek Additional Review</h3>
+          <p>
+            Because issues on the Escalate List often reflect governance or social breakdown, they
+            are unpredictable, difficult to mitigate, and carry a high degree of human rights and
+            organizational risk. Therefore, decisions cannot be made with the project team alone;
+            TNC leadership and outside experts should be consulted.
+          </p>
+          <p>
+            There is, as yet, no specific review process to follow for Escalate List risks. Future
+            options could include use of existing review committees, a new specialized review
+            committee, or selected staff who have knowledge of the risks in question. Higher-level
+            reviewers should be able to:
+          </p>
+          <ul>
+            <li>Exercise independent judgment</li>
+            <li>
+              Offer expertise in human rights and/or the challenges of the particular project
+              environment
+            </li>
+            <li>
+              Oversee discretionary budget with authority to direct additional research or engage
+              outside experts
+            </li>
+            <li>
+              Assess organizational risk to TNC, TNC’s partners, and the NCS community of practice
+              globally
+            </li>
+          </ul>
+          <p>
+            For beta users of the Toolset, the interim process is to send their Escalate List
+            results to their Business Unit or Regional Leadership for review. Reviewers will have
+            support from a specialized TNC legal advisor who will assist reviewers in determining
+            next steps and escalating the issue to existing review mechanisms if there is an urgent
+            need to do so.
+          </p>
+          <p>
+            If Escalate List risks have previously been examined by higher-level leadership, as in
+            the case of ongoing projects, the review need not start over from scratch. A general
+            guideline is for leadership to refresh its formal review of these risks every two years
+            by way of a written analysis that reconsiders mitigation strategies in light of new
+            developments.
+          </p>
+          <p>
+            Additionally, teams can use the summary information on key risk assessment criteria to
+            conduct less formal reviews on a more regular basis, sharing it with colleagues on other
+            teams and units.
+          </p>
 
-      <h3>Prioritize List Follow-up: Use a Rightsholder Engagement Tool or Other Due Diligence</h3>
+          <h3>
+            Prioritize List Follow-up: Use a Rightsholder Engagement Tool or Other Due Diligence
+          </h3>
 
-      <p>
-        Following the screening, teams should address risks on the Prioritize List by engaging with
-        rightsholders and other interested parties. A forthcoming component of this toolset
-        (tentatively called the Rightsholder Engagement Tool) will help teams facilitate the
-        sometimes complex and difficult conversations about:
-      </p>
-      <ol>
-        <li>What the relevant human rights issues are, </li>
-        <li>
-          What the corresponding actions and obligations are (e.g., for the government, for TNC, for
-          others), and{" "}
-        </li>
-        <li>
-          What can and should be done to avoid or mitigate the risk or human rights violations.{" "}
-        </li>
-      </ol>
-      <p>
-        Both the Screening Tool and the forthcoming Rightsholder Engagement Tool are components of
-        the larger process of Human Rights Due Diligence.
-      </p>
-      <p>
-        HRDD is an increasingly important and rapidly evolving international standard, with new
-        expectations emerging from national laws and institutional best practice. It is typically
-        understood to include not just identifying and assessing risks, but also a process of
-        engaging rightsholders on risks and implementing prevention and mitigation actions. The
-        Screening Tool helps teams fulfill the identification and assessment part of the process.
-        The Rightsholder Engagement Tool helps teams fulfill the engagement component and lays a
-        foundation for collaborative creation of mitigation strategies. This is a particularly
-        necessary step given that the screening is primarily based on the teams’ own knowledge and
-        perspective.
-      </p>
-      <p>
-        Teams can also review the Human Rights Guide, Module 4(9) for more comprehensive guidance on
-        how the dialogue should proceed in order to reach consensus.
-      </p>
+          <p>
+            Following the screening, teams should address risks on the Prioritize List by engaging
+            with rightsholders and other interested parties. A forthcoming component of this toolset
+            (tentatively called the Rightsholder Engagement Tool) will help teams facilitate the
+            sometimes complex and difficult conversations about:
+          </p>
+          <ol>
+            <li>What the relevant human rights issues are, </li>
+            <li>
+              What the corresponding actions and obligations are (e.g., for the government, for TNC,
+              for others), and{" "}
+            </li>
+            <li>
+              What can and should be done to avoid or mitigate the risk or human rights violations.{" "}
+            </li>
+          </ol>
+          <p>
+            Both the Screening Tool and the forthcoming Rightsholder Engagement Tool are components
+            of the larger process of Human Rights Due Diligence.
+          </p>
+          <p>
+            HRDD is an increasingly important and rapidly evolving international standard, with new
+            expectations emerging from national laws and institutional best practice. It is
+            typically understood to include not just identifying and assessing risks, but also a
+            process of engaging rightsholders on risks and implementing prevention and mitigation
+            actions. The Screening Tool helps teams fulfill the identification and assessment part
+            of the process. The Rightsholder Engagement Tool helps teams fulfill the engagement
+            component and lays a foundation for collaborative creation of mitigation strategies.
+            This is a particularly necessary step given that the screening is primarily based on the
+            teams’ own knowledge and perspective.
+          </p>
+          <p>
+            Teams can also review the Human Rights Guide, Module 4(9) for more comprehensive
+            guidance on how the dialogue should proceed in order to reach consensus.
+          </p>
 
-      <h3>Watch List Follow-up: Engage, Monitor, and Periodic Review</h3>
-      <p>Entries on the Watch List fall into one of two categories:</p>
-      <ol>
-        <li>Risks from the Contextual Screen that were deemed to be low Project Risks</li>
-        <li>
-          Equity and well-being considerations that may be better addressed using other approaches
-        </li>
-      </ol>
+          <h3>Watch List Follow-up: Engage, Monitor, and Periodic Review</h3>
+          <p>Entries on the Watch List fall into one of two categories:</p>
+          <ol>
+            <li>Risks from the Contextual Screen that were deemed to be low Project Risks</li>
+            <li>
+              Equity and well-being considerations that may be better addressed using other
+              approaches
+            </li>
+          </ol>
 
-      <p>
-        Project Risks deemed low-risk in the Project Risk Screen still are present in the operating
-        environment. Thus, they might exert continued pressure on the project, and further links to
-        the project could be revealed as it grows, succeeds, fails, and/or gains public awareness.
-        Therefore, teams should review these risks annually.
-      </p>
+          <p>
+            Project Risks deemed low-risk in the Project Risk Screen still are present in the
+            operating environment. Thus, they might exert continued pressure on the project, and
+            further links to the project could be revealed as it grows, succeeds, fails, and/or
+            gains public awareness. Therefore, teams should review these risks annually.
+          </p>
 
-      <p>
-        Likewise, equity and well-being considerations should be reviewed once a year, along with
-        the status or latest updates of any other tools or frameworks that have been used to explore
-        or approach the issue.
-      </p>
+          <p>
+            Likewise, equity and well-being considerations should be reviewed once a year, along
+            with the status or latest updates of any other tools or frameworks that have been used
+            to explore or approach the issue.
+          </p>
 
-      <p>
-        The Watch List should be considered a background resource for Community engagement and
-        project implementation. Every item on the list is worth discussing with Communities and
-        decision-making partners as implementation decisions approach.
-      </p>
+          <p>
+            The Watch List should be considered a background resource for Community engagement and
+            project implementation. Every item on the list is worth discussing with Communities and
+            decision-making partners as implementation decisions approach.
+          </p>
 
-      <p>
-        Community input should be sought to help teams understand on-the-ground relevance of the
-        risks identified through the screening process and inform decisions. Where Communities raise
-        different points of view, teams should:
-      </p>
+          <p>
+            Community input should be sought to help teams understand on-the-ground relevance of the
+            risks identified through the screening process and inform decisions. Where Communities
+            raise different points of view, teams should:
+          </p>
 
-      <ul>
-        <li>
-          Always listen for allegations about issues that were previously determined not to be
-          contextual risks, and add them to one of the lists.
-        </li>
-        <li>
-          Consider removing any risks from the Watch List that Communities say are not salient.
-        </li>
-        <li>
-          Elevate items to the Prioritize List if risk seems heightened or perceived mitigation
-          strategies aren’t reliable or available.
-        </li>
-        <li>
-          Use the Project Risk Screen to assess any new risks that are identified from community
-          discussions, and apply the Project Risk Determination to add risks to the Escalate List
-          (if a Minimum Core Violation exists), Prioritize List, or Watch List as applicable.
-        </li>
-      </ul>
+          <ul>
+            <li>
+              Always listen for allegations about issues that were previously determined not to be
+              contextual risks, and add them to one of the lists.
+            </li>
+            <li>
+              Consider removing any risks from the Watch List that Communities say are not salient.
+            </li>
+            <li>
+              Elevate items to the Prioritize List if risk seems heightened or perceived mitigation
+              strategies aren’t reliable or available.
+            </li>
+            <li>
+              Use the Project Risk Screen to assess any new risks that are identified from community
+              discussions, and apply the Project Risk Determination to add risks to the Escalate
+              List (if a Minimum Core Violation exists), Prioritize List, or Watch List as
+              applicable.
+            </li>
+          </ul>
 
-      <h3>Quick Look Option</h3>
-      <p>
-        If a project team is facing a time sensitive demand for human rights screening and is not
-        ready to engage the full Screening Tool, they can consider the following options:
-      </p>
+          <h3>Quick Look Option</h3>
+          <p>
+            If a project team is facing a time sensitive demand for human rights screening and is
+            not ready to engage the full Screening Tool, they can consider the following options:
+          </p>
 
-      <ol>
-        <li>
-          There are several “yes/no” or “high/medium/low” checklists in development that list human
-          rights issues associated with conservation and development projects. While these lists
-          have less guidance on prioritization, linkage, or illustration of common issues, they may
-          be useful as an overview, to help ensure that clear issues are not somehow overlooked, or
-          for compliance purposes. Future versions of this tool will include a list of useful
-          checklists.
-        </li>
-        <li>
-          This Screening Tool can be used in a checklist/overview fashion by reviewing questions or
-          indicators in the Contextual Risk Screen, or even more simply by reviewing the indicator
-          headings in the Quick List of Indicators, below. If there is any difficulty in answering
-          an Indicator, teams can look to any guidance available in the Project Risk Screen on an
-          indicator-by-indicator basis.
-        </li>
-        <li>
-          Finally, teams working on carbon projects can examine their project in light of the Carbon
-          Project Controversies section of the Research Phase. This contains a list of common issues
-          and controversies surrounding carbon projects over the last few years. While there is no
-          specific guidance contained herein, it is useful to stimulate discussion and identify
-          issues.
-        </li>
-      </ol>
+          <ol>
+            <li>
+              There are several “yes/no” or “high/medium/low” checklists in development that list
+              human rights issues associated with conservation and development projects. While these
+              lists have less guidance on prioritization, linkage, or illustration of common issues,
+              they may be useful as an overview, to help ensure that clear issues are not somehow
+              overlooked, or for compliance purposes. Future versions of this tool will include a
+              list of useful checklists.
+            </li>
+            <li>
+              This Screening Tool can be used in a checklist/overview fashion by reviewing questions
+              or indicators in the Contextual Risk Screen, or even more simply by reviewing the
+              indicator headings in the Quick List of Indicators, below. If there is any difficulty
+              in answering an Indicator, teams can look to any guidance available in the Project
+              Risk Screen on an indicator-by-indicator basis.
+            </li>
+            <li>
+              Finally, teams working on carbon projects can examine their project in light of the
+              Carbon Project Controversies section of the Research Phase. This contains a list of
+              common issues and controversies surrounding carbon projects over the last few years.
+              While there is no specific guidance contained herein, it is useful to stimulate
+              discussion and identify issues.
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div className="col-span-12 sm:col-span-8 lg:col-span-4">
+        <Card className="sticky top-10">
+          <CardHeader className="prose w-full">
+            <CardTitle>Research phase</CardTitle>
+          </CardHeader>
+          <CardContent className="prose w-full">
+            <p>
+              The research phase is the first step in the process of using the Human Rights
+              Screening Toolset
+            </p>
+            <Link
+              href={`/projects/${params.id}/project-and-background-community`}
+              className="block"
+            >
+              <Button size="lg" className="w-full">
+                Get started
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
