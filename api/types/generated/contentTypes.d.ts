@@ -697,6 +697,7 @@ export interface ApiContextualRiskContextualRisk extends Schema.CollectionType {
       'manyToOne',
       'api::contextual-risk-category.contextual-risk-category'
     >;
+    project_risk_description: Attribute.RichText & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

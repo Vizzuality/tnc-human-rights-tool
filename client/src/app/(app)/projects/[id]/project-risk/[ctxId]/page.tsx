@@ -1,7 +1,8 @@
 // import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
+import Markdown from "react-markdown";
+
 import { Hydrate, dehydrate } from "@tanstack/react-query";
-import parse from "html-react-parser";
 
 import getQueryClient from "@/lib/getQueryClient";
 
@@ -43,7 +44,9 @@ export default async function ProjectsDetailProjectRiskIdPage({
         <ProjectsDetailTitle>{CTX_RISK.data?.attributes?.title}</ProjectsDetailTitle>
 
         <div>
-          <div className="prose -mt-5">{parse(CTX_RISK.data?.attributes?.description ?? "")}</div>
+          <div className="prose -mt-5">
+            <Markdown>{CTX_RISK.data?.attributes?.project_risk_description}</Markdown>
+          </div>
         </div>
 
         <ProjectRiskForm />

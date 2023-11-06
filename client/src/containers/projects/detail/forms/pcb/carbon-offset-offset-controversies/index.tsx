@@ -2,12 +2,12 @@
 import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
@@ -187,7 +187,9 @@ export default function CarbonOffsetProjectControversiesForm({
                         {`${pcb_category?.data?.attributes?.display_order}.${display_order}`}{" "}
                         {title}
                       </FormLabel>
-                      <div className="prose">{parse(description)}</div>
+                      <div className="prose">
+                        <Markdown>{description}</Markdown>
+                      </div>
 
                       <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                         <RadioGroup

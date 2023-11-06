@@ -2,13 +2,13 @@
 import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
-import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
 import {
@@ -250,7 +250,9 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                         </DialogContent>
                       </Dialog>
                     </FormLabel>
-                    <div className="prose">{parse(description)}</div>
+                    <div className="prose">
+                      <Markdown>{description}</Markdown>
+                    </div>
 
                     <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                       <RadioGroup
