@@ -1568,6 +1568,7 @@ export type ContextualRiskCategoryContextualRisksDataItemAttributes = {
   description?: string;
   display_order?: number;
   contextual_risk_category?: ContextualRiskCategoryContextualRisksDataItemAttributesContextualRiskCategory;
+  project_risk_description?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1960,6 +1961,7 @@ export interface ContextualRisk {
   description: string;
   display_order: number;
   contextual_risk_category?: ContextualRiskContextualRiskCategory;
+  project_risk_description: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2012,6 +2014,7 @@ export type ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDat
   description?: string;
   display_order?: number;
   contextual_risk_category?: ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDataItemAttributesContextualRiskCategory;
+  project_risk_description?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2260,6 +2263,7 @@ export type ContextualRiskRequestData = {
   description: string;
   display_order: number;
   contextual_risk_category?: ContextualRiskRequestDataContextualRiskCategory;
+  project_risk_description: string;
 };
 
 export interface ContextualRiskRequest {

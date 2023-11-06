@@ -1,15 +1,16 @@
 "use client";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
@@ -47,10 +48,14 @@ const RADIO_OPTIONS = [
 export default function CarbonOffsetProjectControversiesForm({
   items,
 }: CarbonOffsetProjectControversiesFormProps) {
-  const { id: projectId } = useParams();
+  const { id: projectId, categoryId } = useParams();
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
+  const { data: categoriesData } = useGetPcbCategories({
+    sort: "display_order:asc",
+  });
+
   const putProjectMutation = usePutProjectsId({
     mutation: {
       onSuccess: () => {
@@ -58,6 +63,31 @@ export default function CarbonOffsetProjectControversiesForm({
       },
     },
   });
+
+  const nextCategory = useMemo(() => {
+    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+
+    if (!categoryId || i === undefined) {
+      return {
+        href: `/projects/${projectId}/project-and-background-community`,
+        label: "Contextual Risk",
+      };
+    }
+
+    const n = categoriesData?.data?.[i + 1];
+
+    if (!n) {
+      return {
+        href: `/projects/${projectId}/contextual-risk`,
+        label: "Proyect Risk",
+      };
+    }
+
+    return {
+      href: `/projects/${projectId}/project-and-background-community/${n.id}`,
+      label: n.attributes?.title ?? "",
+    };
+  }, [categoriesData, categoryId, projectId]);
 
   const formSchema = z.object({
     ...items?.data?.reduce(
@@ -157,7 +187,9 @@ export default function CarbonOffsetProjectControversiesForm({
                         {`${pcb_category?.data?.attributes?.display_order}.${display_order}`}{" "}
                         {title}
                       </FormLabel>
-                      <div className="prose">{parse(description)}</div>
+                      <div className="prose">
+                        <Markdown>{description}</Markdown>
+                      </div>
 
                       <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                         <RadioGroup
@@ -193,7 +225,7 @@ export default function CarbonOffsetProjectControversiesForm({
             );
           })}
 
-        <FooterForm />
+        <FooterForm next={nextCategory} />
       </form>
     </Form>
   );

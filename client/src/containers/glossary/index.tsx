@@ -12,6 +12,7 @@ export default function Glossary() {
           <div className="space-y-10">
             <div className="prose w-full">
               <h1>Glossary</h1>
+              <p>Definitions of the most common terms in the context of the HR Tool</p>
 
               <div id="any-multiple-frequent-and-pervasive">
                 <h2>Any, Multiple, Frequent, and Pervasive</h2>

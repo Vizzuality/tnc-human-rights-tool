@@ -1,15 +1,16 @@
 "use client";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
+import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
@@ -36,11 +37,15 @@ export interface GeographicScopeFormProps extends PropsWithChildren {
 }
 
 export default function GeographicScopeForm({ items }: GeographicScopeFormProps) {
-  const { id: projectId } = useParams();
+  const { id: projectId, categoryId } = useParams();
 
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
+  const { data: categoriesData } = useGetPcbCategories({
+    sort: "display_order:asc",
+  });
+
   const putProjectMutation = usePutProjectsId({
     mutation: {
       onSuccess: () => {
@@ -48,6 +53,31 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
       },
     },
   });
+
+  const nextCategory = useMemo(() => {
+    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+
+    if (!categoryId || i === undefined) {
+      return {
+        href: `/projects/${projectId}/project-and-background-community`,
+        label: "Contextual Risk",
+      };
+    }
+
+    const n = categoriesData?.data?.[i + 1];
+
+    if (!n) {
+      return {
+        href: `/projects/${projectId}/contextual-risk`,
+        label: "Proyect Risk",
+      };
+    }
+
+    return {
+      href: `/projects/${projectId}/project-and-background-community/${n.id}`,
+      label: n.attributes?.title ?? "",
+    };
+  }, [categoriesData, categoryId, projectId]);
 
   const formSchema = z.object({
     ...items?.data?.reduce(
@@ -157,7 +187,9 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
                         {`${pcb_category?.data?.attributes?.display_order}.${display_order}`}{" "}
                         {title}
                       </FormLabel>
-                      <div className="prose">{parse(description)}</div>
+                      <div className="prose">
+                        <Markdown>{description}</Markdown>
+                      </div>
 
                       {ip.type === "textarea" && (
                         <FormControl className="flex py-2.5">
@@ -167,42 +199,44 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
 
                       {ip.type === "checkbox" && !!ip.options && (
                         <>
-                          {ip.options.map((o) => (
-                            <FormField
-                              key={o.value}
-                              control={form.control}
-                              name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
-                              render={({ field }) => {
-                                return (
-                                  <FormItem
-                                    key={o.value}
-                                    className="flex flex-row items-start space-y-0"
-                                  >
-                                    <FormControl>
-                                      <Checkbox
-                                        className="mt-0.5 cursor-pointer"
-                                        checked={field.value?.includes(o.value)}
-                                        onCheckedChange={(checked) => {
-                                          const prevValue = field.value || [];
+                          {ip.options
+                            .sort((a, b) => a.label.localeCompare(b.label))
+                            .map((o) => (
+                              <FormField
+                                key={o.value}
+                                control={form.control}
+                                name={`${pcb_category?.data?.attributes?.display_order}-${display_order}`}
+                                render={({ field }) => {
+                                  return (
+                                    <FormItem
+                                      key={o.value}
+                                      className="flex flex-row items-start space-y-0"
+                                    >
+                                      <FormControl>
+                                        <Checkbox
+                                          className="mt-0.5 cursor-pointer"
+                                          checked={field.value?.includes(o.value)}
+                                          onCheckedChange={(checked) => {
+                                            const prevValue = field.value || [];
 
-                                          return checked
-                                            ? field.onChange([...prevValue, o.value])
-                                            : field.onChange(
-                                                prevValue?.filter(
-                                                  (value: string) => value !== o.value,
-                                                ),
-                                              );
-                                        }}
-                                      />
-                                    </FormControl>
-                                    <FormLabel className="cursor-pointer pl-2 text-sm font-normal">
-                                      {o.label}
-                                    </FormLabel>
-                                  </FormItem>
-                                );
-                              }}
-                            />
-                          ))}
+                                            return checked
+                                              ? field.onChange([...prevValue, o.value])
+                                              : field.onChange(
+                                                  prevValue?.filter(
+                                                    (value: string) => value !== o.value,
+                                                  ),
+                                                );
+                                          }}
+                                        />
+                                      </FormControl>
+                                      <FormLabel className="cursor-pointer pl-2 text-sm font-normal">
+                                        {o.label}
+                                      </FormLabel>
+                                    </FormItem>
+                                  );
+                                }}
+                              />
+                            ))}
                         </>
                       )}
 
@@ -214,7 +248,7 @@ export default function GeographicScopeForm({ items }: GeographicScopeFormProps)
             );
           })}
 
-        <FooterForm />
+        <FooterForm next={nextCategory} />
       </form>
     </Form>
   );

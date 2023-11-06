@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { SpaceGrotesk } from "@/styles/fonts";
 
 export const metadata: Metadata = {
-  title: "Human Rights Tool",
+  title: "Human Rights Screening Tool",
   description: "",
 };
 

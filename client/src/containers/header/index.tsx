@@ -29,7 +29,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2.5">
             <Image src="/images/logo.svg" alt="Logo" width={40} height={40} />
-            <h1>Human Rights Toolset</h1>
+            <h1>Human Rights Screening Tool</h1>
           </Link>
 
           <nav className="flex items-center space-x-5">
@@ -48,7 +48,7 @@ export default function Header() {
             </Link>
 
             <Link href="/other-tools">
-              <Button variant="link">Other tools</Button>
+              <Button variant="link">Other Tools</Button>
             </Link>
 
             {!!session && (

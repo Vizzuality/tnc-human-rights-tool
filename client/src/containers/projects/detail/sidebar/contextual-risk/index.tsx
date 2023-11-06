@@ -38,7 +38,10 @@ export default function ContextualRiskSidebar() {
                 <ContextualRiskSidebarItem categoryId={categoryId} />
               )}
 
-              <span>{attributes?.title}</span>
+              <span>
+                {`${attributes?.display_order}. `}
+                {attributes?.title}
+              </span>
             </>
           ),
         };

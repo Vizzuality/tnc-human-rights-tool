@@ -29,6 +29,10 @@
       "relation": "manyToOne",
       "target": "api::contextual-risk-category.contextual-risk-category",
       "inversedBy": "contextual_risks"
+    },
+    "project_risk_description": {
+      "type": "richtext",
+      "required": true
     }
   }
 }

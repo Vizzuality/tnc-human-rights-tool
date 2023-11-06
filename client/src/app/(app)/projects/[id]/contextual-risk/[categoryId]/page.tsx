@@ -1,4 +1,4 @@
-import parse from "html-react-parser";
+import Markdown from "react-markdown";
 
 import { getContextualRisks } from "@/types/generated/contextual-risk";
 import { getContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
@@ -28,11 +28,17 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>{CATEGORY?.data?.attributes?.title}</ProjectsDetailTitle>
+      <ProjectsDetailTitle>
+        {CATEGORY?.data?.attributes?.display_order}
+        {". "}
+        {CATEGORY?.data?.attributes?.title}
+      </ProjectsDetailTitle>
 
       {!!CATEGORY?.data?.attributes?.description && (
         <div>
-          <div className="prose -mt-5">{parse(CATEGORY.data.attributes.description)}</div>
+          <div className="prose -mt-5">
+            <Markdown>{CATEGORY.data.attributes.description}</Markdown>
+          </div>
         </div>
       )}
 

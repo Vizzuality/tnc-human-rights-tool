@@ -30,8 +30,9 @@ export default async function ProjectsDetailResearchOverviewPage({
         <div className="prose -mt-5">
           <p>
             <i>
-              Have you mapped out potentially interested parties? if yes, upload here. If not please
-              use this tool and one of the tools suggested below.
+              Have you mapped out potentially interested parties? if yes, reference and include your
+              results with use of this tool. If not please use this tool and one of the tools
+              suggested below.
             </i>
           </p>
 

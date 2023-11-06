@@ -28,6 +28,7 @@ export default async function ProjectsLayout({ children }: ProjectsLayoutProps) 
     }),
   });
 
+  // Prefetch useGetContextualRisks
   await queryClient.prefetchQuery({
     ...getGetContextualRisksQueryOptions({
       populate: "*",

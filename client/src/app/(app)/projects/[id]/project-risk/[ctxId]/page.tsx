@@ -1,7 +1,8 @@
 // import { ProjectsDetailPageProps } from "@/app/projects/[id]/page";
 
+import Markdown from "react-markdown";
+
 import { Hydrate, dehydrate } from "@tanstack/react-query";
-import parse from "html-react-parser";
 
 import getQueryClient from "@/lib/getQueryClient";
 
@@ -27,7 +28,9 @@ export default async function ProjectsDetailProjectRiskIdPage({
 }: ProjectsDetailProjectRiskIdProps) {
   const queryClient = getQueryClient();
 
-  const CTX_RISK = await getContextualRisksId(+ctxId);
+  const CTX_RISK = await getContextualRisksId(+ctxId, {
+    populate: "*",
+  });
 
   await queryClient.prefetchQuery({
     ...getGetContextualRisksIdQueryOptions(+ctxId, {
@@ -40,10 +43,16 @@ export default async function ProjectsDetailProjectRiskIdPage({
   return (
     <Hydrate state={dehydratedState}>
       <ProjectsDetailContent>
-        <ProjectsDetailTitle>{CTX_RISK.data?.attributes?.title}</ProjectsDetailTitle>
+        <ProjectsDetailTitle>
+          {CTX_RISK.data?.attributes?.contextual_risk_category?.data?.attributes?.display_order}
+          {"."}
+          {CTX_RISK.data?.attributes?.display_order} {CTX_RISK.data?.attributes?.title}
+        </ProjectsDetailTitle>
 
         <div>
-          <div className="prose -mt-5">{parse(CTX_RISK.data?.attributes?.description ?? "")}</div>
+          <div className="prose -mt-5">
+            <Markdown>{CTX_RISK.data?.attributes?.project_risk_description}</Markdown>
+          </div>
         </div>
 
         <ProjectRiskForm />

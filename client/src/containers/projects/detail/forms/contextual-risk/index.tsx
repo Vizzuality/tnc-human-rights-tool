@@ -1,16 +1,20 @@
 "use client";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import { useForm } from "react-hook-form";
+import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
-import parse from "html-react-parser";
 import { ZodTypeAny, z } from "zod";
 
-import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
+import {
+  useGetContextualRiskCategories,
+  useGetContextualRiskCategoriesId,
+} from "@/types/generated/contextual-risk-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
@@ -20,6 +24,7 @@ import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -53,6 +58,10 @@ const RADIO_OPTIONS = [
 export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
   const { id: projectId, categoryId } = useParams();
 
+  const { data: categoriesData } = useGetContextualRiskCategories({
+    sort: "display_order:asc",
+  });
+
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
@@ -71,6 +80,31 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
     string,
     Record<string, { contextual_risk: string }>
   >;
+
+  const nextCategory = useMemo(() => {
+    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+
+    if (!categoryId || i === undefined) {
+      return {
+        href: `/projects/${projectId}/contextual-risk`,
+        label: "Contextual Risk",
+      };
+    }
+
+    const n = categoriesData?.data?.[i + 1];
+
+    if (!n) {
+      return {
+        href: `/projects/${projectId}/project-risk`,
+        label: "Proyect Risk",
+      };
+    }
+
+    return {
+      href: `/projects/${projectId}/contextual-risk/${n.id}`,
+      label: n.attributes?.title ?? "",
+    };
+  }, [categoriesData, categoryId, projectId]);
 
   const formSchema = z.object({
     ...items?.data?.reduce(
@@ -176,11 +210,49 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 name={`${id}`}
                 render={({ field }) => (
                   <FormItem className="space-y-2">
-                    <FormLabel>
+                    <FormLabel className="flex items-center">
                       {`${contextual_risk_category?.data?.attributes?.display_order}.${display_order}`}{" "}
                       {title}
+                      <Dialog>
+                        <DialogTrigger className="ml-2">
+                          <InfoCircledIcon className="inline-block h-4 w-4 text-primary hover:text-primary/50" />
+                        </DialogTrigger>
+
+                        <DialogContent className="max-h-[90svh] overflow-auto">
+                          <div className="prose">
+                            <h2>Any, Multiple, Frequent, and Pervasive</h2>
+                            <p>
+                              These terms are used, not interchangeably, to calibrate frequency or
+                              persistence of incidents. They each have a slightly different meaning:
+                            </p>
+                            <ul>
+                              <li>
+                                <strong>any:</strong> at least one incident
+                              </li>
+                              <li>
+                                <strong>multiple:</strong> two or more incidents
+                              </li>
+                              <li>
+                                <strong>frequent:</strong> more than two incidents, and somewhat
+                                geographically dependent — three incidents in a small community
+                                might be deemed “frequent” rather than merely “multiple”
+                              </li>
+                              <li>
+                                <strong>pervasive:</strong> high frequency over both time and
+                                geographic scope
+                              </li>
+                            </ul>
+                            <blockquote>
+                              NOTE: Using “frequent” and “pervasive” with strictest rigor will help
+                              teams prioritize.
+                            </blockquote>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </FormLabel>
-                    <div className="prose">{parse(description)}</div>
+                    <div className="prose">
+                      <Markdown>{description}</Markdown>
+                    </div>
 
                     <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                       <RadioGroup
@@ -240,7 +312,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
             );
           })}
 
-        <FooterForm />
+        <FooterForm next={nextCategory} />
       </form>
     </Form>
   );

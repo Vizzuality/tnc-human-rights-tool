@@ -98,6 +98,11 @@ const config: Config = {
             h6: {
               fontWeight: "400",
             },
+            blockquote: {
+              fontSize: "0.875rem",
+              fontWeight: "400",
+              opacity: 0.75,
+            },
           },
         },
       }),
