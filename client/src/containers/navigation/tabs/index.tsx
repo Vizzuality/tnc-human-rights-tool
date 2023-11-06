@@ -59,6 +59,7 @@ const GROUPS = [
 
 export default function NavigationTabs() {
   const { id } = useParams();
+
   const { data: pcbCategoriesData } = useGetPcbCategories({
     sort: "display_order:asc",
   });
