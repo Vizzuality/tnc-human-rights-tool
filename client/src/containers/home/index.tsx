@@ -14,7 +14,7 @@ export default function Home() {
         <div className="col-span-12 lg:col-span-8">
           <div className="space-y-10">
             <div className="prose w-full">
-              <h1>Human Rights Screening Toolset</h1>
+              <h1>Human Rights Screening Tool</h1>
               <p>
                 TNC’s commitment to conservation prioritizes the human rights, collective rights,
                 authority, and capacity of all Indigenous Peoples and Local Communities, termed
@@ -45,7 +45,7 @@ export default function Home() {
               </ul>
 
               <p>
-                This Human Rights Screening Toolset is a screening process to help TNC field teams:
+                This Human Rights Screening Tool is a screening process to help TNC field teams:
                 identify human-rights-based project risks prioritize risks for further attention and
                 action in collaboration with Communities fulfill the larger responsibility of human
                 rights due diligence.

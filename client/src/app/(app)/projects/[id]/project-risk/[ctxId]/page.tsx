@@ -28,7 +28,9 @@ export default async function ProjectsDetailProjectRiskIdPage({
 }: ProjectsDetailProjectRiskIdProps) {
   const queryClient = getQueryClient();
 
-  const CTX_RISK = await getContextualRisksId(+ctxId);
+  const CTX_RISK = await getContextualRisksId(+ctxId, {
+    populate: "*",
+  });
 
   await queryClient.prefetchQuery({
     ...getGetContextualRisksIdQueryOptions(+ctxId, {
@@ -41,7 +43,11 @@ export default async function ProjectsDetailProjectRiskIdPage({
   return (
     <Hydrate state={dehydratedState}>
       <ProjectsDetailContent>
-        <ProjectsDetailTitle>{CTX_RISK.data?.attributes?.title}</ProjectsDetailTitle>
+        <ProjectsDetailTitle>
+          {CTX_RISK.data?.attributes?.contextual_risk_category?.data?.attributes?.display_order}
+          {"."}
+          {CTX_RISK.data?.attributes?.display_order} {CTX_RISK.data?.attributes?.title}
+        </ProjectsDetailTitle>
 
         <div>
           <div className="prose -mt-5">

@@ -28,7 +28,11 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>{CATEGORY?.data?.attributes?.title}</ProjectsDetailTitle>
+      <ProjectsDetailTitle>
+        {CATEGORY?.data?.attributes?.display_order}
+        {". "}
+        {CATEGORY?.data?.attributes?.title}
+      </ProjectsDetailTitle>
 
       {!!CATEGORY?.data?.attributes?.description && (
         <div>

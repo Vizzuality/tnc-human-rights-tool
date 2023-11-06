@@ -29,6 +29,14 @@ export default async function ProjectsDetailResearchOverviewPage({
       <div>
         <div className="prose -mt-5">
           <p>
+            <i>
+              Have you mapped out potentially interested parties? if yes, reference and include your
+              results with use of this tool. If not please use this tool and one of the tools
+              suggested below.
+            </i>
+          </p>
+
+          <p>
             The first step before using the Human Rights Screening Tool is for teams to gain a clear
             view of the interested parties to understand which Indigenous Peoples and Local
             Communities will potentially be affected by a project.

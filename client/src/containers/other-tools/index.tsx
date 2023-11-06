@@ -21,10 +21,8 @@ export default function OtherTools() {
 
               <p>
                 These challenges might be addressed by other tools, some of which are compiled
-                belows
+                below:
               </p>
-
-              <h2>TNC Tools & Standards</h2>
 
               <ul>
                 <li>
