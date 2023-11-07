@@ -105,7 +105,7 @@ export default function Glossary() {
 
                 <blockquote>
                   See also: International Convention for the Protection of All Persons from Enforced
-                  Disappearance — Preamble of the Declaration, and Article 2 (40)
+                  Disappearance — Preamble of the Declaration, and Article 2
                 </blockquote>
               </div>
 
@@ -153,7 +153,7 @@ export default function Glossary() {
                 </p>
               </div>
 
-              <div id="gender-transformative">
+              <div id="human-rights-due-diligence">
                 <h2>Human rights due diligence</h2>
                 <p>
                   <i>
@@ -240,7 +240,10 @@ export default function Glossary() {
                   including race, ethnicity, sex, gender, sexuality, religion, nationality,
                   migrancy, or social status.
                 </p>
-                <p>Progressive Realization</p>
+              </div>
+
+              <div id="progressive-realization">
+                <h2>Progressive Realization</h2>
                 <p>
                   States have obligations around economic, social and cultural rights under
                   international human rights treaties. The core obligation is to work toward the
@@ -255,7 +258,7 @@ export default function Glossary() {
                   realization of these rights.
                 </p>
                 <blockquote>
-                  See also: FAQ on Economic, Social, and Cultural Rights fact sheet, p. 13-14 (13)
+                  See also: FAQ on Economic, Social, and Cultural Rights fact sheet, p. 13-14
                 </blockquote>
               </div>
 
@@ -269,7 +272,7 @@ export default function Glossary() {
                 <blockquote>See also: Project Risk Determination Framework</blockquote>
               </div>
 
-              <div id="project-risk">
+              <div id="project-site-area-region-category">
                 <h2>Project Site, Area, Region, Category</h2>
                 <p>
                   Projects are considered on the basis of their geographic scope, as further
@@ -299,11 +302,11 @@ export default function Glossary() {
               <div id="self-determination">
                 <h2>Self-determination</h2>
                 <p>
-                  The right of Indigenous Peoples, enshrined in UNDRIP(30), to maintain and
-                  strengthen their distinct political, legal, economic, social and cultural
-                  institutions, while retaining their right to participate fully in the political,
-                  economic, social and cultural life of the state. Unlawful impacts to
-                  self-determination might include any or all of the following:
+                  The right of Indigenous Peoples, enshrined in UNDRIP, to maintain and strengthen
+                  their distinct political, legal, economic, social and cultural institutions, while
+                  retaining their right to participate fully in the political, economic, social and
+                  cultural life of the state. Unlawful impacts to self-determination might include
+                  any or all of the following:
                 </p>
                 <ul>
                   <li>Lack of consultation/consent</li>
@@ -334,13 +337,13 @@ export default function Glossary() {
                   national or social origin, property, birth, ability, gender, or other status.
                 </p>
                 <blockquote>
-                  See also: (1) International Covenant on Civil and Political Rights, arts. 2, 26
-                  (28). (2) e.g., Committee on the Elimination of Discrimination against Women, ON
-                  and DP v Russian Federation, para. 7.2 (3 Apr. 2020) (29). (3) the Convention on
-                  the Elimination of Racial Discrimination (42) (4) the Convention on the
-                  Elimination of Discrimination Against Women (29) (5) the Convention on the Rights
-                  of Persons with Disabilities(43) (6) the International Convention on the
-                  Protection of the Rights of All Migrant Workers (44)
+                  See also: International Covenant on Civil and Political Rights, arts. 2, 26. e.g.,
+                  Committee on the Elimination of Discrimination against Women, ON and DP v Russian
+                  Federation, para. 7.2 (3 Apr. 2020). the Convention on the Elimination of Racial
+                  Discrimination (42) (4) the Convention on the Elimination of Discrimination
+                  Against Women (29) (5) the Convention on the Rights of Persons with
+                  Disabilities(43) (6) the International Convention on the Protection of the Rights
+                  of All Migrant Workers (44)
                 </blockquote>
               </div>
 

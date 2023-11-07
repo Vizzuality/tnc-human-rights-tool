@@ -26,12 +26,19 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           <h2>Learning & Early Discussions</h2>
           <p>
             In preparing to use this Toolset, teams should feel empowered to conduct research and
-            engage with key Communities. Module 1 of the Human Rights Guide (11) might help guide
-            you to identify Communities, assess your capacity for engaging, and focus on how to
-            engage respectfully. Human rights often are and should be adapted to local
-            understandings and values. Outsiders must bring humility and deference to the process of
-            applying their understanding of “international human rights” to other peoples’
-            circumstances.
+            engage with key Communities.{" "}
+            <a
+              href="https://www.tnchumanrightsguide.org/module-1-learning-early-discussions/"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Module 1 of the Human Rights Guide
+            </a>{" "}
+            might help guide you to identify Communities, assess your capacity for engaging, and
+            focus on how to engage respectfully. Human rights often are and should be adapted to
+            local understandings and values. Outsiders must bring humility and deference to the
+            process of applying their understanding of “international human rights” to other
+            peoples’ circumstances.
           </p>
           <h2>Project and Community Background</h2>
           <p>
@@ -48,9 +55,11 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           </ul>
           <p>
             The real utility of the research phase is to help teams familiarize themselves with the
-            geographies, Communities, and other contexts present in a project. There are many other
-            context-setting tools available for this work, so teams should decide for themselves
-            which one suits best.
+            geographies, Communities, and other contexts present in a project. There are many{" "}
+            <Link href="/other-tools" target="_blank" rel="noopener noreferer">
+              other context-setting tools
+            </Link>{" "}
+            available for this work, so teams should decide for themselves which one suits best.
           </p>
           <h2>Screening Phase</h2>
           <h3>Human Rights Risk</h3>
@@ -75,10 +84,17 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             self-determination.
           </p>
           <p>
-            Following a comprehensive human rights due diligence process (HRDD) is essential. The
-            responsibility of HRDD is to first identify and assess risk, and secondly to co-create,
-            implement, and review mitigation strategies. This Toolset applies these concepts by way
-            of the Project Risk Determination Framework.
+            Following a comprehensive{" "}
+            <Link
+              href="/glossary#human-rights-due-diligence"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              human rights due diligence process (HRDD)
+            </Link>{" "}
+            is essential. The responsibility of HRDD is to first identify and assess risk, and
+            secondly to co-create, implement, and review mitigation strategies. This Toolset applies
+            these concepts by way of the Project Risk Determination Framework.
           </p>
           <h3>Contextual Risk and Project Risk</h3>
           <p>The screening phase comprises two distinct parts:</p>
@@ -219,16 +235,26 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             given risk falls on the continuum of project risk. Teams then use that, along with
             indicator-specific guidance, to place risks on the Escalate, Priority, or Watch Lists.
           </p>
-          <h3>Key Tool: Minimum Core Risk Determination(13)</h3>
+          <h3>Key Tool: Minimum Core Risk Determination</h3>
           <p>
             Minimum Core Risk Determinations apply most often to socioeconomic rights: food, water,
-            housing, education, medical care, and so on, as delineated further in this helpful fact
-            sheet (13). These rights are understood somewhat differently than civil and political
-            rights. Rather than setting concrete standards, these rights are seen as imposing
-            obligations on states to “progressively realize” the right over time. That said,
-            socioeconomic rights have a “minimum core,” the violation of which is a violation of
-            human rights law like any other. The factors that indicate a minimum core violation
-            include
+            housing, education, medical care, and so on, as delineated further in this helpful{" "}
+            <a
+              href="https://www.ohchr.org/sites/default/files/documents/publications/factsheet33en.pdf"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              fact sheet
+            </a>
+            . These rights are understood somewhat differently than civil and political rights.
+            Rather than setting concrete standards, these rights are seen as imposing obligations on
+            states to{" "}
+            <Link href="/glossary#progressive-realization" target="_blank">
+              “progressively realize”
+            </Link>{" "}
+            the right over time. That said, socioeconomic rights have a “minimum core,” the
+            violation of which is a violation of human rights law like any other. The factors that
+            indicate a minimum core violation include
           </p>
           <ol>
             <li>Unlawful discrimination in respecting, protecting, or fulfilling the right</li>
@@ -251,12 +277,19 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           <p>
             While performing the Contextual Risk Screen, teams may find some indicators that require
             more information to mark as a contextual risk. These are to be pursued with desk
-            research in tandem with preliminary Community engagement as outlined in Module 1 of the
-            Human Rights Guide(11).
+            research in tandem with preliminary Community engagement as outlined in{" "}
+            <a
+              href="https://www.tnchumanrightsguide.org/module-1-learning-early-discussions/"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Module 1 of the Human Rights Guide
+            </a>
+            .
           </p>
           <h3>The Escalate List</h3>
           <p>
-            In cases where risks are considered severe, “grave,” or “gross” [1] violations in
+            In cases where risks are considered severe, “grave,” or “gross” violations in
             international human rights law, and irrespective of whether they are more or less likely
             to occur, organizations like TNC have a stronger obligation to avoid these risks.
             Mitigation strategies might be deemed unreliable in the face of these risks, as they
@@ -279,15 +312,20 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             Escalate List risk has already been examined by regional, national, or global leadership
             outside the project team, the Toolset recommends a refresh.
           </p>
-          <p>
-            <i>
-              Note: This Toolset aligns with TNC’s heightened risk definition, as it identifies
-              conflicts with TNC’s core values and general adverse impacts. That will necessitate
-              performing a heightened risk analysis(16) as described by TNC. The Toolset also serves
-              to identify heightened people risk assessment factors, and it helps create social
-              safeguards and recommendations.
-            </i>
-          </p>
+          <blockquote>
+            Note: This Toolset aligns with TNC’s heightened risk definition, as it identifies
+            conflicts with TNC’s core values and general adverse impacts. That will necessitate
+            performing a{" "}
+            <a
+              href="https://thenatureconservancy462.sharepoint.com/sites/Department/rac/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FDepartment%2Frac%2FShared%20Documents%2FHeightened%20Risk%20Guidelines%2Epdf&parent=%2Fsites%2FDepartment%2Frac%2FShared%20Documents"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              heightened risk analysis
+            </a>{" "}
+            as described by TNC. The Toolset also serves to identify heightened people risk
+            assessment factors, and it helps create social safeguards and recommendations.
+          </blockquote>
 
           <h3>The Prioritize List</h3>
           <p>
@@ -338,12 +376,15 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           </p>
 
           <p>
-            Cross referencing to Other Tools enables teams to off-ramp some risks into different
-            solution frameworks. These risks are still included on the Watch List so that teams can
-            easily review progress and maintain a single point of reference for risks. Risks on the
-            Watch List can occasionally be reviewed using the Minimum Core Risk Determination
-            Framework to ensure that no unlawful discrimination occurs that would violate the
-            minimum core of the right in question.
+            Cross referencing to{" "}
+            <Link href="/other-tools" target="_blank">
+              Other Tools
+            </Link>{" "}
+            enables teams to off-ramp some risks into different solution frameworks. These risks are
+            still included on the Watch List so that teams can easily review progress and maintain a
+            single point of reference for risks. Risks on the Watch List can occasionally be
+            reviewed using the Minimum Core Risk Determination Framework to ensure that no unlawful
+            discrimination occurs that would violate the minimum core of the right in question.
           </p>
 
           <h3>Results Tables</h3>
@@ -447,8 +488,16 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             teams’ own knowledge and perspective.
           </p>
           <p>
-            Teams can also review the Human Rights Guide, Module 4(9) for more comprehensive
-            guidance on how the dialogue should proceed in order to reach consensus.
+            Teams can also review the{" "}
+            <a
+              href="https://www.tnchumanrightsguide.org/module-4-implementation/"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Human Rights Guide, Module 4
+            </a>{" "}
+            for more comprehensive guidance on how the dialogue should proceed in order to reach
+            consensus.
           </p>
 
           <h3>Watch List Follow-up: Engage, Monitor, and Periodic Review</h3>
@@ -492,7 +541,11 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
               contextual risks, and add them to one of the lists.
             </li>
             <li>
-              Consider removing any risks from the Watch List that Communities say are not salient.
+              Consider removing any risks from the Watch List that Communities say are not{" "}
+              <Link href="/glossary#salient" target="_blank">
+                salient
+              </Link>
+              .
             </li>
             <li>
               Elevate items to the Prioritize List if risk seems heightened or perceived mitigation

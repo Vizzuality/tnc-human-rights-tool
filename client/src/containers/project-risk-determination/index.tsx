@@ -104,7 +104,7 @@ export default function ProjectRiskDetermination() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            The IBA Practical Guide (p. 20-21) (37)
+            The IBA Practical Guide (p. 20-21)
           </a>
           addresses these concepts further.
         </p>

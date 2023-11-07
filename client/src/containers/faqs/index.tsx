@@ -18,15 +18,15 @@ export default function FAQs() {
                 </h2>
                 <p>
                   There is a chart of linked materials in Section 1 of this Toolset. Generally
-                  speaking, the VCA Framework(1) describes the what, while the Human Rights Guide(2)
-                  and this Toolset describe the how. All of TNC’s work with IPLC’s is predicated on
+                  speaking, the VCA Framework describes the what, while the Human Rights Guide and
+                  this Toolset describe the how. All of TNC’s work with IPLC’s is predicated on
                   respect for human rights and self-determination, and these tools and guides exist
                   to ensure practitioners have a means to identify, understand, and practically
                   action those understandings at a detailed level.
                 </p>
                 <blockquote>
                   Note: This Toolset may form part of the human rights impact assessment recommended
-                  in Module 2 of the Human Rights Guide(8).
+                  in Module 2 of the Human Rights Guide.
                 </blockquote>
               </div>
 
@@ -119,8 +119,8 @@ export default function FAQs() {
                   </li>
                   <li>If it is too far along, it will be difficult to make changes.</li>
                   <li>
-                    Ideally, conduct this screening as part of a Consultation Plan(8) for FPIC,
-                    after undergoing the early learning and IPLC engagement process.
+                    Ideally, conduct this screening as part of a Consultation Plan for FPIC, after
+                    undergoing the early learning and IPLC engagement process.
                   </li>
                 </ul>
                 <p>For ongoing projects:</p>
@@ -193,7 +193,7 @@ export default function FAQs() {
                 </p>
 
                 <blockquote>
-                  See also: UN Guiding Principles on Business and Human Rights(39)
+                  See also: UN Guiding Principles on Business and Human Rights
                 </blockquote>
               </div>
             </div>

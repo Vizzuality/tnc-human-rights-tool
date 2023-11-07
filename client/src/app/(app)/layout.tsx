@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 
 import BackToTop from "@/containers/back-to-top";
 import Header from "@/containers/header";
-import ScrollUp from "@/containers/scroll-up";
 
 export const metadata: Metadata = {
   title: "Human Rights Screening Tool",
@@ -15,7 +14,6 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <main className="flex min-h-screen flex-col">
       <Header />
-      <ScrollUp />
       <BackToTop />
 
       <section className="flex grow flex-col space-y-5 py-16">{children}</section>
