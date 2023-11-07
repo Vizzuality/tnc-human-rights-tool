@@ -71,7 +71,7 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Interested Parties Assessment Tool
               </a>
-              (17), developed as part of TNC’s
+              , developed as part of TNC’s
               {` `}
               <a
                 href="https://www.conservationgateway.org/ConservationPlanning/cbd/Pages/default.aspx"
@@ -80,7 +80,7 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Conservation by Design 2.0
               </a>
-              (18) framework.
+              framework.
             </li>
             <li>
               <a
@@ -90,7 +90,6 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Rightsholder and Stakeholder Mapping Template
               </a>
-              (19)
             </li>
             <li>
               <a
@@ -100,7 +99,6 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Community Leaders and Institutions Diagnostic
               </a>
-              (20)
             </li>
             <li>
               <a
@@ -110,7 +108,6 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Collective Action and Social Cohesion Diagnostic
               </a>
-              (21)
             </li>
             <li>
               <a
@@ -120,7 +117,6 @@ export default async function ProjectsDetailResearchOverviewPage({
               >
                 Module 1 of the Human Rights Guide
               </a>
-              (11)
             </li>
           </ul>
           <p>Teams should consider applying whichever tool best meets their needs.</p>
@@ -154,7 +150,7 @@ export default async function ProjectsDetailResearchOverviewPage({
             >
               Step 2 of the Human Rights Guide, Module 1: Learning and Early Discussions
             </a>
-            (11).
+            .
           </p>
           <p>
             Some of the challenges this presents are beyond the scope of this screening tool. But
@@ -162,8 +158,8 @@ export default async function ProjectsDetailResearchOverviewPage({
             rights impacts. To develop understanding, it might be helpful to review the following:
           </p>
           <ul>
-            <li>TNC’s Guidance for Integrating Gender Equity in Conservation(22)</li>
-            <li>Flora & Fauna International’s Tool for Participatory Approaches toolset(23)</li>
+            <li>TNC’s Guidance for Integrating Gender Equity in Conservation</li>
+            <li>Flora & Fauna International’s Tool for Participatory Approaches toolset</li>
           </ul>
           <p>
             A best practice might be engaging these tools before running the Human Rights Screening
