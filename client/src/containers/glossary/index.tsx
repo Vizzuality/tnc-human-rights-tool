@@ -240,7 +240,10 @@ export default function Glossary() {
                   including race, ethnicity, sex, gender, sexuality, religion, nationality,
                   migrancy, or social status.
                 </p>
-                <p>Progressive Realization</p>
+              </div>
+
+              <div id="progressive-realization">
+                <h2>Progressive Realization</h2>
                 <p>
                   States have obligations around economic, social and cultural rights under
                   international human rights treaties. The core obligation is to work toward the
@@ -269,7 +272,7 @@ export default function Glossary() {
                 <blockquote>See also: Project Risk Determination Framework</blockquote>
               </div>
 
-              <div id="project-risk">
+              <div id="project-site-area-region-category">
                 <h2>Project Site, Area, Region, Category</h2>
                 <p>
                   Projects are considered on the basis of their geographic scope, as further
