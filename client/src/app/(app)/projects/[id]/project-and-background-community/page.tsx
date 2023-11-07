@@ -158,8 +158,24 @@ export default async function ProjectsDetailResearchOverviewPage({
             rights impacts. To develop understanding, it might be helpful to review the following:
           </p>
           <ul>
-            <li>TNC’s Guidance for Integrating Gender Equity in Conservation</li>
-            <li>Flora & Fauna International’s Tool for Participatory Approaches toolset</li>
+            <li>
+              <a
+                href="https://thenatureconservancy462.sharepoint.com/sites/Conservation/lands/indigenous/Shared%20Documents/2020_TNC's%20Guidance%20for%20Integrating%20Gender%20Equity%20in%20Conservation_Eng%20Version.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                TNC’s Guidance for Integrating Gender Equity in Conservation
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.fauna-flora.org/app/uploads/2017/11/FFI_2013_Tools-for-participatory-approaches.zip"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Flora & Fauna International’s Tool for Participatory Approaches toolset
+              </a>
+            </li>
           </ul>
           <p>
             A best practice might be engaging these tools before running the Human Rights Screening

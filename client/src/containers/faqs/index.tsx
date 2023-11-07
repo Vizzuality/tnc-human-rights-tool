@@ -13,20 +13,20 @@ export default function FAQs() {
 
               <div id="how-does-this-toolset-relate-to-other-tnc-and-nontnc-human-rights-equity-and-iplc-guidance">
                 <h2>
-                  How does this Toolset relate to other TNC and non-TNC human rights, equity, and
-                  IPLC guidance?
+                  How does this Tool relate to other TNC and non-TNC human rights, equity, and IPLC
+                  guidance?
                 </h2>
                 <p>
-                  There is a chart of linked materials in Section 1 of this Toolset. Generally
+                  There is a chart of linked materials in Section 1 of this Tool. Generally
                   speaking, the VCA Framework describes the what, while the Human Rights Guide and
-                  this Toolset describe the how. All of TNC’s work with IPLC’s is predicated on
-                  respect for human rights and self-determination, and these tools and guides exist
-                  to ensure practitioners have a means to identify, understand, and practically
-                  action those understandings at a detailed level.
+                  this Tool describe the how. All of TNC’s work with IPLC’s is predicated on respect
+                  for human rights and self-determination, and these tools and guides exist to
+                  ensure practitioners have a means to identify, understand, and practically action
+                  those understandings at a detailed level.
                 </p>
                 <blockquote>
-                  Note: This Toolset may form part of the human rights impact assessment recommended
-                  in Module 2 of the Human Rights Guide.
+                  Note: This Tool may form part of the human rights impact assessment recommended in
+                  Module 2 of the Human Rights Guide.
                 </blockquote>
               </div>
 
@@ -107,10 +107,10 @@ export default function FAQs() {
 
               <div id="at-what-stage-of-a-project-do-we-apply-this-toolset?-what-if-the-project-has-been-operating-for-a-long-time">
                 <h2>
-                  At what stage of a project do we apply this Toolset? What if the project has been
+                  At what stage of a project do we apply this Tool? What if the project has been
                   operating for a long time?
                 </h2>
-                <p>The Toolset can be applied at any time.</p>
+                <p>The Tool can be applied at any time.</p>
                 <p>For new projects:</p>
                 <ul>
                   <li>
@@ -126,13 +126,13 @@ export default function FAQs() {
                 <p>For ongoing projects:</p>
                 <ul>
                   <li>
-                    This Toolset can help identify potential impacts that weren’t obvious at the
+                    This Tool can help identify potential impacts that weren’t obvious at the
                     outset.
                   </li>
                   <li>It might fit into existing evaluation and monitoring plans.</li>
                   <li>
-                    This Toolset can also be useful as part of making plans for expansion or
-                    adjustment of existing projects.
+                    This Tool can also be useful as part of making plans for expansion or adjustment
+                    of existing projects.
                   </li>
 
                   <li>
@@ -145,20 +145,20 @@ export default function FAQs() {
 
               <div id="what-if-the-project-only-has-a-small-ncs-component?-do-we-apply-the-toolset-just-to-that-component">
                 <h2>
-                  What if the project only has a small NCS component? Do we apply the Toolset just
-                  to that component?
+                  What if the project only has a small NCS component? Do we apply the Tool just to
+                  that component?
                 </h2>
                 <p>
                   Even if NCS is only a small part of the project, it is worthwhile to address the
-                  Toolset to the project as a whole since key audiences will unlikely make this kind
-                  of distinction.
+                  Tool to the project as a whole since key audiences will unlikely make this kind of
+                  distinction.
                 </p>
                 <p>
                   That said, speed and agility are important in implementation of the NCS, and the
-                  application of the Toolset must not become burdensome. Accordingly, the Toolset
-                  was designed to be streamlined and easily integrated. It also rarely results in a
-                  hold status or strict deadlines; it is meant rather to identify issues so teams
-                  can move forward on addressing them along with their implementation plans.
+                  application of the Tool must not become burdensome. Accordingly, the Tool was
+                  designed to be streamlined and easily integrated. It also rarely results in a hold
+                  status or strict deadlines; it is meant rather to identify issues so teams can
+                  move forward on addressing them along with their implementation plans.
                 </p>
               </div>
 
@@ -172,8 +172,8 @@ export default function FAQs() {
                   recommendation is higher-level review, and this is reserved for risks of severe
                   human rights abuses. Most issues are placed on the Prioritize List or Watch List,
                   and invite teams to work quickly while honoring their capacity, time, and resource
-                  constraints. The Toolset does not recommend stopping ongoing projects, and the
-                  hope is that it provides an extra foundation for requests for funding and other
+                  constraints. The Tool does not recommend stopping ongoing projects, and the hope
+                  is that it provides an extra foundation for requests for funding and other
                   assistance for project teams.
                 </p>
               </div>
