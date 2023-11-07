@@ -54,12 +54,12 @@ export default function Home() {
             <div className="prose w-full">
               <h2>How it works</h2>
 
-              <p>The work of this Toolset occurs in three phases:</p>
+              <p>The work of this Tool occurs in three phases:</p>
 
               <h3>1. Research</h3>
               <ul>
                 <li>Engage and conduct preliminary research</li>
-                <li>Use the Community Identification Tool</li>
+                <li>Use the Project and Community Background</li>
               </ul>
 
               <h3>2. Screening</h3>
@@ -109,7 +109,7 @@ export default function Home() {
                       Review this list annually at minimum, or more frequently as projects demand.
                     </li>
                     <li>Review during project implementation.</li>
-                    <li>Review Other Toolsets for any equity and well-being concerns.</li>
+                    <li>Review Other Tools for any equity and well-being concerns.</li>
                   </ul>
                 </li>
                 <li>
@@ -119,7 +119,7 @@ export default function Home() {
               </ul>
 
               <p>
-                To help teams identify potential issues and prioritize them for action, this Toolset
+                To help teams identify potential issues and prioritize them for action, this Tool
                 walks teams through key issues reflected by 82 indicators and provides specific
                 guidance to help make Project Risk Determinations, prioritize, and decide next
                 steps.
@@ -160,7 +160,7 @@ export default function Home() {
                   The <b>Watch List</b> reflects less applicable project risks, which should be
                   reviewed yearly at a minimum. The Watch List also includes broader equity and
                   well-being considerations, which might be best addressed with tools not in this
-                  Toolset.
+                  Tool.
                 </li>
               </ol>
 

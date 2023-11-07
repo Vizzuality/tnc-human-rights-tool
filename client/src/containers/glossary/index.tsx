@@ -276,7 +276,7 @@ export default function Glossary() {
                 <h2>Project Site, Area, Region, Category</h2>
                 <p>
                   Projects are considered on the basis of their geographic scope, as further
-                  outlined in the Community Identification Tool of this guide.
+                  outlined in the Project and Community Background of this guide.
                 </p>
                 <ul>
                   <li>

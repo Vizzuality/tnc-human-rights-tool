@@ -12,7 +12,7 @@ export default function OtherTools() {
               <h1>Other Tools</h1>
 
               <p>
-                This Toolset is not meant to be a single solution to address human rights and
+                This Tool is not meant to be a single solution to address human rights and
                 conservation work. It aims to be a preliminary process to identify issues and
                 perform early due diligence in advance of other work — organizing project decisions
                 around IPLC self-determination, designing mitigation strategies, and project
@@ -35,7 +35,7 @@ export default function OtherTools() {
                   </a>
                   <p>
                     TNC’s core guidance on how to pursue ambitious conservation agendas with full
-                    respect for human rights and IPLC self-determination. This Toolset should be
+                    respect for human rights and IPLC self-determination. This Tool should be
                     considered one component of the larger vision in the Human Rights Guide, and as
                     such it points repeatedly to corresponding Human Rights Guide Modules.
                   </p>

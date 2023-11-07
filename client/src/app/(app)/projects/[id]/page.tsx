@@ -25,7 +25,7 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
         <div className="prose">
           <h2>Learning & Early Discussions</h2>
           <p>
-            In preparing to use this Toolset, teams should feel empowered to conduct research and
+            In preparing to use this Tool, teams should feel empowered to conduct research and
             engage with key Communities.{" "}
             <a
               href="https://www.tnchumanrightsguide.org/module-1-learning-early-discussions/"
@@ -73,13 +73,13 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             It’s important to be aware of this possibility in order to avoid unfavorable outcomes.
             Human-rights based conservation seeks to respect and advance human rights, and as such,
             we see risks as inevitable and embrace the process of identifying risk and responding
-            well to it. This Toolset helps identify and prioritize those risks.
+            well to it. This Tool helps identify and prioritize those risks.
           </p>
           <p>
             The scope of human rights and our responsibility to respect and caretake them is vast,
             so understanding how actions and impacts are linked well help teams understand TNC’s
-            obligations. This Toolset was designed to identify and prioritize human rights risks —
-            it answers to broad ranges of impacts, including not only severe human rights abuses but
+            obligations. This Tool was designed to identify and prioritize human rights risks — it
+            answers to broad ranges of impacts, including not only severe human rights abuses but
             also socioeconomic rights, labor rights, and complex collective rights like the right to
             self-determination.
           </p>
@@ -93,7 +93,7 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
               human rights due diligence process (HRDD)
             </Link>{" "}
             is essential. The responsibility of HRDD is to first identify and assess risk, and
-            secondly to co-create, implement, and review mitigation strategies. This Toolset applies
+            secondly to co-create, implement, and review mitigation strategies. This Tool applies
             these concepts by way of the Project Risk Determination Framework.
           </p>
           <h3>Contextual Risk and Project Risk</h3>
@@ -141,15 +141,15 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             everything is a priority, nothing is a priority.
           </p>
           <p>
-            This Toolset, with its planned and prescriptive structure, aims to cut down on the
+            This Tool, with its planned and prescriptive structure, aims to cut down on the
             cognitive load required to do this prioritization effectively. It will organize
             teams&rsquo; thinking so they can usefully engage with Communities, but it is not a
-            one-stop shop. Rather, the Toolset itself expressly guides teams to revisit and validate
+            one-stop shop. Rather, the Tool itself expressly guides teams to revisit and validate
             determinations with the Communities.
           </p>
           <p>
-            During some of our early workshopping of this Toolset, teams felt uncomfortable making
-            risk determinations, particularly if they felt they would be on the hook for missing
+            During some of our early workshopping of this Tool, teams felt uncomfortable making risk
+            determinations, particularly if they felt they would be on the hook for missing
             something.
           </p>
           <p>This is understandable.</p>
@@ -161,13 +161,13 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           </p>
           <p>
             With that in mind, team members should be made to feel comfortable engaging with the
-            Toolset and properly incentivized to identify risks, even if their identification might
+            Tool and properly incentivized to identify risks, even if their identification might
             delay project deadlines.
           </p>
           <p>
             In our workshopping sessions, team members became more comfortable with making these
-            judgments as they familiarized themselves with the Toolset. And the discussions that
-            ensued from engaging with the Toolset were found to be educational and clarifying.
+            judgments as they familiarized themselves with the Tool. And the discussions that ensued
+            from engaging with the Tool were found to be educational and clarifying.
           </p>
           <h3>Key Tool: The Project Risk Determination</h3>
           <p>
@@ -310,12 +310,11 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           <p>
             The additional layer of review is still being piloted, and is described below. If an
             Escalate List risk has already been examined by regional, national, or global leadership
-            outside the project team, the Toolset recommends a refresh.
+            outside the project team, the Tool recommends a refresh.
           </p>
           <blockquote>
-            Note: This Toolset aligns with TNC’s heightened risk definition, as it identifies
-            conflicts with TNC’s core values and general adverse impacts. That will necessitate
-            performing a{" "}
+            Note: This Tool aligns with TNC’s heightened risk definition, as it identifies conflicts
+            with TNC’s core values and general adverse impacts. That will necessitate performing a{" "}
             <a
               href="https://thenatureconservancy462.sharepoint.com/sites/Department/rac/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FDepartment%2Frac%2FShared%20Documents%2FHeightened%20Risk%20Guidelines%2Epdf&parent=%2Fsites%2FDepartment%2Frac%2FShared%20Documents"
               target="_blank"
@@ -323,8 +322,8 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             >
               heightened risk analysis
             </a>{" "}
-            as described by TNC. The Toolset also serves to identify heightened people risk
-            assessment factors, and it helps create social safeguards and recommendations.
+            as described by TNC. The Tool also serves to identify heightened people risk assessment
+            factors, and it helps create social safeguards and recommendations.
           </blockquote>
 
           <h3>The Prioritize List</h3>
@@ -334,7 +333,7 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           </p>
           <p>
             There is a natural tendency to over-include priorities to avoid making a mistake, but as
-            stated above, if everything is a priority, nothing is a priority. This Toolset will help
+            stated above, if everything is a priority, nothing is a priority. This Tool will help
             with these priority decisions with specific guidance and key risk analysis frameworks.
           </p>
           <p>
@@ -366,8 +365,8 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
 
           <p>
             Some items on the Watch List might be better addressed with alternative tools. The range
-            of human rights considered by this Toolset is broad — food, water, housing, medical
-            care, education, standards of living, collective rights, inter-generational rights. The
+            of human rights considered by this Tool is broad — food, water, housing, medical care,
+            education, standards of living, collective rights, inter-generational rights. The
             correct approach to the social challenges underlying each of these rights is still under
             debate, and approaches that are comprehensive and correct in one context might not work
             in other contexts. A global toolkit is useful, but it is not a global substitute
@@ -433,11 +432,11 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
             </li>
           </ul>
           <p>
-            For beta users of the Toolset, the interim process is to send their Escalate List
-            results to their Business Unit or Regional Leadership for review. Reviewers will have
-            support from a specialized TNC legal advisor who will assist reviewers in determining
-            next steps and escalating the issue to existing review mechanisms if there is an urgent
-            need to do so.
+            For beta users of the Tool, the interim process is to send their Escalate List results
+            to their Business Unit or Regional Leadership for review. Reviewers will have support
+            from a specialized TNC legal advisor who will assist reviewers in determining next steps
+            and escalating the issue to existing review mechanisms if there is an urgent need to do
+            so.
           </p>
           <p>
             If Escalate List risks have previously been examined by higher-level leadership, as in
@@ -600,7 +599,7 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           <CardContent className="prose w-full">
             <p>
               The research phase is the first step in the process of using the Human Rights
-              Screening Toolset
+              Screening Tool
             </p>
             <Link
               href={`/projects/${params.id}/project-and-background-community`}
