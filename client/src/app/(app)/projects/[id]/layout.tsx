@@ -11,6 +11,7 @@ import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
 import NavigationBreadcrumbs from "@/containers/navigation/breadcrumbs";
 import NavigationTabs from "@/containers/navigation/tabs";
 import ProjectsDetailReport from "@/containers/projects/detail/report";
+import ScrollUp from "@/containers/scroll-up";
 import Wrapper from "@/containers/wrapper";
 
 interface ProjectsDetailLayoutProps extends ProjectsDetailPageProps, PropsWithChildren {}
@@ -33,6 +34,7 @@ export default async function ProjectsDetailLayout({
 
   return (
     <Hydrate state={dehydratedState}>
+      <ScrollUp />
       <Wrapper>
         <div className="space-y-8">
           <header className="grid grid-cols-12 items-center space-y-10 border-b border-gray-100 pb-8">
