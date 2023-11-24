@@ -23,6 +23,483 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
     <div className="grid grid-cols-12 gap-y-10 lg:gap-20">
       <div className="col-span-12 lg:col-span-8">
         <div className="prose">
+          <h2>Human Rights and Conservation</h2>
+          <p>
+            Successful and lasting conservation should prioritize the human rights, collective
+            rights, authority, and capacity of Indigenous Peoples and Local Communities (IPLCs) to
+            manage and protect their lands and natural resources.
+          </p>
+
+          <ul>
+            <li>
+              For more details about this approach, see the{" "}
+              <a href="https://tncvoicechoiceaction.org/" target="_blank" rel="noopener noreferrer">
+                Voice, Choice, and Action Framework.
+              </a>
+            </li>
+            <li>
+              For best practices in implementing it, see the{" "}
+              <a
+                href="https://www.tnchumanrightsguide.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Human Rights Guide.
+              </a>
+            </li>
+          </ul>
+
+          <p>
+            The term IPLCs comprises all communities and individuals who maintain profound economic
+            and cultural connections to the land where they live.
+          </p>
+
+          <p>
+            IPLCs are <strong>leaders</strong> who have agency over understanding and protecting
+            their own rights, not <strong>beneficiaries</strong> whose rights are protected by
+            others.
+          </p>
+
+          <p>
+            The concept of human rights — rights inherent to all humans — resonates across many
+            cultures and traditions. And while international human rights laws, as established by
+            treaties and in courts, are important and often legally binding, the concept of human
+            rights cannot be fully understood through one single perspective.
+          </p>
+
+          <p>
+            Human rights work therefore respects the principles of non-discrimination,
+            accountability, transparency, participation, and the right to self-determination.
+            Conservation programs should work with IPLC rightsholders to understand their
+            perspectives on the most effective, culturally meaningful ways to uphold human rights.
+          </p>
+
+          <p>
+            Businesses and organizations can’t outsource their responsibility to respect human
+            rights by merely complying with the terms of national law. While businesses and
+            organizations must of course comply with the law, its responsibility goes over and above
+            that, and requires that conduct complies with international human rights norms.
+          </p>
+
+          <p>
+            This can be called human rights due diligence. Businesses and organizations are required
+            to investigate, assess, and respond to their own impacts and the impact of all partners
+            and associates. The scope of impacts includes any to which organizations contribute or
+            are directly linked. And while this doesn’t mean the organizations are legally
+            responsible for or have complete control over the whole range, it does mean that they
+            are bound to use their leverage to mitigate adverse human rights impacts wherever it
+            can.
+          </p>
+
+          <p>
+            This duty of care is embedded in many organizations’ relationships and institutional
+            structures and practices. The underlying goals and principles of the conservation and
+            human rights agendas must merge, as described, for example, in The Nature Conservancy’s
+            VCA Framework(1), Human Rights Guide(2), and other guidance.
+          </p>
+
+          <h2>Human Rights and Natural Climate Solutions</h2>
+          <p>
+            The relationship between human rights and conservation is reciprocal. Human rights can
+            only thrive on a livable planet.
+          </p>
+
+          <p>
+            <a
+              href="https://www.pnas.org/doi/10.1073/pnas.1710465114"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Natural Climate Solutions
+            </a>{" "}
+            — a global effort to implement actions that protect, better manage, or restore
+            grasslands, croplands, forests, and wetlands to reduce greenhouse gas emissions and
+            store carbon.
+          </p>
+
+          <p>This work is a critical step to avoid climate catastrophe.</p>
+
+          <p>
+            Because NCS is rooted in ecosystem stewardship and not, for example, industrial
+            emissions reduction, it can serve as a platform for IPLCs to pursue their own
+            self-determined climate agendas. Also, NCS seeks to create income opportunities for
+            IPLCs from successful community mitigation projects paid for by global beneficiaries of
+            the mitigation.
+          </p>
+
+          <p>
+            It’s important to know that NCS and other global conservation efforts have occasionally
+            been criticized by Indigenous rights advocates for a history of displacements based on
+            the{" "}
+            <a
+              href="https://india.mongabay.com/2021/10/conservation-by-eliminating-human-presence-is-a-flawed-construct-study/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              fortress conservation
+            </a>{" "}
+            mindset. Critics ask whether that mindset still underlies conservation practice today,
+            and the perception that NCS is part of the problem rather than part of the solution
+            <a
+              href="https://news.mongabay.com/2021/10/advocates-call-for-a-new-human-rights-based-approach-to-conservation/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              may be growing
+            </a>
+            .
+          </p>
+          <p>
+            NCS is in the public domain. A few scientists and practitioners collaborated to define
+            the concept early on, but no single entity can say definitively what NCS is or is not,
+            nor govern the use of the NCS label. The ability to protect the NCS brand is therefore
+            limited, and the NCS label is sometimes applied to projects of questionable integrity.
+          </p>
+
+          <p>
+            Practitioners can help mitigate this issue by defining and demanding integrity as a part
+            of their practice. The development and promotion of this Tool can demonstrate commitment
+            to the understanding that NCS exists to respect human rights and actively promote
+            Indigenous self-determination, human well-being, and equity.
+          </p>
+
+          <p>This is no small matter.</p>
+
+          <p>
+            Having a responsibility to protect human rights means that the concept of respect is
+            deeply embedded in an organization’s relationships, structures, and practices.
+          </p>
+
+          <p>
+            The full range of rights impacts — encompassing not only severe abuses, but also
+            socio-economic rights, labor rights, cultural rights, the right to self-determination,
+            the right to participation and benefits, and inter-generational duties — must be
+            considered.
+          </p>
+
+          <p>This Tool is meant to address the full scope and complexity of this responsibility.</p>
+
+          <h2>Tool Design Considerations</h2>
+
+          <p>
+            This is a screening tool to help teams <strong>identify</strong>,{" "}
+            <strong>prioritize</strong>, and <strong>analyze</strong> information about the human
+            rights impacts of NCS and conservation projects.
+          </p>
+
+          <p>
+            The Screening Tool returns a series of issue lists (<strong>Research</strong>,{" "}
+            <strong>Escalate</strong>, <strong>Prioritize</strong>, and <strong>Watch</strong>) with
+            recommended actions for each.
+          </p>
+          <p>
+            Prioritization is an essential element of human rights due diligence. It requires making
+            judgment calls and hard decisions. The Project Risk Determination Framework lists
+            factors for teams to consider in making these decisions.
+          </p>
+
+          <p>
+            While the Tool requires and relies primarily on teams’ local knowledge at the screening
+            stage, it highlights when more information is needed from Communities, and requires
+            Community engagement at the action phase.
+          </p>
+
+          <p>The Tool adheres to three sets of competing ambitions:</p>
+
+          <h3>Essential, but not overbearing</h3>
+          <p>
+            There are benefits to a consistent, globally applicable approach. Yet teams in the field
+            have the nuanced understanding necessary to craft culturally meaningful and sustainable
+            solutions, and this expertise can’t be subordinated.
+          </p>
+
+          <h3>Rigorous, but not incomprehensible. </h3>
+          <p>
+            A rigorous and professional standard of human rights analysis is a worthy goal. Yet it
+            cannot obscure comprehension or the ability of the teams doing the work to practically
+            apply the advice and guidance of the analysis.
+          </p>
+
+          <h3>Inclusive, but not exhaustive.</h3>
+          <p>
+            The human rights analysis organization NomoGaia says that the 40 core human rights
+            interact in complex ways, meaning that there are “a plethora of theoretically possible,
+            small ways that a [project’s] operations can impact them.” Yet when analysis becomes
+            overwhelming, it becomes paralyzing. Thorough canvassing of this complexity is
+            important, and analytical boundaries and models for determining priorities are likewise
+            essential.
+          </p>
+
+          <h2>Tool Workshopping Process</h2>
+          <p>
+            In April 2022, TNC field teams working separately in Indonesia, Kenya, Mexico,
+            Australia, Angola, Mongolia, the United States, Guatemala, and Brazil participated in a
+            workshop process that included an introduction, a fact-gathering exercise, a tool
+            application exercise, and a follow-up interview.
+          </p>
+          <p>
+            In September 2022, one team conducted a full-day application of the Screening Tool,
+            which enabled them to fully immerse in the practical realities of using the Tool. This
+            helped our team identify new issues and calibrate guidance on how to prioritize issues.
+          </p>
+          <p>Guidance from all the above work shaped the current iteration of the Tool.</p>
+          <p>
+            The Tool will continue to adapt to the new lessons of experience as future teams use it.
+          </p>
+
+          <h2>The Tool, the Guide, the VCA</h2>
+          <p>The Tool’s aims are twofold:</p>
+          <ol>
+            <li>
+              To help teams realize the goals of the{" "}
+              <a href="https://tncvoicechoiceaction.org/" target="_blank" rel="noopener noreferer">
+                VCA
+              </a>
+              , which describes the kinds of relationships that conservation organizations aim to
+              have with IPLCs — affirming their right to self-determination;
+            </li>
+            <li>
+              To help teams follow{" "}
+              <a
+                href="https://www.tnchumanrightsguide.org/"
+                target="_blank"
+                rel="noopener noreferer"
+              >
+                the principles of the Guide
+              </a>
+              , which describes how to achieve those relationships through Free, Prior, and Informed
+              Consent.
+            </li>
+          </ol>
+
+          <p>
+            The VCA and the Guide focus on principles and process more than on particular human
+            rights because human rights cannot be limited to a single perspective.
+          </p>
+
+          <p>
+            Understanding the human rights issues presented by a project in the context of
+            established international human rights law is an important step — especially for work
+            convened by multinational organizations. Many organizations are members of the
+            Conservation Initiative on Human Rights, a consortium of international organizations
+            that seek to improve conservation practices by promoting human rights in policies and
+            practices.
+          </p>
+
+          <ul>
+            <li>
+              For more on respect for human rights:
+              <ul>
+                <li>
+                  <a
+                    href="https://tncvoicechoiceaction.org/foundational-elements/foundational-element-1-equitable-benefits-impacts-and-inclusion/"
+                    target="_blank"
+                    rel="noopener noreferer"
+                  >
+                    VCA Foundational Element 1 - Equitable Benefits, Impacts, and Inclusion
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              For more on how to achieve detailed human rights analysis:
+              <ul>
+                <li>
+                  <a
+                    href="https://www.tnchumanrightsguide.org/module-2-free-prior-informed-consent/#human-rights-impact-assessment"
+                    target="_blank"
+                    rel="noopener noreferer"
+                  >
+                    The FPIC process
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.tnchumanrightsguide.org/module-4-implementation/#step-one"
+                    target="_blank"
+                    rel="noopener noreferer"
+                  >
+                    Implementation
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.tnchumanrightsguide.org/module-6-monitoring-evaluation-adaptation/#step-one"
+                    target="_blank"
+                    rel="noopener noreferer"
+                  >
+                    Monitoring, Evaluation, and Adaptation
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>
+            A template of human rights indicators can be found in the Guide, but there is no human
+            rights screening process. This Tool aims to fill that gap.
+          </p>
+
+          <p>The below chart shows connections between the Tool, the VCA, and the Guide.</p>
+
+          <h2>What “Communities” Means in Screening Contexts</h2>
+
+          <p>
+            The term IPLC is understood to include all “peoples and communities who possess a
+            profound relationship with their natural landscapes, which they depend on for cultural,
+            spiritual, economic and physical well-being.” See Guide, Module 1(11).
+          </p>
+
+          <p>
+            An even broader view of IPLCs — called “Communities” in this Tool — is appropriate for
+            preliminary screening.
+          </p>
+
+          <p>
+            This Tool stops short of guiding teams toward reaching policy outcomes or resolving
+            competing claims. The work of the Tool is to identify issues and prioritize them in
+            lists. Thus, a broad and inclusive approach is needed.
+          </p>
+
+          <p>
+            In practice, this means that teams should avoid trying to assess the relative profundity
+            of a community’s connection to its lands, because these questions typically raise
+            complications and potential missteps.
+          </p>
+
+          <p>
+            The use of “Communities” errs on the side of greatest inclusion. Any community that
+            purports to have a relationship to the landscape may be included — fishers, farmers,
+            others — and a more closely delineated definition may occur in later processes.
+          </p>
+
+          <p>
+            A few indicators require careful attention to the question of whether given Communities
+            are recognized by international law as Indigenous Peoples.
+          </p>
+
+          <p>
+            The UNDRIP does not provide a fixed definition of “Indigenous Peoples,” recognizing that
+            such definitions have historically been used to exclude Indigenous Peoples from
+            recognition, rights, and benefits.
+          </p>
+
+          <p>
+            Respect for community self-definition and self-determination leads to better
+            relationships and more sustainable conservation outcomes alike.
+          </p>
+
+          <p>
+            For more, see{" "}
+            <a
+              href="https://www.un.org/esa/socdev/unpfii/documents/5session_factsheet1.pdf"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Who Are Indigenous Peoples?
+            </a>
+            , UN Permanent Forum on Indigenous Issues.
+          </p>
+
+          <h2>Communities and the Screening Process</h2>
+          <p>How should teams bring Communities into the screening process?</p>
+          <p>It is a difficult question with a nuanced answer.</p>
+          <p>
+            Firstly, Communities themselves are the most important and accurate source of
+            information about their own interests. It’s essential to bring them into any risk
+            assessment process prior to making any major decisions about implementation or
+            mitigation.
+          </p>
+          <p>But timing is important.</p>
+          <p>
+            In many cases, it is unfair to impose the burden of screening work on Communities. It is
+            the business or organization’s responsibility to ensure its work does not cause human
+            rights impacts. It is not the Communities’ responsibility to help a business or
+            organization assess itself, and there should be no expectation of this labor, and
+            certainly not without fair compensation.
+          </p>
+          <p>
+            The screening processes of this Tool are a preliminary exercise in identifying issues,
+            prioritizing them, and organizing teams’ thinking. It is an introduction pointing toward
+            ways to begin a collaborative process with Communities.
+          </p>
+          <p>
+            The Tool is not a one-stop shop for completing human rights due diligence or process for
+            community engagement.
+          </p>
+          <p>Conservation teams have two equally important responsibilities:</p>
+          <ol>
+            <li>
+              Conduct their own screening process to determine any human rights impacts they might
+              have;
+            </li>
+            <li>
+              Follow up and validate its impressions with Communities during later engagement.
+            </li>
+          </ol>
+
+          <p>
+            Teams should rely on their local knowledge and experience. And they should also know —
+            and be candid about — the limits of their knowledge. The Tool will help by recommending
+            areas for further research before decisions are made.
+          </p>
+          <p>
+            Only <strong>after</strong> the screening process is complete should teams begin to
+            develop concrete plans and problem-solve.
+          </p>
+          <p>
+            During the Research Phase detailed in the next section, teams should gain familiarity
+            with the region’s Communities and relevant issues. After that, the screening process can
+            begin.
+          </p>
+          <p>
+            It’s recommended to do the work of planning and problem-solving in concert with
+            Communities. At this phase, teams should validate the determinations of the screening
+            process as well.
+          </p>
+          <p>
+            See also FAQ: Why are teams doing this analysis themselves instead of hiring an expert?
+          </p>
+          <p>
+            While teams are responsible for preliminary screening, this does not invalidate the
+            importance of early engagement with communities to ensure respect for human rights and
+            self-determination.
+          </p>
+          <p>
+            As the{" "}
+            <a
+              href="https://www.tnchumanrightsguide.org/module-1-learning-early-discussions/"
+              target="_blank"
+              rel="noopener noreferer"
+            >
+              Guide
+            </a>{" "}
+            describes, no concept development should begin before Communities are engaged. Careful
+            planning and practicing restraint will help teams adhere to this mandate.
+          </p>
+
+          <p>
+            Early engagement with Communities is fundamental in international human rights law. It
+            is required by courts.
+          </p>
+          <p>
+            Given historical power imbalances, Communities may be reluctant to raise issues or
+            insert their perspectives if it feels like major decisions have already been decided.
+          </p>
+          <p>
+            If Communities are made to feel they have been brought in to rubber-stamp something
+            that’s already been decided, the relationship suffers, along with the outcome.
+          </p>
+          <p>
+            Furthermore, Communities almost always hold critical details about which strategies or
+            approaches will work.
+          </p>
+          <p>
+            To the extent that a business or organization and Communities have different goals, a
+            shared set of goals should be established. Businesses and organizations should not
+            attempt to force Communities’ goals into a project not designed to meet their needs.
+          </p>
+
           <h2>Learning & Early Discussions</h2>
           <p>
             In preparing to use this Tool, teams should feel empowered to conduct research and
