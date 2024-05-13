@@ -20,6 +20,8 @@ import type {
   ContextualRiskCategoryResponse,
   ContextualRiskCategoryRequest,
   GetContextualRiskCategoriesIdParams,
+  ContextualRiskCategoryLocalizationResponse,
+  ContextualRiskCategoryLocalizationRequest,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -335,6 +337,70 @@ export const useDeleteContextualRiskCategoriesId = <
   >;
 }) => {
   const mutationOptions = getDeleteContextualRiskCategoriesIdMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+export const postContextualRiskCategoriesIdLocalizations = (
+  id: number,
+  contextualRiskCategoryLocalizationRequest: ContextualRiskCategoryLocalizationRequest,
+) => {
+  return API<ContextualRiskCategoryLocalizationResponse>({
+    url: `/contextual-risk-categories/${id}/localizations`,
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    data: contextualRiskCategoryLocalizationRequest,
+  });
+};
+
+export const getPostContextualRiskCategoriesIdLocalizationsMutationOptions = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postContextualRiskCategoriesIdLocalizations>>,
+    TError,
+    { id: number; data: ContextualRiskCategoryLocalizationRequest },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postContextualRiskCategoriesIdLocalizations>>,
+  TError,
+  { id: number; data: ContextualRiskCategoryLocalizationRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postContextualRiskCategoriesIdLocalizations>>,
+    { id: number; data: ContextualRiskCategoryLocalizationRequest }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return postContextualRiskCategoriesIdLocalizations(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostContextualRiskCategoriesIdLocalizationsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postContextualRiskCategoriesIdLocalizations>>
+>;
+export type PostContextualRiskCategoriesIdLocalizationsMutationBody =
+  ContextualRiskCategoryLocalizationRequest;
+export type PostContextualRiskCategoriesIdLocalizationsMutationError = ErrorType<Error>;
+
+export const usePostContextualRiskCategoriesIdLocalizations = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postContextualRiskCategoriesIdLocalizations>>,
+    TError,
+    { id: number; data: ContextualRiskCategoryLocalizationRequest },
+    TContext
+  >;
+}) => {
+  const mutationOptions = getPostContextualRiskCategoriesIdLocalizationsMutationOptions(options);
 
   return useMutation(mutationOptions);
 };

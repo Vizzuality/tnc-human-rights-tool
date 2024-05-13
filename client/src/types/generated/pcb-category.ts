@@ -20,6 +20,8 @@ import type {
   PcbCategoryResponse,
   PcbCategoryRequest,
   GetPcbCategoriesIdParams,
+  PcbCategoryLocalizationResponse,
+  PcbCategoryLocalizationRequest,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -293,6 +295,69 @@ export const useDeletePcbCategoriesId = <TError = ErrorType<Error>, TContext = u
   >;
 }) => {
   const mutationOptions = getDeletePcbCategoriesIdMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+export const postPcbCategoriesIdLocalizations = (
+  id: number,
+  pcbCategoryLocalizationRequest: PcbCategoryLocalizationRequest,
+) => {
+  return API<PcbCategoryLocalizationResponse>({
+    url: `/pcb-categories/${id}/localizations`,
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    data: pcbCategoryLocalizationRequest,
+  });
+};
+
+export const getPostPcbCategoriesIdLocalizationsMutationOptions = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postPcbCategoriesIdLocalizations>>,
+    TError,
+    { id: number; data: PcbCategoryLocalizationRequest },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postPcbCategoriesIdLocalizations>>,
+  TError,
+  { id: number; data: PcbCategoryLocalizationRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postPcbCategoriesIdLocalizations>>,
+    { id: number; data: PcbCategoryLocalizationRequest }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return postPcbCategoriesIdLocalizations(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostPcbCategoriesIdLocalizationsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postPcbCategoriesIdLocalizations>>
+>;
+export type PostPcbCategoriesIdLocalizationsMutationBody = PcbCategoryLocalizationRequest;
+export type PostPcbCategoriesIdLocalizationsMutationError = ErrorType<Error>;
+
+export const usePostPcbCategoriesIdLocalizations = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postPcbCategoriesIdLocalizations>>,
+    TError,
+    { id: number; data: PcbCategoryLocalizationRequest },
+    TContext
+  >;
+}) => {
+  const mutationOptions = getPostPcbCategoriesIdLocalizationsMutationOptions(options);
 
   return useMutation(mutationOptions);
 };
