@@ -20,6 +20,8 @@ import type {
   PcbResponse,
   PcbRequest,
   GetPcbsIdParams,
+  PcbLocalizationResponse,
+  PcbLocalizationRequest,
 } from "./strapi.schemas";
 import { API } from "../../services/api/index";
 import type { ErrorType } from "../../services/api/index";
@@ -266,6 +268,69 @@ export const useDeletePcbsId = <TError = ErrorType<Error>, TContext = unknown>(o
   >;
 }) => {
   const mutationOptions = getDeletePcbsIdMutationOptions(options);
+
+  return useMutation(mutationOptions);
+};
+export const postPcbsIdLocalizations = (
+  id: number,
+  pcbLocalizationRequest: PcbLocalizationRequest,
+) => {
+  return API<PcbLocalizationResponse>({
+    url: `/pcbs/${id}/localizations`,
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    data: pcbLocalizationRequest,
+  });
+};
+
+export const getPostPcbsIdLocalizationsMutationOptions = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postPcbsIdLocalizations>>,
+    TError,
+    { id: number; data: PcbLocalizationRequest },
+    TContext
+  >;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof postPcbsIdLocalizations>>,
+  TError,
+  { id: number; data: PcbLocalizationRequest },
+  TContext
+> => {
+  const { mutation: mutationOptions } = options ?? {};
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof postPcbsIdLocalizations>>,
+    { id: number; data: PcbLocalizationRequest }
+  > = (props) => {
+    const { id, data } = props ?? {};
+
+    return postPcbsIdLocalizations(id, data);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PostPcbsIdLocalizationsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof postPcbsIdLocalizations>>
+>;
+export type PostPcbsIdLocalizationsMutationBody = PcbLocalizationRequest;
+export type PostPcbsIdLocalizationsMutationError = ErrorType<Error>;
+
+export const usePostPcbsIdLocalizations = <
+  TError = ErrorType<Error>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postPcbsIdLocalizations>>,
+    TError,
+    { id: number; data: PcbLocalizationRequest },
+    TContext
+  >;
+}) => {
+  const mutationOptions = getPostPcbsIdLocalizationsMutationOptions(options);
 
   return useMutation(mutationOptions);
 };

@@ -688,16 +688,45 @@ export interface ApiContextualRiskContextualRisk extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.RichText & Attribute.Required;
-    display_order: Attribute.Integer & Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    display_order: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     contextual_risk_category: Attribute.Relation<
       'api::contextual-risk.contextual-risk',
       'manyToOne',
       'api::contextual-risk-category.contextual-risk-category'
     >;
-    project_risk_description: Attribute.RichText & Attribute.Required;
+    project_risk_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -713,6 +742,12 @@ export interface ApiContextualRiskContextualRisk extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::contextual-risk.contextual-risk',
+      'oneToMany',
+      'api::contextual-risk.contextual-risk'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -728,10 +763,33 @@ export interface ApiContextualRiskCategoryContextualRiskCategory
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required & Attribute.Unique;
-    description: Attribute.RichText & Attribute.Required;
-    display_order: Attribute.Integer;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    display_order: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     contextual_risks: Attribute.Relation<
       'api::contextual-risk-category.contextual-risk-category',
       'oneToMany',
@@ -756,6 +814,12 @@ export interface ApiContextualRiskCategoryContextualRiskCategory
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::contextual-risk-category.contextual-risk-category',
+      'oneToMany',
+      'api::contextual-risk-category.contextual-risk-category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -770,16 +834,44 @@ export interface ApiPcbPcb extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    display_order: Attribute.Integer;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    display_order: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     pcb_category: Attribute.Relation<
       'api::pcb.pcb',
       'manyToOne',
       'api::pcb-category.pcb-category'
     >;
-    description: Attribute.RichText & Attribute.Required;
-    input: Attribute.JSON & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    input: Attribute.JSON &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -787,6 +879,12 @@ export interface ApiPcbPcb extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::pcb.pcb', 'oneToOne', 'admin::user'> &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::pcb.pcb',
+      'oneToMany',
+      'api::pcb.pcb'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -801,15 +899,37 @@ export interface ApiPcbCategoryPcbCategory extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    display_order: Attribute.Integer;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    display_order: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     pcbs: Attribute.Relation<
       'api::pcb-category.pcb-category',
       'oneToMany',
       'api::pcb.pcb'
     >;
-    description: Attribute.RichText & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Attribute.UID<'api::pcb-category.pcb-category', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -826,6 +946,12 @@ export interface ApiPcbCategoryPcbCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::pcb-category.pcb-category',
+      'oneToMany',
+      'api::pcb-category.pcb-category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -840,16 +966,43 @@ export interface ApiProjectProject extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    name: Attribute.String & Attribute.Required;
-    description: Attribute.RichText & Attribute.Required;
-    risks: Attribute.JSON;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    risks: Attribute.JSON &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     author: Attribute.Relation<
       'api::project.project',
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    pcbs: Attribute.JSON;
+    pcbs: Attribute.JSON &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -865,6 +1018,12 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::project.project'
+    >;
+    locale: Attribute.String;
   };
 }
 
