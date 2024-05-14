@@ -2,16 +2,23 @@
 
 import Link from "next/link";
 
+import { useGetMessages } from "@/types/generated/message";
+
 import Wrapper from "@/containers/wrapper";
 
 export default function Glossary() {
+  const { data, isFetched } = useGetMessages({ populate: "*" });
+
+  const messages = isFetched && data?.data && data?.data[0]?.attributes;
+
   return (
     <Wrapper>
       <div className="grid grid-cols-12 gap-y-10 lg:gap-20">
         <div className="col-span-12 lg:col-span-8">
           <div className="space-y-10">
             <div className="prose w-full">
-              <h1>Glossary</h1>
+              {messages && <h1>{messages.glossary}</h1>}
+
               <p>Definitions of the most common terms in the context of the HR Tool</p>
 
               <div id="any-multiple-frequent-and-pervasive">
