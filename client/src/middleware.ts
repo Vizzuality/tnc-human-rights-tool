@@ -4,7 +4,7 @@ import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 import withIntl from "next-intl/middleware";
 
 const locales = ["en", "es"];
-const privatePages = ["/projects"];
+const privatePaths = ["/projects"];
 
 const intlMiddleware = withIntl({
   locales,
@@ -30,12 +30,9 @@ const authMiddleware = withAuth(
 );
 
 export default function middleware(req: NextRequestWithAuth, ev: NextFetchEvent) {
-  const privatePathnameRegex = RegExp(
-    `^(/(${locales.join("|")}))?(${privatePages
-      .flatMap((p) => (p === "/" ? ["", "/"] : p))
-      .join("|")})/.*?$`,
-    "i",
-  );
+  const localesPattern = locales.join("|");
+  const pathsPattern = privatePaths.join("|").replace(/\//g, "\\/");
+  const privatePathnameRegex = RegExp(`^\\/(?:${localesPattern})${pathsPattern}(?:\\/.*)?$`);
   const isPrivatePage = privatePathnameRegex.test(req.nextUrl.pathname);
 
   if (isPrivatePage) {
