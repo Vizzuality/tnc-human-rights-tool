@@ -1,4 +1,4 @@
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 // import FollowUpForm from "@/containers/projects/detail/forms/follow-up";

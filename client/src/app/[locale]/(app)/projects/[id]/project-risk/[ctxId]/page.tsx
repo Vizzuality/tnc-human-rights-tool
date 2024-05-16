@@ -12,7 +12,7 @@ import {
   getGetContextualRisksIdQueryOptions,
 } from "@/types/generated/contextual-risk";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import MinimumCoreRiskDetermination from "@/containers/minimum-core-risk-determination";
 import ProjectsDetailContent from "@/containers/projects/detail/content";

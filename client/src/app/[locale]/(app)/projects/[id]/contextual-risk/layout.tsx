@@ -12,7 +12,7 @@ import {
   getGetContextualRiskCategoriesIdQueryOptions,
 } from "@/types/generated/contextual-risk-category";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import ContextualRiskSidebar from "@/containers/projects/detail/sidebar/contextual-risk";
 import Sidebar from "@/containers/sidebar";

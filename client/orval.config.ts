@@ -29,6 +29,7 @@ module.exports = {
           "Contextual-risk-category",
           "Pcb",
           "Pcb-category",
+          "Message",
         ],
       },
     },

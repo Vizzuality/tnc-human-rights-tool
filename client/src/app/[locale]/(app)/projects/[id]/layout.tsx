@@ -6,7 +6,7 @@ import getQueryClient from "@/lib/getQueryClient";
 
 import { getGetProjectsIdQueryOptions, getProjectsId } from "@/types/generated/project";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import NavigationBreadcrumbs from "@/containers/navigation/breadcrumbs";
 import NavigationTabs from "@/containers/navigation/tabs";

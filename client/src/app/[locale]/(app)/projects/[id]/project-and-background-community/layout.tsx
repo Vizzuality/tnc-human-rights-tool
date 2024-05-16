@@ -12,7 +12,7 @@ import {
   getPcbCategories,
 } from "@/types/generated/pcb-category";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import PcbSidebar from "@/containers/projects/detail/sidebar/pcb";
 import Sidebar from "@/containers/sidebar";

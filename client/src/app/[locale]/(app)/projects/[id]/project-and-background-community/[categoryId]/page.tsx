@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 import { getPcbs } from "@/types/generated/pcb";
 import { getPcbCategoriesId } from "@/types/generated/pcb-category";
 
-import { ProjectsDetailPageProps } from "@/app/(app)/projects/[id]/page";
+import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import CarbonOffsetProjectControversiesForm from "@/containers/projects/detail/forms/pcb/carbon-offset-offset-controversies";
