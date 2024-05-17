@@ -1,5 +1,9 @@
 import ReactMarkdown from "react-markdown";
 
+import Link from "next/link";
+
+import slugify from "slugify";
+
 export default function Markdown({ children }: { children?: string | null }) {
   return (
     <div className="prose w-full">
@@ -13,8 +17,31 @@ export default function Markdown({ children }: { children?: string | null }) {
                 </a>
               );
             }
-            return <a href={props.href}>{props.children}</a>;
+
+            return <Link href={props.href || ""}>{props.children}</Link>;
           },
+          h1: (props) => (
+            <h1
+              id={slugify(props?.children?.toString() || "", {
+                lower: true,
+                strict: true,
+              })}
+              {...props}
+            >
+              {props.children}
+            </h1>
+          ),
+          h2: (props) => (
+            <h2
+              id={slugify(props?.children?.toString() || "", {
+                lower: true,
+                strict: true,
+              })}
+              {...props}
+            >
+              {props.children}
+            </h2>
+          ),
         }}
       >
         {children}

@@ -1851,6 +1851,16 @@ export interface Message {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2136,6 +2146,16 @@ export type MessageRequestData = {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
   locale?: string;
 };
 
@@ -2202,6 +2222,16 @@ export interface MessageLocalizationRequest {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
   locale: string;
 }
 
