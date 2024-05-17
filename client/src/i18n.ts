@@ -1,14 +1,20 @@
+import { createSharedPathnamesNavigation } from "next-intl/navigation";
 import { getRequestConfig } from "next-intl/server";
 import { merge } from "ts-deepmerge";
 
 import { getMessages } from "@/types/generated/message";
-// Can be imported from a shared config
-const locales = ["en", "es"];
+
+import { localePrefix, locales } from "@/constants/navigation";
+
+export const { Link, redirect, usePathname, useRouter } = createSharedPathnamesNavigation({
+  locales,
+  localePrefix,
+});
 
 export default getRequestConfig(async ({ locale }) => {
-  let l = locale;
+  let l = locale as (typeof locales)[number];
   // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale)) l = "en";
+  if (!locales.includes(l)) l = "en";
 
   const { data: dataDefault } = await getMessages({
     locale: "en",

@@ -3,12 +3,13 @@ import { NextFetchEvent } from "next/server";
 import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 import withIntl from "next-intl/middleware";
 
-const locales = ["en", "es"];
+import { localePrefix, locales } from "@/constants/navigation";
+
 const privatePaths = ["/projects"];
 
 const intlMiddleware = withIntl({
   locales,
-  localePrefix: "always",
+  localePrefix,
   defaultLocale: "en",
 });
 

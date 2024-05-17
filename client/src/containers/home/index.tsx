@@ -1,7 +1,5 @@
 "use client";
 
-import Markdown from "react-markdown";
-
 import Link from "next/link";
 
 import { useTranslations } from "next-intl";
@@ -10,6 +8,7 @@ import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Markdown from "@/components/ui/markdown";
 
 export default function Home() {
   const t = useTranslations();
@@ -19,9 +18,7 @@ export default function Home() {
       <div className="grid grid-cols-12 gap-y-10 lg:gap-20">
         <div className="col-span-12 lg:col-span-8">
           <div className="space-y-10">
-            <div className="prose w-full">
-              <Markdown>{t.raw("intro")}</Markdown>
-            </div>
+            <Markdown>{t.raw("intro")}</Markdown>
           </div>
         </div>
 
@@ -30,7 +27,7 @@ export default function Home() {
             <CardHeader className="prose w-full">
               <CardTitle>{t("get_started")}</CardTitle>
             </CardHeader>
-            <CardContent className="prose w-full">
+            <CardContent className="space-y-5">
               <Markdown>{t.raw("get_started_description")}</Markdown>
               <Link href="/projects" className="block">
                 <Button size="lg" className="w-full">
