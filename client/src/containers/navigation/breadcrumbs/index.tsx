@@ -5,26 +5,30 @@ import { Fragment, useMemo } from "react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
+import { useLocale, useTranslations } from "next-intl";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
 
 export const BREADCRUMBS_DICTIONARY: Record<string, string> = {
-  projects: "Projects",
-  "project-and-background-community": "Project and Community Background",
-  "contextual-risk": "Contextual Risk",
-  "project-risk": "Project Risk",
-  "follow-up": "Follow Up",
-  escalate: "Escalate",
-  prioritize: "Prioritize",
-  watch: "Watch",
-  research: "Research",
+  projects: "projects",
+  "project-and-background-community": "project_and_background_community",
+  "contextual-risk": "contextual_risk",
+  "project-risk": "project_risk",
+  "follow-up": "follow_up",
+  escalate: "escalate",
+  prioritize: "prioritize",
+  watch: "watch",
+  research: "research",
 };
 
 export default function NavigationBreadcrumbs() {
   const { id, categoryId, ctxId } = useParams();
   const pathname = usePathname();
+  const t = useTranslations();
+  const locale = useLocale();
 
   const { data: projectIdData } = useGetProjectsId(+id);
   const { data: pcbCategoriesData } = useGetPcbCategories({
@@ -44,6 +48,10 @@ export default function NavigationBreadcrumbs() {
     const PATH_SLICES = pathname.split("/").filter((slice) => slice !== "");
 
     return PATH_SLICES.map((slice, index) => {
+      if (slice === locale) {
+        return null;
+      }
+
       if (id && slice === id) {
         return {
           href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,
@@ -81,31 +89,33 @@ export default function NavigationBreadcrumbs() {
 
       return {
         href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,
-        label: BREADCRUMBS_DICTIONARY[slice] || slice,
+        label: t(BREADCRUMBS_DICTIONARY[slice]) || slice,
       };
-    });
+    }).filter((s) => !!s);
   }, [
     id,
     categoryId,
     ctxId,
     pathname,
+    locale,
     projectIdData,
     pcbCategoriesData,
     contextualRiskCategoriesData,
     contextualRisksData,
+    t,
   ]);
 
   return (
     <ul className="flex space-x-1 text-sm">
       <li>{">"}</li>
-      {BREADCRUMBS.map(({ href, label }) => (
-        <Fragment key={href}>
+      {BREADCRUMBS.map((props) => (
+        <Fragment key={props?.href}>
           <li>
-            <Link className="hover:text-primary hover:underline" href={href}>
-              {label}
+            <Link className="hover:text-primary hover:underline" href={props?.href || ""}>
+              {props?.label}
             </Link>
           </li>
-          {!(BREADCRUMBS[BREADCRUMBS.length - 1].href === href) && <li>/</li>}
+          {!(BREADCRUMBS[BREADCRUMBS.length - 1]?.href === props?.href) && <li>/</li>}
         </Fragment>
       ))}
     </ul>

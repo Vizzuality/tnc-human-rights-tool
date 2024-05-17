@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 import { getProgress } from "@/lib/status";
 import { cn } from "@/lib/utils";
 
@@ -19,39 +21,39 @@ const LINKS: {
 }[] = [
   {
     href: "/project-and-background-community",
-    label: "Project and Community Background",
+    label: "project_and_background_community",
     slug: "pcb",
   },
   {
     href: "/contextual-risk",
-    label: "Contextual Risk",
+    label: "contextual_risk",
     slug: "contextual-risk",
   },
   {
     href: "/project-risk",
-    label: "Project Risk",
+    label: "project_risk",
     slug: "project-risk",
   },
   {
     href: "/follow-up",
-    label: "Follow Up",
+    label: "follow_up",
     slug: "follow-up",
   },
 ];
 
 const GROUPS = [
   {
-    label: "1. Research phase",
+    label: "research_phase",
     slug: "research-phase",
     className: "col-span-3",
   },
   {
-    label: "2. Screening Phase",
+    label: "screening_phase",
     slug: "screening-phase",
     className: "col-span-6",
   },
   {
-    label: "3. Follow Up Phase",
+    label: "follow_up_phase",
     slug: "follow-up-phase",
     className: "col-span-3",
   },
@@ -59,6 +61,7 @@ const GROUPS = [
 
 export default function NavigationTabs() {
   const { id } = useParams();
+  const t = useTranslations();
 
   const { data: pcbCategoriesData } = useGetPcbCategories({
     sort: "display_order:asc",
@@ -83,7 +86,7 @@ export default function NavigationTabs() {
   return (
     <div className="space-y-2.5">
       <ul className="relative grid w-full grid-cols-12 gap-10">
-        {GROUPS.map(({ label, slug, className }) => (
+        {GROUPS.map(({ label, slug, className }, i) => (
           <li
             className={cn({
               "relative w-full text-center text-xs": true,
@@ -105,7 +108,9 @@ export default function NavigationTabs() {
                 backgroundSize: "10px 1px, 100% 1px",
               }}
             />
-            <span className="relative z-10 inline-block bg-white px-2">{label}</span>
+            <span className="relative z-10 inline-block bg-white px-2">{`${i + 1} ${t(
+              label,
+            )}`}</span>
           </li>
         ))}
       </ul>
@@ -122,7 +127,7 @@ export default function NavigationTabs() {
               progress={progress}
             >
               <span className="flex space-x-1">
-                <span>{label}</span>{" "}
+                <span>{t(label)}</span>{" "}
                 <span className="absolute bottom-1.5 right-1.5 text-[10px] leading-none opacity-75">
                   {format(progress[`${slug}`])}
                 </span>
