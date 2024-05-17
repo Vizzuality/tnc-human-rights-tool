@@ -559,6 +559,14 @@
         }
       },
       "type": "string"
+    },
+    "faqs_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
