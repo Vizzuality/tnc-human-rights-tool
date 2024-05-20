@@ -832,6 +832,160 @@
           "sortable": true
         }
       },
+      "project_and_background_community": {
+        "edit": {
+          "label": "project_and_background_community",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_and_background_community",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "follow_up": {
+        "edit": {
+          "label": "follow_up",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_intro": {
+        "edit": {
+          "label": "project_intro",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_intro",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "research_phase": {
+        "edit": {
+          "label": "research_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "research_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "screening_phase": {
+        "edit": {
+          "label": "screening_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "screening_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "follow_up_phase": {
+        "edit": {
+          "label": "follow_up_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "report": {
+        "edit": {
+          "label": "report",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "report",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "delete_project_alert_title": {
+        "edit": {
+          "label": "delete_project_alert_title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete_project_alert_title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "delete_project_alert_description": {
+        "edit": {
+          "label": "delete_project_alert_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete_project_alert_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "delete": {
+        "edit": {
+          "label": "delete",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "faqs_description": {
+        "edit": {
+          "label": "faqs_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "faqs_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -1193,6 +1347,66 @@
           {
             "name": "reset_password_notification",
             "size": 6
+          },
+          {
+            "name": "project_and_background_community",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "follow_up",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_intro",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "research_phase",
+            "size": 6
+          },
+          {
+            "name": "screening_phase",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "follow_up_phase",
+            "size": 6
+          },
+          {
+            "name": "report",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete_project_alert_title",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete_project_alert_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "delete",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "faqs_description",
+            "size": 12
           }
         ]
       ]

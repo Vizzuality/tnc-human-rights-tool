@@ -5,7 +5,6 @@
   "permissions": [
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::contextual-risk-category.contextual-risk-category",
       "properties": {
         "fields": [
@@ -20,11 +19,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::contextual-risk-category.contextual-risk-category",
       "properties": {
         "locales": [
@@ -32,11 +31,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::contextual-risk-category.contextual-risk-category",
       "properties": {
         "locales": [
@@ -44,11 +43,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "api::contextual-risk-category.contextual-risk-category",
       "properties": {
         "fields": [
@@ -63,11 +62,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::contextual-risk-category.contextual-risk-category",
       "properties": {
         "fields": [
@@ -82,11 +81,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::contextual-risk.contextual-risk",
       "properties": {
         "fields": [
@@ -101,11 +100,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::contextual-risk.contextual-risk",
       "properties": {
         "locales": [
@@ -113,11 +112,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::contextual-risk.contextual-risk",
       "properties": {
         "locales": [
@@ -125,11 +124,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "api::contextual-risk.contextual-risk",
       "properties": {
         "fields": [
@@ -144,11 +143,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::contextual-risk.contextual-risk",
       "properties": {
         "fields": [
@@ -163,11 +162,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::message.message",
       "properties": {
         "fields": [
@@ -228,18 +227,29 @@
           "send",
           "sign_in_cta",
           "success",
-          "reset_password_notification"
+          "reset_password_notification",
+          "project_and_background_community",
+          "follow_up",
+          "project_intro",
+          "research_phase",
+          "screening_phase",
+          "follow_up_phase",
+          "report",
+          "delete_project_alert_title",
+          "delete_project_alert_description",
+          "delete",
+          "faqs_description"
         ],
         "locales": [
           "en",
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::message.message",
       "properties": {
         "locales": [
@@ -247,11 +257,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::message.message",
       "properties": {
         "locales": [
@@ -259,83 +269,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
-      "subject": "api::message.message",
-      "properties": {
-        "fields": [
-          "human_rights_screening_tool",
-          "my_projects",
-          "glossary",
-          "faqs",
-          "other_tools",
-          "logout",
-          "login",
-          "back_to_top",
-          "intro",
-          "get_started_description",
-          "get_started",
-          "projects",
-          "new_project",
-          "project",
-          "progress",
-          "last_updated",
-          "edit_project",
-          "delete_project",
-          "project_risk_prioritization",
-          "screening_notes",
-          "notes_cta",
-          "specific_risk_notes",
-          "indicated_risk_cta",
-          "research_notes",
-          "research_and_community_cta",
-          "key_determination_factors",
-          "key_factors_cta",
-          "follow_up_plan",
-          "contextual_risk",
-          "project_risk",
-          "research",
-          "project_risk_determination_factors",
-          "loading",
-          "create_project_success",
-          "create_project_error",
-          "name",
-          "description",
-          "cancel",
-          "create",
-          "loading_error_title",
-          "loading_error_description",
-          "nav_home",
-          "nav_projects",
-          "glossary_description",
-          "other_tools_description",
-          "sig_in",
-          "username",
-          "password",
-          "sign_up_cta",
-          "confirm_passsword",
-          "sign_up",
-          "forgot_password_cta",
-          "forgot_password",
-          "email",
-          "send",
-          "sign_in_cta",
-          "success",
-          "reset_password_notification"
-        ],
-        "locales": [
-          "en",
-          "es"
-        ]
-      },
-      "conditions": []
-    },
-    {
-      "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::message.message",
       "properties": {
         "fields": [
@@ -396,18 +334,112 @@
           "send",
           "sign_in_cta",
           "success",
-          "reset_password_notification"
+          "reset_password_notification",
+          "project_and_background_community",
+          "follow_up",
+          "project_intro",
+          "research_phase",
+          "screening_phase",
+          "follow_up_phase",
+          "report",
+          "delete_project_alert_title",
+          "delete_project_alert_description",
+          "delete",
+          "faqs_description"
         ],
         "locales": [
           "en",
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
+    },
+    {
+      "action": "plugin::content-manager.explorer.update",
+      "subject": "api::message.message",
+      "properties": {
+        "fields": [
+          "human_rights_screening_tool",
+          "my_projects",
+          "glossary",
+          "faqs",
+          "other_tools",
+          "logout",
+          "login",
+          "back_to_top",
+          "intro",
+          "get_started_description",
+          "get_started",
+          "projects",
+          "new_project",
+          "project",
+          "progress",
+          "last_updated",
+          "edit_project",
+          "delete_project",
+          "project_risk_prioritization",
+          "screening_notes",
+          "notes_cta",
+          "specific_risk_notes",
+          "indicated_risk_cta",
+          "research_notes",
+          "research_and_community_cta",
+          "key_determination_factors",
+          "key_factors_cta",
+          "follow_up_plan",
+          "contextual_risk",
+          "project_risk",
+          "research",
+          "project_risk_determination_factors",
+          "loading",
+          "create_project_success",
+          "create_project_error",
+          "name",
+          "description",
+          "cancel",
+          "create",
+          "loading_error_title",
+          "loading_error_description",
+          "nav_home",
+          "nav_projects",
+          "glossary_description",
+          "other_tools_description",
+          "sig_in",
+          "username",
+          "password",
+          "sign_up_cta",
+          "confirm_passsword",
+          "sign_up",
+          "forgot_password_cta",
+          "forgot_password",
+          "email",
+          "send",
+          "sign_in_cta",
+          "success",
+          "reset_password_notification",
+          "project_and_background_community",
+          "follow_up",
+          "project_intro",
+          "research_phase",
+          "screening_phase",
+          "follow_up_phase",
+          "report",
+          "delete_project_alert_title",
+          "delete_project_alert_description",
+          "delete",
+          "faqs_description"
+        ],
+        "locales": [
+          "en",
+          "es"
+        ]
+      },
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::pcb-category.pcb-category",
       "properties": {
         "fields": [
@@ -422,11 +454,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::pcb-category.pcb-category",
       "properties": {
         "locales": [
@@ -434,11 +466,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::pcb-category.pcb-category",
       "properties": {
         "locales": [
@@ -446,11 +478,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "api::pcb-category.pcb-category",
       "properties": {
         "fields": [
@@ -465,11 +497,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::pcb-category.pcb-category",
       "properties": {
         "fields": [
@@ -484,11 +516,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::pcb.pcb",
       "properties": {
         "fields": [
@@ -503,11 +535,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::pcb.pcb",
       "properties": {
         "locales": [
@@ -515,11 +547,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::pcb.pcb",
       "properties": {
         "locales": [
@@ -527,11 +559,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "api::pcb.pcb",
       "properties": {
         "fields": [
@@ -546,11 +578,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::pcb.pcb",
       "properties": {
         "fields": [
@@ -565,11 +597,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "api::project.project",
       "properties": {
         "fields": [
@@ -584,11 +616,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "api::project.project",
       "properties": {
         "locales": [
@@ -596,11 +628,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.publish",
-      "actionParameters": {},
       "subject": "api::project.project",
       "properties": {
         "locales": [
@@ -608,11 +640,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "api::project.project",
       "properties": {
         "fields": [
@@ -627,11 +659,11 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "api::project.project",
       "properties": {
         "fields": [
@@ -646,228 +678,228 @@
           "es"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.access",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.regenerate",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::api-tokens.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::marketplace.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::project-settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::project-settings.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::roles.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::roles.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::roles.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::roles.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.access",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.regenerate",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::transfer.tokens.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::users.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::users.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::users.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::users.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::webhooks.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::webhooks.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::webhooks.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "admin::webhooks.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::config-sync.menu-link",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::config-sync.settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.collection-types.configure-view",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.components.configure-layout",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.create",
-      "actionParameters": {},
       "subject": "plugin::users-permissions.user",
       "properties": {
         "fields": [
@@ -882,18 +914,18 @@
           "role"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.delete",
-      "actionParameters": {},
       "subject": "plugin::users-permissions.user",
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.read",
-      "actionParameters": {},
       "subject": "plugin::users-permissions.user",
       "properties": {
         "fields": [
@@ -908,11 +940,11 @@
           "role"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.explorer.update",
-      "actionParameters": {},
       "subject": "plugin::users-permissions.user",
       "properties": {
         "fields": [
@@ -927,217 +959,218 @@
           "role"
         ]
       },
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-manager.single-types.configure-view",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::content-type-builder.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::documentation.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::documentation.settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::documentation.settings.regenerate",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::documentation.settings.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::email.settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::i18n.locale.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::i18n.locale.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::i18n.locale.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::i18n.locale.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::import-export-entries.export",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::import-export-entries.import",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.assets.copy-link",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.assets.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.assets.download",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.assets.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.configure-view",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::upload.settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.advanced-settings.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.advanced-settings.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.email-templates.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.email-templates.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.providers.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.providers.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.roles.create",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.roles.delete",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.roles.read",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     },
     {
       "action": "plugin::users-permissions.roles.update",
-      "actionParameters": {},
       "subject": null,
       "properties": {},
-      "conditions": []
+      "conditions": [],
+      "actionParameters": {}
     }
   ]
 }

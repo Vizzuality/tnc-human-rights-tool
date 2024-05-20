@@ -1861,6 +1861,7 @@ export interface Message {
   delete_project_alert_title?: string;
   delete_project_alert_description?: string;
   delete?: string;
+  faqs_description?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2156,6 +2157,7 @@ export type MessageRequestData = {
   delete_project_alert_title?: string;
   delete_project_alert_description?: string;
   delete?: string;
+  faqs_description?: string;
   locale?: string;
 };
 
@@ -2232,6 +2234,7 @@ export interface MessageLocalizationRequest {
   delete_project_alert_title?: string;
   delete_project_alert_description?: string;
   delete?: string;
+  faqs_description?: string;
   locale: string;
 }
 
