@@ -986,6 +986,118 @@
           "sortable": false
         }
       },
+      "research_phase_description": {
+        "edit": {
+          "label": "research_phase_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "research_phase_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "project_and_background_community_description": {
+        "edit": {
+          "label": "project_and_background_community_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_and_background_community_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "follow_up_description": {
+        "edit": {
+          "label": "follow_up_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "contextual_risk_description": {
+        "edit": {
+          "label": "contextual_risk_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "contextual_risk_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "project_risk_description": {
+        "edit": {
+          "label": "project_risk_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "escalate": {
+        "edit": {
+          "label": "escalate",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "escalate",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "prioritize": {
+        "edit": {
+          "label": "prioritize",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "prioritize",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "watch": {
+        "edit": {
+          "label": "watch",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "watch",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -1407,6 +1519,52 @@
           {
             "name": "faqs_description",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "research_phase_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_and_background_community_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "follow_up_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "contextual_risk_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_risk_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "escalate",
+            "size": 6
+          },
+          {
+            "name": "prioritize",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "watch",
+            "size": 6
           }
         ]
       ]

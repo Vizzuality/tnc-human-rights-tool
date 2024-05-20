@@ -238,7 +238,15 @@
           "delete_project_alert_title",
           "delete_project_alert_description",
           "delete",
-          "faqs_description"
+          "faqs_description",
+          "research_phase_description",
+          "project_and_background_community_description",
+          "follow_up_description",
+          "contextual_risk_description",
+          "project_risk_description",
+          "escalate",
+          "prioritize",
+          "watch"
         ],
         "locales": [
           "en",
@@ -345,7 +353,15 @@
           "delete_project_alert_title",
           "delete_project_alert_description",
           "delete",
-          "faqs_description"
+          "faqs_description",
+          "research_phase_description",
+          "project_and_background_community_description",
+          "follow_up_description",
+          "contextual_risk_description",
+          "project_risk_description",
+          "escalate",
+          "prioritize",
+          "watch"
         ],
         "locales": [
           "en",
@@ -428,7 +444,15 @@
           "delete_project_alert_title",
           "delete_project_alert_description",
           "delete",
-          "faqs_description"
+          "faqs_description",
+          "research_phase_description",
+          "project_and_background_community_description",
+          "follow_up_description",
+          "contextual_risk_description",
+          "project_risk_description",
+          "escalate",
+          "prioritize",
+          "watch"
         ],
         "locales": [
           "en",
