@@ -16,6 +16,12 @@
       "action": "api::contextual-risk.contextual-risk.findOne"
     },
     {
+      "action": "api::message.message.find"
+    },
+    {
+      "action": "api::message.message.findOne"
+    },
+    {
       "action": "api::pcb-category.pcb-category.find"
     },
     {
