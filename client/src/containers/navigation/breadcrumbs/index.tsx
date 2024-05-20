@@ -5,7 +5,7 @@ import { Fragment, useMemo } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
@@ -30,7 +30,6 @@ export default function NavigationBreadcrumbs() {
   const { id, categoryId, ctxId } = useParams();
   const pathname = usePathname();
   const t = useTranslations();
-  const locale = useLocale();
 
   const { data: projectIdData } = useGetProjectsId(+id);
   const { data: pcbCategoriesData } = useGetPcbCategories({
@@ -95,7 +94,6 @@ export default function NavigationBreadcrumbs() {
     categoryId,
     ctxId,
     pathname,
-    locale,
     projectIdData,
     pcbCategoriesData,
     contextualRiskCategoriesData,
