@@ -1862,6 +1862,14 @@ export interface Message {
   delete_project_alert_description?: string;
   delete?: string;
   faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2158,6 +2166,14 @@ export type MessageRequestData = {
   delete_project_alert_description?: string;
   delete?: string;
   faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   locale?: string;
 };
 
@@ -2235,6 +2251,14 @@ export interface MessageLocalizationRequest {
   delete_project_alert_description?: string;
   delete?: string;
   faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   locale: string;
 }
 
