@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
@@ -17,10 +19,11 @@ export default async function ProjectsDetailFollowUpIdPage({
   params: { priorizationId },
 }: ProjectsDetailFollowUpIdProps) {
   const PRIORIZATION = PRIORIZATIONS.find(({ value }) => value === priorizationId)?.label;
+  const t = await getTranslations();
 
   return (
     <ProjectsDetailContent>
-      <ProjectsDetailTitle>{PRIORIZATION}</ProjectsDetailTitle>
+      <ProjectsDetailTitle>{t(PRIORIZATION)}</ProjectsDetailTitle>
 
       <ProjectsDetailFollowUpIdPriorization />
     </ProjectsDetailContent>

@@ -3,7 +3,7 @@
 import { Fragment, useMemo } from "react";
 
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { useLocale, useTranslations } from "next-intl";
 
@@ -11,6 +11,8 @@ import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
+
+import { usePathname } from "@/i18n";
 
 export const BREADCRUMBS_DICTIONARY: Record<string, string> = {
   projects: "projects",
@@ -21,7 +23,7 @@ export const BREADCRUMBS_DICTIONARY: Record<string, string> = {
   escalate: "escalate",
   prioritize: "prioritize",
   watch: "watch",
-  research: "research",
+  "more-research": "research",
 };
 
 export default function NavigationBreadcrumbs() {
@@ -48,10 +50,6 @@ export default function NavigationBreadcrumbs() {
     const PATH_SLICES = pathname.split("/").filter((slice) => slice !== "");
 
     return PATH_SLICES.map((slice, index) => {
-      if (slice === locale) {
-        return null;
-      }
-
       if (id && slice === id) {
         return {
           href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,

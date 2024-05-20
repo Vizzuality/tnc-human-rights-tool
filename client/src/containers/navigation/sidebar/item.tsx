@@ -3,9 +3,10 @@
 import { PropsWithChildren } from "react";
 
 import Link, { LinkProps } from "next/link";
-import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+
+import { usePathname } from "@/i18n";
 
 interface NavigationSidebarItemProps extends LinkProps, PropsWithChildren {
   className?: string;
