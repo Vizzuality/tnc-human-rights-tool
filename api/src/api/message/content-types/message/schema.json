@@ -583,6 +583,14 @@
         }
       },
       "type": "richtext"
+    },
+    "follow_up_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
