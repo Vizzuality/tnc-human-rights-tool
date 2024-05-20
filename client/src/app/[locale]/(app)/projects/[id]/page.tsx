@@ -33,19 +33,16 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
       <div className="col-span-12 sm:col-span-8 lg:col-span-4">
         <Card className="sticky top-10">
           <CardHeader className="prose w-full">
-            <CardTitle>Research phase</CardTitle>
+            <CardTitle>{t("research_phase")}</CardTitle>
           </CardHeader>
           <CardContent className="prose w-full">
-            <p>
-              The research phase is the first step in the process of using the Human Rights
-              Screening Tool
-            </p>
+            <p>{t("research_phase_description")}</p>
             <Link
               href={`/projects/${params.id}/project-and-background-community`}
               className="block"
             >
               <Button size="lg" className="w-full">
-                Get started
+                {t("get_started")}
               </Button>
             </Link>
           </CardContent>

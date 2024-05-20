@@ -108,7 +108,7 @@ export default function NavigationTabs() {
                 backgroundSize: "10px 1px, 100% 1px",
               }}
             />
-            <span className="relative z-10 inline-block bg-white px-2">{`${i + 1} ${t(
+            <span className="relative z-10 inline-block bg-white px-2">{`${i + 1}. ${t(
               label,
             )}`}</span>
           </li>

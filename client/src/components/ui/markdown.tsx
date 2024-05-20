@@ -4,9 +4,17 @@ import Link from "next/link";
 
 import slugify from "slugify";
 
-export default function Markdown({ children }: { children?: string | null }) {
+import { cn } from "@/lib/utils";
+
+export default function Markdown({
+  children,
+  className,
+}: {
+  children?: string | null;
+  className?: string;
+}) {
   return (
-    <div className="prose w-full">
+    <div className={cn("prose w-full", className)}>
       <ReactMarkdown
         components={{
           a: (props) => {
