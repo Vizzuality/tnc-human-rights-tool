@@ -1,6 +1,8 @@
 "use client";
 import { useParams } from "next/navigation";
 
+import { useLocale } from "next-intl";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
 import { useGetProjectsId } from "@/types/generated/project";
@@ -15,11 +17,13 @@ interface ContextualRiskSidebarItemProps {
 export default function ContextualRiskSidebarItem({ categoryId }: ContextualRiskSidebarItemProps) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
+  const locale = useLocale();
   const { data: ctxData } = useGetContextualRisks({
     filters: {
       contextual_risk_category: categoryId,
     },
     populate: "*",
+    locale,
   });
   const { data: categoriesIdData } = useGetContextualRiskCategoriesId(categoryId);
   const { attributes } = categoriesIdData?.data ?? {};

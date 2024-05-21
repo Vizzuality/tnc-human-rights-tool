@@ -795,10 +795,12 @@ export interface ApiContextualRiskCategoryContextualRiskCategory
       'oneToMany',
       'api::contextual-risk.contextual-risk'
     >;
-    slug: Attribute.UID<
-      'api::contextual-risk-category.contextual-risk-category',
-      'title'
-    >;
+    slug: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

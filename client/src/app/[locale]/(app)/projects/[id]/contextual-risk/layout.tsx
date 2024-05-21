@@ -33,6 +33,7 @@ export default async function ProjectsDetailContextualRiskLayout({
 }: ProjectsDetailContextualRiskLayoutProps) {
   const CATEGORIES = await getContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
 
   // prefetch category id data

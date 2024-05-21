@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
@@ -10,9 +12,12 @@ import ContextualRiskSidebarItem from "@/containers/projects/detail/sidebar/cont
 export default function ContextualRiskSidebar() {
   const { id } = useParams();
 
-  const { data: categoriesData } = useGetContextualRiskCategories({
+  const queryCategoriesData = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+
+  const { data: categoriesData } = useGetLocalizedList(queryCategoriesData);
 
   const items = [
     {
@@ -28,7 +33,7 @@ export default function ContextualRiskSidebar() {
 
         return 0;
       })
-      ?.map(({ id: categoryId, attributes }) => {
+      ?.map(({ id: categoryId, attributes = {} }) => {
         return {
           href: `/projects/${id}/contextual-risk/${categoryId}`,
           label: attributes?.title ?? "",
