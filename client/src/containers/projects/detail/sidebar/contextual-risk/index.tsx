@@ -33,13 +33,13 @@ export default function ContextualRiskSidebar() {
 
         return 0;
       })
-      ?.map(({ id: categoryId, attributes }) => {
+      ?.map(({ attributes }) => {
         return {
           href: `/projects/${id}/contextual-risk/${attributes?.slug}`,
           label: attributes?.title ?? "",
           children: (
             <>
-              {typeof categoryId !== "undefined" && (
+              {typeof attributes?.slug !== "undefined" && (
                 <ContextualRiskSidebarItem categorySlug={attributes?.slug} />
               )}
 

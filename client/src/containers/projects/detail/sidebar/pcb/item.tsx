@@ -1,27 +1,39 @@
 "use client";
 import { useParams } from "next/navigation";
 
+import { useLocale } from "next-intl";
+
+import { useGetBySlug } from "@/lib/locallizedQuery";
+
 import { useGetPcbs } from "@/types/generated/pcb";
-import { useGetPcbCategoriesId } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
+import { PcbCategoryResponse } from "@/types/generated/strapi.schemas";
 import { PCBs } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
 interface PCBSidebarItemProps {
-  categoryId: number;
+  categorySlug: string;
 }
 
-export default function PCBSidebarItem({ categoryId }: PCBSidebarItemProps) {
+export default function PCBSidebarItem({ categorySlug }: PCBSidebarItemProps) {
   const { id } = useParams();
+  const locale = useLocale();
   const { data: projectIdData } = useGetProjectsId(+id);
   const { data: pcbData } = useGetPcbs({
     filters: {
-      pcb_category: categoryId,
+      pcb_category: {
+        slug: categorySlug,
+      },
     },
     populate: "*",
   });
-  const { data: categoriesIdData } = useGetPcbCategoriesId(categoryId);
+  const { data: categoriesIdData } = useGetBySlug<PcbCategoryResponse>(
+    `pcb-category/${categorySlug}`,
+    {
+      locale,
+    },
+  );
   const { attributes } = categoriesIdData?.data ?? {};
 
   const c_display_order = attributes?.display_order ?? "";

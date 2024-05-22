@@ -50,8 +50,12 @@
       }
     },
     "slug": {
-      "type": "uid",
-      "targetField": "title"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }

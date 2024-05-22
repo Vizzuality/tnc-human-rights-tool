@@ -3,14 +3,13 @@ import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { getLocale } from "next-intl/server";
 
 import getQueryClient from "@/lib/getQueryClient";
+import { getBySlugIdQueryOptions } from "@/lib/locallizedQuery";
 
 import { getGetPcbsQueryOptions } from "@/types/generated/pcb";
-import {
-  getGetPcbCategoriesIdQueryOptions,
-  getPcbCategories,
-} from "@/types/generated/pcb-category";
+import { getPcbCategories } from "@/types/generated/pcb-category";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
@@ -29,18 +28,27 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 export default async function ProjectsDetailPCBLayout({ children }: ProjectsDetailPCBLayoutProps) {
   const CATEGORIES = await getPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+
+  const locale = await getLocale();
 
   // prefetch category id data
   const queryClient = getQueryClient();
 
   for (const c of CATEGORIES?.data ?? []) {
     if (!c.id) return;
-    await queryClient.prefetchQuery(getGetPcbCategoriesIdQueryOptions(c.id));
+    await queryClient.prefetchQuery(
+      getBySlugIdQueryOptions(`pcb-category/${c.attributes?.slug}` || "", {
+        locale,
+      }),
+    );
     await queryClient.prefetchQuery(
       getGetPcbsQueryOptions({
         filters: {
-          pcb_category: c.id,
+          pcb_category: {
+            slug: c.attributes?.slug || "",
+          },
         },
         populate: "*",
       }),

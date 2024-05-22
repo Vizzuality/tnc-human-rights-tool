@@ -1,7 +1,11 @@
 import Markdown from "react-markdown";
 
+import { getLocale } from "next-intl/server";
+
+import { getBySlugId } from "@/lib/locallizedQuery";
+
 import { getPcbs } from "@/types/generated/pcb";
-import { getPcbCategoriesId } from "@/types/generated/pcb-category";
+import { PcbCategoryResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
@@ -12,17 +16,22 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 interface ProjectsDetailPCBCategoryProps {
   params: {
-    categoryId: string;
+    categorySlug: string;
   } & ProjectsDetailPageProps["params"];
 }
 
 export default async function ProjectsDetailPCBCategoryPage({
-  params: { categoryId },
+  params: { categorySlug },
 }: ProjectsDetailPCBCategoryProps) {
-  const CATEGORY = await getPcbCategoriesId(+categoryId);
+  const locale = await getLocale();
+  const CATEGORY = await getBySlugId<PcbCategoryResponse>(`pcb-category/${categorySlug}`, {
+    locale,
+  });
   const ITEMS = await getPcbs({
     filters: {
-      pcb_category: categoryId,
+      pcb_category: {
+        slug: categorySlug,
+      },
     },
     populate: "*",
   });
@@ -39,9 +48,11 @@ export default async function ProjectsDetailPCBCategoryPage({
         </div>
       )}
 
-      {categoryId === "1" && <GeographicScopeForm items={ITEMS} />}
+      {categorySlug === "geographic-scope" && <GeographicScopeForm items={ITEMS} />}
 
-      {categoryId === "3" && <CarbonOffsetProjectControversiesForm items={ITEMS} />}
+      {categorySlug === "carbon-offset-project-controversies" && (
+        <CarbonOffsetProjectControversiesForm items={ITEMS} />
+      )}
     </ProjectsDetailContent>
   );
 }

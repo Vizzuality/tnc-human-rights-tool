@@ -18,6 +18,7 @@ export default async function ProjectsLayout({ children }: ProjectsLayoutProps) 
   await queryClient.prefetchQuery({
     ...getGetContextualRiskCategoriesQueryOptions({
       sort: "display_order:asc",
+      locale: "all",
     }),
   });
 
@@ -25,6 +26,7 @@ export default async function ProjectsLayout({ children }: ProjectsLayoutProps) 
   await queryClient.prefetchQuery({
     ...getGetPcbCategoriesQueryOptions({
       sort: "display_order:asc",
+      locale: "all",
     }),
   });
 
