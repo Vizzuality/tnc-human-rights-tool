@@ -3,29 +3,39 @@ import { useParams } from "next/navigation";
 
 import { useLocale } from "next-intl";
 
+import { useGetBySlug } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
-import { useGetContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
 import { useGetProjectsId } from "@/types/generated/project";
+import { ContextualRiskCategoryResponse } from "@/types/generated/strapi.schemas";
 import { Risks } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
 interface ContextualRiskSidebarItemProps {
-  categoryId: number;
+  categorySlug?: string;
 }
 
-export default function ContextualRiskSidebarItem({ categoryId }: ContextualRiskSidebarItemProps) {
+export default function ContextualRiskSidebarItem({
+  categorySlug,
+}: ContextualRiskSidebarItemProps) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
   const locale = useLocale();
   const { data: ctxData } = useGetContextualRisks({
     filters: {
-      contextual_risk_category: categoryId,
+      contextual_risk_category: {
+        slug: categorySlug,
+      },
     },
     populate: "*",
-    locale,
   });
-  const { data: categoriesIdData } = useGetContextualRiskCategoriesId(categoryId);
+
+  const { data: categoriesIdData } = useGetBySlug<ContextualRiskCategoryResponse>(
+    `contextual-risk-category/${categorySlug}`,
+    { locale },
+  );
+
   const { attributes } = categoriesIdData?.data ?? {};
 
   const slug = attributes?.slug ?? "";

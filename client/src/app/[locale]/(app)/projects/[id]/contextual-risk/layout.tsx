@@ -3,14 +3,14 @@ import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 
 import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { getLocale } from "next-intl/server";
 
 import getQueryClient from "@/lib/getQueryClient";
+import { getBySlugIdQueryOptions } from "@/lib/locallizedQuery";
 
 import { getGetContextualRisksQueryOptions } from "@/types/generated/contextual-risk";
-import {
-  getContextualRiskCategories,
-  getGetContextualRiskCategoriesIdQueryOptions,
-} from "@/types/generated/contextual-risk-category";
+import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
+import { ContextualRiskCategoryResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
@@ -36,16 +36,27 @@ export default async function ProjectsDetailContextualRiskLayout({
     locale: "all",
   });
 
+  const locale = await getLocale();
+
   // prefetch category id data
   const queryClient = getQueryClient();
 
   for (const c of CATEGORIES?.data ?? []) {
     if (!c.id) return;
-    await queryClient.prefetchQuery(getGetContextualRiskCategoriesIdQueryOptions(c.id));
+    await queryClient.prefetchQuery(
+      getBySlugIdQueryOptions<ContextualRiskCategoryResponse>(
+        `contextual-risk-category/${c.attributes?.slug}` || "",
+        {
+          locale,
+        },
+      ),
+    );
     await queryClient.prefetchQuery(
       getGetContextualRisksQueryOptions({
         filters: {
-          contextual_risk_category: c.id,
+          contextual_risk_category: {
+            slug: c.attributes?.slug || "",
+          },
         },
         populate: "*",
       }),

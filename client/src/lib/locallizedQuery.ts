@@ -1,7 +1,15 @@
-import { UseQueryResult } from "@tanstack/react-query";
+import {
+  QueryFunction,
+  QueryKey,
+  UseQueryOptions,
+  UseQueryResult,
+  useQuery,
+} from "@tanstack/react-query";
 import { useLocale } from "next-intl";
 
 import { defaultLocale } from "@/constants/navigation";
+
+import API, { ErrorType } from "@/services/api";
 
 type StrapiDATA = {
   data?: {
@@ -11,6 +19,73 @@ type StrapiDATA = {
   meta?: Record<string, unknown>;
 };
 
+type Params = {
+  /**
+   * Relations to return
+   */
+  populate?: string;
+
+  locale?: string;
+};
+
+export const getBySlugId = <T>(id: string, params?: Params, signal?: AbortSignal) => {
+  return API<T>({
+    url: `/slugify/slugs/${id}`,
+    method: "get",
+    params,
+    signal,
+  });
+};
+
+export const getBySlugIdQueryKey = (id: string, params?: Params) =>
+  [`/slugs/${id}`, ...(params ? [params] : [])] as const;
+
+export const getBySlugIdQueryOptions = <
+  TData = Awaited<ReturnType<typeof getBySlugId>>,
+  TError = ErrorType<Error>,
+>(
+  id: string,
+  params?: Params,
+  options?: {
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getBySlugId>>, TError, TData>;
+  },
+): UseQueryOptions<Awaited<ReturnType<typeof getBySlugId>>, TError, TData> & {
+  queryKey: QueryKey;
+} => {
+  const { query: queryOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getBySlugIdQueryKey(id, params);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getBySlugId>>> = ({ signal }) =>
+    getBySlugId(id, params, signal);
+
+  return { queryKey, queryFn, enabled: !!id, ...queryOptions };
+};
+
+export const useGetBySlug = <
+  TData = Awaited<ReturnType<typeof getBySlugId>>,
+  TError = ErrorType<Error>,
+>(
+  id: string,
+  params?: Params,
+  options?: {
+    query?: UseQueryOptions<Awaited<ReturnType<typeof getBySlugId>>, TError, TData>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+  const queryOptions = getBySlugIdQueryOptions(id, params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
+};
+
+/**
+ * useGetLocalizedList
+ * @param query
+ * @returns
+ */
 export const useGetLocalizedList = <T, E>(query: UseQueryResult<T, E>) => {
   const locale = useLocale();
 

@@ -26,6 +26,17 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  slugify: {
+    enabled: true,
+    config: {
+      contentTypes: {
+        'contextual-risk-category': {
+          field: 'slug',
+          references: 'title',
+        },
+      }
+    }
+  },
   documentation: {
     config: {
       "x-strapi-config": {

@@ -27,7 +27,7 @@ export const BREADCRUMBS_DICTIONARY: Record<string, string> = {
 };
 
 export default function NavigationBreadcrumbs() {
-  const { id, categoryId, ctxId } = useParams();
+  const { id, categorySlug, ctxId } = useParams();
   const pathname = usePathname();
   const t = useTranslations();
 
@@ -37,6 +37,7 @@ export default function NavigationBreadcrumbs() {
   });
   const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
 
   const { data: contextualRisksData } = useGetContextualRisks({
@@ -57,23 +58,24 @@ export default function NavigationBreadcrumbs() {
       }
 
       if (
-        categoryId &&
-        slice === categoryId &&
+        categorySlug &&
+        slice === categorySlug &&
         PATH_SLICES[index - 1] === "project-and-background-community"
       ) {
         return {
           href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,
           label:
-            pcbCategoriesData?.data?.find((c) => c.id === +categoryId)?.attributes?.title ?? "",
+            pcbCategoriesData?.data?.find((c) => c.attributes?.slug === categorySlug)?.attributes
+              ?.title ?? "",
         };
       }
 
-      if (categoryId && slice === categoryId && PATH_SLICES[index - 1] === "contextual-risk") {
+      if (categorySlug && slice === categorySlug && PATH_SLICES[index - 1] === "contextual-risk") {
         return {
           href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,
           label:
-            contextualRiskCategoriesData?.data?.find((c) => c.id === +categoryId)?.attributes
-              ?.title ?? "",
+            contextualRiskCategoriesData?.data?.find((c) => c.attributes?.slug === categorySlug)
+              ?.attributes?.title ?? "",
         };
       }
 
@@ -91,7 +93,7 @@ export default function NavigationBreadcrumbs() {
     }).filter((s) => !!s);
   }, [
     id,
-    categoryId,
+    categorySlug,
     ctxId,
     pathname,
     projectIdData,

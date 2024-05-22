@@ -1,7 +1,11 @@
 import Markdown from "react-markdown";
 
+import { getLocale } from "next-intl/server";
+
+import { getBySlugId } from "@/lib/locallizedQuery";
+
 import { getContextualRisks } from "@/types/generated/contextual-risk";
-import { getContextualRiskCategoriesId } from "@/types/generated/contextual-risk-category";
+import { ContextualRiskCategoryResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
@@ -11,17 +15,26 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 interface ProjectsDetailContextualRiskCategoryProps {
   params: {
-    categoryId: string;
+    categorySlug: string;
   } & ProjectsDetailPageProps["params"];
 }
 
 export default async function ProjectsDetailContextualRiskCategoryPage({
-  params: { categoryId },
+  params: { categorySlug },
 }: ProjectsDetailContextualRiskCategoryProps) {
-  const CATEGORY = await getContextualRiskCategoriesId(+categoryId);
+  const locale = await getLocale();
+
+  const CATEGORY = await getBySlugId<ContextualRiskCategoryResponse>(
+    `contextual-risk-category/${categorySlug}`,
+    {
+      locale,
+    },
+  );
   const ITEMS = await getContextualRisks({
     filters: {
-      contextual_risk_category: +categoryId,
+      contextual_risk_category: {
+        slug: categorySlug,
+      },
     },
     populate: "*",
   });
