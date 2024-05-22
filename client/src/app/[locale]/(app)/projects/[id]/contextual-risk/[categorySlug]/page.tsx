@@ -9,6 +9,8 @@ import { ContextualRiskCategoryResponse } from "@/types/generated/strapi.schemas
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
 
+import { defaultLocale } from "@/constants/navigation";
+
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ContextualRiskForm from "@/containers/projects/detail/forms/contextual-risk";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
@@ -24,12 +26,23 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
 }: ProjectsDetailContextualRiskCategoryProps) {
   const locale = await getLocale();
 
-  const CATEGORY = await getBySlugId<ContextualRiskCategoryResponse>(
-    `contextual-risk-category/${categorySlug}`,
-    {
-      locale,
-    },
-  );
+  let CATEGORY;
+  try {
+    CATEGORY = await getBySlugId<ContextualRiskCategoryResponse>(
+      `contextual-risk-category/${categorySlug}`,
+      {
+        locale,
+      },
+    );
+  } catch (error) {
+    CATEGORY = await getBySlugId<ContextualRiskCategoryResponse>(
+      `contextual-risk-category/${categorySlug}`,
+      {
+        locale: defaultLocale,
+      },
+    );
+  }
+
   const ITEMS = await getContextualRisks({
     filters: {
       contextual_risk_category: {
