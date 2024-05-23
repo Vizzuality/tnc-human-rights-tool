@@ -21,14 +21,15 @@ export default function ContextualRiskSidebarItem({ slug = "" }: ContextualRiskC
     },
     populate: "*",
     locale: "all",
+    "pagination[limit]": 300,
   });
 
-  const { data: ctxData } = useGetLocalizedList(queryContextualRisks);
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisks);
 
   const CRS_DATA = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
   const CR_DATA = CRS_DATA[slug] ?? {};
 
-  const ctxIds = ctxData?.data?.map((item) => item?.id) ?? [];
+  const ctxIds = contextualRisksData?.data?.map((item) => item?.id) ?? [];
 
   const total = ctxIds.length;
   const completed = ctxIds.filter((i) => !!CR_DATA[`${i}`]?.contextual_risk).length;

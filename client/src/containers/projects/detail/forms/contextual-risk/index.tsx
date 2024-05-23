@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useForm } from "react-hook-form";
 import Markdown from "react-markdown";
@@ -13,13 +13,13 @@ import { ZodTypeAny, z } from "zod";
 
 import { useGetLocalizedList } from "@/lib/locallizedQuery";
 
+import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
   usePutProjectsId,
 } from "@/types/generated/project";
-import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
@@ -34,10 +34,6 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-
-export interface ContextualRiskFormProps extends PropsWithChildren {
-  items: ContextualRiskListResponse;
-}
 
 const RADIO_OPTIONS = [
   {
@@ -54,15 +50,27 @@ const RADIO_OPTIONS = [
   },
 ];
 
-export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
+export default function ContextualRiskForm() {
   const { id: projectId, categorySlug = "" } = useParams();
 
-  const queryContextualRisksCategories = useGetContextualRiskCategories({
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
     locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
-  const { data: categoriesData } = useGetLocalizedList(queryContextualRisksCategories);
+  const queryContextualRisks = useGetContextualRisks({
+    filters: {
+      contextual_risk_category: {
+        slug: categorySlug,
+      },
+    },
+    populate: "*",
+    locale: "all",
+    "pagination[limit]": 300,
+  });
+
+  const { data: itemsData } = useGetLocalizedList(queryContextualRisks);
 
   const queryClient = useQueryClient();
 
@@ -82,7 +90,9 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
   >;
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
+    const i = contextualRiskCategoriesData?.data?.findIndex(
+      (c) => c.attributes?.slug === categorySlug,
+    );
 
     if (!categorySlug || i === undefined) {
       return {
@@ -91,7 +101,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
       };
     }
 
-    const n = categoriesData?.data?.[i + 1];
+    const n = contextualRiskCategoriesData?.data?.[i + 1];
 
     if (!n) {
       return {
@@ -104,10 +114,10 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
       href: `/projects/${projectId}/contextual-risk/${n.attributes?.slug}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categorySlug, projectId]);
+  }, [contextualRiskCategoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
-    ...items?.data?.reduce(
+    ...itemsData?.data?.reduce(
       (acc, { id }) => {
         if (!id) {
           return acc;
@@ -188,7 +198,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-10 border-t border-gray-100 pt-5"
       >
-        {items?.data
+        {itemsData?.data
           ?.sort((a, b) => {
             if (a?.attributes?.display_order && b?.attributes?.display_order) {
               return +a.attributes.display_order - +b.attributes.display_order;

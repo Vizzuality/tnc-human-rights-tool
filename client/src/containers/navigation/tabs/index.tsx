@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
 import { getProgress } from "@/lib/status";
 import { cn } from "@/lib/utils";
 
@@ -63,12 +64,18 @@ export default function NavigationTabs() {
   const { id } = useParams();
   const t = useTranslations();
 
-  const { data: pcbCategoriesData } = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
-  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
+
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
+
   const { data: projectData } = useGetProjectsId(+id);
 
   const progress = getProgress({

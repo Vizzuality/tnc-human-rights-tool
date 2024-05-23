@@ -11,6 +11,8 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks, useGetContextualRisksId } from "@/types/generated/contextual-risk";
 import {
   getGetProjectsIdQueryKey,
@@ -42,11 +44,14 @@ export default function ProjectRiskForm() {
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const { data: ctxData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
+    "pagination[limit]": 300,
   });
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
+
   const { data: ctxIdData } = useGetContextualRisksId(+ctxId, {
     populate: "*",
   });
@@ -67,7 +72,7 @@ export default function ProjectRiskForm() {
     }, {});
 
     const ctxFilteredData =
-      ctxData?.data?.filter((item) => {
+      contextualRisksData?.data?.filter((item) => {
         return r[`${item?.id}`]?.contextual_risk === "yes";
       }) ?? [];
 
@@ -88,7 +93,7 @@ export default function ProjectRiskForm() {
       href: `/projects/${projectId}/project-risk/${n.id}`,
       label: n.attributes?.title ?? "",
     };
-  }, [projectId, ctxId, ctxData, RISKS]);
+  }, [projectId, ctxId, contextualRisksData, RISKS]);
 
   const formSchema = z.object({
     proyect_risk_determination: z.enum(

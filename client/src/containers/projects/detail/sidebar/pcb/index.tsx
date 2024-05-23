@@ -11,12 +11,11 @@ import PCBSidebarItem from "@/containers/projects/detail/sidebar/pcb/item";
 export default function PcbSidebar() {
   const { id } = useParams();
 
-  const queryPcbCategoriesData = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
     locale: "all",
   });
-
-  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategoriesData);
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
 
   const items = [
     {

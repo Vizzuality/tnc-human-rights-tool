@@ -34,9 +34,9 @@ export default async function ProjectsLayout({ children }: ProjectsLayoutProps) 
   await queryClient.prefetchQuery({
     ...getGetContextualRisksQueryOptions({
       populate: "*",
-      "pagination[limit]": 300,
       sort: "contextual_risk_category.display_order:asc,display_order:asc",
       locale: "all",
+      "pagination[limit]": 300,
     }),
   });
 

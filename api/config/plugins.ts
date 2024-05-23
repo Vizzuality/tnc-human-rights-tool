@@ -30,7 +30,15 @@ module.exports = ({ env }) => ({
     enabled: true,
     config: {
       contentTypes: {
+        'pcb': {
+          field: 'slug',
+          references: 'title',
+        },
         'pcb-category': {
+          field: 'slug',
+          references: 'title',
+        },
+        'contextual-risk': {
           field: 'slug',
           references: 'title',
         },

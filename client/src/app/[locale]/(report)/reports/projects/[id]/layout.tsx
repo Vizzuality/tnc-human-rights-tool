@@ -31,6 +31,7 @@ export default async function ReportsProjectsIdLayout({
   await queryClient.prefetchQuery({
     ...getGetContextualRiskCategoriesQueryOptions({
       sort: "display_order:asc",
+      locale: "all",
     }),
   });
 
@@ -38,14 +39,17 @@ export default async function ReportsProjectsIdLayout({
   await queryClient.prefetchQuery({
     ...getGetPcbCategoriesQueryOptions({
       sort: "display_order:asc",
+      locale: "all",
     }),
   });
 
+  // Prefetch useGetContextualRisks
   await queryClient.prefetchQuery({
     ...getGetContextualRisksQueryOptions({
       populate: "*",
-      "pagination[limit]": 300,
       sort: "contextual_risk_category.display_order:asc,display_order:asc",
+      locale: "all",
+      "pagination[limit]": 300,
     }),
   });
 

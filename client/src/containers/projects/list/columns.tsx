@@ -9,6 +9,7 @@ import { CellContext, Column, ColumnDef } from "@tanstack/react-table";
 import { formatDistance } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
 import { getProgress, getStatus } from "@/lib/status";
 
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
@@ -52,12 +53,17 @@ export function CellLastUpdated({ row }: CellContext<ProjectListResponseDataItem
 }
 
 export function useColumns(): ColumnDef<ProjectListResponseDataItem>[] {
-  const { data: pcbCategoriesData } = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
-  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
+
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
   const c = useMemo<ColumnDef<ProjectListResponseDataItem>[]>(() => {
     return [

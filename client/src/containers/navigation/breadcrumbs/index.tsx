@@ -34,25 +34,26 @@ export default function NavigationBreadcrumbs() {
   const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+id);
-  const queryPcbCategoriesData = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
     locale: "all",
   });
-  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategoriesData);
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
 
-  const queryContextualRiskCategoriesData = useGetContextualRiskCategories({
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
     locale: "all",
   });
-  const { data: contextualRiskCategoriesData } = useGetLocalizedList(
-    queryContextualRiskCategoriesData,
-  );
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
-  const { data: contextualRisksData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
+    "pagination[limit]": 300,
   });
+
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
 
   const BREADCRUMBS = useMemo(() => {
     const PATH_SLICES = pathname.split("/").filter((slice) => slice !== "");

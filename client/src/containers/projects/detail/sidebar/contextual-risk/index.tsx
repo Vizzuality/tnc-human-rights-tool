@@ -12,12 +12,11 @@ import ContextualRiskSidebarItem from "@/containers/projects/detail/sidebar/cont
 export default function ContextualRiskSidebar() {
   const { id } = useParams();
 
-  const queryCategoriesData = useGetContextualRiskCategories({
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
     locale: "all",
   });
-
-  const { data: categoriesData } = useGetLocalizedList(queryCategoriesData);
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
   const items = [
     {
@@ -25,7 +24,7 @@ export default function ContextualRiskSidebar() {
       label: "Overview",
       children: <span className="text-lg">Overview</span>,
     },
-    ...(categoriesData?.data || [])
+    ...(contextualRiskCategoriesData?.data || [])
       ?.sort((a, b) => {
         if (a?.attributes?.display_order && b?.attributes?.display_order) {
           return +a.attributes.display_order - +b.attributes.display_order;

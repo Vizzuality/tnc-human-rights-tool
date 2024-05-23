@@ -52,8 +52,7 @@ export default function CarbonOffsetProjectControversiesForm() {
     sort: "display_order:asc",
     locale: "all",
   });
-
-  const { data: categoriesData } = useGetLocalizedList(queryPcbCategories);
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
 
   const queryPcbs = useGetPcbs({
     filters: {
@@ -76,7 +75,7 @@ export default function CarbonOffsetProjectControversiesForm() {
   });
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
+    const i = pcbCategoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
 
     if (!categorySlug || i === undefined) {
       return {
@@ -85,7 +84,7 @@ export default function CarbonOffsetProjectControversiesForm() {
       };
     }
 
-    const n = categoriesData?.data?.[i + 1];
+    const n = pcbCategoriesData?.data?.[i + 1];
 
     if (!n) {
       return {
@@ -98,7 +97,7 @@ export default function CarbonOffsetProjectControversiesForm() {
       href: `/projects/${projectId}/project-and-background-community/${n.id}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categorySlug, projectId]);
+  }, [pcbCategoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
     ...itemsData?.data?.reduce(

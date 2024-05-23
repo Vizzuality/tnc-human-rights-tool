@@ -60,6 +60,7 @@ export default async function ProjectsDetailContextualRiskLayout({
         },
         populate: "*",
         locale: "all",
+        "pagination[limit]": 300,
       }),
     );
   }

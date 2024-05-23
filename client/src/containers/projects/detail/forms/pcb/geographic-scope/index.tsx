@@ -44,8 +44,7 @@ export default function GeographicScopeForm() {
     sort: "display_order:asc",
     locale: "all",
   });
-
-  const { data: categoriesData } = useGetLocalizedList(queryPcbCategories);
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
 
   const queryPcbs = useGetPcbs({
     filters: {
@@ -68,7 +67,7 @@ export default function GeographicScopeForm() {
   });
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
+    const i = pcbCategoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
 
     if (!categorySlug || i === undefined) {
       return {
@@ -77,7 +76,7 @@ export default function GeographicScopeForm() {
       };
     }
 
-    const n = categoriesData?.data?.[i + 1];
+    const n = pcbCategoriesData?.data?.[i + 1];
 
     if (!n) {
       return {
@@ -90,7 +89,7 @@ export default function GeographicScopeForm() {
       href: `/projects/${projectId}/project-and-background-community/${n.attributes?.slug}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categorySlug, projectId]);
+  }, [pcbCategoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
     ...itemsData?.data?.reduce(

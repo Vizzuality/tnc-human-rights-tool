@@ -4,7 +4,6 @@ import { getLocale } from "next-intl/server";
 
 import { getBySlugId } from "@/lib/locallizedQuery";
 
-import { getContextualRisks } from "@/types/generated/contextual-risk";
 import { ContextualRiskCategoryResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
@@ -43,15 +42,6 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
     );
   }
 
-  const ITEMS = await getContextualRisks({
-    filters: {
-      contextual_risk_category: {
-        slug: categorySlug,
-      },
-    },
-    populate: "*",
-  });
-
   return (
     <ProjectsDetailContent>
       <ProjectsDetailTitle>
@@ -68,7 +58,7 @@ export default async function ProjectsDetailContextualRiskCategoryPage({
         </div>
       )}
 
-      <ContextualRiskForm items={ITEMS} />
+      <ContextualRiskForm />
     </ProjectsDetailContent>
   );
 }
