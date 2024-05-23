@@ -20,7 +20,7 @@ export default function ReportsProjectId() {
 
   const { data: contextualRisksData } = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
+    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
   });
 

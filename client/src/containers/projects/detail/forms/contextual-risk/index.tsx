@@ -11,10 +11,9 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { ZodTypeAny, z } from "zod";
 
-import {
-  useGetContextualRiskCategories,
-  useGetContextualRiskCategoriesId,
-} from "@/types/generated/contextual-risk-category";
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
+import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
@@ -56,16 +55,18 @@ const RADIO_OPTIONS = [
 ];
 
 export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
-  const { id: projectId, categoryId } = useParams();
+  const { id: projectId, categorySlug = "" } = useParams();
 
-  const { data: categoriesData } = useGetContextualRiskCategories({
+  const queryContextualRisksCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+
+  const { data: categoriesData } = useGetLocalizedList(queryContextualRisksCategories);
 
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const { data: categoryIdData } = useGetContextualRiskCategoriesId(+categoryId);
 
   const putProjectMutation = usePutProjectsId({
     mutation: {
@@ -75,16 +76,15 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
     },
   });
 
-  const categorySlug = categoryIdData?.data?.attributes?.slug ?? "";
   const defaultValuesCategory = (projectIdData?.data?.attributes?.risks || {}) as Record<
     string,
     Record<string, { contextual_risk: string }>
   >;
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+    const i = categoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
 
-    if (!categoryId || i === undefined) {
+    if (!categorySlug || i === undefined) {
       return {
         href: `/projects/${projectId}/contextual-risk`,
         label: "Contextual Risk",
@@ -101,10 +101,10 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
     }
 
     return {
-      href: `/projects/${projectId}/contextual-risk/${n.id}`,
+      href: `/projects/${projectId}/contextual-risk/${n.attributes?.slug}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categoryId, projectId]);
+  }, [categoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
     ...items?.data?.reduce(
@@ -136,7 +136,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValuesCategory[categorySlug],
+    defaultValues: defaultValuesCategory[`${categorySlug}`],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -167,7 +167,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 description: projectIdData.data.attributes.description,
                 risks: {
                   ...defaultValuesCategory,
-                  [categorySlug]: parsedValues,
+                  [`${categorySlug}`]: parsedValues,
                 },
               },
             },

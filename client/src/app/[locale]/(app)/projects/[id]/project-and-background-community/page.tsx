@@ -23,7 +23,7 @@ export default async function ProjectsDetailResearchOverviewPage({
 
   if (!CATEGORIES?.data) return null;
 
-  const [{ id: categoryId, attributes }] = CATEGORIES.data;
+  const [{ attributes }] = CATEGORIES.data;
 
   return (
     <ProjectsDetailContent>
@@ -34,7 +34,7 @@ export default async function ProjectsDetailResearchOverviewPage({
       </div>
 
       <div className="prose flex justify-end pt-5">
-        <Link href={`/projects/${id}/project-and-background-community/${categoryId}`}>
+        <Link href={`/projects/${id}/project-and-background-community/${attributes?.slug}`}>
           <Button className="items-center">
             {attributes?.title}
 

@@ -22,7 +22,7 @@ export default async function ProjectsDetailContextualRiskPage({
 
   if (!CATEGORIES?.data) return null;
 
-  const [{ id: categoryId, attributes }] = CATEGORIES?.data;
+  const [{ attributes }] = CATEGORIES?.data;
 
   const t = await getTranslations();
 
@@ -35,7 +35,7 @@ export default async function ProjectsDetailContextualRiskPage({
       </div>
 
       <div className="prose flex justify-end pt-5">
-        <Link href={`/projects/${id}/contextual-risk/${categoryId}`}>
+        <Link href={`/projects/${id}/contextual-risk/${attributes?.slug}`}>
           <Button className="items-center">
             {attributes?.title}
 

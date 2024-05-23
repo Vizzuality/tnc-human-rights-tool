@@ -44,7 +44,7 @@ export default function ProjectRiskForm() {
   const { data: projectIdData } = useGetProjectsId(+projectId);
   const { data: ctxData } = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
+    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
   });
   const { data: ctxIdData } = useGetContextualRisksId(+ctxId, {

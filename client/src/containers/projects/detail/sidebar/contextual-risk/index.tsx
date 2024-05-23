@@ -40,7 +40,7 @@ export default function ContextualRiskSidebar() {
           children: (
             <>
               {typeof attributes?.slug !== "undefined" && (
-                <ContextualRiskSidebarItem categorySlug={attributes?.slug} />
+                <ContextualRiskSidebarItem {...attributes} />
               )}
 
               <span>
