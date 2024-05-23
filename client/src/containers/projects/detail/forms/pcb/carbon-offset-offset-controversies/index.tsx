@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useForm } from "react-hook-form";
 import Markdown from "react-markdown";
@@ -10,13 +10,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { ZodTypeAny, z } from "zod";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
+import { useGetPcbs } from "@/types/generated/pcb";
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
   usePutProjectsId,
 } from "@/types/generated/project";
-import { PcbListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
@@ -30,10 +32,6 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export interface CarbonOffsetProjectControversiesFormProps extends PropsWithChildren {
-  items: PcbListResponse;
-}
-
 const RADIO_OPTIONS = [
   {
     value: "yes",
@@ -45,16 +43,29 @@ const RADIO_OPTIONS = [
   },
 ];
 
-export default function CarbonOffsetProjectControversiesForm({
-  items,
-}: CarbonOffsetProjectControversiesFormProps) {
-  const { id: projectId, categoryId } = useParams();
+export default function CarbonOffsetProjectControversiesForm() {
+  const { id: projectId, categorySlug } = useParams();
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const { data: categoriesData } = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+
+  const { data: categoriesData } = useGetLocalizedList(queryPcbCategories);
+
+  const queryPcbs = useGetPcbs({
+    filters: {
+      pcb_category: {
+        slug: categorySlug,
+      },
+    },
+    populate: "*",
+    locale: "all",
+  });
+
+  const { data: itemsData } = useGetLocalizedList(queryPcbs);
 
   const putProjectMutation = usePutProjectsId({
     mutation: {
@@ -65,9 +76,9 @@ export default function CarbonOffsetProjectControversiesForm({
   });
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+    const i = categoriesData?.data?.findIndex((c) => c.attributes?.slug === categorySlug);
 
-    if (!categoryId || i === undefined) {
+    if (!categorySlug || i === undefined) {
       return {
         href: `/projects/${projectId}/project-and-background-community`,
         label: "Contextual Risk",
@@ -87,10 +98,10 @@ export default function CarbonOffsetProjectControversiesForm({
       href: `/projects/${projectId}/project-and-background-community/${n.id}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categoryId, projectId]);
+  }, [categoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
-    ...items?.data?.reduce(
+    ...itemsData?.data?.reduce(
       (acc, { id, attributes }) => {
         if (!id || !attributes) {
           return acc;
@@ -161,7 +172,7 @@ export default function CarbonOffsetProjectControversiesForm({
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-10 border-t border-gray-100 pt-5"
       >
-        {items?.data
+        {itemsData?.data
           ?.sort((a, b) => {
             if (a?.attributes?.display_order && b?.attributes?.display_order) {
               return +a.attributes.display_order - +b.attributes.display_order;

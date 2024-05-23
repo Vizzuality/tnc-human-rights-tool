@@ -51,6 +51,7 @@ export default async function ProjectsDetailPCBLayout({ children }: ProjectsDeta
           },
         },
         populate: "*",
+        locale: "all",
       }),
     );
   }

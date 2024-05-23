@@ -38,9 +38,7 @@ export default function PcbSidebar() {
           label: attributes?.title ?? "",
           children: (
             <>
-              {typeof attributes?.slug !== "undefined" && (
-                <PCBSidebarItem categorySlug={attributes?.slug} />
-              )}
+              {typeof attributes?.slug !== "undefined" && <PCBSidebarItem {...attributes} />}
 
               <span>{attributes?.title}</span>
             </>

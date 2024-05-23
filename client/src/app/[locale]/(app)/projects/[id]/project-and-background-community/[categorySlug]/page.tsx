@@ -4,7 +4,6 @@ import { getLocale } from "next-intl/server";
 
 import { getBySlugId } from "@/lib/locallizedQuery";
 
-import { getPcbs } from "@/types/generated/pcb";
 import { PcbCategoryResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
@@ -37,15 +36,6 @@ export default async function ProjectsDetailPCBCategoryPage({
     });
   }
 
-  const ITEMS = await getPcbs({
-    filters: {
-      pcb_category: {
-        slug: categorySlug,
-      },
-    },
-    populate: "*",
-  });
-
   return (
     <ProjectsDetailContent>
       <ProjectsDetailTitle>{CATEGORY?.data?.attributes?.title}</ProjectsDetailTitle>
@@ -58,10 +48,10 @@ export default async function ProjectsDetailPCBCategoryPage({
         </div>
       )}
 
-      {categorySlug === "geographic-scope" && <GeographicScopeForm items={ITEMS} />}
+      {categorySlug === "geographic-scope" && <GeographicScopeForm />}
 
       {categorySlug === "carbon-offset-project-controversies" && (
-        <CarbonOffsetProjectControversiesForm items={ITEMS} />
+        <CarbonOffsetProjectControversiesForm />
       )}
     </ProjectsDetailContent>
   );

@@ -7,6 +7,8 @@ import { useParams } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
@@ -32,13 +34,19 @@ export default function NavigationBreadcrumbs() {
   const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+id);
-  const { data: pcbCategoriesData } = useGetPcbCategories({
-    sort: "display_order:asc",
-  });
-  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+  const queryPcbCategoriesData = useGetPcbCategories({
     sort: "display_order:asc",
     locale: "all",
   });
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategoriesData);
+
+  const queryContextualRiskCategoriesData = useGetContextualRiskCategories({
+    sort: "display_order:asc",
+    locale: "all",
+  });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(
+    queryContextualRiskCategoriesData,
+  );
 
   const { data: contextualRisksData } = useGetContextualRisks({
     populate: "*",
