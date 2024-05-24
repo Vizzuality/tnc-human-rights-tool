@@ -45,7 +45,7 @@ export default function ProjectRiskSidebar() {
       })
       ?.map((item) => {
         return {
-          href: `/projects/${id}/project-risk/${item.id}`,
+          href: `/projects/${id}/project-risk/${item.attributes?.slug}`,
           label: item.attributes?.title ?? "",
           children: (
             <>

@@ -4,15 +4,16 @@ import Markdown from "react-markdown";
 
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { getLocale } from "next-intl/server";
 
 import getQueryClient from "@/lib/getQueryClient";
+import { getBySlugId, getBySlugIdQueryOptions } from "@/lib/locallizedQuery";
 
-import {
-  getContextualRisksId,
-  getGetContextualRisksIdQueryOptions,
-} from "@/types/generated/contextual-risk";
+import { ContextualRiskResponse } from "@/types/generated/strapi.schemas";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
+
+import { defaultLocale } from "@/constants/navigation";
 
 import MinimumCoreRiskDetermination from "@/containers/minimum-core-risk-determination";
 import ProjectsDetailContent from "@/containers/projects/detail/content";
@@ -23,22 +24,40 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 interface ProjectsDetailProjectRiskIdProps {
   params: {
-    ctxId: string;
+    ctxSlug: string;
   } & ProjectsDetailPageProps["params"];
 }
 
 export default async function ProjectsDetailProjectRiskIdPage({
-  params: { ctxId },
+  params: { ctxSlug },
 }: ProjectsDetailProjectRiskIdProps) {
   const queryClient = getQueryClient();
+  const locale = await getLocale();
 
-  const CTX_RISK = await getContextualRisksId(+ctxId, {
-    populate: "*",
+  let CTX_RISK;
+  try {
+    CTX_RISK = await getBySlugId<ContextualRiskResponse>(`contextual-risk/${ctxSlug}`, {
+      locale,
+      populate: "*",
+    });
+  } catch (error) {
+    CTX_RISK = await getBySlugId<ContextualRiskResponse>(`contextual-risk/${ctxSlug}`, {
+      locale: defaultLocale,
+      populate: "*",
+    });
+  }
+
+  await queryClient.prefetchQuery({
+    ...getBySlugIdQueryOptions(`contextual-risk/${ctxSlug}`, {
+      populate: "*",
+      locale,
+    }),
   });
 
   await queryClient.prefetchQuery({
-    ...getGetContextualRisksIdQueryOptions(+ctxId, {
+    ...getBySlugIdQueryOptions(`contextual-risk/${ctxSlug}`, {
       populate: "*",
+      locale: defaultLocale,
     }),
   });
 

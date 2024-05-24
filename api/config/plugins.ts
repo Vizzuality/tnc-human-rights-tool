@@ -28,6 +28,7 @@ module.exports = ({ env }) => ({
   },
   slugify: {
     enabled: true,
+
     config: {
       contentTypes: {
         'pcb': {

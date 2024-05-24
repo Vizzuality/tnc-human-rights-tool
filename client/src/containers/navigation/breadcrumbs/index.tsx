@@ -29,7 +29,7 @@ export const BREADCRUMBS_DICTIONARY: Record<string, string> = {
 };
 
 export default function NavigationBreadcrumbs() {
-  const { id, categorySlug, ctxId } = useParams();
+  const { id, categorySlug, ctxSlug } = useParams();
   const pathname = usePathname();
   const t = useTranslations();
 
@@ -88,10 +88,12 @@ export default function NavigationBreadcrumbs() {
         };
       }
 
-      if (ctxId && slice === ctxId && PATH_SLICES[index - 1] === "project-risk") {
+      if (ctxSlug && slice === ctxSlug && PATH_SLICES[index - 1] === "project-risk") {
         return {
           href: `/${PATH_SLICES.slice(0, index + 1).join("/")}`,
-          label: contextualRisksData?.data?.find((c) => c.id === +ctxId)?.attributes?.title ?? "",
+          label:
+            contextualRisksData?.data?.find((c) => c.attributes?.slug === ctxSlug)?.attributes
+              ?.title ?? "",
         };
       }
 
@@ -103,7 +105,7 @@ export default function NavigationBreadcrumbs() {
   }, [
     id,
     categorySlug,
-    ctxId,
+    ctxSlug,
     pathname,
     projectIdData,
     pcbCategoriesData,

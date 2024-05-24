@@ -73,10 +73,22 @@ export const useGetBySlug = <
   },
 ): UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
   const queryOptions = getBySlugIdQueryOptions(id, params, options);
+  const queryDefaultOptions = getBySlugIdQueryOptions(
+    id,
+    {
+      ...params,
+      locale: defaultLocale,
+    },
+    options,
+  );
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & { queryKey: QueryKey };
+  const queryDefault = useQuery(queryDefaultOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
 
   query.queryKey = queryOptions.queryKey;
+  queryDefault.queryKey = queryDefaultOptions.queryKey;
 
   return query;
 };

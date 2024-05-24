@@ -11,15 +11,18 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { z } from "zod";
 
-import { useGetLocalizedList } from "@/lib/locallizedQuery";
+import { useGetBySlug, useGetLocalizedList } from "@/lib/locallizedQuery";
 
-import { useGetContextualRisks, useGetContextualRisksId } from "@/types/generated/contextual-risk";
+import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
   usePutProjectsId,
 } from "@/types/generated/project";
+import { ContextualRiskResponse } from "@/types/generated/strapi.schemas";
 import { Risks } from "@/types/project";
+
+import { defaultLocale } from "@/constants/navigation";
 
 import ProjectRiskDetermination from "@/containers/project-risk-determination";
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
@@ -39,7 +42,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { DETERMINATIONS, PRIORIZATIONS } from "@/constants";
 
 export default function ProjectRiskForm() {
-  const { id: projectId, ctxId } = useParams();
+  const { id: projectId, ctxSlug } = useParams();
 
   const queryClient = useQueryClient();
 
@@ -52,9 +55,14 @@ export default function ProjectRiskForm() {
   });
   const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
 
-  const { data: ctxIdData } = useGetContextualRisksId(+ctxId, {
-    populate: "*",
-  });
+  const { data: ctxDefaultIdData } = useGetBySlug<ContextualRiskResponse>(
+    `contextual-risk/${ctxSlug}`,
+    {
+      populate: "*",
+      locale: defaultLocale,
+    },
+  );
+
   const putProjectMutation = usePutProjectsId({
     mutation: {
       onSuccess: () => {
@@ -63,7 +71,8 @@ export default function ProjectRiskForm() {
     },
   });
 
-  const slug = ctxIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
+  const slug =
+    ctxDefaultIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
   const RISKS = projectIdData?.data?.attributes?.risks as Risks;
 
   const nextCategory = useMemo(() => {
@@ -77,7 +86,7 @@ export default function ProjectRiskForm() {
       }) ?? [];
 
     const i = ctxFilteredData.findIndex((item) => {
-      return item.id === +ctxId;
+      return item.attributes?.slug === ctxSlug;
     });
 
     const n = ctxFilteredData?.[i + 1];
@@ -93,7 +102,7 @@ export default function ProjectRiskForm() {
       href: `/projects/${projectId}/project-risk/${n.id}`,
       label: n.attributes?.title ?? "",
     };
-  }, [projectId, ctxId, contextualRisksData, RISKS]);
+  }, [projectId, ctxSlug, contextualRisksData, RISKS]);
 
   const formSchema = z.object({
     proyect_risk_determination: z.enum(
@@ -113,7 +122,7 @@ export default function ProjectRiskForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: RISKS[slug]?.[`${ctxId}`],
+    defaultValues: RISKS[slug]?.[`${ctxDefaultIdData?.data?.id}`],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -130,8 +139,8 @@ export default function ProjectRiskForm() {
                   ...RISKS,
                   [slug]: {
                     ...RISKS[slug],
-                    [`${ctxId}`]: {
-                      ...RISKS[slug]?.[`${ctxId}`],
+                    [`${ctxDefaultIdData?.data?.id}`]: {
+                      ...RISKS[slug]?.[`${ctxDefaultIdData?.data?.id}`],
                       ...values,
                     },
                   },

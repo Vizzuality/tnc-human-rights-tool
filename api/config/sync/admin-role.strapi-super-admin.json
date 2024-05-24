@@ -93,7 +93,8 @@
           "description",
           "display_order",
           "contextual_risk_category",
-          "project_risk_description"
+          "project_risk_description",
+          "slug"
         ],
         "locales": [
           "en",
@@ -136,7 +137,8 @@
           "description",
           "display_order",
           "contextual_risk_category",
-          "project_risk_description"
+          "project_risk_description",
+          "slug"
         ],
         "locales": [
           "en",
@@ -155,7 +157,8 @@
           "description",
           "display_order",
           "contextual_risk_category",
-          "project_risk_description"
+          "project_risk_description",
+          "slug"
         ],
         "locales": [
           "en",
@@ -552,7 +555,8 @@
           "display_order",
           "pcb_category",
           "description",
-          "input"
+          "input",
+          "slug"
         ],
         "locales": [
           "en",
@@ -595,7 +599,8 @@
           "display_order",
           "pcb_category",
           "description",
-          "input"
+          "input",
+          "slug"
         ],
         "locales": [
           "en",
@@ -614,7 +619,8 @@
           "display_order",
           "pcb_category",
           "description",
-          "input"
+          "input",
+          "slug"
         ],
         "locales": [
           "en",
