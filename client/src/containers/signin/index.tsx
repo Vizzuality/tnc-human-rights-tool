@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +19,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
+import { Link } from "@/i18n";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter your email address" }),

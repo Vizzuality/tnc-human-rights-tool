@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
@@ -10,9 +12,11 @@ import ContextualRiskSidebarItem from "@/containers/projects/detail/sidebar/cont
 export default function ContextualRiskSidebar() {
   const { id } = useParams();
 
-  const { data: categoriesData } = useGetContextualRiskCategories({
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
   const items = [
     {
@@ -20,7 +24,7 @@ export default function ContextualRiskSidebar() {
       label: "Overview",
       children: <span className="text-lg">Overview</span>,
     },
-    ...(categoriesData?.data || [])
+    ...(contextualRiskCategoriesData?.data || [])
       ?.sort((a, b) => {
         if (a?.attributes?.display_order && b?.attributes?.display_order) {
           return +a.attributes.display_order - +b.attributes.display_order;
@@ -28,14 +32,14 @@ export default function ContextualRiskSidebar() {
 
         return 0;
       })
-      ?.map(({ id: categoryId, attributes }) => {
+      ?.map(({ attributes }) => {
         return {
-          href: `/projects/${id}/contextual-risk/${categoryId}`,
+          href: `/projects/${id}/contextual-risk/${attributes?.slug}`,
           label: attributes?.title ?? "",
           children: (
             <>
-              {typeof categoryId !== "undefined" && (
-                <ContextualRiskSidebarItem categoryId={categoryId} />
+              {typeof attributes?.slug !== "undefined" && (
+                <ContextualRiskSidebarItem {...attributes} />
               )}
 
               <span>

@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetProjectsId } from "@/types/generated/project";
 import { Risks } from "@/types/project";
@@ -16,11 +18,14 @@ export default function ProjectRiskSidebar() {
 
   const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
 
-  const { data: contextualRisksData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
+    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
   });
+
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
 
   const items = [
     {
@@ -40,7 +45,7 @@ export default function ProjectRiskSidebar() {
       })
       ?.map((item) => {
         return {
-          href: `/projects/${id}/project-risk/${item.id}`,
+          href: `/projects/${id}/project-risk/${item.attributes?.slug}`,
           label: item.attributes?.title ?? "",
           children: (
             <>

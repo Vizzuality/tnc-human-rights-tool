@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-
 import { PlusIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 import { useGetProjects } from "@/types/generated/project";
 
@@ -13,18 +12,21 @@ import Wrapper from "@/containers/wrapper";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { Link } from "@/i18n";
+
 export default function Projects() {
   const { data, isFetching, isFetched } = useGetProjects();
   const columns = useColumns();
+  const t = useTranslations();
 
   return (
     <Wrapper>
       <div className="space-y-5">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl">Projects</h1>
+          <h1 className="text-4xl">{t("projects")}</h1>
           <Link href="/projects/new">
             <Button className="items-center space-x-2">
-              <span>New Project</span>
+              <span>{t("new_project")}</span>
               <PlusIcon />
             </Button>
           </Link>

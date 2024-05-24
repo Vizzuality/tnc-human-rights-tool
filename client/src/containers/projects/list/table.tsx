@@ -9,6 +9,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import {
@@ -39,12 +41,17 @@ interface ProjectsTableProps<TData, TValue> {
 }
 
 export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTableProps<TData, TValue>) {
-  const { data: pcbCategoriesData } = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
-  const { data: contextualRiskCategoriesData } = useGetContextualRiskCategories({
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
+
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
 
   const table = useReactTable({
     data,

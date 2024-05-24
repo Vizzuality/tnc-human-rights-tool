@@ -1,31 +1,31 @@
 "use client";
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetPcbs } from "@/types/generated/pcb";
-import { useGetPcbCategoriesId } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
+import { PcbCategory } from "@/types/generated/strapi.schemas";
 import { PCBs } from "@/types/project";
 
 import NavigationCircle from "@/containers/navigation/sidebar/circle";
 
-interface PCBSidebarItemProps {
-  categoryId: number;
-}
-
-export default function PCBSidebarItem({ categoryId }: PCBSidebarItemProps) {
+export default function PCBSidebarItem({ slug = "", display_order }: PcbCategory) {
   const { id } = useParams();
   const { data: projectIdData } = useGetProjectsId(+id);
-  const { data: pcbData } = useGetPcbs({
+  const queryPcbs = useGetPcbs({
     filters: {
-      pcb_category: categoryId,
+      pcb_category: {
+        slug: slug,
+      },
     },
     populate: "*",
+    locale: "all",
   });
-  const { data: categoriesIdData } = useGetPcbCategoriesId(categoryId);
-  const { attributes } = categoriesIdData?.data ?? {};
 
-  const c_display_order = attributes?.display_order ?? "";
-  const slug = attributes?.slug ?? "";
+  const { data: pcbData } = useGetLocalizedList(queryPcbs);
+
+  const c_display_order = display_order ?? "";
   const PCBS_DATA = (projectIdData?.data?.attributes?.pcbs ?? {}) as PCBs;
   const PCB_DATA = PCBS_DATA[slug] ?? {};
 

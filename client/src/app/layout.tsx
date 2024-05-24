@@ -1,31 +1,12 @@
-import type { Metadata } from "next";
-
+import { ReactNode } from "react";
 import "@/styles/globals.css";
-import { getServerSession } from "next-auth";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import LayoutProviders from "@/app/layout-providers";
-
-import { Toaster } from "@/components/ui/toaster";
-
-import { SpaceGrotesk } from "@/styles/fonts";
-
-export const metadata: Metadata = {
-  title: "Human Rights Screening Tool",
-  description: "",
+type Props = {
+  children: ReactNode;
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
-
-  return (
-    <LayoutProviders session={session}>
-      <html lang="en" className={`${SpaceGrotesk.variable}`}>
-        <body>
-          <Toaster />
-          {children}
-        </body>
-      </html>
-    </LayoutProviders>
-  );
+// Since we have a `not-found.tsx` page on the root, a layout file
+// is required, even if it's just passing children through.
+export default function RootLayout({ children }: Props) {
+  return children;
 }

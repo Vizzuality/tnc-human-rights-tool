@@ -4,6 +4,10 @@ import { useMemo } from "react";
 
 import { useParams } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetProjectsId } from "@/types/generated/project";
 import { Risks } from "@/types/project";
@@ -15,14 +19,18 @@ import { PRIORIZATIONS } from "@/constants";
 
 export default function ReportsProjectId() {
   const { id } = useParams();
+  const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+id);
 
-  const { data: contextualRisksData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
+    "pagination[limit]": 300,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
   });
+
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
 
   const ITEMS = useMemo(() => {
     const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;
@@ -97,7 +105,7 @@ export default function ReportsProjectId() {
                   key={priorization.value}
                   className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
                 >
-                  <h2>{priorization.label}</h2>
+                  <h2>{t(priorization.label)}</h2>
                   <div className="mt-8 divide-y">
                     {GROUPS[priorization.value]?.map((item) => {
                       if (!item?.id) return null;

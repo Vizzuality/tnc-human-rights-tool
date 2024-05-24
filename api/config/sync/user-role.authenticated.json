@@ -4,10 +4,19 @@
   "type": "authenticated",
   "permissions": [
     {
+      "action": "api::contextual-risk-category.contextual-risk-category.createLocalization"
+    },
+    {
       "action": "api::contextual-risk-category.contextual-risk-category.find"
     },
     {
       "action": "api::contextual-risk-category.contextual-risk-category.findOne"
+    },
+    {
+      "action": "api::contextual-risk-category.contextual-risk-category.generateSlugs"
+    },
+    {
+      "action": "api::contextual-risk.contextual-risk.createLocalization"
     },
     {
       "action": "api::contextual-risk.contextual-risk.find"
@@ -16,16 +25,37 @@
       "action": "api::contextual-risk.contextual-risk.findOne"
     },
     {
+      "action": "api::contextual-risk.contextual-risk.generateSlugs"
+    },
+    {
+      "action": "api::message.message.find"
+    },
+    {
+      "action": "api::message.message.findOne"
+    },
+    {
+      "action": "api::pcb-category.pcb-category.createLocalization"
+    },
+    {
       "action": "api::pcb-category.pcb-category.find"
     },
     {
       "action": "api::pcb-category.pcb-category.findOne"
     },
     {
+      "action": "api::pcb-category.pcb-category.generateSlugs"
+    },
+    {
+      "action": "api::pcb.pcb.createLocalization"
+    },
+    {
       "action": "api::pcb.pcb.find"
     },
     {
       "action": "api::pcb.pcb.findOne"
+    },
+    {
+      "action": "api::pcb.pcb.generateSlugs"
     },
     {
       "action": "api::project.project.create"
@@ -41,6 +71,9 @@
     },
     {
       "action": "api::project.project.update"
+    },
+    {
+      "action": "plugin::slugify.slugController.findSlug"
     },
     {
       "action": "plugin::users-permissions.auth.changePassword"

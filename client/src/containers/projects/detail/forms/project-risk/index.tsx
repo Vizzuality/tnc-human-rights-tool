@@ -9,15 +9,21 @@ import { useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
-import { useGetContextualRisks, useGetContextualRisksId } from "@/types/generated/contextual-risk";
+import { useGetBySlug, useGetLocalizedList } from "@/lib/locallizedQuery";
+
+import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
   usePutProjectsId,
 } from "@/types/generated/project";
+import { ContextualRiskResponse } from "@/types/generated/strapi.schemas";
 import { Risks } from "@/types/project";
+
+import { defaultLocale } from "@/constants/navigation";
 
 import ProjectRiskDetermination from "@/containers/project-risk-determination";
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
@@ -37,19 +43,29 @@ import { Textarea } from "@/components/ui/textarea";
 import { DETERMINATIONS, PRIORIZATIONS } from "@/constants";
 
 export default function ProjectRiskForm() {
-  const { id: projectId, ctxId } = useParams();
+  const { id: projectId, ctxSlug } = useParams();
+
+  const t = useTranslations();
 
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const { data: ctxData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
+    "pagination[limit]": 300,
   });
-  const { data: ctxIdData } = useGetContextualRisksId(+ctxId, {
-    populate: "*",
-  });
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
+
+  const { data: ctxDefaultIdData } = useGetBySlug<ContextualRiskResponse>(
+    `contextual-risk/${ctxSlug}`,
+    {
+      populate: "*",
+      locale: defaultLocale,
+    },
+  );
+
   const putProjectMutation = usePutProjectsId({
     mutation: {
       onSuccess: () => {
@@ -58,7 +74,8 @@ export default function ProjectRiskForm() {
     },
   });
 
-  const slug = ctxIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
+  const slug =
+    ctxDefaultIdData?.data?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
   const RISKS = projectIdData?.data?.attributes?.risks as Risks;
 
   const nextCategory = useMemo(() => {
@@ -67,12 +84,12 @@ export default function ProjectRiskForm() {
     }, {});
 
     const ctxFilteredData =
-      ctxData?.data?.filter((item) => {
+      contextualRisksData?.data?.filter((item) => {
         return r[`${item?.id}`]?.contextual_risk === "yes";
       }) ?? [];
 
     const i = ctxFilteredData.findIndex((item) => {
-      return item.id === +ctxId;
+      return item.attributes?.slug === ctxSlug;
     });
 
     const n = ctxFilteredData?.[i + 1];
@@ -85,10 +102,10 @@ export default function ProjectRiskForm() {
     }
 
     return {
-      href: `/projects/${projectId}/project-risk/${n.id}`,
+      href: `/projects/${projectId}/project-risk/${n.attributes?.slug}`,
       label: n.attributes?.title ?? "",
     };
-  }, [projectId, ctxId, ctxData, RISKS]);
+  }, [projectId, ctxSlug, contextualRisksData, RISKS]);
 
   const formSchema = z.object({
     proyect_risk_determination: z.enum(
@@ -108,7 +125,7 @@ export default function ProjectRiskForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: RISKS[slug]?.[`${ctxId}`],
+    defaultValues: RISKS[slug]?.[`${ctxDefaultIdData?.data?.id}`],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -125,8 +142,8 @@ export default function ProjectRiskForm() {
                   ...RISKS,
                   [slug]: {
                     ...RISKS[slug],
-                    [`${ctxId}`]: {
-                      ...RISKS[slug]?.[`${ctxId}`],
+                    [`${ctxDefaultIdData?.data?.id}`]: {
+                      ...RISKS[slug]?.[`${ctxDefaultIdData?.data?.id}`],
                       ...values,
                     },
                   },
@@ -156,7 +173,7 @@ export default function ProjectRiskForm() {
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <FormLabel className="flex items-center">
-                <span>Project Risk Determination</span>
+                <span>{t("project_risk_determination")}</span>
                 <Dialog>
                   <DialogTrigger className="ml-2">
                     <InfoCircledIcon className="inline-block h-4 w-4 text-primary hover:text-primary/50" />
@@ -180,7 +197,9 @@ export default function ProjectRiskForm() {
                         <FormControl>
                           <RadioGroupItem {...field} value={value} />
                         </FormControl>
-                        <FormLabel className="cursor-pointer pl-2 font-normal">{label}</FormLabel>
+                        <FormLabel className="cursor-pointer pl-2 font-normal">
+                          {t(label)}
+                        </FormLabel>
                       </div>
                     </FormItem>
                   ))}
@@ -197,7 +216,7 @@ export default function ProjectRiskForm() {
           name="proyect_risk_priorization"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Project Risk Prioritization</FormLabel>
+              <FormLabel>{t("project_risk_prioritization")}</FormLabel>
 
               <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                 <RadioGroup
@@ -212,7 +231,9 @@ export default function ProjectRiskForm() {
                           <FormControl>
                             <RadioGroupItem {...field} value={value} />
                           </FormControl>
-                          <FormLabel className="cursor-pointer pl-2 font-normal">{label}</FormLabel>
+                          <FormLabel className="cursor-pointer pl-2 font-normal">
+                            {t(label)}
+                          </FormLabel>
                         </div>
                       </FormItem>
                     ),
@@ -231,9 +252,9 @@ export default function ProjectRiskForm() {
           defaultValue="lorem ipsum"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Screening Notes</FormLabel>
+              <FormLabel>{t("screening_notes")}</FormLabel>
 
-              <div className="prose">Notes you previously entered in the contextual risk</div>
+              <div className="prose">{t("screening_notes_description")}</div>
 
               <FormControl>
                 <Textarea rows={5} readOnly {...field} />
@@ -249,11 +270,9 @@ export default function ProjectRiskForm() {
           name="proyect_risk_notes"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Specific Risk Notes</FormLabel>
+              <FormLabel>{t("specific_risk_notes")}</FormLabel>
 
-              <div className="prose">
-                Describe the indicated risk as it applies to this project.
-              </div>
+              <div className="prose">{t("specific_risk_notes_description")}</div>
 
               <FormControl>
                 <Textarea rows={5} {...field} />
@@ -269,11 +288,9 @@ export default function ProjectRiskForm() {
           name="proyect_risk_research_notes"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Research Notes</FormLabel>
+              <FormLabel>{t("research_notes")}</FormLabel>
 
-              <div className="prose">
-                Briefly describe research and Community engagement on this risk.
-              </div>
+              <div className="prose">{t("research_notes_description")}</div>
 
               <FormControl>
                 <Textarea rows={5} {...field} />
@@ -289,11 +306,9 @@ export default function ProjectRiskForm() {
           name="proyect_risk_key_determination_factors"
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
-              <FormLabel>Key Determination Factors</FormLabel>
+              <FormLabel>{t("key_determination_factors")}</FormLabel>
 
-              <div className="prose">
-                Describe key factors used to determine the risk as high or low.
-              </div>
+              <div className="prose">{t("key_determination_factors_description")}</div>
 
               <FormControl>
                 <Textarea rows={5} {...field} />

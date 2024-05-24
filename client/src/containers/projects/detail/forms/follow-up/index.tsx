@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import {
@@ -31,6 +32,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function FollowUpForm(props: ContextualRiskListResponseDataItem) {
   const { id: projectId, priorizationId } = useParams();
+
+  const t = useTranslations();
 
   const queryClient = useQueryClient();
 
@@ -101,28 +104,28 @@ export default function FollowUpForm(props: ContextualRiskListResponseDataItem) 
 
         {priorizationId !== "more-research" && (
           <>
-            <Label>Contextual Risk</Label>
+            <Label>{t("contextual_risk")}</Label>
             <p>{RISK.contextual_notes}</p>
           </>
         )}
 
         {priorizationId !== "more-research" && (
           <>
-            <Label>Project Risk</Label>
+            <Label>{t("project_risk")}</Label>
             <p>{RISK.proyect_risk_notes}</p>
           </>
         )}
 
         {priorizationId !== "more-research" && (
           <>
-            <Label>Research</Label>
+            <Label>{t("research")}</Label>
             <p>{RISK.proyect_risk_research_notes}</p>
           </>
         )}
 
         {priorizationId !== "more-research" && (
           <>
-            <Label>Project Risk Determination factors</Label>
+            <Label>{t("project_risk_determination_factors")}</Label>
             <p>{RISK.proyect_risk_key_determination_factors}</p>
           </>
         )}
@@ -137,7 +140,7 @@ export default function FollowUpForm(props: ContextualRiskListResponseDataItem) 
               name="follow_up_notes"
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
-                  <FormLabel>Follow up plan</FormLabel>
+                  <FormLabel>{t("follow_up_plan")}</FormLabel>
 
                   <FormControl className="prose mt-5 inline-block border-t border-primary/10 py-2.5">
                     <Textarea rows={5} {...field} />

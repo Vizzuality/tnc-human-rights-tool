@@ -217,6 +217,56 @@ export type GetPcbsParams = {
   locale?: string;
 };
 
+export type GetMessagesIdParams = {
+  /**
+   * Relations to return
+   */
+  populate?: string;
+};
+
+export type GetMessagesParams = {
+  /**
+   * Sort by attributes ascending (asc) or descending (desc)
+   */
+  sort?: string;
+  /**
+   * Return page/pageSize (default: true)
+   */
+  "pagination[withCount]"?: boolean;
+  /**
+   * Page number (default: 0)
+   */
+  "pagination[page]"?: number;
+  /**
+   * Page size (default: 25)
+   */
+  "pagination[pageSize]"?: number;
+  /**
+   * Offset value (default: 0)
+   */
+  "pagination[start]"?: number;
+  /**
+   * Number of entities to return (default: 25)
+   */
+  "pagination[limit]"?: number;
+  /**
+   * Fields to return (ex: title,author)
+   */
+  fields?: string;
+  /**
+   * Relations to return
+   */
+  populate?: string;
+  /**
+   * Filters to apply
+   */
+  filters?: { [key: string]: any };
+  /**
+   * Locale to apply
+   */
+  locale?: string;
+};
+
 export type GetContextualRiskCategoriesIdParams = {
   /**
    * Relations to return
@@ -964,6 +1014,7 @@ export type PcbCategoryPcbsDataItemAttributes = {
   pcb_category?: PcbCategoryPcbsDataItemAttributesPcbCategory;
   description?: string;
   input?: unknown;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1297,6 +1348,7 @@ export interface Pcb {
   pcb_category?: PcbPcbCategory;
   description: string;
   input: unknown;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1424,6 +1476,7 @@ export type PcbPcbCategoryDataAttributesPcbsDataItemAttributes = {
   pcb_category?: PcbPcbCategoryDataAttributesPcbsDataItemAttributesPcbCategory;
   description?: string;
   input?: unknown;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -1688,6 +1741,7 @@ export type PcbRequestData = {
   pcb_category?: PcbRequestDataPcbCategory;
   description: string;
   input: unknown;
+  slug?: string;
   locale?: string;
 };
 
@@ -1703,6 +1757,7 @@ export interface PcbLocalizationRequest {
   pcb_category?: PcbLocalizationRequestPcbCategory;
   description: string;
   input: unknown;
+  slug?: string;
   locale: string;
 }
 
@@ -1801,6 +1856,25 @@ export interface Message {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
+  faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2086,6 +2160,25 @@ export type MessageRequestData = {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
+  faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   locale?: string;
 };
 
@@ -2152,6 +2245,25 @@ export interface MessageLocalizationRequest {
   sign_in_cta?: string;
   success?: string;
   reset_password_notification?: string;
+  project_and_background_community?: string;
+  follow_up?: string;
+  project_intro?: string;
+  research_phase?: string;
+  screening_phase?: string;
+  follow_up_phase?: string;
+  report?: string;
+  delete_project_alert_title?: string;
+  delete_project_alert_description?: string;
+  delete?: string;
+  faqs_description?: string;
+  research_phase_description?: string;
+  project_and_background_community_description?: string;
+  follow_up_description?: string;
+  contextual_risk_description?: string;
+  project_risk_description?: string;
+  escalate?: string;
+  prioritize?: string;
+  watch?: string;
   locale: string;
 }
 
@@ -2283,6 +2395,7 @@ export type ContextualRiskCategoryContextualRisksDataItemAttributes = {
   display_order?: number;
   contextual_risk_category?: ContextualRiskCategoryContextualRisksDataItemAttributesContextualRiskCategory;
   project_risk_description?: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2607,6 +2720,7 @@ export interface ContextualRisk {
   display_order: number;
   contextual_risk_category?: ContextualRiskContextualRiskCategory;
   project_risk_description: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2731,6 +2845,7 @@ export type ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDat
   display_order?: number;
   contextual_risk_category?: ContextualRiskContextualRiskCategoryDataAttributesContextualRisksDataItemAttributesContextualRiskCategory;
   project_risk_description?: string;
+  slug?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -3006,6 +3121,7 @@ export type ContextualRiskRequestData = {
   display_order: number;
   contextual_risk_category?: ContextualRiskRequestDataContextualRiskCategory;
   project_risk_description: string;
+  slug?: string;
   locale?: string;
 };
 
@@ -3021,6 +3137,7 @@ export interface ContextualRiskLocalizationRequest {
   display_order: number;
   contextual_risk_category?: ContextualRiskLocalizationRequestContextualRiskCategory;
   project_risk_description: string;
+  slug?: string;
   locale: string;
 }
 

@@ -300,16 +300,16 @@
           "sortable": true
         }
       },
-      "notes_cta": {
+      "screening_notes_description": {
         "edit": {
-          "label": "notes_cta",
+          "label": "screening_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "notes_cta",
+          "label": "screening_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -328,16 +328,16 @@
           "sortable": true
         }
       },
-      "indicated_risk_cta": {
+      "specific_risk_notes_description": {
         "edit": {
-          "label": "indicated_risk_cta",
+          "label": "specific_risk_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "indicated_risk_cta",
+          "label": "specific_risk_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -356,16 +356,16 @@
           "sortable": true
         }
       },
-      "research_and_community_cta": {
+      "research_notes_description": {
         "edit": {
-          "label": "research_and_community_cta",
+          "label": "research_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "research_and_community_cta",
+          "label": "research_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -384,16 +384,16 @@
           "sortable": true
         }
       },
-      "key_factors_cta": {
+      "key_determination_factors_description": {
         "edit": {
-          "label": "key_factors_cta",
+          "label": "key_determination_factors_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "key_factors_cta",
+          "label": "key_determination_factors_description",
           "searchable": true,
           "sortable": true
         }
@@ -832,6 +832,496 @@
           "sortable": true
         }
       },
+      "project_and_background_community": {
+        "edit": {
+          "label": "project_and_background_community",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_and_background_community",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "follow_up": {
+        "edit": {
+          "label": "follow_up",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_intro": {
+        "edit": {
+          "label": "project_intro",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_intro",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "research_phase": {
+        "edit": {
+          "label": "research_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "research_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "screening_phase": {
+        "edit": {
+          "label": "screening_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "screening_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "follow_up_phase": {
+        "edit": {
+          "label": "follow_up_phase",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up_phase",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "report": {
+        "edit": {
+          "label": "report",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "report",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "delete_project_alert_title": {
+        "edit": {
+          "label": "delete_project_alert_title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete_project_alert_title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "delete_project_alert_description": {
+        "edit": {
+          "label": "delete_project_alert_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete_project_alert_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "delete": {
+        "edit": {
+          "label": "delete",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "delete",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "faqs_description": {
+        "edit": {
+          "label": "faqs_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "faqs_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "research_phase_description": {
+        "edit": {
+          "label": "research_phase_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "research_phase_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "project_and_background_community_description": {
+        "edit": {
+          "label": "project_and_background_community_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_and_background_community_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "follow_up_description": {
+        "edit": {
+          "label": "follow_up_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "follow_up_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "contextual_risk_description": {
+        "edit": {
+          "label": "contextual_risk_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "contextual_risk_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "project_risk_description": {
+        "edit": {
+          "label": "project_risk_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "escalate": {
+        "edit": {
+          "label": "escalate",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "escalate",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "prioritize": {
+        "edit": {
+          "label": "prioritize",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "prioritize",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "watch": {
+        "edit": {
+          "label": "watch",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "watch",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_risk_determination": {
+        "edit": {
+          "label": "project_risk_determination",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_determination",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_risk_determination_description": {
+        "edit": {
+          "label": "project_risk_determination_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_determination_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "probable_high_risk": {
+        "edit": {
+          "label": "probable_high_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "probable_high_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "not_aplicable": {
+        "edit": {
+          "label": "not_aplicable",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "not_aplicable",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "unlikely": {
+        "edit": {
+          "label": "unlikely",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "unlikely",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "reliable_mitigation_available_or_already_in_place": {
+        "edit": {
+          "label": "reliable_mitigation_available_or_already_in_place",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "reliable_mitigation_available_or_already_in_place",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "limited_scope_of_risk": {
+        "edit": {
+          "label": "limited_scope_of_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "limited_scope_of_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "save": {
+        "edit": {
+          "label": "save",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "save",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "continue": {
+        "edit": {
+          "label": "continue",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "continue",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "contextual_risk_info_description": {
+        "edit": {
+          "label": "contextual_risk_info_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "contextual_risk_info_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "yes": {
+        "edit": {
+          "label": "yes",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "yes",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "no": {
+        "edit": {
+          "label": "no",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "no",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "more_research": {
+        "edit": {
+          "label": "more_research",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "more_research",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "notes_specific_risk": {
+        "edit": {
+          "label": "notes_specific_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "notes_specific_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "back_to_project": {
+        "edit": {
+          "label": "back_to_project",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "back_to_project",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "export_as_pdf": {
+        "edit": {
+          "label": "export_as_pdf",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "export_as_pdf",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -892,50 +1382,10 @@
       }
     },
     "layouts": {
-      "list": [
-        "id",
-        "human_rights_screening_tool",
-        "my_projects",
-        "glossary"
-      ],
       "edit": [
         [
           {
             "name": "human_rights_screening_tool",
-            "size": 6
-          },
-          {
-            "name": "my_projects",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "glossary",
-            "size": 6
-          },
-          {
-            "name": "faqs",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "other_tools",
-            "size": 6
-          },
-          {
-            "name": "logout",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "login",
-            "size": 6
-          },
-          {
-            "name": "back_to_top",
             "size": 6
           }
         ],
@@ -947,17 +1397,7 @@
         ],
         [
           {
-            "name": "get_started_description",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "get_started",
-            "size": 6
-          },
-          {
-            "name": "projects",
+            "name": "my_projects",
             "size": 6
           }
         ],
@@ -965,107 +1405,9 @@
           {
             "name": "new_project",
             "size": 6
-          },
-          {
-            "name": "project",
-            "size": 6
           }
         ],
         [
-          {
-            "name": "progress",
-            "size": 6
-          },
-          {
-            "name": "last_updated",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "edit_project",
-            "size": 6
-          },
-          {
-            "name": "delete_project",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "project_risk_prioritization",
-            "size": 6
-          },
-          {
-            "name": "screening_notes",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "notes_cta",
-            "size": 6
-          },
-          {
-            "name": "specific_risk_notes",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "indicated_risk_cta",
-            "size": 6
-          },
-          {
-            "name": "research_notes",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "research_and_community_cta",
-            "size": 6
-          },
-          {
-            "name": "key_determination_factors",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "key_factors_cta",
-            "size": 6
-          },
-          {
-            "name": "follow_up_plan",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "contextual_risk",
-            "size": 6
-          },
-          {
-            "name": "project_risk",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "research",
-            "size": 6
-          },
-          {
-            "name": "project_risk_determination_factors",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "loading",
-            "size": 6
-          },
           {
             "name": "create_project_success",
             "size": 6
@@ -1075,7 +1417,219 @@
           {
             "name": "create_project_error",
             "size": 6
-          },
+          }
+        ],
+        [
+          {
+            "name": "edit_project",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete_project",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "projects",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "progress",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "last_updated",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete_project_alert_title",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete_project_alert_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_intro",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "get_started",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "get_started_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "glossary",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "glossary_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "faqs",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "faqs_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "other_tools",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "other_tools_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "logout",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "login",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "back_to_top",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_risk_prioritization",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "screening_notes",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "screening_notes_description",
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "specific_risk_notes",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "specific_risk_notes_description",
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "research_notes",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "research_notes_description",
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "key_determination_factors",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "key_determination_factors_description",
+            "size": 8
+          }
+        ],
+        [
+          {
+            "name": "follow_up_plan",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "contextual_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "research",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_risk_determination_factors",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "loading",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "name",
             "size": 6
@@ -1085,7 +1639,9 @@
           {
             "name": "description",
             "size": 6
-          },
+          }
+        ],
+        [
           {
             "name": "cancel",
             "size": 6
@@ -1095,7 +1651,9 @@
           {
             "name": "create",
             "size": 6
-          },
+          }
+        ],
+        [
           {
             "name": "loading_error_title",
             "size": 6
@@ -1105,7 +1663,9 @@
           {
             "name": "loading_error_description",
             "size": 6
-          },
+          }
+        ],
+        [
           {
             "name": "nav_home",
             "size": 6
@@ -1119,21 +1679,23 @@
         ],
         [
           {
-            "name": "glossary_description",
-            "size": 12
-          }
-        ],
-        [
-          {
-            "name": "other_tools_description",
-            "size": 12
-          }
-        ],
-        [
-          {
             "name": "sig_in",
             "size": 6
-          },
+          }
+        ],
+        [
+          {
+            "name": "sign_in_cta",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "sign_up",
+            "size": 6
+          }
+        ],
+        [
           {
             "name": "username",
             "size": 6
@@ -1143,7 +1705,9 @@
           {
             "name": "password",
             "size": 6
-          },
+          }
+        ],
+        [
           {
             "name": "sign_up_cta",
             "size": 6
@@ -1153,17 +1717,9 @@
           {
             "name": "confirm_passsword",
             "size": 6
-          },
-          {
-            "name": "sign_up",
-            "size": 6
           }
         ],
         [
-          {
-            "name": "forgot_password_cta",
-            "size": 6
-          },
           {
             "name": "forgot_password",
             "size": 6
@@ -1171,21 +1727,7 @@
         ],
         [
           {
-            "name": "email",
-            "size": 6
-          },
-          {
-            "name": "send",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "sign_in_cta",
-            "size": 6
-          },
-          {
-            "name": "success",
+            "name": "forgot_password_cta",
             "size": 6
           }
         ],
@@ -1194,7 +1736,217 @@
             "name": "reset_password_notification",
             "size": 6
           }
+        ],
+        [
+          {
+            "name": "success",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "email",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "send",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "follow_up",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_and_background_community",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "research_phase",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "screening_phase",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "follow_up_phase",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "report",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "delete",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "save",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "continue",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "yes",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "no",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "more_research",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "back_to_project",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "export_as_pdf",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "escalate",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "prioritize",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "watch",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_risk_determination",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "research_phase_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_and_background_community_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "follow_up_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "contextual_risk_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_risk_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "project_risk_determination_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "probable_high_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "not_aplicable",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "unlikely",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "reliable_mitigation_available_or_already_in_place",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "limited_scope_of_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "notes_specific_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "contextual_risk_info_description",
+            "size": 12
+          }
         ]
+      ],
+      "list": [
+        "id",
+        "human_rights_screening_tool",
+        "my_projects",
+        "glossary"
       ]
     }
   },
