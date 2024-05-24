@@ -300,16 +300,16 @@
           "sortable": true
         }
       },
-      "notes_cta": {
+      "screening_notes_description": {
         "edit": {
-          "label": "notes_cta",
+          "label": "screening_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "notes_cta",
+          "label": "screening_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -328,16 +328,16 @@
           "sortable": true
         }
       },
-      "indicated_risk_cta": {
+      "specific_risk_notes_description": {
         "edit": {
-          "label": "indicated_risk_cta",
+          "label": "specific_risk_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "indicated_risk_cta",
+          "label": "specific_risk_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -356,16 +356,16 @@
           "sortable": true
         }
       },
-      "research_and_community_cta": {
+      "research_notes_description": {
         "edit": {
-          "label": "research_and_community_cta",
+          "label": "research_notes_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "research_and_community_cta",
+          "label": "research_notes_description",
           "searchable": true,
           "sortable": true
         }
@@ -384,16 +384,16 @@
           "sortable": true
         }
       },
-      "key_factors_cta": {
+      "key_determination_factors_description": {
         "edit": {
-          "label": "key_factors_cta",
+          "label": "key_determination_factors_description",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "key_factors_cta",
+          "label": "key_determination_factors_description",
           "searchable": true,
           "sortable": true
         }
@@ -1098,6 +1098,230 @@
           "sortable": true
         }
       },
+      "project_risk_determination": {
+        "edit": {
+          "label": "project_risk_determination",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_determination",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_risk_determination_description": {
+        "edit": {
+          "label": "project_risk_determination_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_determination_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "probable_high_risk": {
+        "edit": {
+          "label": "probable_high_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "probable_high_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "not_aplicable": {
+        "edit": {
+          "label": "not_aplicable",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "not_aplicable",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "unlikely": {
+        "edit": {
+          "label": "unlikely",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "unlikely",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "reliable_mitigation_available_or_already_in_place": {
+        "edit": {
+          "label": "reliable_mitigation_available_or_already_in_place",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "reliable_mitigation_available_or_already_in_place",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "limited_scope_of_risk": {
+        "edit": {
+          "label": "limited_scope_of_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "limited_scope_of_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "save": {
+        "edit": {
+          "label": "save",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "save",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "continue": {
+        "edit": {
+          "label": "continue",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "continue",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "contextual_risk_info_description": {
+        "edit": {
+          "label": "contextual_risk_info_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "contextual_risk_info_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "yes": {
+        "edit": {
+          "label": "yes",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "yes",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "no": {
+        "edit": {
+          "label": "no",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "no",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "more_research": {
+        "edit": {
+          "label": "more_research",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "more_research",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "notes_specific_risk": {
+        "edit": {
+          "label": "notes_specific_risk",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "notes_specific_risk",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "back_to_project": {
+        "edit": {
+          "label": "back_to_project",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "back_to_project",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "export_as_pdf": {
+        "edit": {
+          "label": "export_as_pdf",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "export_as_pdf",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -1269,19 +1493,11 @@
         ],
         [
           {
-            "name": "notes_cta",
-            "size": 6
-          },
-          {
             "name": "specific_risk_notes",
             "size": 6
           }
         ],
         [
-          {
-            "name": "indicated_risk_cta",
-            "size": 6
-          },
           {
             "name": "research_notes",
             "size": 6
@@ -1289,19 +1505,11 @@
         ],
         [
           {
-            "name": "research_and_community_cta",
-            "size": 6
-          },
-          {
             "name": "key_determination_factors",
             "size": 6
           }
         ],
         [
-          {
-            "name": "key_factors_cta",
-            "size": 6
-          },
           {
             "name": "follow_up_plan",
             "size": 6
@@ -1564,6 +1772,108 @@
         [
           {
             "name": "watch",
+            "size": 6
+          },
+          {
+            "name": "project_risk_determination",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "project_risk_determination_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "probable_high_risk",
+            "size": 6
+          },
+          {
+            "name": "not_aplicable",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "unlikely",
+            "size": 6
+          },
+          {
+            "name": "reliable_mitigation_available_or_already_in_place",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "limited_scope_of_risk",
+            "size": 6
+          },
+          {
+            "name": "screening_notes_description",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "specific_risk_notes_description",
+            "size": 6
+          },
+          {
+            "name": "research_notes_description",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "key_determination_factors_description",
+            "size": 6
+          },
+          {
+            "name": "save",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "continue",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "contextual_risk_info_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "yes",
+            "size": 6
+          },
+          {
+            "name": "no",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "more_research",
+            "size": 6
+          },
+          {
+            "name": "notes_specific_risk",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "back_to_project",
+            "size": 6
+          },
+          {
+            "name": "export_as_pdf",
             "size": 6
           }
         ]
