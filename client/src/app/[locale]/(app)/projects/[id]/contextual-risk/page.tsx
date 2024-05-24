@@ -1,9 +1,11 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { getContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
+
+import { defaultLocale } from "@/constants/navigation";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
@@ -16,13 +18,25 @@ import { Link } from "@/i18n";
 export default async function ProjectsDetailContextualRiskPage({
   params: { id },
 }: ProjectsDetailPageProps) {
-  const CATEGORIES = await getContextualRiskCategories({
-    sort: "display_order:asc",
-  });
+  let CATEGORIES;
+  let DEFAULT_CATEGORIES;
+  const locale = await getLocale();
 
-  if (!CATEGORIES?.data) return null;
+  try {
+    CATEGORIES = await getContextualRiskCategories({
+      sort: "display_order:asc",
+      locale: locale,
+    });
 
-  const [{ attributes }] = CATEGORIES?.data;
+    DEFAULT_CATEGORIES = await getContextualRiskCategories({
+      sort: "display_order:asc",
+      locale: defaultLocale,
+    });
+  } catch (error) {}
+
+  if (!DEFAULT_CATEGORIES?.data) return null;
+
+  const [{ attributes }] = CATEGORIES?.data?.length ? CATEGORIES?.data : DEFAULT_CATEGORIES?.data;
 
   const t = await getTranslations();
 

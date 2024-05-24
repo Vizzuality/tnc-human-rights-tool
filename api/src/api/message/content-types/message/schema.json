@@ -176,7 +176,7 @@
         }
       }
     },
-    "notes_cta": {
+    "screening_notes_description": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -192,7 +192,7 @@
         }
       }
     },
-    "indicated_risk_cta": {
+    "specific_risk_notes_description": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -208,7 +208,7 @@
         }
       }
     },
-    "research_and_community_cta": {
+    "research_notes_description": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -224,7 +224,7 @@
         }
       }
     },
-    "key_factors_cta": {
+    "key_determination_factors_description": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -625,6 +625,134 @@
       "type": "string"
     },
     "watch": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "project_risk_determination": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "project_risk_determination_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "probable_high_risk": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "not_aplicable": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "unlikely": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "reliable_mitigation_available_or_already_in_place": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "limited_scope_of_risk": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "save": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "continue": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "contextual_risk_info_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
+    },
+    "yes": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "no": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "more_research": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "notes_specific_risk": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "back_to_project": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "export_as_pdf": {
       "pluginOptions": {
         "i18n": {
           "localized": true

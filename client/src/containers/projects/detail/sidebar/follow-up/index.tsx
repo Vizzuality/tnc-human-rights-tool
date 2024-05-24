@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 import { useGetLocalizedList } from "@/lib/locallizedQuery";
 
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
@@ -15,6 +17,8 @@ import { PRIORIZATIONS } from "@/constants";
 
 export default function FollowUpSidebar() {
   const { id } = useParams();
+
+  const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+id);
   const queryContextualRisksData = useGetContextualRisks({
@@ -70,7 +74,7 @@ export default function FollowUpSidebar() {
           <>
             <FollowUpSidebarItem items={CTX_ITEMS} />
             <span>
-              {priority.label} ({count})
+              {t(priority.label)} ({count})
             </span>
           </>
         ),

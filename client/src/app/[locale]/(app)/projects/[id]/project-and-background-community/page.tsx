@@ -1,9 +1,11 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import { getPcbCategories } from "@/types/generated/pcb-category";
 
 import { ProjectsDetailPageProps } from "@/app/[locale]/(app)/projects/[id]/page";
+
+import { defaultLocale } from "@/constants/navigation";
 
 import ProjectsDetailContent from "@/containers/projects/detail/content";
 import ProjectsDetailTitle from "@/containers/projects/detail/title";
@@ -16,14 +18,27 @@ import { Link } from "@/i18n";
 export default async function ProjectsDetailResearchOverviewPage({
   params: { id },
 }: ProjectsDetailPageProps) {
+  let CATEGORIES;
+  let DEFAULT_CATEGORIES;
+  const locale = await getLocale();
+
+  try {
+    CATEGORIES = await getPcbCategories({
+      sort: "display_order:asc",
+      locale: locale,
+    });
+
+    DEFAULT_CATEGORIES = await getPcbCategories({
+      sort: "display_order:asc",
+      locale: defaultLocale,
+    });
+  } catch (error) {}
+
+  if (!DEFAULT_CATEGORIES?.data) return null;
+
+  const [{ attributes }] = CATEGORIES?.data?.length ? CATEGORIES?.data : DEFAULT_CATEGORIES?.data;
+
   const t = await getTranslations();
-  const CATEGORIES = await getPcbCategories({
-    sort: "display_order:asc",
-  });
-
-  if (!CATEGORIES?.data) return null;
-
-  const [{ attributes }] = CATEGORIES.data;
 
   return (
     <ProjectsDetailContent>

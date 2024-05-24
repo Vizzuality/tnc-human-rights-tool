@@ -4,6 +4,8 @@ import { useMemo } from "react";
 
 import { useParams } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 import { useGetLocalizedList } from "@/lib/locallizedQuery";
 
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
@@ -17,6 +19,7 @@ import { PRIORIZATIONS } from "@/constants";
 
 export default function ReportsProjectId() {
   const { id } = useParams();
+  const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+id);
 
@@ -102,7 +105,7 @@ export default function ReportsProjectId() {
                   key={priorization.value}
                   className="break-after-page pb-8 last-of-type:break-after-avoid last-of-type:pb-0"
                 >
-                  <h2>{priorization.label}</h2>
+                  <h2>{t(priorization.label)}</h2>
                   <div className="mt-8 divide-y">
                     {GROUPS[priorization.value]?.map((item) => {
                       if (!item?.id) return null;

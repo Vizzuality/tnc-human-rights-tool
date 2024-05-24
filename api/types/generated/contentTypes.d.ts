@@ -1007,7 +1007,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    notes_cta: Attribute.String &
+    screening_notes_description: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1019,7 +1019,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    indicated_risk_cta: Attribute.String &
+    specific_risk_notes_description: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1031,7 +1031,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    research_and_community_cta: Attribute.String &
+    research_notes_description: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1043,7 +1043,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    key_factors_cta: Attribute.String &
+    key_determination_factors_description: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -1344,6 +1344,102 @@ export interface ApiMessageMessage extends Schema.CollectionType {
         };
       }>;
     watch: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    project_risk_determination: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    project_risk_determination_description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    probable_high_risk: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    not_aplicable: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    unlikely: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    reliable_mitigation_available_or_already_in_place: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    limited_scope_of_risk: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    save: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    continue: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    contextual_risk_info_description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    yes: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    no: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    more_research: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    notes_specific_risk: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    back_to_project: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    export_as_pdf: Attribute.String &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
