@@ -1,12 +1,11 @@
+import slugify from "slugify";
+
 export default {
   async beforeCreate(event) {
     const { title, locale } = event.params.data;
 
     if (title && locale === 'en') {
-      event.params.data.slug = title
-        .toLowerCase()
-        .replace(/ /g, '-')
-        .replace(/[^\w-]+/g, '');
+      event.params.data.slug = slugify(title, { lower: true, strict: true, trim: true });
     }
   },
 
@@ -17,10 +16,7 @@ export default {
     });
 
     if (title && existingEntity.locale && existingEntity.locale === 'en') {
-      event.params.data.slug = title
-        .toLowerCase()
-        .replace(/ /g, '-')
-        .replace(/[^\w-]+/g, '');
+      event.params.data.slug = slugify(title, { lower: true, strict: true, trim: true });
     }
   }
 }

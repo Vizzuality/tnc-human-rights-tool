@@ -3,6 +3,7 @@
  */
 
 import { factories } from '@strapi/strapi'
+import slugify from 'slugify';
 
 export default factories.createCoreController('api::pcb-category.pcb-category', () => ({
   async generateSlugs(ctx) {
@@ -13,10 +14,7 @@ export default factories.createCoreController('api::pcb-category.pcb-category', 
 
       for (const category of pcbCategories) {
         if (category.title) {
-          const slug = category.title
-            .toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
+          const slug = slugify(category.title, { lower: true, strict: true, trim: true });
 
           await strapi.db.query('api::pcb-category.pcb-category').update({
             where: { id: category.id },

@@ -3,6 +3,7 @@
  */
 
 import { factories } from '@strapi/strapi'
+import slugify from 'slugify';
 
 export default factories.createCoreController('api::contextual-risk-category.contextual-risk-category', () => ({
   async generateSlugs(ctx) {
@@ -13,10 +14,7 @@ export default factories.createCoreController('api::contextual-risk-category.con
 
       for (const category of riskCategories) {
         if (category.title) {
-          const slug = category.title
-            .toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
+          const slug = slugify(category.title, { lower: true, strict: true, trim: true });
 
           // Update the category with the new slug
           await strapi.db.query('api::contextual-risk-category.contextual-risk-category').update({

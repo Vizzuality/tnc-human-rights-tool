@@ -3,6 +3,7 @@
  */
 
 import { factories } from '@strapi/strapi'
+import slugify from 'slugify';
 
 export default factories.createCoreController('api::pcb.pcb', () => ({
   async generateSlugs(ctx) {
@@ -13,10 +14,8 @@ export default factories.createCoreController('api::pcb.pcb', () => ({
 
       for (const pcb of pcbs) {
         if (pcb.title) {
-          const slug = pcb.title
-            .toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
+
+          const slug = slugify(pcb.title, { lower: true, strict: true, trim: true });
 
           // Update the PCB with the new slug
           await strapi.db.query('api::pcb.pcb').update({
