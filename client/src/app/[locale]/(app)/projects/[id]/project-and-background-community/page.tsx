@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { getTranslations } from "next-intl/server";
 
@@ -12,6 +10,8 @@ import ProjectsDetailTitle from "@/containers/projects/detail/title";
 
 import { Button } from "@/components/ui/button";
 import Markdown from "@/components/ui/markdown";
+
+import { Link } from "@/i18n";
 
 export default async function ProjectsDetailResearchOverviewPage({
   params: { id },

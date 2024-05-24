@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { CellContext } from "@tanstack/react-table";
@@ -21,6 +19,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+
+import { Link } from "@/i18n";
 
 export default function ProjectsActions({
   row,

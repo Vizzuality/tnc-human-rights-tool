@@ -1,12 +1,14 @@
 import { Metadata } from "next";
 
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
-import { useTranslations } from "next-intl";
+import { Locale } from "@/constants/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Markdown from "@/components/ui/markdown";
+
+import { Link } from "@/i18n";
 
 export type ProjectsDetailPageProps = {
   params: {
@@ -23,6 +25,7 @@ export async function generateMetadata({ params }: ProjectsDetailPageProps): Pro
 
 export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
 
   return (
     <div className="grid grid-cols-12 gap-y-10 lg:gap-20">
@@ -38,6 +41,7 @@ export default function ProjectsDetailPage({ params }: ProjectsDetailPageProps) 
           <CardContent className="prose w-full">
             <p>{t("research_phase_description")}</p>
             <Link
+              locale={locale}
               href={`/projects/${params.id}/project-and-background-community`}
               className="block"
             >

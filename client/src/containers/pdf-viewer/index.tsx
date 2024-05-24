@@ -2,7 +2,6 @@
 
 import { PropsWithChildren, useState } from "react";
 
-import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 
 import { ShadowIcon } from "@radix-ui/react-icons";
@@ -13,6 +12,8 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+
+import { Link } from "@/i18n";
 
 interface PDFViewerProps extends PropsWithChildren {
   filename: string;

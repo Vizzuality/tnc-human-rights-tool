@@ -2,9 +2,6 @@
 
 import { useForm } from "react-hook-form";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { z } from "zod";
@@ -25,6 +22,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+
+import { Link, useRouter } from "@/i18n";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Please enter your project name" }),

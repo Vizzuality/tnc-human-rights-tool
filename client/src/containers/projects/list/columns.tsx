@@ -2,8 +2,6 @@
 
 import { useMemo } from "react";
 
-import Link from "next/link";
-
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { CellContext, Column, ColumnDef } from "@tanstack/react-table";
 import { formatDistance } from "date-fns";
@@ -22,6 +20,8 @@ import { LOCALES } from "@/constants/navigation";
 import ProjectsActions from "@/containers/projects/list/actions";
 
 import { Button } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 export function Header<T>({ column, tid }: { column: Column<T, unknown>; tid: string }) {
   const t = useTranslations();

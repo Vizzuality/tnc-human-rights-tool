@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { useTranslations } from "next-intl";
 
 import Wrapper from "@/containers/wrapper";
@@ -9,6 +7,8 @@ import Wrapper from "@/containers/wrapper";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Markdown from "@/components/ui/markdown";
+
+import { Link } from "@/i18n";
 
 export default function Home() {
   const t = useTranslations();

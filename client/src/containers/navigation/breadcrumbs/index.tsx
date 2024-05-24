@@ -2,7 +2,6 @@
 
 import { Fragment, useMemo } from "react";
 
-import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { useTranslations } from "next-intl";
@@ -14,6 +13,7 @@ import { useGetContextualRiskCategories } from "@/types/generated/contextual-ris
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 import { useGetProjectsId } from "@/types/generated/project";
 
+import { Link } from "@/i18n";
 import { usePathname } from "@/i18n";
 
 export const BREADCRUMBS_DICTIONARY: Record<string, string> = {

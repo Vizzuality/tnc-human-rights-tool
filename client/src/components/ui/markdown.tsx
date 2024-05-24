@@ -1,10 +1,10 @@
 import ReactMarkdown from "react-markdown";
 
-import Link from "next/link";
-
 import slugify from "slugify";
 
 import { cn } from "@/lib/utils";
+
+import { Link } from "@/i18n";
 
 export default function Markdown({
   children,

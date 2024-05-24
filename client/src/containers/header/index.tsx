@@ -1,16 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
-import { locales } from "@/constants/navigation";
+import { Locale } from "@/constants/navigation";
 
 import Wrapper from "@/containers/wrapper";
 
@@ -22,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { useRouter, usePathname } from "@/i18n";
+import { useRouter, usePathname, Link } from "@/i18n";
 
 import { AXIOS_SIGNOUT } from "@/services/api";
 
@@ -30,11 +29,12 @@ export default function Header() {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const t = useTranslations();
+  const locale = useLocale() as Locale;
 
   const pathname = usePathname();
   const router = useRouter();
 
-  const onLanguageChange = (locale: (typeof locales)[number]) => {
+  const onLanguageChange = (locale: Locale) => {
     router.push(pathname, { locale });
   };
 
@@ -47,27 +47,27 @@ export default function Header() {
     >
       <Wrapper>
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2.5">
+          <Link locale={locale} href="/" className="flex items-center space-x-2.5">
             <Image src="/images/logo.svg" alt="Logo" width={40} height={40} />
             <h1>{t("human_rights_screening_tool")}</h1>
           </Link>
 
           <nav className="flex items-center space-x-5">
             {!!session && (
-              <Link href="/projects">
+              <Link locale={locale} href="/projects">
                 <Button variant="link">{t("my_projects")}</Button>
               </Link>
             )}
 
-            <Link href="/glossary">
+            <Link locale={locale} href="/glossary">
               <Button variant="link">{t("glossary")}</Button>
             </Link>
 
-            <Link href="/faqs">
+            <Link locale={locale} href="/faqs">
               <Button variant="link">{t("faqs")}</Button>
             </Link>
 
-            <Link href="/other-tools">
+            <Link locale={locale} href="/other-tools">
               <Button variant="link">{t("other_tools")}</Button>
             </Link>
 
@@ -99,7 +99,7 @@ export default function Header() {
             )}
 
             {!session && (
-              <Link href="/auth/signin">
+              <Link locale={locale} href="/auth/signin">
                 <Button>{t("login")}</Button>
               </Link>
             )}

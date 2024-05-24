@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 import { useFormContext } from "react-hook-form";
 
-import Link from "next/link";
-
 import { CheckIcon, ShadowIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 type FooterFormProps = {
   className?: string;

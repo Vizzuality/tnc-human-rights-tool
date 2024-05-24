@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { PlusIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 
@@ -13,6 +11,8 @@ import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+
+import { Link } from "@/i18n";
 
 export default function Projects() {
   const { data, isFetching, isFetched } = useGetProjects();

@@ -2,12 +2,18 @@
 
 import { PropsWithChildren } from "react";
 
-import Link, { LinkProps } from "next/link";
+import { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
+
+import { useLocale } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
+import { Locale } from "@/constants/navigation";
+
 import { Button, ButtonProps } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 interface TabsNavigationItemProps extends LinkProps, PropsWithChildren {
   className?: string;
@@ -23,12 +29,14 @@ export default function TabsNavigationItem({
   ...props
 }: TabsNavigationItemProps) {
   const pathname = usePathname();
+  const locale = useLocale() as Locale;
 
   const p = progress?.[slug] ?? 0;
 
   return (
     <Link
       {...props}
+      locale={locale}
       className={cn({
         "relative flex flex-col items-center space-y-1": true,
         [`${className}`]: !!className,

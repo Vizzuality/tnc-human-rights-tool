@@ -17,3 +17,5 @@ export const LOCALES = {
     dateFns: pt,
   },
 };
+
+export type Locale = (typeof locales)[number];

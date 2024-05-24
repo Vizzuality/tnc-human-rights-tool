@@ -1,11 +1,12 @@
 "use client";
-import Link from "next/link";
 
 import { useTranslations } from "next-intl";
 
 import Wrapper from "@/containers/wrapper";
 
 import { Button } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 // Error components must be Client Components
 

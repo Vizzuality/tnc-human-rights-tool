@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import { FileIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 export default function ProjectsDetailReport() {
   const { id } = useParams();
