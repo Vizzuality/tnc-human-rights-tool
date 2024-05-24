@@ -104,13 +104,15 @@ export const useGetLocalizedList = <T, E>(query: UseQueryResult<T, E>) => {
   const { data } = query as UseQueryResult<StrapiDATA, E>;
 
   if (Array.isArray(data?.data)) {
-    const LOCALE_DATA = data.data.filter((item) => {
-      return item?.attributes?.locale === locale;
-    });
+    const LOCALE_DATA =
+      data?.data?.filter((item) => {
+        return item?.attributes?.locale === locale;
+      }) ?? [];
 
-    const DEFAULT_DATA = data.data.filter((item) => {
-      return item?.attributes?.locale === defaultLocale;
-    });
+    const DEFAULT_DATA =
+      data?.data?.filter((item) => {
+        return item?.attributes?.locale === defaultLocale;
+      }) ?? [];
 
     const DATA = DEFAULT_DATA.map((item) => {
       const LOCALE_ITEM = LOCALE_DATA.find((localeItem) => {
