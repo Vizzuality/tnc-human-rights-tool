@@ -275,7 +275,8 @@
           "more_research",
           "notes_specific_risk",
           "back_to_project",
-          "export_as_pdf"
+          "export_as_pdf",
+          "download_report"
         ],
         "locales": [
           "en",
@@ -409,7 +410,8 @@
           "more_research",
           "notes_specific_risk",
           "back_to_project",
-          "export_as_pdf"
+          "export_as_pdf",
+          "download_report"
         ],
         "locales": [
           "en",
@@ -517,7 +519,8 @@
           "more_research",
           "notes_specific_risk",
           "back_to_project",
-          "export_as_pdf"
+          "export_as_pdf",
+          "download_report"
         ],
         "locales": [
           "en",

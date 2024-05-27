@@ -759,6 +759,14 @@
         }
       },
       "type": "string"
+    },
+    "download_report": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }

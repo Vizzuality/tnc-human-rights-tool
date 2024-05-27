@@ -29,11 +29,19 @@ export default function Home() {
             </CardHeader>
             <CardContent className="space-y-5">
               <Markdown>{t.raw("get_started_description")}</Markdown>
-              <Link href="/projects" className="block">
-                <Button size="lg" className="w-full">
-                  {t("get_started")}
-                </Button>
-              </Link>
+              <div className="space-y-2">
+                <Link href="/projects" className="block">
+                  <Button size="lg" className="w-full">
+                    {t("get_started")}
+                  </Button>
+                </Link>
+                <p className="text-center">or</p>
+                <a href="/hr-tool-full-en.pdf" download="Report" className="block">
+                  <Button size="lg" className="w-full" variant="outline">
+                    {t("download_report")}
+                  </Button>
+                </a>
+              </div>
             </CardContent>
           </Card>
         </div>

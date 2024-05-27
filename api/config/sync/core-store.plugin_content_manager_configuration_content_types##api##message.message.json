@@ -1322,6 +1322,20 @@
           "sortable": true
         }
       },
+      "download_report": {
+        "edit": {
+          "label": "download_report",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "download_report",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -1382,6 +1396,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "human_rights_screening_tool",
+        "my_projects",
+        "glossary"
+      ],
       "edit": [
         [
           {
@@ -1940,13 +1960,13 @@
             "name": "contextual_risk_info_description",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "download_report",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "human_rights_screening_tool",
-        "my_projects",
-        "glossary"
       ]
     }
   },

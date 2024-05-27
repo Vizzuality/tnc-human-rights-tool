@@ -7,6 +7,9 @@
       "action": "api::message.message.create"
     },
     {
+      "action": "api::message.message.createLocalization"
+    },
+    {
       "action": "api::message.message.delete"
     },
     {

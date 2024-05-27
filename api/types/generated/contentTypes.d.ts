@@ -1445,6 +1445,12 @@ export interface ApiMessageMessage extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    download_report: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
