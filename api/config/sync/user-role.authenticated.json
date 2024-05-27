@@ -4,9 +4,6 @@
   "type": "authenticated",
   "permissions": [
     {
-      "action": "api::contextual-risk-category.contextual-risk-category.createLocalization"
-    },
-    {
       "action": "api::contextual-risk-category.contextual-risk-category.find"
     },
     {
@@ -14,9 +11,6 @@
     },
     {
       "action": "api::contextual-risk-category.contextual-risk-category.generateSlugs"
-    },
-    {
-      "action": "api::contextual-risk.contextual-risk.createLocalization"
     },
     {
       "action": "api::contextual-risk.contextual-risk.find"
@@ -34,9 +28,6 @@
       "action": "api::message.message.findOne"
     },
     {
-      "action": "api::pcb-category.pcb-category.createLocalization"
-    },
-    {
       "action": "api::pcb-category.pcb-category.find"
     },
     {
@@ -44,9 +35,6 @@
     },
     {
       "action": "api::pcb-category.pcb-category.generateSlugs"
-    },
-    {
-      "action": "api::pcb.pcb.createLocalization"
     },
     {
       "action": "api::pcb.pcb.find"
