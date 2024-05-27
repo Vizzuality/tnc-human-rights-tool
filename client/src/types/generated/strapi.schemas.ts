@@ -1891,6 +1891,7 @@ export interface Message {
   notes_specific_risk?: string;
   back_to_project?: string;
   export_as_pdf?: string;
+  download_report?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2211,6 +2212,7 @@ export type MessageRequestData = {
   notes_specific_risk?: string;
   back_to_project?: string;
   export_as_pdf?: string;
+  download_report?: string;
   locale?: string;
 };
 
@@ -2312,6 +2314,7 @@ export interface MessageLocalizationRequest {
   notes_specific_risk?: string;
   back_to_project?: string;
   export_as_pdf?: string;
+  download_report?: string;
   locale: string;
 }
 
