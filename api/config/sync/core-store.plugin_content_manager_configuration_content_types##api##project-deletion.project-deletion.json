@@ -1,0 +1,229 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::project-deletion.project-deletion",
+  "value": {
+    "uid": "api::project-deletion.project-deletion",
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "id",
+      "defaultSortBy": "id",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project": {
+        "edit": {
+          "label": "project",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true,
+          "mainField": "name"
+        },
+        "list": {
+          "label": "project",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "first_warning_date": {
+        "edit": {
+          "label": "first_warning_date",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "first_warning_date",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "second_warning_date": {
+        "edit": {
+          "label": "second_warning_date",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "second_warning_date",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "deletion_date": {
+        "edit": {
+          "label": "deletion_date",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "deletion_date",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_deleted": {
+        "edit": {
+          "label": "project_deleted",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_deleted",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "user_email": {
+        "edit": {
+          "label": "user_email",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "user_email",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "project_name": {
+        "edit": {
+          "label": "project_name",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_name",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "project",
+        "first_warning_date",
+        "second_warning_date"
+      ],
+      "edit": [
+        [
+          {
+            "name": "project",
+            "size": 6
+          },
+          {
+            "name": "first_warning_date",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "second_warning_date",
+            "size": 4
+          },
+          {
+            "name": "deletion_date",
+            "size": 4
+          },
+          {
+            "name": "project_deleted",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "user_email",
+            "size": 6
+          },
+          {
+            "name": "project_name",
+            "size": 6
+          }
+        ]
+      ]
+    }
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}
