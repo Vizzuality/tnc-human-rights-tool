@@ -1,3 +1,7 @@
+import firstWarningEmailTemplate from "./templates/first-warning-template";
+import secondWarningEmailTemplate from "./templates/second-warning-template";
+import deletionWarningEmailTemplate from "./templates/deletion-warning-template";
+
 export default {
   firstWarningNotifications: {
     task: async ({ strapi }) => {
@@ -5,22 +9,24 @@ export default {
 
       const firstWarningsToBeSentToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
-          first_warning_date: today
+          first_warning_date: today,
+          project_deleted: false
         },
         populate: ['project'],
       });
 
       if(firstWarningsToBeSentToday.length)
         for (const deletion of firstWarningsToBeSentToday) {
+          const emailBody = firstWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} will be deleted in 14 days for security reasons`,
-            text: `Your project is scheduled for deletion in 14 days.`,
+            html: emailBody,
           });
         }
     },
     options: {
-      rule: "0 1 * * *",
+      rule: "10 * * * *",
     },
   },
 
@@ -30,23 +36,24 @@ export default {
 
       const secondWarningsToBeSentToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
-          second_warning_date: today
+          second_warning_date: today,
+          project_deleted: false
         },
         populate: ['project'],
       });
 
       if(secondWarningsToBeSentToday.length)
         for (const deletion of secondWarningsToBeSentToday) {
-          console.log("send second warning")
+          const emailBody = secondWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} will be deleted tomorrow for security reasons`,
-            text: `Your project is scheduled for deletion tomorrow.`,
+            html: emailBody,
           });
         }
     },
     options: {
-      rule: "0 2 * * *",
+      rule: "20 * * * *",
     },
   },
 
@@ -57,7 +64,8 @@ export default {
 
       const projectsToBeDeletedToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
-          deletion_date: today
+          deletion_date: today,
+          project_deleted: false
         },
         populate: ['project'],
       });
@@ -76,15 +84,16 @@ export default {
             },
           });
 
+          const emailBody = deletionWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} has been deleted`,
-            text: `Your project has been deleted as scheduled.`,
+            html: emailBody,
           });
         }
     },
     options: {
-      rule: "0 3 * * *",
+      rule: "30 * * * *",
     },
   },
 
@@ -102,8 +111,7 @@ export default {
           },
         });
 
-        if (!existingDeletion && project.author) {
-          console.log(project.author)
+        if (!existingDeletion && project.author && project.author.email) {
           const createdAt = new Date(project.createdAt);
           const firstWarningDate = new Date(createdAt);
           firstWarningDate.setMonth(firstWarningDate.getMonth() + 5);
@@ -130,7 +138,7 @@ export default {
       }
     },
     options: {
-      rule: "0 0 * * *",
+      rule: "0 * * * *",
     },
   },
 };
