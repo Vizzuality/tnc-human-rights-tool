@@ -2,12 +2,8 @@ const secondWarningEmailTemplate = (projectName: string) => {
   return   `<html>
                 <head>
                     <style>
-                      .email-container {
+                        .email-container {
                         width: 60%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
                         background-color: #F4F4F4;
                         margin: 4% 20% 0 20%;
                         border-radius: 4px;
@@ -17,6 +13,7 @@ const secondWarningEmailTemplate = (projectName: string) => {
 
                       .email-header {
                         border-bottom: 2px solid #16A34A;
+                        text-align: center;
                         margin-bottom: 16px;
                       }
 
@@ -27,10 +24,10 @@ const secondWarningEmailTemplate = (projectName: string) => {
                         font-weight: 700;
                       }
 
-                      @media only screen and (max-width: 700px) {
+                      @media only screen and (max-width: 1024px) {
                         .email-header {
                           font-size: 10px;
-                          text-align: center;
+
                           padding: 0 20px 0 20px;
                         }
                         .email-body {
