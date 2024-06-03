@@ -1714,6 +1714,9 @@ export interface ApiProjectDeletionProjectDeletion
     project_deleted: Attribute.Boolean & Attribute.DefaultTo<false>;
     user_email: Attribute.Email;
     project_name: Attribute.String;
+    first_warning_email_sent: Attribute.Boolean & Attribute.DefaultTo<false>;
+    second_warning_email_sent: Attribute.Boolean & Attribute.DefaultTo<false>;
+    deletion_email_sent: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

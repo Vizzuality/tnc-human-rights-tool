@@ -10,20 +10,34 @@ export default {
       const firstWarningsToBeSentToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
           first_warning_date: today,
+          first_warning_email_sent: false,
           project_deleted: false
         },
         populate: ['project'],
       });
 
-      if(firstWarningsToBeSentToday.length)
-        for (const deletion of firstWarningsToBeSentToday) {
+      if(!firstWarningsToBeSentToday.length) {
+        return;
+      }
+
+      for (const deletion of firstWarningsToBeSentToday) {
+        try {
           const emailBody = firstWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} will be deleted in 14 days for security reasons`,
             html: emailBody,
           });
+          await strapi.db.query('api::project-deletion.project-deletion').update({
+            where: { id: deletion.id },
+            data: {
+              first_warning_email_sent: true
+            },
+          });
+        } catch(error) {
+          console.log(`14 days warning email notification for project ${deletion.project.name} has not been sent`)
         }
+      }
     },
     options: {
       rule: "0 1 * * *",
@@ -37,26 +51,40 @@ export default {
       const secondWarningsToBeSentToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
           second_warning_date: today,
+          second_warning_email_sent: false,
           project_deleted: false
         },
         populate: ['project'],
       });
 
-      if(secondWarningsToBeSentToday.length)
-        for (const deletion of secondWarningsToBeSentToday) {
+      if(!secondWarningsToBeSentToday.length) {
+        return;
+      }
+
+      for (const deletion of secondWarningsToBeSentToday) {
+        try {
           const emailBody = secondWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} will be deleted tomorrow for security reasons`,
             html: emailBody,
           });
+          await strapi.db.query('api::project-deletion.project-deletion').update({
+            where: { id: deletion.id },
+            data: {
+              second_warning_email_sent: true
+            },
+          });
+        } catch(error) {
+          console.log(`1 day warning email notification for project ${deletion.project.name} has not been sent`)
         }
+
+      }
     },
     options: {
       rule: "0 2 * * *",
     },
   },
-
 
   deleteProjectOnDeletionDate: {
     task: async ({ strapi }) => {
@@ -65,17 +93,17 @@ export default {
       const projectsToBeDeletedToday = await strapi.db.query('api::project-deletion.project-deletion').findMany({
         where: {
           deletion_date: today,
+          deletion_email_sent: false,
           project_deleted: false
         },
         populate: ['project'],
       });
 
-      if (projectsToBeDeletedToday.length)
-        for (const deletion of projectsToBeDeletedToday) {
-          console.log(`Deleting project ${deletion.project.name}`)
-          await strapi.db.query('api::project.project').delete({
-            where: { id: deletion.project.id }});
-
+      if (!projectsToBeDeletedToday.length) {
+        return;
+      }
+      for (const deletion of projectsToBeDeletedToday) {
+        try {
           await strapi.db.query('api::project-deletion.project-deletion').update({
             where: { id: deletion.id },
             data: {
@@ -83,24 +111,38 @@ export default {
               project: null,
             },
           });
-
+          await strapi.db.query('api::project.project').delete({
+            where: { id: deletion.project.id }});
           const emailBody = deletionWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
             subject: `Project ${deletion.project.name} has been deleted`,
             html: emailBody,
           });
+          await strapi.db.query('api::project-deletion.project-deletion').update({
+            where: { id: deletion.id },
+            data: {
+              deletion_email_sent: true
+            },
+          });
+        } catch(error) {
+          console.log(`Deletion of project ${deletion.project.name} has not been successful`)
         }
+      }
     },
     options: {
       rule: "0 3 * * *",
     },
   },
 
-
   scheduleProjectDeletions: {
     task: async ({ strapi }) => {
       const projects = await strapi.db.query('api::project.project').findMany({
+        where: {
+          published_at: {
+            $notNull: true,
+          },
+        },
         populate: ['author'],
       });
 

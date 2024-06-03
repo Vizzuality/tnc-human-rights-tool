@@ -35,6 +35,18 @@
     },
     "project_name": {
       "type": "string"
+    },
+    "first_warning_email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "second_warning_email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "deletion_email_sent": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

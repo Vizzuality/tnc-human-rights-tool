@@ -464,6 +464,9 @@ export interface ProjectDeletion {
   project_deleted?: boolean;
   user_email?: string;
   project_name?: string;
+  first_warning_email_sent?: boolean;
+  second_warning_email_sent?: boolean;
+  deletion_email_sent?: boolean;
   createdAt?: string;
   updatedAt?: string;
   createdBy?: ProjectDeletionCreatedBy;
@@ -918,6 +921,9 @@ export type ProjectDeletionRequestData = {
   project_deleted?: boolean;
   user_email?: string;
   project_name?: string;
+  first_warning_email_sent?: boolean;
+  second_warning_email_sent?: boolean;
+  deletion_email_sent?: boolean;
 };
 
 export interface ProjectDeletionRequest {
