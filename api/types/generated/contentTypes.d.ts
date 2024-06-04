@@ -1714,6 +1714,47 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
 }
 
+export interface ApiProjectDeletionProjectDeletion
+  extends Schema.CollectionType {
+  collectionName: 'project_deletions';
+  info: {
+    singularName: 'project-deletion';
+    pluralName: 'project-deletions';
+    displayName: 'Project Deletion';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    project: Attribute.Relation<
+      'api::project-deletion.project-deletion',
+      'oneToOne',
+      'api::project.project'
+    >;
+    first_warning_date: Attribute.Date;
+    second_warning_date: Attribute.Date;
+    deletion_date: Attribute.Date;
+    project_deleted: Attribute.Boolean & Attribute.DefaultTo<false>;
+    user_email: Attribute.Email;
+    project_name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-deletion.project-deletion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-deletion.project-deletion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1737,6 +1778,7 @@ declare module '@strapi/types' {
       'api::pcb.pcb': ApiPcbPcb;
       'api::pcb-category.pcb-category': ApiPcbCategoryPcbCategory;
       'api::project.project': ApiProjectProject;
+      'api::project-deletion.project-deletion': ApiProjectDeletionProjectDeletion;
     }
   }
 }
