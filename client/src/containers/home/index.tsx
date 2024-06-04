@@ -35,7 +35,7 @@ export default function Home() {
                     {t("get_started")}
                   </Button>
                 </Link>
-                <p className="text-center">or</p>
+                <p className="text-center">{t("or")}</p>
                 <a href="/hr-tool-full-en.pdf" download="Report" className="block">
                   <Button size="lg" className="w-full" variant="outline">
                     {t("download_report")}

@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import { usePostAuthResetPassword } from "@/types/generated/users-permissions-auth";
@@ -42,6 +43,8 @@ const formSchema = z
 
 export default function ResetPassword() {
   const [success, setSuccess] = useState(false);
+
+  const t = useTranslations();
 
   const { replace } = useRouter();
   const searchParams = useSearchParams();
@@ -97,10 +100,10 @@ export default function ResetPassword() {
       <CardContent>
         {!!success && (
           <div className="prose max-w-xs">
-            <h3>Success!</h3>
+            <h3>{t("success")}</h3>
             <p>You have changed your password successfully.</p>
             <Link href="/auth/signin">
-              <Button>Sign in</Button>
+              <Button>{t("sig_in")}</Button>
             </Link>
           </div>
         )}
@@ -114,7 +117,7 @@ export default function ResetPassword() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>{t("password")}</FormLabel>
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
@@ -127,7 +130,7 @@ export default function ResetPassword() {
                   name="passwordConfirmation"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>{t("confirm_passsword")}</FormLabel>
                       <FormControl>
                         <Input type="password" {...field} />
                       </FormControl>
@@ -138,7 +141,7 @@ export default function ResetPassword() {
               </fieldset>
               <div className="space-y-3">
                 <Button className="w-full" type="submit">
-                  Reset password
+                  {t("reset_password")}
                 </Button>
               </div>
             </form>

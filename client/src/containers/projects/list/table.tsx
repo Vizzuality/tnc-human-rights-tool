@@ -8,6 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { useGetLocalizedList } from "@/lib/locallizedQuery";
 
@@ -41,6 +42,7 @@ interface ProjectsTableProps<TData, TValue> {
 }
 
 export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTableProps<TData, TValue>) {
+  const t = useTranslations();
   const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
     locale: "all",
@@ -110,7 +112,7 @@ export function ProjectsTable<TData, TValue>({ columns, data }: ProjectsTablePro
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                {t("no_results")}
               </TableCell>
             </TableRow>
           )}

@@ -74,7 +74,7 @@ export default function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="link" className="items-center space-x-1">
-                  <span>Language</span>
+                  <span>{t("language")}</span>
                   <ChevronDownIcon className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>

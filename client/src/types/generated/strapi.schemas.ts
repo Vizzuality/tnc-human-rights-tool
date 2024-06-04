@@ -1892,6 +1892,10 @@ export interface Message {
   back_to_project?: string;
   export_as_pdf?: string;
   download_report?: string;
+  or?: string;
+  language?: string;
+  no_results?: string;
+  reset_password?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2213,6 +2217,10 @@ export type MessageRequestData = {
   back_to_project?: string;
   export_as_pdf?: string;
   download_report?: string;
+  or?: string;
+  language?: string;
+  no_results?: string;
+  reset_password?: string;
   locale?: string;
 };
 
@@ -2315,6 +2323,10 @@ export interface MessageLocalizationRequest {
   back_to_project?: string;
   export_as_pdf?: string;
   download_report?: string;
+  or?: string;
+  language?: string;
+  no_results?: string;
+  reset_password?: string;
   locale: string;
 }
 

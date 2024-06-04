@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import { usePostAuthLocalRegister } from "@/types/generated/users-permissions-auth";
@@ -42,6 +43,7 @@ const formSchema = z
   });
 
 export default function Signup() {
+  const t = useTranslations();
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const signupMutation = usePostAuthLocalRegister();
@@ -103,7 +105,7 @@ export default function Signup() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>{t("name")}</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -116,7 +118,7 @@ export default function Signup() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -129,7 +131,7 @@ export default function Signup() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t("password")}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -142,7 +144,7 @@ export default function Signup() {
                 name="confirm-password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>{t("confirm_passsword")}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -153,14 +155,13 @@ export default function Signup() {
             </fieldset>
             <div className="space-y-3">
               <Button className="w-full" type="submit">
-                Sign up
+                {t("sign_up")}
               </Button>
               <p className="text-center text-sm">
-                Already have an account?{" "}
+                {t("sign_in_cta")}{" "}
                 <Link className="text-primary hover:underline" href="/auth/signin">
-                  Sign in
-                </Link>{" "}
-                instead.
+                  {t("sig_in")}
+                </Link>
               </p>
             </div>
           </form>

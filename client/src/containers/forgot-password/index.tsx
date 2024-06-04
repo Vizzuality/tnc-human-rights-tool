@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import { usePostAuthForgotPassword } from "@/types/generated/users-permissions-auth";
@@ -31,6 +32,8 @@ const formSchema = z.object({
 
 export default function ForgotPassword() {
   const [success, setSuccess] = useState(false);
+
+  const t = useTranslations();
 
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -72,7 +75,7 @@ export default function ForgotPassword() {
   return (
     <Card className="min-w-[380px]">
       <CardHeader>
-        <CardTitle>Forgot password</CardTitle>
+        <CardTitle>{t("forgot_password")}</CardTitle>
         {!!searchParams.get("error") && (
           <div className="rounded-md bg-destructive/90 p-3 text-sm text-destructive-foreground">
             {searchParams.get("error")}
@@ -82,8 +85,8 @@ export default function ForgotPassword() {
       <CardContent>
         {success && (
           <div className="prose max-w-xs">
-            <h3>Success!</h3>
-            <p>We sent you an email with instructions on how to reset your password.</p>
+            <h3>{t("success")}</h3>
+            <p>{t("reset_password_notification")}</p>
           </div>
         )}
 
@@ -96,7 +99,7 @@ export default function ForgotPassword() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t("email")}</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -107,15 +110,14 @@ export default function ForgotPassword() {
               </fieldset>
               <div className="space-y-3">
                 <Button className="w-full" type="submit">
-                  Send
+                  {t("send")}
                 </Button>
 
                 <p className="text-center text-sm">
-                  Already have an account?{" "}
+                  {t("sign_in_cta")}{" "}
                   <Link className="text-primary hover:underline" href="/auth/signin">
-                    Sign in
-                  </Link>{" "}
-                  instead.
+                    {t("sig_in")}
+                  </Link>
                 </p>
               </div>
             </form>
