@@ -35,7 +35,7 @@ export default {
             },
           });
         } catch(error) {
-          console.log(`14 days warning email notification for project ${deletion.project.name} has not been sent`)
+          strapi.log.error(`14 days warning email notification for project ${deletion.project.name} has not been sent`)
         }
       }
     },
@@ -76,7 +76,7 @@ export default {
             },
           });
         } catch(error) {
-          console.log(`1 day warning email notification for project ${deletion.project.name} has not been sent`)
+          strapi.log.error(`1 day warning email notification for project ${deletion.project.name} has not been sent`)
         }
 
       }
@@ -126,7 +126,7 @@ export default {
             },
           });
         } catch(error) {
-          console.log(`Deletion of project ${deletion.project.name} has not been successful`)
+          strapi.log.error(`Deletion of project ${deletion.project.name} has not been successful`)
         }
       }
     },
