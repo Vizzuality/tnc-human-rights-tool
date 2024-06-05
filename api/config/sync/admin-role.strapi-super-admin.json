@@ -718,7 +718,10 @@
           "deletion_date",
           "project_deleted",
           "user_email",
-          "project_name"
+          "project_name",
+          "first_warning_email_sent",
+          "second_warning_email_sent",
+          "deletion_email_sent"
         ]
       },
       "conditions": []
@@ -742,7 +745,10 @@
           "deletion_date",
           "project_deleted",
           "user_email",
-          "project_name"
+          "project_name",
+          "first_warning_email_sent",
+          "second_warning_email_sent",
+          "deletion_email_sent"
         ]
       },
       "conditions": []
@@ -759,7 +765,10 @@
           "deletion_date",
           "project_deleted",
           "user_email",
-          "project_name"
+          "project_name",
+          "first_warning_email_sent",
+          "second_warning_email_sent",
+          "deletion_email_sent"
         ]
       },
       "conditions": []
