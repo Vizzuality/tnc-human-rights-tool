@@ -2355,6 +2355,8 @@ export interface Message {
   language?: string;
   no_results?: string;
   reset_password?: string;
+  the_minimum_core_risk_determination?: string;
+  the_minimum_core_risk_determination_description?: string;
   createdAt?: string;
   updatedAt?: string;
   publishedAt?: string;
@@ -2705,6 +2707,8 @@ export type MessageRequestData = {
   language?: string;
   no_results?: string;
   reset_password?: string;
+  the_minimum_core_risk_determination?: string;
+  the_minimum_core_risk_determination_description?: string;
   locale?: string;
 };
 
@@ -2811,6 +2815,8 @@ export interface MessageLocalizationRequest {
   language?: string;
   no_results?: string;
   reset_password?: string;
+  the_minimum_core_risk_determination?: string;
+  the_minimum_core_risk_determination_description?: string;
   locale: string;
 }
 

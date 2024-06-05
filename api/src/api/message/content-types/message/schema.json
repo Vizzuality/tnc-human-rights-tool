@@ -799,6 +799,22 @@
         }
       },
       "type": "string"
+    },
+    "the_minimum_core_risk_determination": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "the_minimum_core_risk_determination_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "richtext"
     }
   }
 }
