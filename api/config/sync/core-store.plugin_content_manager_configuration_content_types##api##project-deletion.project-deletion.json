@@ -276,10 +276,11 @@
         ]
       ],
       "list": [
-        "id",
-        "project",
+        "project_name",
         "first_warning_date",
-        "second_warning_date"
+        "second_warning_date",
+        "deletion_date",
+        "project_deleted"
       ]
     }
   },

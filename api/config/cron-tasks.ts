@@ -40,7 +40,7 @@ export default {
       }
     },
     options: {
-      rule: "0 1 * * *",
+      rule: "10 * * * *",
     },
   },
 
@@ -82,7 +82,7 @@ export default {
       }
     },
     options: {
-      rule: "0 2 * * *",
+      rule: "15 * * * *",
     },
   },
 
@@ -131,7 +131,7 @@ export default {
       }
     },
     options: {
-      rule: "0 3 * * *",
+      rule: "20 * * * *",
     },
   },
 
@@ -180,7 +180,7 @@ export default {
       }
     },
     options: {
-      rule: "0 0 * * *",
+      rule: "5 * * * *",
     },
   },
 };
