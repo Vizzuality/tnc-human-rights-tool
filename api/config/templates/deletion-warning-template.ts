@@ -1,5 +1,5 @@
 const deletionWarningEmailTemplate = (projectName: string) => {
-  return `  <html>
+  return `<html>
                 <head>
                     <style>
                       .email-container {
@@ -20,14 +20,14 @@ const deletionWarningEmailTemplate = (projectName: string) => {
                       .email-body {
                         font-family: Arial, sans-serif;
                         color: #333;
-                        text-align: center;
+                        text-align: left;
+                        padding: 0px 30px 0px 30px;
                         font-weight: 700;
                       }
 
                       @media only screen and (max-width: 1024px) {
                         .email-header {
                           font-size: 10px;
-
                           padding: 0 20px 0 20px;
                         }
                         .email-body {
@@ -36,14 +36,14 @@ const deletionWarningEmailTemplate = (projectName: string) => {
                       }
                     </style>
                 </head>
-                <body>
+               <body>
                     <div class="email-container">
                         <div class="email-header">
                             <h1>Human Rights Screening Tool</h1>
                         </div>
                         <div class="email-body">
-                            <p>Dear Author,</p>
-                             <p>Your project ${projectName} has been deleted for secutity reasons!</p>
+                            <p>Dear user,</p>
+                            <p>Your project ${projectName} has been deleted as part of the tool's periodic data cleaning to keep the site secure. </p>
                         </div>
                     </div>
                 </body>
