@@ -40,7 +40,7 @@ export default {
       }
     },
     options: {
-      rule: "0 1 * * *",
+      rule: "10 * * * *",
     },
   },
 
@@ -82,7 +82,7 @@ export default {
       }
     },
     options: {
-      rule: "0 2 * * *",
+      rule: "15 * * * *",
     },
   },
 
@@ -131,7 +131,7 @@ export default {
       }
     },
     options: {
-      rule: "0 3 * * *",
+      rule: "20 * * * *",
     },
   },
 
@@ -156,8 +156,8 @@ export default {
         if (!existingDeletion && project.author && project.author.email) {
           const createdAt = new Date(project.createdAt);
           const firstWarningDate = new Date(createdAt);
-          firstWarningDate.setMonth(firstWarningDate.getMonth() + 5);
-          firstWarningDate.setDate(firstWarningDate.getDate() + 14);
+          firstWarningDate.setMonth(firstWarningDate.getMonth() + 6);
+          firstWarningDate.setDate(firstWarningDate.getDate() - 30);
 
           const secondWarningDate = new Date(createdAt);
           secondWarningDate.setMonth(secondWarningDate.getMonth() + 6);
@@ -180,7 +180,7 @@ export default {
       }
     },
     options: {
-      rule: "0 0 * * *",
+      rule: "5 * * * *",
     },
   },
 };
