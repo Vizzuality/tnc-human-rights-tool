@@ -25,7 +25,7 @@ export default {
           const emailBody = firstWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
-            subject: `Project ${deletion.project.name} will be deleted in 14 days for security reasons`,
+            subject: `Project ${deletion.project.name} data will be deleted in 30 days`,
             html: emailBody,
           });
           await strapi.db.query('api::project-deletion.project-deletion').update({
@@ -35,12 +35,12 @@ export default {
             },
           });
         } catch(error) {
-          strapi.log.error(`14 days warning email notification for project ${deletion.project.name} has not been sent`)
+          strapi.log.error(`30 days warning email notification for project ${deletion.project.name} has not been sent`)
         }
       }
     },
     options: {
-      rule: "10 * * * *",
+      rule: "0 1 * * *",
     },
   },
 
@@ -66,7 +66,7 @@ export default {
           const emailBody = secondWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
-            subject: `Project ${deletion.project.name} will be deleted tomorrow for security reasons`,
+            subject: `Project ${deletion.project.name} data will be deleted in 1 day`,
             html: emailBody,
           });
           await strapi.db.query('api::project-deletion.project-deletion').update({
@@ -82,7 +82,7 @@ export default {
       }
     },
     options: {
-      rule: "15 * * * *",
+      rule: "0 2 * * *",
     },
   },
 
@@ -116,7 +116,7 @@ export default {
           const emailBody = deletionWarningEmailTemplate(deletion.project.name)
           await strapi.plugins['email'].services.email.send({
             to: deletion.user_email,
-            subject: `Project ${deletion.project.name} has been deleted`,
+            subject: `Project ${deletion.project.name} data has been deleted`,
             html: emailBody,
           });
           await strapi.db.query('api::project-deletion.project-deletion').update({
@@ -131,7 +131,7 @@ export default {
       }
     },
     options: {
-      rule: "20 * * * *",
+      rule: "0 3 * * *",
     },
   },
 
@@ -180,7 +180,7 @@ export default {
       }
     },
     options: {
-      rule: "5 * * * *",
+      rule: "0 0 * * *",
     },
   },
 };
