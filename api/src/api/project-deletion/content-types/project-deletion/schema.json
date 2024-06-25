@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_deletions",
+  "info": {
+    "singularName": "project-deletion",
+    "pluralName": "project-deletions",
+    "displayName": "Project Deletion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "project": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project.project"
+    },
+    "first_warning_date": {
+      "type": "date"
+    },
+    "second_warning_date": {
+      "type": "date"
+    },
+    "deletion_date": {
+      "type": "date"
+    },
+    "project_deleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "user_email": {
+      "type": "email"
+    },
+    "project_name": {
+      "type": "string"
+    },
+    "first_warning_email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "second_warning_email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "deletion_email_sent": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

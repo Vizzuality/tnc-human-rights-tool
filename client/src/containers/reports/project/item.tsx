@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 
+import { useTranslations } from "next-intl";
+
 import { useGetProjectsId } from "@/types/generated/project";
 import { ContextualRiskListResponseDataItem } from "@/types/generated/strapi.schemas";
 import { Risks } from "@/types/project";
@@ -10,6 +12,7 @@ import { Label } from "@/components/ui/label";
 
 export default function ReportsProjectIdItem(props: ContextualRiskListResponseDataItem) {
   const { id: projectId } = useParams();
+  const t = useTranslations();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
   const slug = props?.attributes?.contextual_risk_category?.data?.attributes?.slug ?? "";
@@ -28,33 +31,33 @@ export default function ReportsProjectIdItem(props: ContextualRiskListResponseDa
 
         {RISK.contextual_risk !== "more-research" && (
           <>
-            <Label>Contextual Risk</Label>
+            <Label>{t("contextual_risk")}</Label>
             <p>{RISK.contextual_notes}</p>
           </>
         )}
 
         {RISK.contextual_risk !== "more-research" && (
           <>
-            <Label>Project Risk</Label>
+            <Label>{t("project_risk")}</Label>
             <p>{RISK.proyect_risk_notes}</p>
           </>
         )}
 
         {RISK.contextual_risk !== "more-research" && (
           <>
-            <Label>Research</Label>
+            <Label>{t("research")}</Label>
             <p>{RISK.proyect_risk_research_notes}</p>
           </>
         )}
 
         {RISK.contextual_risk !== "more-research" && (
           <>
-            <Label>Project Risk Determination factors</Label>
+            <Label>{t("project_risk_determination_factors")}</Label>
             <p>{RISK.proyect_risk_key_determination_factors}</p>
           </>
         )}
 
-        <Label>Follow up plan</Label>
+        <Label>{t("follow_up_plan")}</Label>
         <p>{RISK.follow_up_notes}</p>
       </div>
     </div>

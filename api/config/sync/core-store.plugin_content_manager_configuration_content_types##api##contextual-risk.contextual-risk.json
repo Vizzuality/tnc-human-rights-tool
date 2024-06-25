@@ -77,6 +77,34 @@
           "sortable": true
         }
       },
+      "project_risk_description": {
+        "edit": {
+          "label": "project_risk_description",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "project_risk_description",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "slug": {
+        "edit": {
+          "label": "slug",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "slug",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -137,6 +165,12 @@
       }
     },
     "layouts": {
+      "list": [
+        "id",
+        "title",
+        "display_order",
+        "contextual_risk_category"
+      ],
       "edit": [
         [
           {
@@ -161,13 +195,19 @@
             "name": "description",
             "size": 12
           }
+        ],
+        [
+          {
+            "name": "project_risk_description",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "slug",
+            "size": 6
+          }
         ]
-      ],
-      "list": [
-        "id",
-        "title",
-        "display_order",
-        "contextual_risk_category"
       ]
     }
   },

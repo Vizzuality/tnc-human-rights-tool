@@ -1,26 +1,25 @@
 "use client";
-import { PropsWithChildren, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useForm } from "react-hook-form";
-import Markdown from "react-markdown";
 
 import { useParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { ZodTypeAny, z } from "zod";
 
-import {
-  useGetContextualRiskCategories,
-  useGetContextualRiskCategoriesId,
-} from "@/types/generated/contextual-risk-category";
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
+import { useGetContextualRisks } from "@/types/generated/contextual-risk";
+import { useGetContextualRiskCategories } from "@/types/generated/contextual-risk-category";
 import {
   getGetProjectsIdQueryKey,
   useGetProjectsId,
   usePutProjectsId,
 } from "@/types/generated/project";
-import { ContextualRiskListResponse } from "@/types/generated/strapi.schemas";
 
 import FooterForm from "@/containers/projects/detail/forms/common/footer";
 
@@ -33,39 +32,52 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Markdown from "@/components/ui/markdown";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-
-export interface ContextualRiskFormProps extends PropsWithChildren {
-  items: ContextualRiskListResponse;
-}
 
 const RADIO_OPTIONS = [
   {
     value: "yes",
-    label: "Yes",
+    label: "yes",
   },
   {
     value: "no",
-    label: "No",
+    label: "no",
   },
   {
     value: "more-research",
-    label: "More Research",
+    label: "more_research",
   },
 ];
 
-export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
-  const { id: projectId, categoryId } = useParams();
+export default function ContextualRiskForm() {
+  const { id: projectId, categorySlug = "" } = useParams();
 
-  const { data: categoriesData } = useGetContextualRiskCategories({
+  const t = useTranslations();
+
+  const queryContextualRiskCategories = useGetContextualRiskCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: contextualRiskCategoriesData } = useGetLocalizedList(queryContextualRiskCategories);
+
+  const queryContextualRisks = useGetContextualRisks({
+    filters: {
+      contextual_risk_category: {
+        slug: categorySlug,
+      },
+    },
+    populate: "*",
+    locale: "all",
+    "pagination[limit]": 300,
+  });
+
+  const { data: itemsData } = useGetLocalizedList(queryContextualRisks);
 
   const queryClient = useQueryClient();
 
   const { data: projectIdData } = useGetProjectsId(+projectId);
-  const { data: categoryIdData } = useGetContextualRiskCategoriesId(+categoryId);
 
   const putProjectMutation = usePutProjectsId({
     mutation: {
@@ -75,39 +87,40 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
     },
   });
 
-  const categorySlug = categoryIdData?.data?.attributes?.slug ?? "";
   const defaultValuesCategory = (projectIdData?.data?.attributes?.risks || {}) as Record<
     string,
     Record<string, { contextual_risk: string }>
   >;
 
   const nextCategory = useMemo(() => {
-    const i = categoriesData?.data?.findIndex((c) => c.id === +categoryId);
+    const i = contextualRiskCategoriesData?.data?.findIndex(
+      (c) => c.attributes?.slug === categorySlug,
+    );
 
-    if (!categoryId || i === undefined) {
+    if (!categorySlug || i === undefined) {
       return {
         href: `/projects/${projectId}/contextual-risk`,
-        label: "Contextual Risk",
+        label: t("contextual_risk"),
       };
     }
 
-    const n = categoriesData?.data?.[i + 1];
+    const n = contextualRiskCategoriesData?.data?.[i + 1];
 
     if (!n) {
       return {
         href: `/projects/${projectId}/project-risk`,
-        label: "Proyect Risk",
+        label: t("project_risk"),
       };
     }
 
     return {
-      href: `/projects/${projectId}/contextual-risk/${n.id}`,
+      href: `/projects/${projectId}/contextual-risk/${n.attributes?.slug}`,
       label: n.attributes?.title ?? "",
     };
-  }, [categoriesData, categoryId, projectId]);
+  }, [t, contextualRiskCategoriesData, categorySlug, projectId]);
 
   const formSchema = z.object({
-    ...items?.data?.reduce(
+    ...itemsData?.data?.reduce(
       (acc, { id }) => {
         if (!id) {
           return acc;
@@ -136,7 +149,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValuesCategory[categorySlug],
+    defaultValues: defaultValuesCategory[`${categorySlug}`],
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -167,7 +180,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                 description: projectIdData.data.attributes.description,
                 risks: {
                   ...defaultValuesCategory,
-                  [categorySlug]: parsedValues,
+                  [`${categorySlug}`]: parsedValues,
                 },
               },
             },
@@ -188,7 +201,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-10 border-t border-gray-100 pt-5"
       >
-        {items?.data
+        {itemsData?.data
           ?.sort((a, b) => {
             if (a?.attributes?.display_order && b?.attributes?.display_order) {
               return +a.attributes.display_order - +b.attributes.display_order;
@@ -219,34 +232,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                         </DialogTrigger>
 
                         <DialogContent className="max-h-[90svh] overflow-auto">
-                          <div className="prose">
-                            <h2>Any, Multiple, Frequent, and Pervasive</h2>
-                            <p>
-                              These terms are used, not interchangeably, to calibrate frequency or
-                              persistence of incidents. They each have a slightly different meaning:
-                            </p>
-                            <ul>
-                              <li>
-                                <strong>any:</strong> at least one incident
-                              </li>
-                              <li>
-                                <strong>multiple:</strong> two or more incidents
-                              </li>
-                              <li>
-                                <strong>frequent:</strong> more than two incidents, and somewhat
-                                geographically dependent — three incidents in a small community
-                                might be deemed “frequent” rather than merely “multiple”
-                              </li>
-                              <li>
-                                <strong>pervasive:</strong> high frequency over both time and
-                                geographic scope
-                              </li>
-                            </ul>
-                            <blockquote>
-                              NOTE: Using “frequent” and “pervasive” with strictest rigor will help
-                              teams prioritize.
-                            </blockquote>
-                          </div>
+                          <Markdown>{t.raw("contextual_risk_info_description")}</Markdown>
                         </DialogContent>
                       </Dialog>
                     </FormLabel>
@@ -272,7 +258,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                                 <RadioGroupItem {...field} value={value} />
                               </FormControl>
                               <FormLabel className="cursor-pointer pl-2 font-normal">
-                                {label}
+                                {t(label)}
                               </FormLabel>
                             </div>
                           </FormItem>
@@ -286,7 +272,7 @@ export default function ContextualRiskForm({ items }: ContextualRiskFormProps) {
                         name={`${id}`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Notes/Specific Risk</FormLabel>
+                            <FormLabel>{t("notes_specific_risk")}</FormLabel>
                             <FormControl>
                               <Textarea
                                 rows={5}

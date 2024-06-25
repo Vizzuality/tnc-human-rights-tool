@@ -1,8 +1,7 @@
-import Link from "next/link";
-
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { CellContext } from "@tanstack/react-table";
+import { useTranslations } from "next-intl";
 
 import { useDeleteProjectsId } from "@/types/generated/project";
 import { ProjectListResponseDataItem } from "@/types/generated/strapi.schemas";
@@ -21,11 +20,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
+import { Link } from "@/i18n";
+
 export default function ProjectsActions({
   row,
 }: CellContext<ProjectListResponseDataItem, unknown>) {
   const deleteProjectsIdMutation = useDeleteProjectsId();
   const queryClient = useQueryClient();
+  const t = useTranslations();
 
   const handleDelete = () => {
     if (!row.original.id) {
@@ -56,7 +58,7 @@ export default function ProjectsActions({
         </TooltipTrigger>
 
         <TooltipContent sideOffset={4} alignOffset={0}>
-          Edit project
+          {t("edit_project")}
         </TooltipContent>
       </Tooltip>
 
@@ -71,19 +73,19 @@ export default function ProjectsActions({
           </TooltipTrigger>
 
           <TooltipContent side="top" sideOffset={4} align="center">
-            Delete project
+            {t("delete_project")}
           </TooltipContent>
 
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>{t("delete_project_alert_title")}</AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your project
+                {t("delete_project_alert_description")}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
+              <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDelete}>{t("delete")}</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

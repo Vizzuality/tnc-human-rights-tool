@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 
 import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+
+  const t = useTranslations();
 
   const handleScroll = () => {
     const { scrollTop } = window.document.scrollingElement || window.document.body;
@@ -40,7 +43,7 @@ export default function BackToTop() {
     >
       <button className="pointer-events-auto flex space-x-2 py-5" onClick={handleBackToTop}>
         <ArrowUpIcon className="h-6 w-6" />
-        <span>Back to top</span>
+        <span>{t("back_to_top")}</span>
       </button>
     </div>
   );

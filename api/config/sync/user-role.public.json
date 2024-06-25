@@ -4,6 +4,24 @@
   "type": "public",
   "permissions": [
     {
+      "action": "api::message.message.create"
+    },
+    {
+      "action": "api::message.message.createLocalization"
+    },
+    {
+      "action": "api::message.message.delete"
+    },
+    {
+      "action": "api::message.message.find"
+    },
+    {
+      "action": "api::message.message.findOne"
+    },
+    {
+      "action": "api::message.message.update"
+    },
+    {
       "action": "plugin::users-permissions.auth.callback"
     },
     {

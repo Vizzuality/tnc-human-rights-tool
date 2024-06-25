@@ -2,17 +2,19 @@
 
 import { PropsWithChildren, useState } from "react";
 
-import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 
 import { ShadowIcon } from "@radix-ui/react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+
+import { Link } from "@/i18n";
 
 interface PDFViewerProps extends PropsWithChildren {
   filename: string;
@@ -72,6 +74,7 @@ const useWebshotMutation = () => {
 export default function PDFViewer({ children, filename }: PDFViewerProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams();
+  const t = useTranslations();
   const searchParams = useSearchParams();
   const format = searchParams.get("format");
 
@@ -106,7 +109,7 @@ export default function PDFViewer({ children, filename }: PDFViewerProps) {
       {format !== "pdf" && (
         <header className="mb-10 flex w-[210mm] items-center justify-between">
           <Link className="hover:text-primary hover:underline" href={`/projects/${id}`}>
-            {"<"} Back to project
+            {"<"} {t("back_to_project")}
           </Link>
 
           <Button className="relative" size="lg" onClick={handleExportAsPdf}>
@@ -116,7 +119,9 @@ export default function PDFViewer({ children, filename }: PDFViewerProps) {
               </span>
             ) : null}
 
-            <span className={cn(isSubmitting ? "opacity-20" : "opacity-100")}>Export as pdf</span>
+            <span className={cn(isSubmitting ? "opacity-20" : "opacity-100")}>
+              {t("export_as_pdf")}
+            </span>
           </Button>
         </header>
       )}

@@ -26,6 +26,30 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  slugify: {
+    enabled: true,
+
+    config: {
+      contentTypes: {
+        'pcb': {
+          field: 'slug',
+          references: 'title',
+        },
+        'pcb-category': {
+          field: 'slug',
+          references: 'title',
+        },
+        'contextual-risk': {
+          field: 'slug',
+          references: 'title',
+        },
+        'contextual-risk-category': {
+          field: 'slug',
+          references: 'title',
+        },
+      }
+    }
+  },
   documentation: {
     config: {
       "x-strapi-config": {

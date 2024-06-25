@@ -2,11 +2,11 @@
 
 import { useForm } from "react-hook-form";
 
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -21,12 +21,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { Link } from "@/i18n";
+
 const formSchema = z.object({
   email: z.string().email({ message: "Please enter your email address" }),
   password: z.string().nonempty({ message: "Please enter your password" }),
 });
 
 export default function Signin() {
+  const t = useTranslations();
   const searchParams = useSearchParams();
 
   // 1. Define your form.
@@ -68,7 +71,7 @@ export default function Signin() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>{t("username")}</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -81,7 +84,7 @@ export default function Signin() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t("password")}</FormLabel>
                     <FormControl>
                       <Input type="password" {...field} />
                     </FormControl>
@@ -93,19 +96,18 @@ export default function Signin() {
 
             <div className="space-y-3">
               <Button className="w-full" type="submit">
-                Sign in
+                {t("sig_in")}
               </Button>
               <p className="text-center text-sm">
-                {"Don't"} have an account?{" "}
+                {t("sign_up_cta")}{" "}
                 <Link className="text-primary hover:underline" href="/auth/signup">
-                  Sign up
-                </Link>{" "}
-                instead.
+                  {t("sign_up")}
+                </Link>
               </p>
               <p className="text-center text-sm">
-                Forgot you password?{" "}
+                {t("forgot_password_cta")}{" "}
                 <Link className="text-primary hover:underline" href="/auth/forgot-password">
-                  Reset password
+                  {t("reset_password")}
                 </Link>
               </p>
             </div>

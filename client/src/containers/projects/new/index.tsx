@@ -2,10 +2,8 @@
 
 import { useForm } from "react-hook-form";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { z } from "zod";
 
 import { usePostProjects } from "@/types/generated/project";
@@ -25,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 
+import { Link, useRouter } from "@/i18n";
+
 const formSchema = z.object({
   name: z.string().min(1, { message: "Please enter your project name" }),
   description: z.string().min(5, { message: "Description must contain at least 5 characters" }),
@@ -36,6 +36,8 @@ export default function ProjectsNew() {
   const postProjectMutation = usePostProjects();
 
   const { toast } = useToast();
+
+  const t = useTranslations();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -77,7 +79,7 @@ export default function ProjectsNew() {
   return (
     <Wrapper>
       <div className="max-w-6xl space-y-5">
-        <h1 className="text-4xl">New Project</h1>
+        <h1 className="text-4xl">{t("new_project")}</h1>
 
         <div className="grid grid-cols-12">
           <div className="col-span-6">
@@ -89,7 +91,7 @@ export default function ProjectsNew() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>{t("name")}</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -102,7 +104,7 @@ export default function ProjectsNew() {
                     name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>{t("description")}</FormLabel>
                         <FormControl>
                           <Textarea {...field} rows={5} />
                         </FormControl>
@@ -115,10 +117,10 @@ export default function ProjectsNew() {
                 <div className="flex space-x-2">
                   <Link href="/projects">
                     <Button type="button" variant="secondary">
-                      Cancel
+                      {t("cancel")}
                     </Button>
                   </Link>
-                  <Button type="submit">Create</Button>
+                  <Button type="submit">{t("create")}</Button>
                 </div>
               </form>
             </Form>

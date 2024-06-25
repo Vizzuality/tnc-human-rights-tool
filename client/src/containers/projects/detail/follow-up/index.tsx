@@ -4,6 +4,8 @@ import { useMemo } from "react";
 
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetContextualRisks } from "@/types/generated/contextual-risk";
 import { useGetProjectsId } from "@/types/generated/project";
 import { Risks } from "@/types/project";
@@ -15,11 +17,14 @@ export default function ProjectsDetailFollowUpIdPriorization() {
 
   const { data: projectIdData } = useGetProjectsId(+id);
 
-  const { data: contextualRisksData } = useGetContextualRisks({
+  const queryContextualRisksData = useGetContextualRisks({
     populate: "*",
-    "pagination[limit]": 100,
     sort: "contextual_risk_category.display_order:asc,display_order:asc",
+    locale: "all",
+    "pagination[limit]": 300,
   });
+
+  const { data: contextualRisksData } = useGetLocalizedList(queryContextualRisksData);
 
   const ITEMS = useMemo(() => {
     const RISKS = (projectIdData?.data?.attributes?.risks ?? {}) as Risks;

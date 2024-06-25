@@ -1,6 +1,8 @@
 "use client";
 import { useParams } from "next/navigation";
 
+import { useGetLocalizedList } from "@/lib/locallizedQuery";
+
 import { useGetPcbCategories } from "@/types/generated/pcb-category";
 
 import NavigationSidebar, { NavigationSidebarProps } from "@/containers/navigation/sidebar";
@@ -9,9 +11,11 @@ import PCBSidebarItem from "@/containers/projects/detail/sidebar/pcb/item";
 export default function PcbSidebar() {
   const { id } = useParams();
 
-  const { data: pcbCategoriesData } = useGetPcbCategories({
+  const queryPcbCategories = useGetPcbCategories({
     sort: "display_order:asc",
+    locale: "all",
   });
+  const { data: pcbCategoriesData } = useGetLocalizedList(queryPcbCategories);
 
   const items = [
     {
@@ -27,13 +31,13 @@ export default function PcbSidebar() {
 
         return 0;
       })
-      ?.map(({ id: categoryId, attributes }) => {
+      ?.map(({ attributes }) => {
         return {
-          href: `/projects/${id}/project-and-background-community/${categoryId}`,
+          href: `/projects/${id}/project-and-background-community/${attributes?.slug}`,
           label: attributes?.title ?? "",
           children: (
             <>
-              {typeof categoryId !== "undefined" && <PCBSidebarItem categoryId={categoryId} />}
+              {typeof attributes?.slug !== "undefined" && <PCBSidebarItem {...attributes} />}
 
               <span>{attributes?.title}</span>
             </>

@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from "react";
 
 import { useFormContext } from "react-hook-form";
 
-import Link from "next/link";
-
 import { CheckIcon, ShadowIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
+
+import { Link } from "@/i18n";
 
 type FooterFormProps = {
   className?: string;
@@ -21,6 +22,7 @@ type FooterFormProps = {
 };
 
 export default function FooterForm({ className = "", next }: FooterFormProps) {
+  const t = useTranslations();
   const { formState } = useFormContext();
   const { isSubmitting, isSubmitSuccessful } = formState;
 
@@ -59,7 +61,9 @@ export default function FooterForm({ className = "", next }: FooterFormProps) {
             <CheckIcon className="h-6 w-6" />
           </span>
         ) : null}
-        <span className={cn(isSubmitting || success ? "opacity-20" : "opacity-100")}>Save</span>
+        <span className={cn(isSubmitting || success ? "opacity-20" : "opacity-100")}>
+          {t("save")}
+        </span>
       </Button>
 
       {!!next && (
@@ -67,7 +71,7 @@ export default function FooterForm({ className = "", next }: FooterFormProps) {
           <Button className="pointer-events-auto relative" variant="secondary" type="submit">
             <span>
               {/* Go to {next.label} */}
-              Continue
+              {t("continue")}
             </span>
           </Button>
         </Link>
