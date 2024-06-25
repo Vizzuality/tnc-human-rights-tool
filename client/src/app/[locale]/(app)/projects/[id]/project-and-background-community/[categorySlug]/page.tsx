@@ -50,7 +50,7 @@ export default async function ProjectsDetailPCBCategoryPage({
 
       {categorySlug === "geographic-scope" && <GeographicScopeForm />}
 
-      {categorySlug === "carbon-offset-project-controversies" && (
+      {categorySlug === "carbon-credit-project-controversies" && (
         <CarbonOffsetProjectControversiesForm />
       )}
     </ProjectsDetailContent>
