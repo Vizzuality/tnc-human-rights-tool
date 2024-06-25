@@ -120,7 +120,7 @@ export default function GeographicScopeForm() {
   });
 
   const defaultValuesCategory = (projectIdData?.data?.attributes?.pcbs || {}) as Record<
-    "carbon-offset-project-controversies" | "geographic-scope",
+    "carbon-credit-project-controversies" | "geographic-scope",
     Record<string, string>
   >;
 
