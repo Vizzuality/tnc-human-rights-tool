@@ -38,7 +38,11 @@ export default function Home() {
                   </Button>
                 </Link>
                 <p className="text-center">{t("or")}</p>
-                <a href={`/pdf/hr-tool-full-${locale || 'en'}.pdf`} download="Report" className="block">
+                <a
+                  href={`/pdf/hr-tool-full-${locale || 'en'}.pdf`}
+                  download="Report"
+                  className="block"
+                >
                   <Button size="lg" className="w-full" variant="outline">
                     {t("download_report")}
                   </Button>

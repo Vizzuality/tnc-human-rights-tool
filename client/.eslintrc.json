@@ -6,6 +6,7 @@
   ],
   "ignorePatterns": ["src/types/generated/*"],
   "rules": {
+    "prettier/prettier": "warn",
     "no-console": [1, { "allow": ["info", "error", "debug"] }],
     "import/order": [
       "warn",
@@ -107,6 +108,5 @@
         "pathGroupsExcludedImportTypes": ["react"]
       }
     ]
-
   }
 }
