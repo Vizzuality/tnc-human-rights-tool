@@ -12,6 +12,8 @@ npm run develop
 yarn develop
 ```
 
+**IMPORTANT**: Currently there is a problem with the first run of the CMS. The migration is run before the database is created. To fix this, first remove temporarily the `database/migrations/*.js` files and then run `yarn develop`. After the first run, you can put back the migration files.
+
 ### `start`
 
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
