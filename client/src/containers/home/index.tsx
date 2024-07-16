@@ -1,6 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Locale } from "@/constants/navigation";
 
 import Wrapper from "@/containers/wrapper";
 
@@ -12,6 +13,7 @@ import { Link } from "@/i18n";
 
 export default function Home() {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
 
   return (
     <Wrapper>
@@ -36,7 +38,7 @@ export default function Home() {
                   </Button>
                 </Link>
                 <p className="text-center">{t("or")}</p>
-                <a href="/hr-tool-full-en.pdf" download="Report" className="block">
+                <a href={`/pdf/hr-tool-full-${locale || 'en'}.pdf`} download="Report" className="block">
                   <Button size="lg" className="w-full" variant="outline">
                     {t("download_report")}
                   </Button>
