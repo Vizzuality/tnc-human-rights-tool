@@ -12,9 +12,11 @@ import { Locale } from "@/constants/navigation";
 
 import { Link, usePathname } from "@/i18n";
 
-interface NavigationSidebarItemProps extends LinkProps, PropsWithChildren {
-  className?: string;
-}
+type NavigationSidebarItemProps = LinkProps &
+  PropsWithChildren<{
+    className?: string;
+    prefetch?: boolean | undefined;
+  }>;
 
 export default function NavigationSidebarItem({
   children,

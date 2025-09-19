@@ -19,6 +19,7 @@ interface TabsNavigationItemProps extends LinkProps, PropsWithChildren {
   className?: string;
   slug: "pcb" | "contextual-risk" | "project-risk" | "follow-up";
   progress?: Record<"pcb" | "contextual-risk" | "project-risk" | "follow-up", number>;
+  prefetch?: boolean | undefined;
 }
 
 export default function TabsNavigationItem({
