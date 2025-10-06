@@ -70,7 +70,7 @@ resource "random_password" "staging_api_token_salt" {
 }
 
 resource "random_password" "staging_admin_jwt_secret" {
-  length           = 32
+  length           = 41
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
@@ -82,7 +82,7 @@ resource "random_password" "staging_transfer_token_salt" {
 }
 
 resource "random_password" "staging_jwt_secret" {
-  length           = 32
+  length           = 41
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
@@ -111,7 +111,7 @@ resource "random_password" "production_api_token_salt" {
 }
 
 resource "random_password" "production_admin_jwt_secret" {
-  length           = 32
+  length           = 41
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
@@ -123,7 +123,7 @@ resource "random_password" "production_transfer_token_salt" {
 }
 
 resource "random_password" "production_jwt_secret" {
-  length           = 32
+  length           = 41
   special          = true
   override_special = "!#%&*()-_=+[]{}<>:?"
 }
